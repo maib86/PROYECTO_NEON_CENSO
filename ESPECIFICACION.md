@@ -68,7 +68,8 @@ Criterios de aceptación:
         las 3 visitas; `precision_gnss_m` con valor (1.5).
   - [x] Desfase de 6 h en `fecha_visita` (hora local guardada como UTC) corregido con D-23:
         zona de sesión fijada en la base; las 3 filas de prueba corregidas (`sql/10`).
-  - [ ] Repetir una visita desde el celular tras D-23 y comprobar la hora.
+  - [x] Visita repetida desde el celular tras D-23 (id 1394): `fecha_visita` 25 s antes de
+        `fecha_edicion`, sin desfase.
   - [ ] `encuestador = @cloud_username`: NULL sin sesión de QFieldCloud (esperado); pendiente
         de la cuenta del INEC (D-22).
 - [ ] Credenciales de base en QFieldCloud como secreto `pg_service`, no en el `.qgs`.

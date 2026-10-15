@@ -1,0 +1,16 @@
+## Visita 1394 desde QField tras D-23 (rol propietario)
+$ psql -X -w -v ON_ERROR_STOP=1 -f - <<'SQL'
+SHOW timezone;
+SELECT id, finca_id, lote, estado_visita, editado_por, fecha_visita, fecha_edicion, fecha_edicion - fecha_visita AS edicion_menos_visita, precision_gnss_m, encuestador IS NULL AS encuestador_es_null, observaciones IS NOT NULL AND observaciones <> '' AS hay_observaciones FROM mgn.finca_visita WHERE id = 1394;
+SQL
+# rol: owner · rc=0 · tiempo de pared: 0.91 s
+      TimeZone      
+--------------------
+ America/Costa_Rica
+(1 row)
+
+  id  | finca_id | lote | estado_visita | editado_por |        fecha_visita        |        fecha_edicion         | edicion_menos_visita | precision_gnss_m  | encuestador_es_null | hay_observaciones 
+------+----------+------+---------------+-------------+----------------------------+------------------------------+----------------------+-------------------+---------------------+-------------------
+ 1394 |     1396 | A    | visitada      | edit_lote_a | 2026-10-15 16:29:35.795-06 | 2026-10-15 16:30:01.26469-06 | 00:00:25.46969       | 1.600000023841858 | t                   | t
+(1 row)
+
