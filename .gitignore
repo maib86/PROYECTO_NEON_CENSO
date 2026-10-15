@@ -34,3 +34,6 @@ campo/*.qgd
 
 # Salidas de la simulación S04 (paquetes, temporales)
 sim/salida/
+
+# Paquete para el celular (D-22): contiene pg_service.conf con la clave del rol. Nunca se sube.
+campo/paquete_movil/

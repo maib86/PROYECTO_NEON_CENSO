@@ -4,6 +4,9 @@
 #  USO
 #    py campo/escribir_pg_service.py            (servicio neon_lote_a, DATABASE_URL_LOTE_A)
 #    py campo/escribir_pg_service.py b          (servicio neon_lote_b, DATABASE_URL_LOTE_B)
+#    py campo/escribir_pg_service.py a campo/paquete_movil/pg_service.conf
+#        (otro destino, p. ej. el paquete del celular, D-22). Si el destino está dentro
+#        del repositorio, debe estar ignorado por git; si no, el script se detiene.
 #
 #  Nombre con punto inicial: es el archivo por usuario que libpq (psql, QGIS) lee en
 #  Windows sin variables de entorno. Sin el punto haría falta PGSERVICEFILE.
@@ -16,6 +19,7 @@
 
 import os
 import re
+import subprocess
 import sys
 from pathlib import Path
 from urllib.parse import urlparse, unquote
@@ -43,7 +47,15 @@ def main():
     }
     bloque = f"[{servicio}]\n" + "".join(f"{k}={v}\n" for k, v in valores.items())
 
-    destino = Path(os.environ["APPDATA"]) / "postgresql" / ".pg_service.conf"
+    if len(sys.argv) > 2:
+        destino = Path(sys.argv[2]).resolve()
+        visible = destino.relative_to(RAIZ).as_posix() if destino.is_relative_to(RAIZ) else destino.name
+        if destino.is_relative_to(RAIZ) and subprocess.run(
+                ["git", "check-ignore", "-q", str(destino)], cwd=RAIZ).returncode != 0:
+            sys.exit(f"{visible} no está ignorado por git: agregarlo a .gitignore antes.")
+    else:
+        destino = Path(os.environ["APPDATA"]) / "postgresql" / ".pg_service.conf"
+        visible = r"%APPDATA%\postgresql\.pg_service.conf"  # sin la cuenta de Windows
     destino.parent.mkdir(parents=True, exist_ok=True)
     previo = destino.read_text(encoding="utf-8") if destino.exists() else ""
     # Quita el bloque anterior del mismo servicio (hasta el siguiente [encabezado]).
@@ -53,7 +65,7 @@ def main():
     destino.write_text(nuevo, encoding="utf-8", newline="\n")
 
     otros = re.findall(r"^\[([^\]]+)\]", resto, re.MULTILINE)
-    print(r"Archivo: %APPDATA%\postgresql\.pg_service.conf")  # sin la cuenta de Windows
+    print(f"Archivo: {visible}")
     print(f"Servicio escrito: {servicio} · claves: {', '.join(valores)}")
     print(f"Otros servicios conservados: {', '.join(otros) if otros else 'ninguno'}")
 

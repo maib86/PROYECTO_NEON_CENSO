@@ -263,3 +263,35 @@ documenta con `COMMENT ON FUNCTION`; no cambia el comportamiento. La hora real d
 la aporta el formulario de QField (D-19).
 **Consecuencias.** D-16 sigue vigente en su decisión; su contexto y su alternativa descartada
 quedan corregidos por esta entrada.
+
+## D-21 · 2026-10-15 · Piloto: `encuestador` y precisión de la última edición; `fecha_visita` de la primera visita
+
+**Contexto.** Con un punto por finca (`UNIQUE(finca_id)`, D-07) y valores por defecto con
+«aplicar al actualizar» (D-19), una revisita o una edición de otra persona reescribe
+`encuestador` y `precision_gnss_m`, mientras que `fecha_visita` conserva la primera.
+**Decisión.** En el piloto, `encuestador` y `precision_gnss_m` reflejan la última edición y
+`fecha_visita` la primera visita con estado distinto de `pendiente`. La inconsistencia queda
+declarada: una fila puede combinar la persona de la última edición con la fecha de la primera.
+**Consecuencias.** En producción cada visita es una fila (retiro de `UNIQUE(finca_id)`, D-07),
+con su persona, fecha y precisión propias. Requerimiento TI 8.
+
+## D-22 · 2026-10-15 · Fase 3 dividida: hoy conexión directa por pg_service en el dispositivo; offline con QFieldCloud después
+
+**Contexto.** Fuentes indicadas por la persona: el plan Community de QFieldCloud no admite
+capas PostGIS (community.qfield.org/t/1816) y el secreto `pg_service` se usa solo en el
+servidor (community.qfield.org/t/831). El flujo de D-19 (secreto `pg_service` en QFieldCloud)
+no se puede probar con la cuenta disponible.
+**Decisión.** La Fase 3 se divide en dos.
+1. Hoy: QField con conexión directa a Neon por `pg_service` en el dispositivo, con internet y
+   sin QFieldCloud. La identidad llega por el rol (`editado_por`) y el RLS se aplica en el
+   celular. Paquete en `campo/paquete_movil/` (fuera del repositorio): copia de
+   `NEON_campo_lote_A.qgs` y `pg_service.conf` (sin punto inicial) con el servicio
+   `neon_lote_a`.
+2. Lunes: solicitar al INEC una cuenta QFieldCloud de prueba que soporte PostGIS, para validar
+   la edición offline.
+**Descartado.** Esperar la cuenta del INEC para empezar la Fase 3 (el plazo del piloto es
+2026-10-16 15:00).
+**Consecuencias.** La prueba de hoy no valida la edición offline ni el flujo de D-19, que
+queda pendiente de la cuenta del INEC. El dispositivo guarda la clave de `edit_lote_a`: solo
+aceptable en el piloto. Requerimientos TI 9 (plan del INEC con PostGIS offline) y 10
+(credenciales en el dispositivo solo con MDM en producción).
