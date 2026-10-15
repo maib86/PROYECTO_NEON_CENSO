@@ -16,7 +16,10 @@ ARCHIVOS
 -----------------------------------------------------------------------
   06_centroides_visita.sql     Crea la capa de puntos, las vistas del
                                tablero y el rol tablero_lectura.
-                               SE EJECUTA UNA VEZ en el SQL Editor.
+                               SE EJECUTA UNA VEZ (sql/ del repositorio).
+
+  07_ajustes_vistas_tablero.sql  Ajusta las vistas del tablero (D-14,
+                               D-15). SE EJECUTA UNA VEZ, después del 06.
 
   generar_tablero.py           El generador. Lee la base, escribe HTML.
 
@@ -37,12 +40,18 @@ ARCHIVOS
 
 PASO 1 — Preparar la base
 -----------------------------------------------------------------------
-En el SQL Editor de Neon, como neondb_owner:
+Con psql, como neondb_owner, desde la raíz del repositorio (D-13). La
+clave de tablero_lectura NO se escribe en el archivo: se pasa como
+variable de psql, la misma que trae DATABASE_URL_TABLERO en .env.
 
-  1. Abrir 06_centroides_visita.sql.
-  2. Sustituir <<<CONTRASENA_TABLERO>>> en el Bloque 6.
-  3. Ejecutar completo.
-  4. Correr las verificaciones del final: 1432 puntos, 1432 dentro.
+  1. Respaldo previo: pg_dump -Fc -n mgn a respaldos/ (ver D-13).
+  2. psql "$DATABASE_URL" -X -1 -v ON_ERROR_STOP=1 \
+       -v clave_tablero="CLAVE" -f sql/06_centroides_visita.sql
+  3. psql "$DATABASE_URL" -X -1 -v ON_ERROR_STOP=1 \
+       -f sql/07_ajustes_vistas_tablero.sql
+  4. Correr las verificaciones del final de cada script: 1432 puntos,
+     1432 dentro; vistas sin observaciones; tablero_lectura con su
+     propia conexión.
 
 Esto crea mgn.finca_visita: un punto dentro de cada polígono, con el
 formulario de visita. Las editoras A y B pueden editarlo con el mismo
@@ -61,18 +70,23 @@ La fecha_visita se llena sola al cambiar el estado.
 
 PASO 3 — Generar el tablero en la propia máquina (prueba local)
 -----------------------------------------------------------------------
-QGIS trae su propio Python con psycopg2 incluido. Abrir la
-"OSGeo4W Shell" (viene con QGIS en Windows) y ejecutar:
+Desde Git Bash, en la raíz del repositorio. El script lee SOLO la
+variable DATABASE_URL_TABLERO (rol tablero_lectura) y se detiene si la
+conexión es de otro rol (D-14). La URL con la clave está en .env: se
+carga desde ahí en la sesión de Git Bash, no se escribe a mano:
 
-  set DATABASE_URL=postgresql://tablero_lectura:CLAVE@HOST/neondb?sslmode=require
-  py generar_tablero.py --salida tablero\index.html
+  set -a; . ./.env; set +a
+  py tablero/generar_tablero.py --salida tablero/salida/index.html
 
-Abrir tablero\index.html en el navegador. Eso es el tablero con los
+(.env debe tener fin de línea LF; con CRLF las variables quedan con un
+"\r" al final y la conexión falla.)
+
+Abrir tablero/salida/index.html en el navegador. Eso es el tablero con los
 datos reales de ese momento.
 
 Para verlo poblado antes de tener visitas reales:
 
-  py generar_tablero.py --fixture fixture_demo.json --salida demo.html
+  py tablero/generar_tablero.py --fixture tablero/fixture_demo.json --salida tablero/salida/demo.html
 
 
 PASO 4 — Que se regenere solo (el escenario del hotel)
@@ -85,12 +99,12 @@ un lugar siempre disponible. Para el piloto: GitHub Actions, gratis.
   2. Crear un repositorio nuevo. Para el piloto con datos públicos,
      público (GitHub Pages es gratis solo en repos públicos).
   3. Subir estos archivos al repositorio:
-        generar_tablero.py
+        tablero/generar_tablero.py
         .github/workflows/tablero.yml
      (la carpeta .github con su subcarpeta workflows, tal cual)
   4. Settings -> Secrets and variables -> Actions -> New repository
      secret:
-        Nombre : DATABASE_URL
+        Nombre : DATABASE_URL_TABLERO
         Valor  : postgresql://tablero_lectura:CLAVE@HOST/neondb?sslmode=require
      Usar el host SIN "-pooler".
   5. Settings -> Pages -> Source: elegir "GitHub Actions".

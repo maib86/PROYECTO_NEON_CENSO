@@ -130,3 +130,38 @@ creador de un rol no puede asumirlo sin concesión explícita).
 **Consecuencias.** La clave puede quedar en registros del servidor si estos registran DDL, y
 en la lista de procesos local. Para producción, requerimiento TI: crear el rol sin clave y
 fijarla con `\password` (hash SCRAM calculado en el cliente).
+
+## D-14 · 2026-10-15 · Tablero: lectura solo con `tablero_lectura`, salida escapada, sin texto libre ni posición GNSS
+
+**Contexto.** La revisión independiente de la sesión 02 encontró que `generar_tablero.py`
+leía `DATABASE_URL` (propietario en el `.env` local), que `persona` entraba sin escapar en el
+popup del mapa y que el JSON dentro de `<script>` no escapaba `</`. Además, las vistas
+exponían `observaciones` (texto libre) en un tablero que D-09 prevé público.
+**Decisión.** `generar_tablero.py` y el workflow leen solo `DATABASE_URL_TABLERO` (el secreto
+de Actions se llama igual) y el generador se detiene si `current_user` no es
+`tablero_lectura`. En el HTML, `persona` y demás datos se escapan en el popup y todo JSON
+dentro de `<script>` escapa `<` como la secuencia JSON `\u003c`. Las vistas `v_tab_*` no exponen
+`observaciones` ni `posicion_registro`. `persona` solo como nombre de usuario de rol
+(`@cloud_username` en campo, rol de base en escritorio), nunca nombre real. `cuando` con año
+(`DD/MM/AAAA HH24:MI`). Aplicación en la base: `sql/07_ajustes_vistas_tablero.sql`.
+**Descartado.** Mantener `observaciones` ocultas solo por CSS en pantallas pequeñas (siguen en
+el HTML publicado). Dejar en el popup el texto sin escapar (un rol de edición podría inyectar
+código en la página pública).
+**Consecuencias.** Requerimientos para TI (no se aplican en el piloto): vistas con
+`security_invoker = true` y políticas para el rol del tablero cuando la lectura deba
+restringirse; coherencia `lote` ↔ `finca_id` (FK compuesta o trigger) al retirar
+`UNIQUE(finca_id)`. Registrados en `docs/requerimientos_ti/insumos_piloto.md`.
+
+## D-15 · 2026-10-15 · Estados de visita, fórmula de avance y movimientos (PROVISIONAL)
+
+**Contexto.** Los valores de `estado_visita`, la fórmula de `avance_pct` y el `LIMIT 25` de
+`v_tab_movimientos` venían del script 06 sin decisión registrada. El cuestionario real del
+censo todavía no está definido.
+**Decisión (provisional hasta tener el cuestionario real).** Cinco estados: `pendiente`,
+`visitada`, `no_localizada`, `rechazo`, `revisita`. `avance_pct` cuenta solo estados
+terminales (`visitada`, `no_localizada`, `rechazo`); `revisita` es incidencia, no avance.
+`v_tab_movimientos` muestra los últimos 25.
+**Descartado.** Contar todo estado distinto de `pendiente` como avance (versión del 06:
+inflaba el avance con fincas que hay que volver a visitar).
+**Consecuencias.** Al llegar el cuestionario real se revisan estados, fórmula y límite, con
+una entrada nueva que reemplace a esta.

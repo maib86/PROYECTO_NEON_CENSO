@@ -8,7 +8,7 @@
    "rechazos": 23,
    "revisitas": 16,
    "pendientes": 490,
-   "avance_pct": 30.9,
+   "avance_pct": 28.6,
    "ultima_visita": "2026-10-13T17:52:00-06:00"
   },
   {
@@ -19,7 +19,7 @@
    "rechazos": 16,
    "revisitas": 21,
    "pendientes": 513,
-   "avance_pct": 29.0,
+   "avance_pct": 26.1,
    "ultima_visita": "2026-10-13T17:48:00-06:00"
   }
  ],
@@ -148,7 +148,7 @@
    "codigo_upm": "20205005",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 10:14",
+   "cuando": "12/10/2026 10:14",
    "lat": 10.109954617830537,
    "lon": -84.52742581686844,
    "id": 7
@@ -192,7 +192,7 @@
    "codigo_upm": "20205005",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 08:13",
+   "cuando": "13/10/2026 08:13",
    "lat": 10.113907205080665,
    "lon": -84.52765039568948,
    "id": 11
@@ -280,7 +280,7 @@
    "codigo_upm": "20205005",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 13:00",
+   "cuando": "11/10/2026 13:00",
    "lat": 10.113637710495427,
    "lon": -84.52908770014406,
    "id": 19
@@ -291,7 +291,7 @@
    "codigo_upm": "20205005",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 14:46",
+   "cuando": "11/10/2026 14:46",
    "lat": 10.113637710495427,
    "lon": -84.52926736320087,
    "id": 20
@@ -302,7 +302,7 @@
    "codigo_upm": "20205005",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 13:32",
+   "cuando": "13/10/2026 13:32",
    "lat": 10.11462585730796,
    "lon": -84.52940211049349,
    "id": 21
@@ -357,7 +357,7 @@
    "codigo_upm": "20205005",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 16:52",
+   "cuando": "13/10/2026 16:52",
    "lat": 10.114805520364783,
    "lon": -84.5323665509311,
    "id": 26
@@ -368,7 +368,7 @@
    "codigo_upm": "20205005",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 11:22",
+   "cuando": "13/10/2026 11:22",
    "lat": 10.115434341063665,
    "lon": -84.53223180363847,
    "id": 27
@@ -390,7 +390,7 @@
    "codigo_upm": "20205005",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 17:41",
+   "cuando": "12/10/2026 17:41",
    "lat": 10.110044449358949,
    "lon": -84.5325012982237,
    "id": 29
@@ -401,7 +401,7 @@
    "codigo_upm": "20205005",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 14:18",
+   "cuando": "13/10/2026 14:18",
    "lat": 10.113592794731222,
    "lon": -84.53268096128053,
    "id": 30
@@ -412,7 +412,7 @@
    "codigo_upm": "20205005",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 13:22",
+   "cuando": "11/10/2026 13:22",
    "lat": 10.115883498705728,
    "lon": -84.5325012982237,
    "id": 31
@@ -434,7 +434,7 @@
    "codigo_upm": "20205005",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 08:44",
+   "cuando": "11/10/2026 08:44",
    "lat": 10.11561400412049,
    "lon": -84.53295045586577,
    "id": 33
@@ -445,7 +445,7 @@
    "codigo_upm": "20205005",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 09:39",
+   "cuando": "11/10/2026 09:39",
    "lat": 10.11592841446993,
    "lon": -84.53308520315838,
    "id": 34
@@ -456,7 +456,7 @@
    "codigo_upm": "20205005",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 11:53",
+   "cuando": "11/10/2026 11:53",
    "lat": 10.116467403640403,
    "lon": -84.5331301189226,
    "id": 35
@@ -500,7 +500,7 @@
    "codigo_upm": "20205005",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 14:43",
+   "cuando": "11/10/2026 14:43",
    "lat": 10.111347006520923,
    "lon": -84.53362419232886,
    "id": 39
@@ -522,7 +522,7 @@
    "codigo_upm": "20205005",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 12:23",
+   "cuando": "12/10/2026 12:23",
    "lat": 10.116152993290962,
    "lon": -84.53402843420672,
    "id": 41
@@ -610,7 +610,7 @@
    "codigo_upm": "20205005",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 17:17",
+   "cuando": "12/10/2026 17:17",
    "lat": 10.116242824819373,
    "lon": -84.5346572549056,
    "id": 49
@@ -643,7 +643,7 @@
    "codigo_upm": "20205005",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 07:58",
+   "cuando": "12/10/2026 07:58",
    "lat": 10.116691982461433,
    "lon": -84.53501658101925,
    "id": 52
@@ -720,7 +720,7 @@
    "codigo_upm": "20205005",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 14:14",
+   "cuando": "13/10/2026 14:14",
    "lat": 10.107663913856033,
    "lon": -84.53928357861881,
    "id": 59
@@ -753,7 +753,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 16:17",
+   "cuando": "12/10/2026 16:17",
    "lat": 10.115703835648901,
    "lon": -84.5084264486093,
    "id": 62
@@ -775,7 +775,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 07:24",
+   "cuando": "11/10/2026 07:24",
    "lat": 10.114176699665897,
    "lon": -84.50972900577128,
    "id": 64
@@ -808,7 +808,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 14:29",
+   "cuando": "12/10/2026 14:29",
    "lat": 10.116781813989846,
    "lon": -84.5098637530639,
    "id": 67
@@ -819,7 +819,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "11/10 17:16",
+   "cuando": "11/10/2026 17:16",
    "lat": 10.109325797131653,
    "lon": -84.50995358459231,
    "id": 68
@@ -830,7 +830,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 16:09",
+   "cuando": "13/10/2026 16:09",
    "lat": 10.113772457788045,
    "lon": -84.51040274223436,
    "id": 69
@@ -841,7 +841,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 13:26",
+   "cuando": "12/10/2026 13:26",
    "lat": 10.110224112415771,
    "lon": -84.5106722368196,
    "id": 70
@@ -863,7 +863,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 12:06",
+   "cuando": "11/10/2026 12:06",
    "lat": 10.12199204263774,
    "lon": -84.51282819350149,
    "id": 72
@@ -874,7 +874,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 17:09",
+   "cuando": "13/10/2026 17:09",
    "lat": 10.110493607001008,
    "lon": -84.51327735114356,
    "id": 73
@@ -885,7 +885,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 10:52",
+   "cuando": "11/10/2026 10:52",
    "lat": 10.111122427699893,
    "lon": -84.51336718267197,
    "id": 74
@@ -918,7 +918,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 09:40",
+   "cuando": "12/10/2026 09:40",
    "lat": 10.123743757441773,
    "lon": -84.51498415018338,
    "id": 77
@@ -951,7 +951,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 15:14",
+   "cuando": "12/10/2026 15:14",
    "lat": 10.123968336262802,
    "lon": -84.5151638132402,
    "id": 80
@@ -1017,7 +1017,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 09:43",
+   "cuando": "11/10/2026 09:43",
    "lat": 10.115030099185812,
    "lon": -84.51579263393909,
    "id": 86
@@ -1050,7 +1050,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 11:55",
+   "cuando": "12/10/2026 11:55",
    "lat": 10.118219118444436,
    "lon": -84.5158824654675,
    "id": 89
@@ -1061,7 +1061,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "11/10 15:29",
+   "cuando": "11/10/2026 15:29",
    "lat": 10.115299593771049,
    "lon": -84.51610704428853,
    "id": 90
@@ -1083,7 +1083,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 11:34",
+   "cuando": "11/10/2026 11:34",
    "lat": 10.111347006520923,
    "lon": -84.51624179158115,
    "id": 92
@@ -1105,7 +1105,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "13/10 11:18",
+   "cuando": "13/10/2026 11:18",
    "lat": 10.112380069097659,
    "lon": -84.51655620193058,
    "id": 94
@@ -1149,7 +1149,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 13:10",
+   "cuando": "11/10/2026 13:10",
    "lat": 10.101061296517752,
    "lon": -84.51992488424604,
    "id": 98
@@ -1182,7 +1182,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 12:17",
+   "cuando": "13/10/2026 12:17",
    "lat": 10.111481753813539,
    "lon": -84.52086811529436,
    "id": 101
@@ -1259,7 +1259,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 11:48",
+   "cuando": "13/10/2026 11:48",
    "lat": 10.09953416053475,
    "lon": -84.52181134634269,
    "id": 108
@@ -1270,7 +1270,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 15:23",
+   "cuando": "12/10/2026 15:23",
    "lat": 10.099040087128484,
    "lon": -84.5219011778711,
    "id": 109
@@ -1281,7 +1281,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "revisita",
    "persona": "edit_lote_a",
-   "cuando": "13/10 17:34",
+   "cuando": "13/10/2026 17:34",
    "lat": 10.097108709267626,
    "lon": -84.52199100939951,
    "id": 110
@@ -1358,7 +1358,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 17:44",
+   "cuando": "11/10/2026 17:44",
    "lat": 10.110673270057832,
    "lon": -84.52302407197625,
    "id": 117
@@ -1369,7 +1369,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 16:05",
+   "cuando": "12/10/2026 16:05",
    "lat": 10.112110574512425,
    "lon": -84.5264376700559,
    "id": 118
@@ -1380,7 +1380,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 14:32",
+   "cuando": "11/10/2026 14:32",
    "lat": 10.111751248398775,
    "lon": -84.52652750158433,
    "id": 119
@@ -1424,7 +1424,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 16:24",
+   "cuando": "12/10/2026 16:24",
    "lat": 10.104924052239468,
    "lon": -84.54004714661032,
    "id": 123
@@ -1578,7 +1578,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 16:11",
+   "cuando": "11/10/2026 16:11",
    "lat": 10.103980821191143,
    "lon": -84.5444488915025,
    "id": 137
@@ -1611,7 +1611,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 16:48",
+   "cuando": "12/10/2026 16:48",
    "lat": 10.08682299926446,
    "lon": -84.54503279643717,
    "id": 140
@@ -1633,7 +1633,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 07:32",
+   "cuando": "11/10/2026 07:32",
    "lat": 10.08614926280137,
    "lon": -84.54489804914456,
    "id": 142
@@ -1644,7 +1644,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 13:28",
+   "cuando": "12/10/2026 13:28",
    "lat": 10.103576579313287,
    "lon": -84.5452573752582,
    "id": 143
@@ -1655,7 +1655,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 11:26",
+   "cuando": "13/10/2026 11:26",
    "lat": 10.071686386727045,
    "lon": -84.54570653290027,
    "id": 144
@@ -1666,7 +1666,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 11:45",
+   "cuando": "11/10/2026 11:45",
    "lat": 10.075099984806698,
    "lon": -84.54570653290027,
    "id": 145
@@ -1677,7 +1677,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 07:34",
+   "cuando": "13/10/2026 07:34",
    "lat": 10.090506091929349,
    "lon": -84.54570653290027,
    "id": 146
@@ -1743,7 +1743,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 09:23",
+   "cuando": "11/10/2026 09:23",
    "lat": 10.07653728926129,
    "lon": -84.5466946797128,
    "id": 152
@@ -1754,7 +1754,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "rechazo",
    "persona": "edit_lote_b",
-   "cuando": "13/10 11:06",
+   "cuando": "13/10/2026 11:06",
    "lat": 10.087227241142312,
    "lon": -84.5466946797128,
    "id": 153
@@ -1853,7 +1853,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 17:50",
+   "cuando": "11/10/2026 17:50",
    "lat": 10.06503885362456,
    "lon": -84.54858114180945,
    "id": 162
@@ -1864,7 +1864,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 15:58",
+   "cuando": "11/10/2026 15:58",
    "lat": 10.105822367523587,
    "lon": -84.54876080486628,
    "id": 163
@@ -1875,7 +1875,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 12:26",
+   "cuando": "13/10/2026 12:26",
    "lat": 10.086867915028666,
    "lon": -84.5489853836873,
    "id": 164
@@ -1930,7 +1930,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 16:23",
+   "cuando": "11/10/2026 16:23",
    "lat": 10.087047578085489,
    "lon": -84.54925487827254,
    "id": 169
@@ -1996,7 +1996,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "revisita",
    "persona": "edit_lote_b",
-   "cuando": "12/10 11:14",
+   "cuando": "12/10/2026 11:14",
    "lat": 10.06692531572121,
    "lon": -84.54992861473562,
    "id": 175
@@ -2029,7 +2029,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "revisita",
    "persona": "edit_lote_b",
-   "cuando": "13/10 12:18",
+   "cuando": "13/10/2026 12:18",
    "lat": 10.066476158079151,
    "lon": -84.55037777237769,
    "id": 178
@@ -2073,7 +2073,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 13:25",
+   "cuando": "12/10/2026 13:25",
    "lat": 10.088934040182139,
    "lon": -84.55055743543451,
    "id": 182
@@ -2128,7 +2128,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 11:26",
+   "cuando": "11/10/2026 11:26",
    "lat": 10.102857927085992,
    "lon": -84.55073709849134,
    "id": 187
@@ -2139,7 +2139,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "revisita",
    "persona": "edit_lote_b",
-   "cuando": "13/10 13:48",
+   "cuando": "13/10/2026 13:48",
    "lat": 10.095761236341449,
    "lon": -84.55082693001975,
    "id": 188
@@ -2194,7 +2194,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 10:43",
+   "cuando": "13/10/2026 10:43",
    "lat": 10.08983235546626,
    "lon": -84.55145575071863,
    "id": 193
@@ -2216,7 +2216,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 13:49",
+   "cuando": "11/10/2026 13:49",
    "lat": 10.104160484247966,
    "lon": -84.5519498241249,
    "id": 195
@@ -2238,7 +2238,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 15:59",
+   "cuando": "13/10/2026 15:59",
    "lat": 10.066476158079151,
    "lon": -84.55208457141751,
    "id": 197
@@ -2282,7 +2282,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 14:54",
+   "cuando": "11/10/2026 14:54",
    "lat": 10.085789936687721,
    "lon": -84.55253372905958,
    "id": 201
@@ -2304,7 +2304,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 14:20",
+   "cuando": "13/10/2026 14:20",
    "lat": 10.088080640662227,
    "lon": -84.55257864482378,
    "id": 203
@@ -2326,7 +2326,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 11:49",
+   "cuando": "12/10/2026 11:49",
    "lat": 10.091269659920851,
    "lon": -84.55298288670164,
    "id": 205
@@ -2458,7 +2458,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "revisita",
    "persona": "edit_lote_b",
-   "cuando": "13/10 16:00",
+   "cuando": "13/10/2026 16:00",
    "lat": 10.088125556426432,
    "lon": -84.55486934879829,
    "id": 217
@@ -2480,7 +2480,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 12:27",
+   "cuando": "11/10/2026 12:27",
    "lat": 10.095267162935183,
    "lon": -84.55531850644036,
    "id": 219
@@ -2502,7 +2502,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "revisita",
    "persona": "edit_lote_b",
-   "cuando": "12/10 16:43",
+   "cuando": "12/10/2026 16:43",
    "lat": 10.096210393983508,
    "lon": -84.52432662913822,
    "id": 221
@@ -2513,7 +2513,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 12:28",
+   "cuando": "11/10/2026 12:28",
    "lat": 10.08614926280137,
    "lon": -84.52441646066663,
    "id": 222
@@ -2557,7 +2557,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "revisita",
    "persona": "edit_lote_b",
-   "cuando": "11/10 11:06",
+   "cuando": "11/10/2026 11:06",
    "lat": 10.08623909432978,
    "lon": -84.52495544983711,
    "id": 226
@@ -2689,7 +2689,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 13:21",
+   "cuando": "13/10/2026 13:21",
    "lat": 10.088574714068493,
    "lon": -84.52630292276328,
    "id": 238
@@ -2700,7 +2700,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 11:32",
+   "cuando": "11/10/2026 11:32",
    "lat": 10.083229738127981,
    "lon": -84.5264825858201,
    "id": 239
@@ -2788,7 +2788,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "revisita",
    "persona": "edit_lote_b",
-   "cuando": "11/10 16:10",
+   "cuando": "11/10/2026 16:10",
    "lat": 10.090101850051497,
    "lon": -84.52800972180312,
    "id": 247
@@ -2799,7 +2799,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 12:06",
+   "cuando": "11/10/2026 12:06",
    "lat": 10.093111206253296,
    "lon": -84.52814446909574,
    "id": 248
@@ -2854,7 +2854,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 10:32",
+   "cuando": "11/10/2026 10:32",
    "lat": 10.094323931886857,
    "lon": -84.52904278437985,
    "id": 253
@@ -2876,7 +2876,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 14:08",
+   "cuando": "11/10/2026 14:08",
    "lat": 10.089922186994672,
    "lon": -84.52926736320087,
    "id": 255
@@ -2898,7 +2898,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 10:27",
+   "cuando": "13/10/2026 10:27",
    "lat": 10.094279016122652,
    "lon": -84.5294470262577,
    "id": 257
@@ -2920,7 +2920,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 08:57",
+   "cuando": "13/10/2026 08:57",
    "lat": 10.088934040182139,
    "lon": -84.52980635237135,
    "id": 259
@@ -2942,7 +2942,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 07:04",
+   "cuando": "13/10/2026 07:04",
    "lat": 10.09306629048909,
    "lon": -84.52998601542818,
    "id": 261
@@ -2953,7 +2953,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 07:43",
+   "cuando": "11/10/2026 07:43",
    "lat": 10.08848488254008,
    "lon": -84.53034534154182,
    "id": 262
@@ -2964,7 +2964,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 17:48",
+   "cuando": "13/10/2026 17:48",
    "lat": 10.095491741756213,
    "lon": -84.53043517307023,
    "id": 263
@@ -2986,7 +2986,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 07:39",
+   "cuando": "13/10/2026 07:39",
    "lat": 10.103262168963846,
    "lon": -84.5308843307123,
    "id": 265
@@ -3008,7 +3008,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "rechazo",
    "persona": "edit_lote_b",
-   "cuando": "12/10 16:30",
+   "cuando": "12/10/2026 16:30",
    "lat": 10.104160484247966,
    "lon": -84.53106399376912,
    "id": 267
@@ -3030,7 +3030,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "rechazo",
    "persona": "edit_lote_b",
-   "cuando": "12/10 17:28",
+   "cuando": "12/10/2026 17:28",
    "lat": 10.095132415642563,
    "lon": -84.53115382529754,
    "id": 269
@@ -3041,7 +3041,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 12:44",
+   "cuando": "12/10/2026 12:44",
    "lat": 10.085745020923515,
    "lon": -84.53133348835435,
    "id": 270
@@ -3085,7 +3085,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 10:32",
+   "cuando": "12/10/2026 10:32",
    "lat": 10.058211657465252,
    "lon": -84.53160298293959,
    "id": 274
@@ -3096,7 +3096,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 10:39",
+   "cuando": "11/10/2026 10:39",
    "lat": 10.058481152050488,
    "lon": -84.5316478987038,
    "id": 275
@@ -3206,7 +3206,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 07:10",
+   "cuando": "13/10/2026 07:10",
    "lat": 10.093335785074325,
    "lon": -84.53308520315838,
    "id": 285
@@ -3228,7 +3228,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "rechazo",
    "persona": "edit_lote_b",
-   "cuando": "11/10 07:45",
+   "cuando": "11/10/2026 07:45",
    "lat": 10.091179828392438,
    "lon": -84.53380385538568,
    "id": 287
@@ -3261,7 +3261,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 12:12",
+   "cuando": "13/10/2026 12:12",
    "lat": 10.081298360267123,
    "lon": -84.53429792879194,
    "id": 290
@@ -3272,7 +3272,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 16:47",
+   "cuando": "13/10/2026 16:47",
    "lat": 10.094862921057327,
    "lon": -84.53456742337718,
    "id": 291
@@ -3305,7 +3305,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 15:06",
+   "cuando": "12/10/2026 15:06",
    "lat": 10.091224744156644,
    "lon": -84.53483691796242,
    "id": 294
@@ -3338,7 +3338,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 12:44",
+   "cuando": "12/10/2026 12:44",
    "lat": 10.100701970404106,
    "lon": -84.53501658101925,
    "id": 297
@@ -3360,7 +3360,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 11:36",
+   "cuando": "13/10/2026 11:36",
    "lat": 10.085250947517249,
    "lon": -84.53555557018971,
    "id": 299
@@ -3371,7 +3371,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 09:19",
+   "cuando": "12/10/2026 09:19",
    "lat": 10.096210393983508,
    "lon": -84.53573523324654,
    "id": 300
@@ -3415,7 +3415,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "rechazo",
    "persona": "edit_lote_b",
-   "cuando": "13/10 07:54",
+   "cuando": "13/10/2026 07:54",
    "lat": 10.081792433673389,
    "lon": -84.5361843908886,
    "id": 304
@@ -3426,7 +3426,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 10:40",
+   "cuando": "13/10/2026 10:40",
    "lat": 10.074022006465757,
    "lon": -84.536274222417,
    "id": 305
@@ -3448,7 +3448,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "revisita",
    "persona": "edit_lote_b",
-   "cuando": "13/10 11:27",
+   "cuando": "13/10/2026 11:27",
    "lat": 10.08992218699467,
    "lon": -84.53654371700225,
    "id": 307
@@ -3492,7 +3492,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "revisita",
    "persona": "edit_lote_b",
-   "cuando": "12/10 16:21",
+   "cuando": "12/10/2026 16:21",
    "lat": 10.078423751357942,
    "lon": -84.53672338005907,
    "id": 311
@@ -3525,7 +3525,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "revisita",
    "persona": "edit_lote_b",
-   "cuando": "13/10 14:09",
+   "cuando": "13/10/2026 14:09",
    "lat": 10.093784942716386,
    "lon": -84.5369030431159,
    "id": 314
@@ -3547,7 +3547,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 12:59",
+   "cuando": "13/10/2026 12:59",
    "lat": 10.070788071442927,
    "lon": -84.53726236922954,
    "id": 316
@@ -3569,7 +3569,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 08:18",
+   "cuando": "12/10/2026 08:18",
    "lat": 10.091628986034499,
    "lon": -84.53753186381478,
    "id": 318
@@ -3580,7 +3580,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 17:50",
+   "cuando": "11/10/2026 17:50",
    "lat": 10.091359491449262,
    "lon": -84.5376666111074,
    "id": 319
@@ -3657,7 +3657,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 17:25",
+   "cuando": "13/10/2026 17:25",
    "lat": 10.099174834421103,
    "lon": -84.53896916826938,
    "id": 326
@@ -3679,7 +3679,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 13:22",
+   "cuando": "13/10/2026 13:22",
    "lat": 10.084172969176308,
    "lon": -84.53932849438301,
    "id": 328
@@ -3690,7 +3690,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 09:03",
+   "cuando": "11/10/2026 09:03",
    "lat": 10.098276519136984,
    "lon": -84.53937341014722,
    "id": 329
@@ -3701,7 +3701,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 13:48",
+   "cuando": "12/10/2026 13:48",
    "lat": 10.083274653892186,
    "lon": -84.53946324167563,
    "id": 330
@@ -3723,7 +3723,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 11:02",
+   "cuando": "11/10/2026 11:02",
    "lat": 10.084442463761542,
    "lon": -84.53946324167563,
    "id": 332
@@ -3778,7 +3778,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 17:02",
+   "cuando": "12/10/2026 17:02",
    "lat": 10.098276519136984,
    "lon": -84.5406759673092,
    "id": 337
@@ -3789,7 +3789,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 12:03",
+   "cuando": "13/10/2026 12:03",
    "lat": 10.089068787474758,
    "lon": -84.5406759673092,
    "id": 338
@@ -3800,7 +3800,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 11:32",
+   "cuando": "12/10/2026 11:32",
    "lat": 10.0893831978242,
    "lon": -84.5406759673092,
    "id": 339
@@ -3932,7 +3932,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 17:11",
+   "cuando": "12/10/2026 17:11",
    "lat": 10.099174834421103,
    "lon": -84.54161919835752,
    "id": 351
@@ -3943,7 +3943,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 07:29",
+   "cuando": "11/10/2026 07:29",
    "lat": 10.09863584525063,
    "lon": -84.54170902988594,
    "id": 352
@@ -3954,7 +3954,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "rechazo",
    "persona": "edit_lote_b",
-   "cuando": "13/10 14:51",
+   "cuando": "13/10/2026 14:51",
    "lat": 10.070159250744041,
    "lon": -84.54175394565014,
    "id": 353
@@ -3987,7 +3987,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 17:13",
+   "cuando": "12/10/2026 17:13",
    "lat": 10.071147397556572,
    "lon": -84.54269717669847,
    "id": 356
@@ -4009,7 +4009,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 08:10",
+   "cuando": "11/10/2026 08:10",
    "lat": 10.090371344636731,
    "lon": -84.54328108163314,
    "id": 358
@@ -4097,7 +4097,7 @@
    "codigo_upm": "20205004",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 10:51",
+   "cuando": "12/10/2026 10:51",
    "lat": 10.114356362722724,
    "lon": -84.51646637040217,
    "id": 366
@@ -4152,7 +4152,7 @@
    "codigo_upm": "20205004",
    "estado_visita": "rechazo",
    "persona": "edit_lote_b",
-   "cuando": "11/10 15:09",
+   "cuando": "11/10/2026 15:09",
    "lat": 10.11606316176255,
    "lon": -84.51673586498741,
    "id": 371
@@ -4163,7 +4163,7 @@
    "codigo_upm": "20205004",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 12:34",
+   "cuando": "13/10/2026 12:34",
    "lat": 10.114176699665897,
    "lon": -84.51687061228003,
    "id": 372
@@ -4174,7 +4174,7 @@
    "codigo_upm": "20205004",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 15:22",
+   "cuando": "12/10/2026 15:22",
    "lat": 10.114356362722724,
    "lon": -84.51687061228003,
    "id": 373
@@ -4196,7 +4196,7 @@
    "codigo_upm": "20205004",
    "estado_visita": "rechazo",
    "persona": "edit_lote_b",
-   "cuando": "11/10 11:54",
+   "cuando": "11/10/2026 11:54",
    "lat": 10.11471568883637,
    "lon": -84.51705027533686,
    "id": 375
@@ -4218,7 +4218,7 @@
    "codigo_upm": "20205004",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 17:10",
+   "cuando": "12/10/2026 17:10",
    "lat": 10.118219118444436,
    "lon": -84.51736468568629,
    "id": 377
@@ -4350,7 +4350,7 @@
    "codigo_upm": "20205004",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 12:55",
+   "cuando": "13/10/2026 12:55",
    "lat": 10.116197909055167,
    "lon": -84.52001471577445,
    "id": 389
@@ -4405,7 +4405,7 @@
    "codigo_upm": "20205004",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 14:30",
+   "cuando": "12/10/2026 14:30",
    "lat": 10.122126789930356,
    "lon": -84.52199100939951,
    "id": 394
@@ -4427,7 +4427,7 @@
    "codigo_upm": "20205004",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 16:28",
+   "cuando": "11/10/2026 16:28",
    "lat": 10.115703835648901,
    "lon": -84.52284440891943,
    "id": 396
@@ -4438,7 +4438,7 @@
    "codigo_upm": "20205004",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 07:34",
+   "cuando": "12/10/2026 07:34",
    "lat": 10.117230971631905,
    "lon": -84.52288932468363,
    "id": 397
@@ -4537,7 +4537,7 @@
    "codigo_upm": "20205004",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 10:22",
+   "cuando": "13/10/2026 10:22",
    "lat": 10.116691982461433,
    "lon": -84.52513511289393,
    "id": 406
@@ -4559,7 +4559,7 @@
    "codigo_upm": "20205004",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 07:22",
+   "cuando": "13/10/2026 07:22",
    "lat": 10.117320803160318,
    "lon": -84.52513511289393,
    "id": 408
@@ -4570,7 +4570,7 @@
    "codigo_upm": "20205004",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 15:22",
+   "cuando": "11/10/2026 15:22",
    "lat": 10.116961477046669,
    "lon": -84.52522494442235,
    "id": 409
@@ -4581,7 +4581,7 @@
    "codigo_upm": "20205004",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 14:47",
+   "cuando": "13/10/2026 14:47",
    "lat": 10.11651231940461,
    "lon": -84.52603342817805,
    "id": 410
@@ -4614,7 +4614,7 @@
    "codigo_upm": "20205004",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 12:49",
+   "cuando": "11/10/2026 12:49",
    "lat": 10.11651231940461,
    "lon": -84.52756056416105,
    "id": 413
@@ -4625,7 +4625,7 @@
    "codigo_upm": "20205004",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 13:20",
+   "cuando": "13/10/2026 13:20",
    "lat": 10.116871645518255,
    "lon": -84.52765039568946,
    "id": 414
@@ -4735,7 +4735,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 14:25",
+   "cuando": "13/10/2026 14:25",
    "lat": 10.113727542023838,
    "lon": -84.55846260993476,
    "id": 424
@@ -4746,7 +4746,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "11/10 17:40",
+   "cuando": "11/10/2026 17:40",
    "lat": 10.12307002097868,
    "lon": -84.55909143063364,
    "id": 425
@@ -4757,7 +4757,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "revisita",
    "persona": "edit_lote_a",
-   "cuando": "13/10 12:44",
+   "cuando": "13/10/2026 12:44",
    "lat": 10.113458047438602,
    "lon": -84.55972025133254,
    "id": 426
@@ -4790,7 +4790,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "revisita",
    "persona": "edit_lote_a",
-   "cuando": "11/10 09:50",
+   "cuando": "11/10/2026 09:50",
    "lat": 10.112110574512425,
    "lon": -84.56133721884396,
    "id": 429
@@ -4845,7 +4845,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 11:39",
+   "cuando": "11/10/2026 11:39",
    "lat": 10.128145502333957,
    "lon": -84.56254994447751,
    "id": 434
@@ -4867,7 +4867,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 11:03",
+   "cuando": "12/10/2026 11:03",
    "lat": 10.111122427699893,
    "lon": -84.56439149080995,
    "id": 436
@@ -4900,7 +4900,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 13:54",
+   "cuando": "12/10/2026 13:54",
    "lat": 10.113143637089161,
    "lon": -84.56537963762248,
    "id": 439
@@ -4999,7 +4999,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 10:07",
+   "cuando": "12/10/2026 10:07",
    "lat": 10.111930911455598,
    "lon": -84.56834407806008,
    "id": 448
@@ -5010,7 +5010,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 15:01",
+   "cuando": "13/10/2026 15:01",
    "lat": 10.112380069097659,
    "lon": -84.56874831993792,
    "id": 449
@@ -5021,7 +5021,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 07:42",
+   "cuando": "12/10/2026 07:42",
    "lat": 10.119207265256968,
    "lon": -84.5692423933442,
    "id": 450
@@ -5043,7 +5043,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 07:28",
+   "cuando": "13/10/2026 07:28",
    "lat": 10.116332656347787,
    "lon": -84.56996104557149,
    "id": 452
@@ -5065,7 +5065,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 14:04",
+   "cuando": "12/10/2026 14:04",
    "lat": 10.115793667177314,
    "lon": -84.57014070862832,
    "id": 454
@@ -5076,7 +5076,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 17:29",
+   "cuando": "12/10/2026 17:29",
    "lat": 10.116422487876196,
    "lon": -84.57041020321356,
    "id": 455
@@ -5098,7 +5098,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 09:15",
+   "cuando": "11/10/2026 09:15",
    "lat": 10.11561400412049,
    "lon": -84.5708144450914,
    "id": 457
@@ -5120,7 +5120,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 12:07",
+   "cuando": "12/10/2026 12:07",
    "lat": 10.113637710495427,
    "lon": -84.57130851849767,
    "id": 459
@@ -5197,7 +5197,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "11/10 13:35",
+   "cuando": "11/10/2026 13:35",
    "lat": 10.129358227967519,
    "lon": -84.57346447517956,
    "id": 466
@@ -5274,7 +5274,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "revisita",
    "persona": "edit_lote_a",
-   "cuando": "11/10 15:57",
+   "cuando": "11/10/2026 15:57",
    "lat": 10.128459912683399,
    "lon": -84.57409329587844,
    "id": 473
@@ -5351,7 +5351,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 10:12",
+   "cuando": "11/10/2026 10:12",
    "lat": 10.123788673205977,
    "lon": -84.57508144269097,
    "id": 480
@@ -5395,7 +5395,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 17:12",
+   "cuando": "12/10/2026 17:12",
    "lat": 10.111302090756716,
    "lon": -84.57571026338985,
    "id": 484
@@ -5428,7 +5428,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 15:26",
+   "cuando": "13/10/2026 15:26",
    "lat": 10.124776820018509,
    "lon": -84.57624925256033,
    "id": 487
@@ -5439,7 +5439,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "12/10 12:24",
+   "cuando": "12/10/2026 12:24",
    "lat": 10.112065658748218,
    "lon": -84.57651874714557,
    "id": 488
@@ -5483,7 +5483,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "13/10 14:21",
+   "cuando": "13/10/2026 14:21",
    "lat": 10.11606316176255,
    "lon": -84.57701282055183,
    "id": 492
@@ -5516,7 +5516,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 09:37",
+   "cuando": "13/10/2026 09:37",
    "lat": 10.113727542023838,
    "lon": -84.57813571465698,
    "id": 495
@@ -5560,7 +5560,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 09:29",
+   "cuando": "11/10/2026 09:29",
    "lat": 10.125899714123658,
    "lon": -84.58572647880779,
    "id": 499
@@ -5593,7 +5593,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 13:38",
+   "cuando": "13/10/2026 13:38",
    "lat": 10.127651428927692,
    "lon": -84.58837650889595,
    "id": 502
@@ -5615,7 +5615,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 17:10",
+   "cuando": "13/10/2026 17:10",
    "lat": 10.127696344691898,
    "lon": -84.58918499265165,
    "id": 504
@@ -5648,7 +5648,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 16:51",
+   "cuando": "11/10/2026 16:51",
    "lat": 10.126932776700396,
    "lon": -84.5894994030011,
    "id": 507
@@ -5659,7 +5659,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 14:47",
+   "cuando": "12/10/2026 14:47",
    "lat": 10.126124292944688,
    "lon": -84.5896341502937,
    "id": 508
@@ -5681,7 +5681,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 10:15",
+   "cuando": "11/10/2026 10:15",
    "lat": 10.12801075504134,
    "lon": -84.58963415029372,
    "id": 510
@@ -5769,7 +5769,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "12/10 11:41",
+   "cuando": "12/10/2026 11:41",
    "lat": 10.137173570939357,
    "lon": -84.59241892767449,
    "id": 518
@@ -5813,7 +5813,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 15:57",
+   "cuando": "12/10/2026 15:57",
    "lat": 10.12342934709233,
    "lon": -84.51552313935385,
    "id": 522
@@ -5824,7 +5824,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 16:07",
+   "cuando": "12/10/2026 16:07",
    "lat": 10.12652853482254,
    "lon": -84.51597229699591,
    "id": 523
@@ -5890,7 +5890,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "12/10 13:22",
+   "cuando": "12/10/2026 13:22",
    "lat": 10.127831091984515,
    "lon": -84.51776892756415,
    "id": 529
@@ -5923,7 +5923,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 13:12",
+   "cuando": "12/10/2026 13:12",
    "lat": 10.12711243975722,
    "lon": -84.5188918216693,
    "id": 532
@@ -5967,7 +5967,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 17:52",
+   "cuando": "13/10/2026 17:52",
    "lat": 10.132502331461936,
    "lon": -84.52154185175746,
    "id": 536
@@ -5978,7 +5978,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 07:42",
+   "cuando": "12/10/2026 07:42",
    "lat": 10.122441200279798,
    "lon": -84.52208084092793,
    "id": 537
@@ -6000,7 +6000,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 10:25",
+   "cuando": "13/10/2026 10:25",
    "lat": 10.132412499933526,
    "lon": -84.52217067245634,
    "id": 539
@@ -6022,7 +6022,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 13:54",
+   "cuando": "11/10/2026 13:54",
    "lat": 10.123788673205977,
    "lon": -84.52226050398474,
    "id": 541
@@ -6033,7 +6033,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 07:41",
+   "cuando": "11/10/2026 07:41",
    "lat": 10.123968336262802,
    "lon": -84.52226050398474,
    "id": 542
@@ -6044,7 +6044,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "revisita",
    "persona": "edit_lote_a",
-   "cuando": "11/10 08:55",
+   "cuando": "11/10/2026 08:55",
    "lat": 10.124462409669068,
    "lon": -84.52226050398474,
    "id": 543
@@ -6121,7 +6121,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 12:45",
+   "cuando": "11/10/2026 12:45",
    "lat": 10.125495472245804,
    "lon": -84.52261983009839,
    "id": 550
@@ -6143,7 +6143,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 14:37",
+   "cuando": "12/10/2026 14:37",
    "lat": 10.131828594998847,
    "lon": -84.52275457739101,
    "id": 552
@@ -6154,7 +6154,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 10:23",
+   "cuando": "12/10/2026 10:23",
    "lat": 10.12342934709233,
    "lon": -84.52288932468363,
    "id": 553
@@ -6176,7 +6176,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 08:57",
+   "cuando": "11/10/2026 08:57",
    "lat": 10.124686988490097,
    "lon": -84.52297915621205,
    "id": 555
@@ -6198,7 +6198,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 07:48",
+   "cuando": "13/10/2026 07:48",
    "lat": 10.131065027007345,
    "lon": -84.52311390350467,
    "id": 557
@@ -6231,7 +6231,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "revisita",
    "persona": "edit_lote_a",
-   "cuando": "13/10 07:34",
+   "cuando": "13/10/2026 07:34",
    "lat": 10.123968336262802,
    "lon": -84.52387747149616,
    "id": 560
@@ -6242,7 +6242,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "revisita",
    "persona": "edit_lote_a",
-   "cuando": "11/10 14:34",
+   "cuando": "11/10/2026 14:34",
    "lat": 10.12464207272589,
    "lon": -84.52396730302458,
    "id": 561
@@ -6286,7 +6286,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 17:18",
+   "cuando": "12/10/2026 17:18",
    "lat": 10.124686988490097,
    "lon": -84.52639275429169,
    "id": 565
@@ -6308,7 +6308,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 07:21",
+   "cuando": "12/10/2026 07:21",
    "lat": 10.131514184649404,
    "lon": -84.5264825858201,
    "id": 567
@@ -6363,7 +6363,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 14:54",
+   "cuando": "11/10/2026 14:54",
    "lat": 10.124686988490097,
    "lon": -84.52854871097358,
    "id": 572
@@ -6385,7 +6385,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 07:02",
+   "cuando": "11/10/2026 07:02",
    "lat": 10.124956483075334,
    "lon": -84.52881820555882,
    "id": 574
@@ -6440,7 +6440,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "11/10 14:06",
+   "cuando": "11/10/2026 14:06",
    "lat": 10.1352421930785,
    "lon": -84.53030042577761,
    "id": 579
@@ -6451,7 +6451,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 10:46",
+   "cuando": "11/10/2026 10:46",
    "lat": 10.130795532422109,
    "lon": -84.53034534154182,
    "id": 580
@@ -6473,7 +6473,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "revisita",
    "persona": "edit_lote_a",
-   "cuando": "13/10 10:06",
+   "cuando": "13/10/2026 10:06",
    "lat": 10.13560151919215,
    "lon": -84.53052500459864,
    "id": 582
@@ -6506,7 +6506,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 13:33",
+   "cuando": "12/10/2026 13:33",
    "lat": 10.139958348320128,
    "lon": -84.53146823564697,
    "id": 585
@@ -6539,7 +6539,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 15:46",
+   "cuando": "11/10/2026 15:46",
    "lat": 10.139688853734892,
    "lon": -84.53353436080045,
    "id": 588
@@ -6561,7 +6561,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 10:07",
+   "cuando": "13/10/2026 10:07",
    "lat": 10.129717554081166,
    "lon": -84.53366910809306,
    "id": 590
@@ -6605,7 +6605,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 10:53",
+   "cuando": "11/10/2026 10:53",
    "lat": 10.136724413297298,
    "lon": -84.5369030431159,
    "id": 594
@@ -6660,7 +6660,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 12:07",
+   "cuando": "11/10/2026 12:07",
    "lat": 10.118488613029673,
    "lon": -84.53977765202508,
    "id": 599
@@ -6693,7 +6693,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 08:59",
+   "cuando": "12/10/2026 08:59",
    "lat": 10.118578444558084,
    "lon": -84.54049630425237,
    "id": 602
@@ -6726,7 +6726,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 13:12",
+   "cuando": "11/10/2026 13:12",
    "lat": 10.11974625442744,
    "lon": -84.54085563036602,
    "id": 605
@@ -6781,7 +6781,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 16:37",
+   "cuando": "11/10/2026 16:37",
    "lat": 10.1201954120695,
    "lon": -84.54184377717856,
    "id": 610
@@ -6825,7 +6825,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 15:27",
+   "cuando": "13/10/2026 15:27",
    "lat": 10.122441200279798,
    "lon": -84.54274209246267,
    "id": 614
@@ -6836,7 +6836,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "13/10 12:22",
+   "cuando": "13/10/2026 12:22",
    "lat": 10.118039455387613,
    "lon": -84.54503279643717,
    "id": 615
@@ -6858,7 +6858,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 13:42",
+   "cuando": "11/10/2026 13:42",
    "lat": 10.118039455387613,
    "lon": -84.54624552207073,
    "id": 617
@@ -6869,7 +6869,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 13:01",
+   "cuando": "13/10/2026 13:01",
    "lat": 10.123788673205977,
    "lon": -84.54647010089177,
    "id": 618
@@ -6880,7 +6880,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 16:52",
+   "cuando": "12/10/2026 16:52",
    "lat": 10.127606513163485,
    "lon": -84.54947945709357,
    "id": 619
@@ -6902,7 +6902,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 13:48",
+   "cuando": "12/10/2026 13:48",
    "lat": 10.133131152160821,
    "lon": -84.55379137045735,
    "id": 621
@@ -6924,7 +6924,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 15:45",
+   "cuando": "12/10/2026 15:45",
    "lat": 10.12531580918898,
    "lon": -84.55657614783811,
    "id": 623
@@ -6946,7 +6946,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 13:06",
+   "cuando": "13/10/2026 13:06",
    "lat": 10.129492975260137,
    "lon": -84.56052873508824,
    "id": 625
@@ -6968,7 +6968,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 11:21",
+   "cuando": "11/10/2026 11:21",
    "lat": 10.107439335035002,
    "lon": -84.54179886141435,
    "id": 627
@@ -7012,7 +7012,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "rechazo",
    "persona": "edit_lote_b",
-   "cuando": "12/10 14:21",
+   "cuando": "12/10/2026 14:21",
    "lat": 10.10779866114865,
    "lon": -84.5444488915025,
    "id": 631
@@ -7034,7 +7034,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 15:48",
+   "cuando": "13/10/2026 15:48",
    "lat": 10.108427481847533,
    "lon": -84.54489804914456,
    "id": 633
@@ -7078,7 +7078,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "rechazo",
    "persona": "edit_lote_b",
-   "cuando": "11/10 14:36",
+   "cuando": "11/10/2026 14:36",
    "lat": 10.11606316176255,
    "lon": -84.54687434276963,
    "id": 637
@@ -7089,7 +7089,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "revisita",
    "persona": "edit_lote_b",
-   "cuando": "12/10 16:50",
+   "cuando": "12/10/2026 16:50",
    "lat": 10.117500466217141,
    "lon": -84.54768282652533,
    "id": 638
@@ -7100,7 +7100,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "rechazo",
    "persona": "edit_lote_b",
-   "cuando": "11/10 13:56",
+   "cuando": "11/10/2026 13:56",
    "lat": 10.117680129273964,
    "lon": -84.54772774228954,
    "id": 639
@@ -7122,7 +7122,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 12:59",
+   "cuando": "13/10/2026 12:59",
    "lat": 10.116961477046669,
    "lon": -84.54786248958216,
    "id": 641
@@ -7188,7 +7188,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 07:53",
+   "cuando": "13/10/2026 07:53",
    "lat": 10.105642704466764,
    "lon": -84.54956928862198,
    "id": 647
@@ -7232,7 +7232,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 14:25",
+   "cuando": "13/10/2026 14:25",
    "lat": 10.070428745329277,
    "lon": -84.55064726696293,
    "id": 651
@@ -7243,7 +7243,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 17:34",
+   "cuando": "11/10/2026 17:34",
    "lat": 10.117096224339289,
    "lon": -84.55073709849134,
    "id": 652
@@ -7298,7 +7298,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 08:36",
+   "cuando": "13/10/2026 08:36",
    "lat": 10.074785574457257,
    "lon": -84.55141083495442,
    "id": 657
@@ -7342,7 +7342,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 11:54",
+   "cuando": "13/10/2026 11:54",
    "lat": 10.115748751413108,
    "lon": -84.55226423447434,
    "id": 661
@@ -7364,7 +7364,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 16:31",
+   "cuando": "13/10/2026 16:31",
    "lat": 10.11561400412049,
    "lon": -84.55316254975845,
    "id": 663
@@ -7375,7 +7375,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 14:02",
+   "cuando": "13/10/2026 14:02",
    "lat": 10.10523846258891,
    "lon": -84.55338712857949,
    "id": 664
@@ -7408,7 +7408,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 15:16",
+   "cuando": "13/10/2026 15:16",
    "lat": 10.072135544369104,
    "lon": -84.55415069657099,
    "id": 667
@@ -7463,7 +7463,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 09:49",
+   "cuando": "11/10/2026 09:49",
    "lat": 10.071327060613397,
    "lon": -84.55459985421305,
    "id": 672
@@ -7485,7 +7485,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 13:43",
+   "cuando": "11/10/2026 13:43",
    "lat": 10.07051857685769,
    "lon": -84.55477951726988,
    "id": 674
@@ -7507,7 +7507,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 07:16",
+   "cuando": "12/10/2026 07:16",
    "lat": 10.073662680352108,
    "lon": -84.55495918032669,
    "id": 676
@@ -7540,7 +7540,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 09:38",
+   "cuando": "13/10/2026 09:38",
    "lat": 10.064859190567738,
    "lon": -84.55540833796876,
    "id": 679
@@ -7573,7 +7573,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 07:14",
+   "cuando": "13/10/2026 07:14",
    "lat": 10.090865418042997,
    "lon": -84.55581257984662,
    "id": 682
@@ -7617,7 +7617,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 12:43",
+   "cuando": "13/10/2026 12:43",
    "lat": 10.064499864454088,
    "lon": -84.55639648478129,
    "id": 686
@@ -7628,7 +7628,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 11:42",
+   "cuando": "12/10/2026 11:42",
    "lat": 10.069260935459923,
    "lon": -84.55666597936653,
    "id": 687
@@ -7650,7 +7650,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 14:50",
+   "cuando": "12/10/2026 14:50",
    "lat": 10.105283378353114,
    "lon": -84.55675581089494,
    "id": 689
@@ -7683,7 +7683,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 09:17",
+   "cuando": "12/10/2026 09:17",
    "lat": 10.065667674323443,
    "lon": -84.55702530548017,
    "id": 692
@@ -7694,7 +7694,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 16:40",
+   "cuando": "13/10/2026 16:40",
    "lat": 10.113817373552251,
    "lon": -84.55711513700858,
    "id": 693
@@ -7749,7 +7749,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 17:27",
+   "cuando": "12/10/2026 17:27",
    "lat": 10.054618396328774,
    "lon": -84.55738463159382,
    "id": 698
@@ -7771,7 +7771,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 12:57",
+   "cuando": "12/10/2026 12:57",
    "lat": 10.054259070215126,
    "lon": -84.55742954735803,
    "id": 700
@@ -7782,7 +7782,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 08:32",
+   "cuando": "12/10/2026 08:32",
    "lat": 10.05488789091401,
    "lon": -84.55756429465065,
    "id": 701
@@ -7793,7 +7793,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 08:15",
+   "cuando": "13/10/2026 08:15",
    "lat": 10.055696374669717,
    "lon": -84.55774395770746,
    "id": 702
@@ -7804,7 +7804,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 11:31",
+   "cuando": "13/10/2026 11:31",
    "lat": 10.07240503895434,
    "lon": -84.55765412617906,
    "id": 703
@@ -7870,7 +7870,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "revisita",
    "persona": "edit_lote_b",
-   "cuando": "11/10 08:41",
+   "cuando": "11/10/2026 08:41",
    "lat": 10.08147802332395,
    "lon": -84.55774395770747,
    "id": 709
@@ -7881,7 +7881,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "revisita",
    "persona": "edit_lote_b",
-   "cuando": "11/10 08:14",
+   "cuando": "11/10/2026 08:14",
    "lat": 10.055157385499246,
    "lon": -84.55796853652849,
    "id": 710
@@ -7925,7 +7925,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 08:16",
+   "cuando": "11/10/2026 08:16",
    "lat": 10.072045712840692,
    "lon": -84.5580134522927,
    "id": 714
@@ -7936,7 +7936,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 12:53",
+   "cuando": "11/10/2026 12:53",
    "lat": 10.113637710495427,
    "lon": -84.5580134522927,
    "id": 715
@@ -7947,7 +7947,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 12:51",
+   "cuando": "13/10/2026 12:51",
    "lat": 10.051384461305943,
    "lon": -84.55814819958532,
    "id": 716
@@ -8035,7 +8035,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 07:14",
+   "cuando": "11/10/2026 07:14",
    "lat": 10.050575977550235,
    "lon": -84.55855244146318,
    "id": 724
@@ -8057,7 +8057,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 17:40",
+   "cuando": "12/10/2026 17:40",
    "lat": 10.075773721269789,
    "lon": -84.55873210452,
    "id": 726
@@ -8079,7 +8079,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 08:14",
+   "cuando": "13/10/2026 08:14",
    "lat": 10.102588432500756,
    "lon": -84.55891176757682,
    "id": 728
@@ -8112,7 +8112,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 16:24",
+   "cuando": "11/10/2026 16:24",
    "lat": 10.056055700783364,
    "lon": -84.55918126216206,
    "id": 731
@@ -8178,7 +8178,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 09:29",
+   "cuando": "12/10/2026 09:29",
    "lat": 10.07999580310515,
    "lon": -84.55972025133254,
    "id": 737
@@ -8288,7 +8288,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 10:14",
+   "cuando": "11/10/2026 10:14",
    "lat": 10.048420020868349,
    "lon": -84.56030415626721,
    "id": 747
@@ -8354,7 +8354,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 14:39",
+   "cuando": "13/10/2026 14:39",
    "lat": 10.105013883767878,
    "lon": -84.56070839814507,
    "id": 753
@@ -8365,7 +8365,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "rechazo",
    "persona": "edit_lote_b",
-   "cuando": "12/10 14:24",
+   "cuando": "12/10/2026 14:24",
    "lat": 10.10577745175938,
    "lon": -84.56075331390926,
    "id": 754
@@ -8387,7 +8387,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 16:17",
+   "cuando": "11/10/2026 16:17",
    "lat": 10.048240357811526,
    "lon": -84.5610677242587,
    "id": 756
@@ -8409,7 +8409,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 09:46",
+   "cuando": "13/10/2026 09:46",
    "lat": 10.046892884885345,
    "lon": -84.56124738731553,
    "id": 758
@@ -8442,7 +8442,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 09:42",
+   "cuando": "12/10/2026 09:42",
    "lat": 10.04752170558423,
    "lon": -84.56147196613657,
    "id": 761
@@ -8453,7 +8453,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 07:11",
+   "cuando": "12/10/2026 07:11",
    "lat": 10.047881031697877,
    "lon": -84.56133721884395,
    "id": 762
@@ -8541,7 +8541,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 16:10",
+   "cuando": "13/10/2026 16:10",
    "lat": 10.104295231540583,
    "lon": -84.56187620801441,
    "id": 770
@@ -8596,7 +8596,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "rechazo",
    "persona": "edit_lote_b",
-   "cuando": "12/10 09:42",
+   "cuando": "12/10/2026 09:42",
    "lat": 10.096390057040331,
    "lon": -84.56205587107124,
    "id": 775
@@ -8607,7 +8607,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 17:41",
+   "cuando": "13/10/2026 17:41",
    "lat": 10.04617423265805,
    "lon": -84.56223553412806,
    "id": 776
@@ -8651,7 +8651,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 08:32",
+   "cuando": "12/10/2026 08:32",
    "lat": 10.05677435301066,
    "lon": -84.5624601129491,
    "id": 780
@@ -8684,7 +8684,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 07:29",
+   "cuando": "11/10/2026 07:29",
    "lat": 10.052103113533239,
    "lon": -84.56272960753434,
    "id": 783
@@ -8695,7 +8695,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 07:41",
+   "cuando": "13/10/2026 07:41",
    "lat": 10.08089411838927,
    "lon": -84.56268469177013,
    "id": 784
@@ -8706,7 +8706,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 13:21",
+   "cuando": "12/10/2026 13:21",
    "lat": 10.095851067869859,
    "lon": -84.56295418635537,
    "id": 785
@@ -8739,7 +8739,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 09:10",
+   "cuando": "11/10/2026 09:10",
    "lat": 10.045096254317107,
    "lon": -84.56313384941218,
    "id": 788
@@ -8772,7 +8772,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 10:53",
+   "cuando": "11/10/2026 10:53",
    "lat": 10.1036664108417,
    "lon": -84.5631338494122,
    "id": 791
@@ -8838,7 +8838,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 10:21",
+   "cuando": "12/10/2026 10:21",
    "lat": 10.044018275976164,
    "lon": -84.56349317552583,
    "id": 797
@@ -8893,7 +8893,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 12:40",
+   "cuando": "11/10/2026 12:40",
    "lat": 10.053181091874183,
    "lon": -84.56358300705425,
    "id": 802
@@ -8904,7 +8904,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 13:58",
+   "cuando": "12/10/2026 13:58",
    "lat": 10.095042584114152,
    "lon": -84.56358300705425,
    "id": 803
@@ -8915,7 +8915,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 14:41",
+   "cuando": "12/10/2026 14:41",
    "lat": 10.109056302546417,
    "lon": -84.56367283858266,
    "id": 804
@@ -8981,7 +8981,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 12:30",
+   "cuando": "13/10/2026 12:30",
    "lat": 10.108517313375945,
    "lon": -84.56394233316789,
    "id": 810
@@ -9080,7 +9080,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 10:57",
+   "cuando": "11/10/2026 10:57",
    "lat": 10.056864184539073,
    "lon": -84.56430165928154,
    "id": 819
@@ -9091,7 +9091,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "rechazo",
    "persona": "edit_lote_b",
-   "cuando": "12/10 15:40",
+   "cuando": "12/10/2026 15:40",
    "lat": 10.085430610574075,
    "lon": -84.56425674351735,
    "id": 820
@@ -9146,7 +9146,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 11:12",
+   "cuando": "13/10/2026 11:12",
    "lat": 10.105373209881527,
    "lon": -84.56448132233837,
    "id": 825
@@ -9256,7 +9256,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "revisita",
    "persona": "edit_lote_b",
-   "cuando": "11/10 14:45",
+   "cuando": "11/10/2026 14:45",
    "lat": 10.05511246973504,
    "lon": -84.56511014303726,
    "id": 835
@@ -9278,7 +9278,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 12:19",
+   "cuando": "11/10/2026 12:19",
    "lat": 10.052911597288947,
    "lon": -84.56511014303724,
    "id": 837
@@ -9322,7 +9322,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 15:17",
+   "cuando": "13/10/2026 15:17",
    "lat": 10.053270923402597,
    "lon": -84.56511014303726,
    "id": 841
@@ -9366,7 +9366,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 16:18",
+   "cuando": "13/10/2026 16:18",
    "lat": 10.053630249516242,
    "lon": -84.56537963762248,
    "id": 845
@@ -9388,7 +9388,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 14:21",
+   "cuando": "13/10/2026 14:21",
    "lat": 10.055741290433923,
    "lon": -84.5655143849151,
    "id": 847
@@ -9399,7 +9399,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "rechazo",
    "persona": "edit_lote_b",
-   "cuando": "11/10 12:34",
+   "cuando": "11/10/2026 12:34",
    "lat": 10.044826759731873,
    "lon": -84.56555930067931,
    "id": 848
@@ -9509,7 +9509,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 09:19",
+   "cuando": "13/10/2026 09:19",
    "lat": 10.087406904199137,
    "lon": -84.56591862679296,
    "id": 858
@@ -9531,7 +9531,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 11:56",
+   "cuando": "12/10/2026 11:56",
    "lat": 10.109415628660065,
    "lon": -84.56591862679295,
    "id": 860
@@ -9553,7 +9553,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 09:00",
+   "cuando": "13/10/2026 09:00",
    "lat": 10.095042584114154,
    "lon": -84.56600845832136,
    "id": 862
@@ -9652,7 +9652,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 10:08",
+   "cuando": "12/10/2026 10:08",
    "lat": 10.094683258000504,
    "lon": -84.5662779529066,
    "id": 871
@@ -9663,7 +9663,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 16:43",
+   "cuando": "12/10/2026 16:43",
    "lat": 10.108831723725388,
    "lon": -84.5662779529066,
    "id": 872
@@ -9707,7 +9707,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 15:17",
+   "cuando": "12/10/2026 15:17",
    "lat": 10.090371344636731,
    "lon": -84.56645761596343,
    "id": 876
@@ -9762,7 +9762,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 14:36",
+   "cuando": "12/10/2026 14:36",
    "lat": 10.109774954773712,
    "lon": -84.56663727902026,
    "id": 881
@@ -9784,7 +9784,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "revisita",
    "persona": "edit_lote_b",
-   "cuando": "12/10 08:38",
+   "cuando": "12/10/2026 08:38",
    "lat": 10.05165395589118,
    "lon": -84.56672711054867,
    "id": 883
@@ -9949,7 +9949,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "revisita",
    "persona": "edit_lote_b",
-   "cuando": "12/10 16:49",
+   "cuando": "12/10/2026 16:49",
    "lat": 10.096030730926685,
    "lon": -84.56780508888961,
    "id": 898
@@ -10048,7 +10048,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "revisita",
    "persona": "edit_lote_b",
-   "cuando": "11/10 13:02",
+   "cuando": "11/10/2026 13:02",
    "lat": 10.060187951090317,
    "lon": -84.56870340417373,
    "id": 907
@@ -10070,7 +10070,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 07:53",
+   "cuando": "12/10/2026 07:53",
    "lat": 10.058436236286283,
    "lon": -84.56879323570215,
    "id": 909
@@ -10147,7 +10147,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 08:12",
+   "cuando": "12/10/2026 08:12",
    "lat": 10.093874774244796,
    "lon": -84.5692423933442,
    "id": 916
@@ -10191,7 +10191,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "revisita",
    "persona": "edit_lote_b",
-   "cuando": "13/10 09:58",
+   "cuando": "13/10/2026 09:58",
    "lat": 10.061445592488083,
    "lon": -84.56951188792944,
    "id": 920
@@ -10290,7 +10290,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 07:19",
+   "cuando": "12/10/2026 07:19",
    "lat": 10.112020742984011,
    "lon": -84.56987121404308,
    "id": 929
@@ -10301,7 +10301,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 16:30",
+   "cuando": "12/10/2026 16:30",
    "lat": 10.04985732532294,
    "lon": -84.5700508770999,
    "id": 930
@@ -10312,7 +10312,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 14:18",
+   "cuando": "11/10/2026 14:18",
    "lat": 10.061086266374435,
    "lon": -84.57014070862832,
    "id": 931
@@ -10367,7 +10367,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 13:40",
+   "cuando": "11/10/2026 13:40",
    "lat": 10.098725676779043,
    "lon": -84.57058986627038,
    "id": 936
@@ -10444,7 +10444,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 07:06",
+   "cuando": "12/10/2026 07:06",
    "lat": 10.04662339030011,
    "lon": -84.57094919238403,
    "id": 943
@@ -10466,7 +10466,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 09:21",
+   "cuando": "12/10/2026 09:21",
    "lat": 10.071506723670222,
    "lon": -84.5715330973187,
    "id": 945
@@ -10477,7 +10477,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "revisita",
    "persona": "edit_lote_b",
-   "cuando": "12/10 10:40",
+   "cuando": "12/10/2026 10:40",
    "lat": 10.083544148477422,
    "lon": -84.57162292884712,
    "id": 946
@@ -10488,7 +10488,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 15:41",
+   "cuando": "12/10/2026 15:41",
    "lat": 10.105193546824703,
    "lon": -84.57166784461133,
    "id": 947
@@ -10510,7 +10510,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "revisita",
    "persona": "edit_lote_b",
-   "cuando": "12/10 08:44",
+   "cuando": "12/10/2026 08:44",
    "lat": 10.101779948745051,
    "lon": -84.57184750766815,
    "id": 949
@@ -10554,7 +10554,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "rechazo",
    "persona": "edit_lote_b",
-   "cuando": "12/10 13:57",
+   "cuando": "12/10/2026 13:57",
    "lat": 10.070788071442927,
    "lon": -84.57256615989544,
    "id": 953
@@ -10565,7 +10565,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "revisita",
    "persona": "edit_lote_b",
-   "cuando": "11/10 08:37",
+   "cuando": "11/10/2026 08:37",
    "lat": 10.067419389127476,
    "lon": -84.5730153175375,
    "id": 954
@@ -10664,7 +10664,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 07:39",
+   "cuando": "11/10/2026 07:39",
    "lat": 10.103037590142815,
    "lon": -84.57355430670798,
    "id": 963
@@ -10686,7 +10686,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "12/10 17:46",
+   "cuando": "12/10/2026 17:46",
    "lat": 10.0690812724031,
    "lon": -84.57386871705741,
    "id": 965
@@ -10763,7 +10763,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 17:48",
+   "cuando": "13/10/2026 17:48",
    "lat": 10.099174834421103,
    "lon": -84.57436279046368,
    "id": 972
@@ -10785,7 +10785,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "11/10 08:16",
+   "cuando": "11/10/2026 08:16",
    "lat": 10.092347638261794,
    "lon": -84.57481194810573,
    "id": 974
@@ -10884,7 +10884,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 14:58",
+   "cuando": "13/10/2026 14:58",
    "lat": 10.0533158391668,
    "lon": -84.57813571465698,
    "id": 983
@@ -10906,7 +10906,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 09:37",
+   "cuando": "13/10/2026 09:37",
    "lat": 10.063511717641557,
    "lon": -84.57876453535586,
    "id": 985
@@ -10994,7 +10994,7 @@
    "codigo_upm": "20205006",
    "estado_visita": "revisita",
    "persona": "edit_lote_a",
-   "cuando": "11/10 15:54",
+   "cuando": "11/10/2026 15:54",
    "lat": 10.117141140103492,
    "lon": -84.53299537162998,
    "id": 993
@@ -11049,7 +11049,7 @@
    "codigo_upm": "20205006",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 17:33",
+   "cuando": "12/10/2026 17:33",
    "lat": 10.110224112415771,
    "lon": -84.53506149678344,
    "id": 998
@@ -11126,7 +11126,7 @@
    "codigo_upm": "20205006",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 15:01",
+   "cuando": "13/10/2026 15:01",
    "lat": 10.11651231940461,
    "lon": -84.53524115984028,
    "id": 1005
@@ -11170,7 +11170,7 @@
    "codigo_upm": "20205006",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 13:11",
+   "cuando": "11/10/2026 13:11",
    "lat": 10.11682672975405,
    "lon": -84.53564540171813,
    "id": 1009
@@ -11203,7 +11203,7 @@
    "codigo_upm": "20205006",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 15:53",
+   "cuando": "12/10/2026 15:53",
    "lat": 10.11583858294152,
    "lon": -84.53600472783177,
    "id": 1012
@@ -11291,7 +11291,7 @@
    "codigo_upm": "20205006",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 17:06",
+   "cuando": "12/10/2026 17:06",
    "lat": 10.118847939143318,
    "lon": -84.53789118992843,
    "id": 1020
@@ -11302,7 +11302,7 @@
    "codigo_upm": "20205006",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 09:21",
+   "cuando": "11/10/2026 09:21",
    "lat": 10.118039455387613,
    "lon": -84.53807085298526,
    "id": 1021
@@ -11335,7 +11335,7 @@
    "codigo_upm": "20205006",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 08:35",
+   "cuando": "11/10/2026 08:35",
    "lat": 10.115883498705724,
    "lon": -84.5384301790989,
    "id": 1024
@@ -11401,7 +11401,7 @@
    "codigo_upm": "20205006",
    "estado_visita": "revisita",
    "persona": "edit_lote_a",
-   "cuando": "12/10 08:23",
+   "cuando": "12/10/2026 08:23",
    "lat": 10.118578444558086,
    "lon": -84.53950815743984,
    "id": 1030
@@ -11412,7 +11412,7 @@
    "codigo_upm": "20205006",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 15:39",
+   "cuando": "12/10/2026 15:39",
    "lat": 10.120285243597912,
    "lon": -84.53950815743984,
    "id": 1031
@@ -11423,7 +11423,7 @@
    "codigo_upm": "20205006",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 10:45",
+   "cuando": "11/10/2026 10:45",
    "lat": 10.11839878150126,
    "lon": -84.53968782049667,
    "id": 1032
@@ -11456,7 +11456,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 08:43",
+   "cuando": "12/10/2026 08:43",
    "lat": 10.108068155733886,
    "lon": -84.57535093727621,
    "id": 1035
@@ -11566,7 +11566,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 09:15",
+   "cuando": "11/10/2026 09:15",
    "lat": 10.105463041409939,
    "lon": -84.5790340299411,
    "id": 1045
@@ -11577,7 +11577,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 15:04",
+   "cuando": "11/10/2026 15:04",
    "lat": 10.104609641890026,
    "lon": -84.57925860876213,
    "id": 1046
@@ -11599,7 +11599,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 16:32",
+   "cuando": "12/10/2026 16:32",
    "lat": 10.09351544813115,
    "lon": -84.57930352452634,
    "id": 1048
@@ -11610,7 +11610,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 14:09",
+   "cuando": "13/10/2026 14:09",
    "lat": 10.110134280887362,
    "lon": -84.57957301911158,
    "id": 1049
@@ -11676,7 +11676,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 16:30",
+   "cuando": "12/10/2026 16:30",
    "lat": 10.111122427699893,
    "lon": -84.58244762802076,
    "id": 1055
@@ -11687,7 +11687,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 08:36",
+   "cuando": "11/10/2026 08:36",
    "lat": 10.111302090756716,
    "lon": -84.58244762802076,
    "id": 1056
@@ -11698,7 +11698,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "revisita",
    "persona": "edit_lote_a",
-   "cuando": "12/10 15:32",
+   "cuando": "12/10/2026 15:32",
    "lat": 10.097827361494922,
    "lon": -84.58258237531336,
    "id": 1057
@@ -11709,7 +11709,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 14:14",
+   "cuando": "13/10/2026 14:14",
    "lat": 10.107978324205472,
    "lon": -84.58253745954917,
    "id": 1058
@@ -11731,7 +11731,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "12/10 16:27",
+   "cuando": "12/10/2026 16:27",
    "lat": 10.11170633263457,
    "lon": -84.58280695413441,
    "id": 1060
@@ -11775,7 +11775,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 17:04",
+   "cuando": "12/10/2026 17:04",
    "lat": 10.107214756213972,
    "lon": -84.58509765810891,
    "id": 1064
@@ -11786,7 +11786,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "13/10 17:20",
+   "cuando": "13/10/2026 17:20",
    "lat": 10.10712492468556,
    "lon": -84.58550189998677,
    "id": 1065
@@ -11808,7 +11808,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 16:19",
+   "cuando": "12/10/2026 16:19",
    "lat": 10.094773089528918,
    "lon": -84.58693920444135,
    "id": 1067
@@ -11830,7 +11830,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "12/10 12:47",
+   "cuando": "12/10/2026 12:47",
    "lat": 10.094503594943681,
    "lon": -84.58720869902659,
    "id": 1069
@@ -11841,7 +11841,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 17:38",
+   "cuando": "12/10/2026 17:38",
    "lat": 10.119791170191645,
    "lon": -84.587298530555,
    "id": 1070
@@ -11874,7 +11874,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 17:45",
+   "cuando": "13/10/2026 17:45",
    "lat": 10.119027602200145,
    "lon": -84.58761294090445,
    "id": 1073
@@ -12006,7 +12006,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "12/10 07:41",
+   "cuando": "12/10/2026 07:41",
    "lat": 10.087945893369607,
    "lon": -84.58976889758632,
    "id": 1085
@@ -12094,7 +12094,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 07:02",
+   "cuando": "13/10/2026 07:02",
    "lat": 10.084083137647895,
    "lon": -84.59012822369998,
    "id": 1093
@@ -12138,7 +12138,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "13/10 10:05",
+   "cuando": "13/10/2026 10:05",
    "lat": 10.122081874166149,
    "lon": -84.59017313946418,
    "id": 1097
@@ -12149,7 +12149,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 12:28",
+   "cuando": "11/10/2026 12:28",
    "lat": 10.12118355888203,
    "lon": -84.59035280252101,
    "id": 1098
@@ -12182,7 +12182,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "11/10 12:02",
+   "cuando": "11/10/2026 12:02",
    "lat": 10.08992218699467,
    "lon": -84.59066721287044,
    "id": 1101
@@ -12193,7 +12193,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 07:15",
+   "cuando": "11/10/2026 07:15",
    "lat": 10.135107445785884,
    "lon": -84.59098162321989,
    "id": 1102
@@ -12270,7 +12270,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 08:43",
+   "cuando": "12/10/2026 08:43",
    "lat": 10.077255941488586,
    "lon": -84.5917901069756,
    "id": 1109
@@ -12347,7 +12347,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 11:31",
+   "cuando": "11/10/2026 11:31",
    "lat": 10.076357626204466,
    "lon": -84.59376640060066,
    "id": 1116
@@ -12358,7 +12358,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "11/10 16:14",
+   "cuando": "11/10/2026 16:14",
    "lat": 10.077076278431761,
    "lon": -84.59376640060066,
    "id": 1117
@@ -12402,7 +12402,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 14:34",
+   "cuando": "11/10/2026 14:34",
    "lat": 10.080220381926182,
    "lon": -84.59421555824272,
    "id": 1121
@@ -12413,7 +12413,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 15:47",
+   "cuando": "13/10/2026 15:47",
    "lat": 10.088305219483257,
    "lon": -84.59421555824272,
    "id": 1122
@@ -12424,7 +12424,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 08:18",
+   "cuando": "13/10/2026 08:18",
    "lat": 10.080265297690387,
    "lon": -84.59439522129955,
    "id": 1123
@@ -12534,7 +12534,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 15:16",
+   "cuando": "12/10/2026 15:16",
    "lat": 10.082196675551245,
    "lon": -84.59574269422572,
    "id": 1133
@@ -12567,7 +12567,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 15:41",
+   "cuando": "12/10/2026 15:41",
    "lat": 10.13358030980288,
    "lon": -84.59610202033937,
    "id": 1136
@@ -12578,7 +12578,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 09:06",
+   "cuando": "11/10/2026 09:06",
    "lat": 10.080579708039828,
    "lon": -84.59646134645303,
    "id": 1137
@@ -12589,7 +12589,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "13/10 08:06",
+   "cuando": "13/10/2026 08:06",
    "lat": 10.115793667177314,
    "lon": -84.59646134645303,
    "id": 1138
@@ -12600,7 +12600,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 15:09",
+   "cuando": "13/10/2026 15:09",
    "lat": 10.080400044983005,
    "lon": -84.59646134645303,
    "id": 1139
@@ -12622,7 +12622,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 08:24",
+   "cuando": "11/10/2026 08:24",
    "lat": 10.118758107614909,
    "lon": -84.59717999868032,
    "id": 1141
@@ -12633,7 +12633,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 10:43",
+   "cuando": "13/10/2026 10:43",
    "lat": 10.1119309114556,
    "lon": -84.59785373514342,
    "id": 1142
@@ -12710,7 +12710,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 08:04",
+   "cuando": "12/10/2026 08:04",
    "lat": 10.085295863281456,
    "lon": -84.59902154501276,
    "id": 1149
@@ -12721,7 +12721,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 11:00",
+   "cuando": "11/10/2026 11:00",
    "lat": 10.11628774058358,
    "lon": -84.59915629230538,
    "id": 1150
@@ -12765,7 +12765,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "12/10 14:43",
+   "cuando": "12/10/2026 14:43",
    "lat": 10.11938692831379,
    "lon": -84.59960544994743,
    "id": 1154
@@ -12776,7 +12776,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 09:37",
+   "cuando": "11/10/2026 09:37",
    "lat": 10.11853352879388,
    "lon": -84.60000969182529,
    "id": 1155
@@ -12787,7 +12787,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 09:29",
+   "cuando": "11/10/2026 09:29",
    "lat": 10.061760002837524,
    "lon": -84.60014443911791,
    "id": 1156
@@ -12798,7 +12798,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 16:53",
+   "cuando": "13/10/2026 16:53",
    "lat": 10.071776218255458,
    "lon": -84.60023427064633,
    "id": 1157
@@ -12820,7 +12820,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 07:31",
+   "cuando": "11/10/2026 07:31",
    "lat": 10.064634611746706,
    "lon": -84.60041393370315,
    "id": 1159
@@ -12831,7 +12831,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 16:38",
+   "cuando": "12/10/2026 16:38",
    "lat": 10.107708829620238,
    "lon": -84.60041393370315,
    "id": 1160
@@ -12930,7 +12930,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "revisita",
    "persona": "edit_lote_a",
-   "cuando": "11/10 07:16",
+   "cuando": "11/10/2026 07:16",
    "lat": 10.060726940260786,
    "lon": -84.600818175581,
    "id": 1169
@@ -12985,7 +12985,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 11:35",
+   "cuando": "13/10/2026 11:35",
    "lat": 10.110403775472596,
    "lon": -84.60104275440203,
    "id": 1174
@@ -13018,7 +13018,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 07:20",
+   "cuando": "13/10/2026 07:20",
    "lat": 10.066206663493915,
    "lon": -84.60122241745886,
    "id": 1177
@@ -13172,7 +13172,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 14:28",
+   "cuando": "13/10/2026 14:28",
    "lat": 10.060457445675551,
    "lon": -84.60216564850718,
    "id": 1191
@@ -13194,7 +13194,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 07:33",
+   "cuando": "13/10/2026 07:33",
    "lat": 10.111796164162982,
    "lon": -84.60221056427139,
    "id": 1193
@@ -13205,7 +13205,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 16:08",
+   "cuando": "11/10/2026 16:08",
    "lat": 10.060187951090315,
    "lon": -84.60221056427139,
    "id": 1194
@@ -13304,7 +13304,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 08:20",
+   "cuando": "12/10/2026 08:20",
    "lat": 10.118219118444436,
    "lon": -84.60265972191344,
    "id": 1203
@@ -13546,7 +13546,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 10:00",
+   "cuando": "13/10/2026 10:00",
    "lat": 10.124372578140655,
    "lon": -84.60441143671748,
    "id": 1225
@@ -13634,7 +13634,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 11:47",
+   "cuando": "11/10/2026 11:47",
    "lat": 10.07096773449975,
    "lon": -84.60486059435954,
    "id": 1233
@@ -13678,7 +13678,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 14:52",
+   "cuando": "12/10/2026 14:52",
    "lat": 10.094234100358445,
    "lon": -84.60521992047319,
    "id": 1237
@@ -13843,7 +13843,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 14:37",
+   "cuando": "12/10/2026 14:37",
    "lat": 10.088574714068493,
    "lon": -84.60719621409825,
    "id": 1252
@@ -13854,7 +13854,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 14:33",
+   "cuando": "11/10/2026 14:33",
    "lat": 10.09908500289269,
    "lon": -84.60733096139086,
    "id": 1253
@@ -13898,7 +13898,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 15:11",
+   "cuando": "11/10/2026 15:11",
    "lat": 10.088754377125316,
    "lon": -84.60751062444768,
    "id": 1257
@@ -13920,7 +13920,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "revisita",
    "persona": "edit_lote_a",
-   "cuando": "11/10 14:38",
+   "cuando": "11/10/2026 14:38",
    "lat": 10.07968139275571,
    "lon": -84.60795978208975,
    "id": 1259
@@ -13953,7 +13953,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 15:25",
+   "cuando": "12/10/2026 15:25",
    "lat": 10.08659842044343,
    "lon": -84.60813944514658,
    "id": 1262
@@ -13986,7 +13986,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 14:11",
+   "cuando": "12/10/2026 14:11",
    "lat": 10.12801075504134,
    "lon": -84.60863351855284,
    "id": 1265
@@ -13997,7 +13997,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 14:08",
+   "cuando": "13/10/2026 14:08",
    "lat": 10.127471765870867,
    "lon": -84.60863351855284,
    "id": 1266
@@ -14096,7 +14096,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 17:55",
+   "cuando": "11/10/2026 17:55",
    "lat": 10.063062559999498,
    "lon": -84.60939708654433,
    "id": 1275
@@ -14107,7 +14107,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 17:37",
+   "cuando": "11/10/2026 17:37",
    "lat": 10.078064425244293,
    "lon": -84.60953183383695,
    "id": 1276
@@ -14195,7 +14195,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "13/10 16:17",
+   "cuando": "13/10/2026 16:17",
    "lat": 10.078603414414765,
    "lon": -84.6098462441864,
    "id": 1284
@@ -14206,7 +14206,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 08:11",
+   "cuando": "13/10/2026 08:11",
    "lat": 10.10734950350659,
    "lon": -84.61002590724323,
    "id": 1285
@@ -14272,7 +14272,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 13:05",
+   "cuando": "12/10/2026 13:05",
    "lat": 10.108607144904358,
    "lon": -84.61002590724323,
    "id": 1291
@@ -14305,7 +14305,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 09:25",
+   "cuando": "12/10/2026 09:25",
    "lat": 10.085789936687721,
    "lon": -84.61029540182847,
    "id": 1294
@@ -14327,7 +14327,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 10:13",
+   "cuando": "11/10/2026 10:13",
    "lat": 10.123968336262802,
    "lon": -84.61029540182847,
    "id": 1296
@@ -14338,7 +14338,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 15:15",
+   "cuando": "11/10/2026 15:15",
    "lat": 10.12500139883954,
    "lon": -84.61034031759267,
    "id": 1297
@@ -14360,7 +14360,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 14:43",
+   "cuando": "12/10/2026 14:43",
    "lat": 10.085430610574075,
    "lon": -84.61043014912109,
    "id": 1299
@@ -14371,7 +14371,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 15:55",
+   "cuando": "13/10/2026 15:55",
    "lat": 10.064140538340443,
    "lon": -84.61051998064949,
    "id": 1300
@@ -14382,7 +14382,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 13:09",
+   "cuando": "12/10/2026 13:09",
    "lat": 10.125270893424776,
    "lon": -84.61092422252734,
    "id": 1301
@@ -14393,7 +14393,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 07:10",
+   "cuando": "12/10/2026 07:10",
    "lat": 10.124776820018509,
    "lon": -84.61056489641369,
    "id": 1302
@@ -14404,7 +14404,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 10:17",
+   "cuando": "12/10/2026 10:17",
    "lat": 10.124686988490097,
    "lon": -84.61074455947052,
    "id": 1303
@@ -14470,7 +14470,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 07:04",
+   "cuando": "11/10/2026 07:04",
    "lat": 10.104834220711055,
    "lon": -84.61114880134838,
    "id": 1309
@@ -14503,7 +14503,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 07:46",
+   "cuando": "12/10/2026 07:46",
    "lat": 10.075459310920348,
    "lon": -84.61119371711258,
    "id": 1312
@@ -14602,7 +14602,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 15:44",
+   "cuando": "12/10/2026 15:44",
    "lat": 10.11282922673972,
    "lon": -84.61173270628305,
    "id": 1321
@@ -14635,7 +14635,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 17:15",
+   "cuando": "13/10/2026 17:15",
    "lat": 10.082825496250127,
    "lon": -84.6127208530956,
    "id": 1324
@@ -14734,7 +14734,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "revisita",
    "persona": "edit_lote_a",
-   "cuando": "13/10 15:30",
+   "cuando": "13/10/2026 15:30",
    "lat": 10.07186604978387,
    "lon": -84.61254119003877,
    "id": 1333
@@ -14745,7 +14745,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 14:37",
+   "cuando": "12/10/2026 14:37",
    "lat": 10.079052572056824,
    "lon": -84.61267593733137,
    "id": 1334
@@ -14756,7 +14756,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 11:30",
+   "cuando": "13/10/2026 11:30",
    "lat": 10.083184822363776,
    "lon": -84.61267593733137,
    "id": 1335
@@ -14767,7 +14767,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 16:20",
+   "cuando": "13/10/2026 16:20",
    "lat": 10.078872909000001,
    "lon": -84.61272085309558,
    "id": 1336
@@ -14822,7 +14822,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 07:57",
+   "cuando": "13/10/2026 07:57",
    "lat": 10.074830490221462,
    "lon": -84.61317001073765,
    "id": 1341
@@ -14844,7 +14844,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 11:28",
+   "cuando": "11/10/2026 11:28",
    "lat": 10.074560995636228,
    "lon": -84.61325984226605,
    "id": 1343
@@ -14899,7 +14899,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "13/10 08:07",
+   "cuando": "13/10/2026 08:07",
    "lat": 10.081927180966009,
    "lon": -84.61352933685129,
    "id": 1348
@@ -14932,7 +14932,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 10:15",
+   "cuando": "13/10/2026 10:15",
    "lat": 10.081792433673389,
    "lon": -84.61406832602177,
    "id": 1351
@@ -14943,7 +14943,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 12:37",
+   "cuando": "11/10/2026 12:37",
    "lat": 10.107080008921354,
    "lon": -84.61420307331437,
    "id": 1352
@@ -14965,7 +14965,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "revisita",
    "persona": "edit_lote_a",
-   "cuando": "13/10 13:13",
+   "cuando": "13/10/2026 13:13",
    "lat": 10.111167343464098,
    "lon": -84.61451748366382,
    "id": 1354
@@ -15009,7 +15009,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 09:00",
+   "cuando": "13/10/2026 09:00",
    "lat": 10.108337650319122,
    "lon": -84.61469714672064,
    "id": 1358
@@ -15053,7 +15053,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 14:59",
+   "cuando": "12/10/2026 14:59",
    "lat": 10.068901609346273,
    "lon": -84.61496664130588,
    "id": 1362
@@ -15097,7 +15097,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 12:46",
+   "cuando": "13/10/2026 12:46",
    "lat": 10.07276436506799,
    "lon": -84.61532596741954,
    "id": 1366
@@ -15130,7 +15130,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 15:57",
+   "cuando": "12/10/2026 15:57",
    "lat": 10.110493607001008,
    "lon": -84.61559546200476,
    "id": 1369
@@ -15174,7 +15174,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 09:29",
+   "cuando": "11/10/2026 09:29",
    "lat": 10.082017012494418,
    "lon": -84.61608953541104,
    "id": 1373
@@ -15207,7 +15207,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 07:56",
+   "cuando": "13/10/2026 07:56",
    "lat": 10.06692531572121,
    "lon": -84.61721242951617,
    "id": 1376
@@ -15229,7 +15229,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 10:06",
+   "cuando": "12/10/2026 10:06",
    "lat": 10.107259671978177,
    "lon": -84.61766158715824,
    "id": 1378
@@ -15240,7 +15240,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "11/10 16:46",
+   "cuando": "11/10/2026 16:46",
    "lat": 10.107978324205472,
    "lon": -84.61766158715824,
    "id": 1379
@@ -15295,7 +15295,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 07:24",
+   "cuando": "13/10/2026 07:24",
    "lat": 10.072225375897517,
    "lon": -84.61900906008442,
    "id": 1384
@@ -15317,7 +15317,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 10:12",
+   "cuando": "12/10/2026 10:12",
    "lat": 10.059559130391431,
    "lon": -84.61918872314124,
    "id": 1386
@@ -15339,7 +15339,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 10:50",
+   "cuando": "12/10/2026 10:50",
    "lat": 10.055247217027658,
    "lon": -84.61932347043386,
    "id": 1388
@@ -15383,7 +15383,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 13:48",
+   "cuando": "13/10/2026 13:48",
    "lat": 10.064230369868852,
    "lon": -84.61999720689695,
    "id": 1392
@@ -15449,7 +15449,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 13:03",
+   "cuando": "11/10/2026 13:03",
    "lat": 10.064589695982502,
    "lon": -84.6204014487748,
    "id": 1398
@@ -15460,7 +15460,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 14:17",
+   "cuando": "12/10/2026 14:17",
    "lat": 10.065398179738208,
    "lon": -84.620446364539,
    "id": 1399
@@ -15482,7 +15482,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_a",
-   "cuando": "11/10 12:09",
+   "cuando": "11/10/2026 12:09",
    "lat": 10.065218516681384,
    "lon": -84.62053619606742,
    "id": 1401
@@ -15526,7 +15526,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 07:27",
+   "cuando": "13/10/2026 07:27",
    "lat": 10.064679527510911,
    "lon": -84.62062602759583,
    "id": 1405
@@ -15570,7 +15570,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 15:46",
+   "cuando": "13/10/2026 15:46",
    "lat": 10.087496735727548,
    "lon": -84.62125484829471,
    "id": 1409
@@ -15636,7 +15636,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 16:49",
+   "cuando": "13/10/2026 16:49",
    "lat": 10.103486747784876,
    "lon": -84.62201841628622,
    "id": 1415
@@ -15658,7 +15658,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 08:45",
+   "cuando": "12/10/2026 08:45",
    "lat": 10.077255941488588,
    "lon": -84.62233282663567,
    "id": 1417
@@ -15669,7 +15669,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 17:43",
+   "cuando": "12/10/2026 17:43",
    "lat": 10.079591561227296,
    "lon": -84.62233282663566,
    "id": 1418
@@ -15702,7 +15702,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 13:41",
+   "cuando": "12/10/2026 13:41",
    "lat": 10.087137409613902,
    "lon": -84.62332097344819,
    "id": 1421
@@ -15724,7 +15724,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 16:02",
+   "cuando": "13/10/2026 16:02",
    "lat": 10.087092493849696,
    "lon": -84.62354555226922,
    "id": 1423
@@ -15746,7 +15746,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "revisita",
    "persona": "edit_lote_a",
-   "cuando": "12/10 10:33",
+   "cuando": "12/10/2026 10:33",
    "lat": 10.076447457732879,
    "lon": -84.62372521532605,
    "id": 1425
@@ -15757,7 +15757,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 16:16",
+   "cuando": "13/10/2026 16:16",
    "lat": 10.047881031697877,
    "lon": -84.62385996261867,
    "id": 1426
@@ -15801,7 +15801,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 10:56",
+   "cuando": "13/10/2026 10:56",
    "lat": 10.08516111598884,
    "lon": -84.62448878331755,
    "id": 1430
@@ -15812,7 +15812,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "12/10 15:42",
+   "cuando": "12/10/2026 15:42",
    "lat": 10.075908468562407,
    "lon": -84.62471336213858,
    "id": 1431
@@ -15823,7 +15823,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 14:09",
+   "cuando": "13/10/2026 14:09",
    "lat": 10.087406904199137,
    "lon": -84.62475827790279,
    "id": 1432
@@ -15836,8 +15836,7 @@
    "codigo_upm": "20205002",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 17:52",
-   "observaciones": null
+   "cuando": "13/10/2026 17:52"
   },
   {
    "finca_id": 263,
@@ -15845,8 +15844,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 17:48",
-   "observaciones": null
+   "cuando": "13/10/2026 17:48"
   },
   {
    "finca_id": 972,
@@ -15854,8 +15852,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 17:48",
-   "observaciones": null
+   "cuando": "13/10/2026 17:48"
   },
   {
    "finca_id": 1073,
@@ -15863,8 +15860,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 17:45",
-   "observaciones": null
+   "cuando": "13/10/2026 17:45"
   },
   {
    "finca_id": 776,
@@ -15872,8 +15868,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 17:41",
-   "observaciones": null
+   "cuando": "13/10/2026 17:41"
   },
   {
    "finca_id": 110,
@@ -15881,8 +15876,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "revisita",
    "persona": "edit_lote_a",
-   "cuando": "13/10 17:34",
-   "observaciones": null
+   "cuando": "13/10/2026 17:34"
   },
   {
    "finca_id": 326,
@@ -15890,8 +15884,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 17:25",
-   "observaciones": null
+   "cuando": "13/10/2026 17:25"
   },
   {
    "finca_id": 1065,
@@ -15899,8 +15892,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "13/10 17:20",
-   "observaciones": null
+   "cuando": "13/10/2026 17:20"
   },
   {
    "finca_id": 1324,
@@ -15908,8 +15900,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 17:15",
-   "observaciones": null
+   "cuando": "13/10/2026 17:15"
   },
   {
    "finca_id": 504,
@@ -15917,8 +15908,7 @@
    "codigo_upm": "20205001",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 17:10",
-   "observaciones": null
+   "cuando": "13/10/2026 17:10"
   },
   {
    "finca_id": 73,
@@ -15926,8 +15916,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 17:09",
-   "observaciones": null
+   "cuando": "13/10/2026 17:09"
   },
   {
    "finca_id": 1157,
@@ -15935,8 +15924,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 16:53",
-   "observaciones": null
+   "cuando": "13/10/2026 16:53"
   },
   {
    "finca_id": 26,
@@ -15944,8 +15932,7 @@
    "codigo_upm": "20205005",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 16:52",
-   "observaciones": null
+   "cuando": "13/10/2026 16:52"
   },
   {
    "finca_id": 1415,
@@ -15953,8 +15940,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 16:49",
-   "observaciones": null
+   "cuando": "13/10/2026 16:49"
   },
   {
    "finca_id": 291,
@@ -15962,8 +15948,7 @@
    "codigo_upm": "20205009",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 16:47",
-   "observaciones": null
+   "cuando": "13/10/2026 16:47"
   },
   {
    "finca_id": 693,
@@ -15971,8 +15956,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 16:40",
-   "observaciones": null
+   "cuando": "13/10/2026 16:40"
   },
   {
    "finca_id": 663,
@@ -15980,8 +15964,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "no_localizada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 16:31",
-   "observaciones": null
+   "cuando": "13/10/2026 16:31"
   },
   {
    "finca_id": 1336,
@@ -15989,8 +15972,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 16:20",
-   "observaciones": null
+   "cuando": "13/10/2026 16:20"
   },
   {
    "finca_id": 845,
@@ -15998,8 +15980,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 16:18",
-   "observaciones": null
+   "cuando": "13/10/2026 16:18"
   },
   {
    "finca_id": 1284,
@@ -16007,8 +15988,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "rechazo",
    "persona": "edit_lote_a",
-   "cuando": "13/10 16:17",
-   "observaciones": null
+   "cuando": "13/10/2026 16:17"
   },
   {
    "finca_id": 1426,
@@ -16016,8 +15996,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 16:16",
-   "observaciones": null
+   "cuando": "13/10/2026 16:16"
   },
   {
    "finca_id": 770,
@@ -16025,8 +16004,7 @@
    "codigo_upm": "20205007",
    "estado_visita": "visitada",
    "persona": "edit_lote_b",
-   "cuando": "13/10 16:10",
-   "observaciones": null
+   "cuando": "13/10/2026 16:10"
   },
   {
    "finca_id": 69,
@@ -16034,8 +16012,7 @@
    "codigo_upm": "20205003",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 16:09",
-   "observaciones": null
+   "cuando": "13/10/2026 16:09"
   },
   {
    "finca_id": 1423,
@@ -16043,8 +16020,7 @@
    "codigo_upm": "20205010",
    "estado_visita": "visitada",
    "persona": "edit_lote_a",
-   "cuando": "13/10 16:02",
-   "observaciones": null
+   "cuando": "13/10/2026 16:02"
   },
   {
    "finca_id": 217,
@@ -16052,8 +16028,7 @@
    "codigo_upm": "20205008",
    "estado_visita": "revisita",
    "persona": "edit_lote_b",
-   "cuando": "13/10 16:00",
-   "observaciones": null
+   "cuando": "13/10/2026 16:00"
   }
  ]
 }

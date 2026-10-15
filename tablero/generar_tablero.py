@@ -7,9 +7,12 @@
 #  día, mapa de puntos y últimos movimientos.
 #
 #  USO
-#    Con la base:        DATABASE_URL="postgresql://tablero_lectura:CLAVE@HOST/neondb?sslmode=require" \
-#                        python3 generar_tablero.py --salida tablero/index.html
-#    Con datos de prueba: python3 generar_tablero.py --fixture fixture_demo.json --salida tablero/index.html
+#    Con la base:        DATABASE_URL_TABLERO="postgresql://tablero_lectura:CLAVE@HOST/neondb?sslmode=require" \
+#                        py tablero/generar_tablero.py --salida tablero/salida/index.html
+#    Con datos de prueba: py tablero/generar_tablero.py --fixture tablero/fixture_demo.json --salida tablero/salida/demo.html
+#
+#  Lee SOLO la variable DATABASE_URL_TABLERO (rol tablero_lectura), nunca DATABASE_URL
+#  (propietario). Si la conexión no es tablero_lectura, se detiene sin generar nada (D-14).
 #
 #  El HTML resultante no contiene credenciales ni consulta nada: es una foto del
 #  avance al momento de generarse. Se puede abrir desde cualquier navegador.
@@ -41,6 +44,7 @@ ESTADOS = [
     ("rechazo",       "Rechazo",        "#d03b3b", "✕"),
     ("pendiente",     "Pendiente",      "#898781", "·"),
 ]
+ROL_TABLERO = "tablero_lectura"
 ESTADO_COLOR = {k: c for k, _, c, _ in ESTADOS}
 ESTADO_LABEL = {k: l for k, l, _, _ in ESTADOS}
 
@@ -57,6 +61,11 @@ def leer_base(url):
     datos = {}
     with psycopg2.connect(url) as con:
         with con.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
+            cur.execute("SELECT current_user AS u")
+            usuario = cur.fetchone()["u"]
+            if usuario != ROL_TABLERO:
+                sys.exit(f"La conexión es '{usuario}', no '{ROL_TABLERO}'. "
+                         "El tablero solo lee con el rol de solo lectura.")
             for clave, sql in VISTAS.items():
                 cur.execute(sql)
                 filas = [dict(r) for r in cur.fetchall()]
@@ -83,6 +92,12 @@ def esc(s):
     return (str(s) if s is not None else "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
+def json_en_script(obj, **kw):
+    """JSON seguro dentro de <script>: '<' como \\u003c impide que un dato cierre la
+    etiqueta con '</script>' o abra '<!--' (D-14)."""
+    return json.dumps(obj, **kw).replace("<", "\\u003c")
+
+
 def fmt_int(n):
     return f"{int(n):,}".replace(",", ".")
 
@@ -94,7 +109,7 @@ def fecha_corta(iso):
         d = datetime.fromisoformat(str(iso))
         if d.tzinfo:
             d = d.astimezone(CR_TZ)
-        return d.strftime("%d/%m %H:%M")
+        return d.strftime("%d/%m/%Y %H:%M")
     except Exception:
         return str(iso)[:16]
 
@@ -205,7 +220,7 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}
 .vacio{color:var(--muted);font-size:13px;margin:0}
 footer{text-align:center;color:var(--muted);font-size:12px;padding:12px 16px 30px}
 .leaflet-container{background:var(--page)}
-@media(max-width:600px){.col-obs{display:none}td,th{padding:6px 4px}}
+@media(max-width:600px){td,th{padding:6px 4px}}
 """
 
 
@@ -217,7 +232,8 @@ def render(datos, generado):
     mov = datos.get("movimientos", [])
 
     total = sum(int(r["fincas"]) for r in res)
-    hechas = sum(int(r["fincas"]) - int(r["pendientes"]) for r in res)
+    # Avance = solo estados terminales (D-15): revisita es incidencia, no avance.
+    hechas = sum(int(r["visitadas"]) + int(r["no_localizadas"]) + int(r["rechazos"]) for r in res)
     pct = (100.0 * hechas / total) if total else 0.0
     visitadas = sum(int(r["visitadas"]) for r in res)
     incid = sum(int(r["no_localizadas"]) + int(r["rechazos"]) + int(r["revisitas"]) for r in res)
@@ -227,10 +243,11 @@ def render(datos, generado):
     tiles_lote = []
     for r in res:
         l = r["lote"]
-        f, p = int(r["fincas"]), int(r["pendientes"])
+        f = int(r["fincas"])
+        cerradas = int(r["visitadas"]) + int(r["no_localizadas"]) + int(r["rechazos"])
         tiles_lote.append(f"""
         <div class="tile"><div class="k"><span class="lote" style="background:{LOTE_COLOR.get(l,'#2a78d6')}"></span>Lote {esc(l)}</div>
-          <div class="v">{fmt_int(f-p)}<small>de {fmt_int(f)} · {float(r['avance_pct'] or 0):.1f}%</small></div>
+          <div class="v">{fmt_int(cerradas)}<small>de {fmt_int(f)} · {(100.0 * cerradas / f if f else 0.0):.1f}%</small></div>
           <div class="k">{fmt_int(r['visitadas'])} visitadas · {fmt_int(int(r['no_localizadas'])+int(r['rechazos'])+int(r['revisitas']))} incidencias</div>
         </div>""")
 
@@ -252,17 +269,16 @@ def render(datos, generado):
     # --- movimientos
     filas_mov = "".join(
         f"<tr><td>{esc(m['cuando'])}</td><td>{esc(m['persona'])}</td><td>{esc(m['finca_id'])} <span style='color:var(--muted)'>· L{esc(m['lote'])}</span></td>"
-        f"<td><span class='pill'><i style='background:{ESTADO_COLOR.get(m['estado_visita'],'#898781')}'></i>{esc(ESTADO_LABEL.get(m['estado_visita'], m['estado_visita']))}</span></td>"
-        f"<td class='col-obs'>{esc(m.get('observaciones') or '')}</td></tr>"
-        for m in mov) or "<tr><td colspan=5 class='vacio'>Sin movimientos todavía.</td></tr>"
+        f"<td><span class='pill'><i style='background:{ESTADO_COLOR.get(m['estado_visita'],'#898781')}'></i>{esc(ESTADO_LABEL.get(m['estado_visita'], m['estado_visita']))}</span></td></tr>"
+        for m in mov) or "<tr><td colspan=4 class='vacio'>Sin movimientos todavía.</td></tr>"
 
     # --- puntos para el mapa
-    puntos_js = json.dumps([
+    puntos_js = json_en_script([
         {"i": p["finca_id"], "l": p["lote"], "e": p["estado_visita"], "p": p.get("persona") or "",
          "c": p.get("cuando") or "", "y": round(float(p["lat"]), 6), "x": round(float(p["lon"]), 6)}
         for p in pts if p.get("lat") is not None], ensure_ascii=False, separators=(",", ":"))
-    colores_js = json.dumps(ESTADO_COLOR)
-    labels_js = json.dumps(ESTADO_LABEL, ensure_ascii=False)
+    colores_js = json_en_script(ESTADO_COLOR)
+    labels_js = json_en_script(ESTADO_LABEL, ensure_ascii=False)
 
     return f"""<!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -277,7 +293,7 @@ def render(datos, generado):
 <main>
   <section class="card span2">
     <h2>Avance general</h2>
-    <div class="hero"><div class="big">{pct:.1f}%</div><div class="ctx">{fmt_int(hechas)} de {fmt_int(total)} fincas con visita registrada · {fmt_int(visitadas)} visitadas · {fmt_int(incid)} incidencias</div></div>
+    <div class="hero"><div class="big">{pct:.1f}%</div><div class="ctx">{fmt_int(hechas)} de {fmt_int(total)} fincas con visita cerrada · {fmt_int(visitadas)} visitadas · {fmt_int(incid)} incidencias</div></div>
     <div class="tiles">{''.join(tiles_lote)}</div>
   </section>
 
@@ -302,7 +318,7 @@ def render(datos, generado):
 
   <section class="card span2">
     <h2>Últimos movimientos</h2>
-    <table><tr><th>Cuándo</th><th>Persona</th><th>Finca</th><th>Estado</th><th class='col-obs'>Observaciones</th></tr>{filas_mov}</table>
+    <table><tr><th>Cuándo</th><th>Persona</th><th>Finca</th><th>Estado</th></tr>{filas_mov}</table>
   </section>
 </main>
 <footer>Tablero estático. No contiene credenciales ni consulta la base al abrirse. Se regenera de forma programada.</footer>
@@ -310,6 +326,7 @@ def render(datos, generado):
 <script>
 (function(){{
   var P={puntos_js}, C={colores_js}, N={labels_js};
+  function h(s){{return String(s).replace(/[&<>"']/g,function(c){{return {{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}}[c];}});}}
   var el=document.getElementById('mapa');
   if(typeof L==='undefined'){{ el.innerHTML='<p class="vacio" style="padding:14px">El mapa necesita conexión a internet para cargar la cartografía base. Las cifras de arriba no dependen de ello.</p>'; return; }}
   if(!P.length) return;
@@ -319,7 +336,7 @@ def render(datos, generado):
   P.forEach(function(p){{
     var pend=p.e==='pendiente';
     L.circleMarker([p.y,p.x],{{radius:pend?3:5,color:'#fcfcfb',weight:pend?0:1.5,fillColor:C[p.e]||'#898781',fillOpacity:pend?.55:.95}})
-     .bindPopup('<b>Finca '+p.i+'</b> · Lote '+p.l+'<br>'+(N[p.e]||p.e)+(p.p?'<br>'+p.p:'')+(p.c?' · '+p.c:''))
+     .bindPopup('<b>Finca '+h(p.i)+'</b> · Lote '+h(p.l)+'<br>'+h(N[p.e]||p.e)+(p.p?'<br>'+h(p.p):'')+(p.c?' · '+h(p.c):''))
      .addTo(g);
   }});
   g.addTo(m); m.fitBounds(g.getBounds().pad(0.05));
@@ -342,9 +359,9 @@ def main():
     if a.fixture:
         datos = leer_fixture(a.fixture)
     else:
-        url = os.environ.get("DATABASE_URL")
+        url = os.environ.get("DATABASE_URL_TABLERO")
         if not url:
-            sys.exit("Falta DATABASE_URL (o usar --fixture).")
+            sys.exit("Falta DATABASE_URL_TABLERO (o usar --fixture).")
         datos = leer_base(url)
         if a.volcar:
             with open(a.volcar, "w", encoding="utf-8") as f:

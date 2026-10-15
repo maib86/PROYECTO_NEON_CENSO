@@ -31,7 +31,7 @@ for p in random.sample(pts, int(len(pts) * 0.30)):
     t = dia + timedelta(hours=random.randint(7, 17), minutes=random.randint(0, 59))
     p["estado_visita"] = random.choice(estados)
     p["persona"] = personas[p["lote"]]
-    p["cuando"] = t.strftime("%d/%m %H:%M")
+    p["cuando"] = t.strftime("%d/%m/%Y %H:%M")
     p["_t"] = t
 
 # Vistas
@@ -39,7 +39,7 @@ resumen = []
 for l in ("A", "B"):
     s = [p for p in pts if p["lote"] == l]
     c = lambda e: sum(1 for p in s if p["estado_visita"] == e)
-    hechas = len(s) - c("pendiente")
+    hechas = c("visitada") + c("no_localizada") + c("rechazo")   # solo terminales (D-15)
     resumen.append({"lote": l, "fincas": len(s), "visitadas": c("visitada"), "no_localizadas": c("no_localizada"),
                     "rechazos": c("rechazo"), "revisitas": c("revisita"), "pendientes": c("pendiente"),
                     "avance_pct": round(100.0 * hechas / len(s), 1),
@@ -65,7 +65,7 @@ diario = [{"dia": k[0], "lote": k[1], "visitas": v} for k, v in sorted(dia.items
 
 mov = sorted([p for p in pts if p["_t"]], key=lambda p: p["_t"], reverse=True)[:25]
 movimientos = [{"finca_id": p["finca_id"], "lote": p["lote"], "codigo_upm": p["codigo_upm"], "estado_visita": p["estado_visita"],
-                "persona": p["persona"], "cuando": p["cuando"], "observaciones": None} for p in mov]
+                "persona": p["persona"], "cuando": p["cuando"]} for p in mov]
 
 puntos = [{k: v for k, v in p.items() if k != "_t"} | {"id": p["finca_id"]} for p in pts]
 

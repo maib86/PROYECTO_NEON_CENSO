@@ -7,9 +7,9 @@
       "Bash(git log *)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(python *)",
-      "Bash(python3 *)",
-      "Bash(pip install *)",
+      "Bash(py tablero/*)",
+      "Bash(py -m pip *)",
+      "Bash(py -m playwright *)",
       "Bash(psql --version)",
       "Bash(ls *)",
       "Bash(dir *)"

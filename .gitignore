@@ -15,3 +15,6 @@ __pycache__/
 *.pyc
 .DS_Store
 Thumbs.db
+
+# Capas de trabajo locales (p. ej. datos_prueba/ugm/ugm.gpkg, capa UGM del SNIT, 206 MB)
+*.gpkg

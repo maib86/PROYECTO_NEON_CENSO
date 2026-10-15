@@ -67,8 +67,8 @@ espera la confirmación o la captura. No simula que lo hizo.
 ## Entorno
 
 - Windows. Shell: Git Bash (o PowerShell). `psql` debe estar en PATH de usuario
-  (`C:\Program Files\PostgreSQL\18\bin`). Cliente psql 18.6 contra servidor Neon 16/17
-  (compatible hacia atrás; ver D-12).
+  (`C:\Program Files\PostgreSQL\18\bin`). Cliente psql 18.6 y servidor Neon 18.6
+  (misma versión; ver D-12 y D-13).
 - Python: invocar **siempre con `py`** (`py script.py`, `py -m pip ...`), nunca `python`:
   en esta máquina `python` lo intercepta el alias de Microsoft Store (ver D-12).
   Python 3.12+ con `psycopg2-binary`, `shapely`, `pyproj`, `playwright` (para capturas
