@@ -1,0 +1,127 @@
+=======================================================================
+  TABLERO DE AVANCE — Cómo ponerlo a funcionar
+=======================================================================
+
+QUÉ ES
+-----------------------------------------------------------------------
+Un archivo HTML que muestra el avance del operativo: por lote, por
+persona, por día, mapa de fincas por estado y últimos movimientos.
+
+No consulta la base al abrirse. Es una "foto" generada por un script
+que lee las vistas v_tab_* con un rol de SOLO LECTURA. El HTML no
+contiene credenciales: se puede compartir sin riesgo.
+
+
+ARCHIVOS
+-----------------------------------------------------------------------
+  06_centroides_visita.sql     Crea la capa de puntos, las vistas del
+                               tablero y el rol tablero_lectura.
+                               SE EJECUTA UNA VEZ en el SQL Editor.
+
+  generar_tablero.py           El generador. Lee la base, escribe HTML.
+
+  fixture_demo.json            Datos simulados (3 días, dos personas)
+                               para ver el tablero poblado sin tocar
+                               la base. Solo para demostración.
+
+  construir_fixture_demo.py    Cómo se construyó el fixture. No hace
+                               falta ejecutarlo.
+
+  .github/workflows/tablero.yml
+                               Regeneración automática cada 30 min en
+                               GitHub, publicada en GitHub Pages.
+
+  salida/index.html            Ejemplo ya generado con el fixture.
+  salida/captura_*.png         Cómo se ve en escritorio y celular.
+
+
+PASO 1 — Preparar la base
+-----------------------------------------------------------------------
+En el SQL Editor de Neon, como neondb_owner:
+
+  1. Abrir 06_centroides_visita.sql.
+  2. Sustituir <<<CONTRASENA_TABLERO>>> en el Bloque 6.
+  3. Ejecutar completo.
+  4. Correr las verificaciones del final: 1432 puntos, 1432 dentro.
+
+Esto crea mgn.finca_visita: un punto dentro de cada polígono, con el
+formulario de visita. Las editoras A y B pueden editarlo con el mismo
+reparto que los polígonos.
+
+
+PASO 2 — Generar unas visitas de prueba desde QGIS
+-----------------------------------------------------------------------
+  1. En QGIS, añadir la capa mgn.finca_visita (con edit_lote_a).
+  2. Activar edición, seleccionar unos puntos del lote A, cambiar
+     estado_visita a 'visitada' (o 'no_localizada', etc.), guardar.
+  3. Que la compañera haga lo mismo con el lote B.
+
+La fecha_visita se llena sola al cambiar el estado.
+
+
+PASO 3 — Generar el tablero en la propia máquina (prueba local)
+-----------------------------------------------------------------------
+QGIS trae su propio Python con psycopg2 incluido. Abrir la
+"OSGeo4W Shell" (viene con QGIS en Windows) y ejecutar:
+
+  set DATABASE_URL=postgresql://tablero_lectura:CLAVE@HOST/neondb?sslmode=require
+  py generar_tablero.py --salida tablero\index.html
+
+Abrir tablero\index.html en el navegador. Eso es el tablero con los
+datos reales de ese momento.
+
+Para verlo poblado antes de tener visitas reales:
+
+  py generar_tablero.py --fixture fixture_demo.json --salida demo.html
+
+
+PASO 4 — Que se regenere solo (el escenario del hotel)
+-----------------------------------------------------------------------
+Para consultar el avance de noche, desde el celular, sin que ninguna
+computadora del equipo esté encendida, el script tiene que correr en
+un lugar siempre disponible. Para el piloto: GitHub Actions, gratis.
+
+  1. Crear una cuenta en github.com (si no se tiene).
+  2. Crear un repositorio nuevo. Para el piloto con datos públicos,
+     público (GitHub Pages es gratis solo en repos públicos).
+  3. Subir estos archivos al repositorio:
+        generar_tablero.py
+        .github/workflows/tablero.yml
+     (la carpeta .github con su subcarpeta workflows, tal cual)
+  4. Settings -> Secrets and variables -> Actions -> New repository
+     secret:
+        Nombre : DATABASE_URL
+        Valor  : postgresql://tablero_lectura:CLAVE@HOST/neondb?sslmode=require
+     Usar el host SIN "-pooler".
+  5. Settings -> Pages -> Source: elegir "GitHub Actions".
+  6. Pestaña Actions -> "Tablero de avance" -> Run workflow.
+
+En uno o dos minutos la pestaña Actions muestra la URL pública del
+tablero, del tipo https://USUARIO.github.io/REPOSITORIO/
+
+A partir de ahí se regenera cada 30 minutos sin intervención.
+
+
+SOBRE SEGURIDAD, PARA EL DOCUMENTO DE TI
+-----------------------------------------------------------------------
+  - El HTML publicado no contiene credenciales ni consulta nada.
+  - La credencial que usa el generador es de un rol que SOLO puede leer
+    cinco vistas. No ve las tablas, no puede escribir.
+  - La credencial vive como secreto cifrado de GitHub, nunca en código.
+  - En producción, este mismo patrón se traslada a un servidor del
+    INEC: una tarea programada (cron) que corre el script y escribe en
+    el servidor web interno. Cero cambios en el script.
+  - El tablero en GitHub Pages es público. Para el piloto con datos
+    públicos es aceptable; para datos reales NO lo es, y por eso la
+    versión de producción vive adentro.
+
+
+AJUSTES FRECUENTES
+-----------------------------------------------------------------------
+  Cada cuánto se regenera : editar el cron en tablero.yml
+                            ("*/15 * * * *" = cada 15 min)
+  Título / distrito       : buscar "Distrito 20205" en generar_tablero.py
+  Colores de estado       : lista ESTADOS en generar_tablero.py
+  Zona horaria            : las vistas ya convierten a America/Costa_Rica
+
+=======================================================================

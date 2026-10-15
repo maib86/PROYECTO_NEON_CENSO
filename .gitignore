@@ -1,0 +1,17 @@
+# Credenciales — NUNCA se suben
+.env
+*.env
+credenciales*
+
+# Salidas generadas
+tablero/salida/
+public/
+*.dump
+*.backup
+
+# Locales
+.claude/settings.local.json
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db

@@ -1,0 +1,220 @@
+=======================================================================
+  PAQUETE DE REPLICACION
+  Capa vectorial compartida en PostGIS para edicion multiusuario
+=======================================================================
+  Fecha: 13 de octubre de 2026
+  Basado en una implementacion real ya validada en produccion.
+=======================================================================
+
+
+QUE RESUELVE ESTO
+-----------------------------------------------------------------------
+Varias personas editan UNA SOLA capa vectorial desde QGIS, cada una
+desde su casa u oficina, cada una sobre la parte que le toca.
+
+  - No se generan versiones paralelas que haya que unir despues.
+  - Nadie puede pisar el trabajo de otra persona: lo impide la base.
+  - Queda registro de quien edito que y cuando.
+  - No hay que instalar ningun servidor ni pedir permisos de TI.
+  - Costo: cero, en el plan gratuito de Neon.
+
+
+QUE HACE FALTA
+-----------------------------------------------------------------------
+  - QGIS 3.28 o superior (todas las personas)
+  - Un navegador web (solo quien monta la base)
+  - Una cuenta gratuita en neon.com (solo quien monta la base)
+
+NO hace falta instalar PostgreSQL ni PostGIS en ninguna maquina.
+El servidor esta en la nube; QGIS ya trae el cliente incorporado.
+
+Unica excepcion: el comando pg_dump para respaldos completos viene
+con la instalacion de PostgreSQL. Sin el, se respalda exportando a
+GeoPackage desde QGIS, que no requiere instalar nada.
+
+
+CONTENIDO DEL PAQUETE
+-----------------------------------------------------------------------
+
+  LEEME.txt                     <- este archivo
+
+  plantillas/                   <- LO QUE SE USA
+    01_estructura.sql              Esquema, tabla, indices, auditoria
+    02_carga.sql                   Carga de la capa y asignacion del reparto
+    03_usuarios_y_acceso.sql       Usuarios y control de acceso por fila
+    04_panel_seguimiento.sql       Vistas de avance y actividad
+    05_verificaciones.sql          Consultas de control
+
+  ejemplo_implementacion_real/  <- SOLO COMO REFERENCIA
+    esquema_prueba_20205.sql       Plantillas 01 a 04 ya completadas.
+                                   Reparto por lote de UPM, 2 personas.
+                                   Esta es la que se ejecuto de verdad.
+    panel_seguimiento_20205.sql    Panel ya completado
+    esquema_asentamientos_informales.sql
+                                   Segundo ejemplo, con reparto por
+                                   provincia en vez de por lote. Util
+                                   para ver como se ve la misma
+                                   estructura con otra columna de
+                                   reparto.
+
+IMPORTANTE: los archivos de ejemplo_implementacion_real NO se ejecutan.
+Estan atados a capas concretas (la primera, 1.432 poligonos de
+deteccion de cambio del distrito 20205, repartidos entre dos personas).
+Sirven unicamente para ver como se ve una plantilla ya completada,
+cuando alguna instruccion no quede clara.
+
+
+COMO SE USA
+-----------------------------------------------------------------------
+
+1. Leer primero la guia. Este paquete es el complemento de ella, no
+   el reves. La guia explica las decisiones; estos archivos las
+   ejecutan.
+
+2. Responder las SEIS DECISIONES que la guia plantea al inicio. Las
+   respuestas son los valores que van en los marcadores.
+
+3. Abrir cada plantilla en un editor de texto (el Bloc de notas sirve)
+   y sustituir todo lo que aparezca marcado asi:
+
+       <<<ALGO_EN_MAYUSCULAS>>>
+
+   Conviene usar "Reemplazar todo" del editor, no ir una por una: una
+   misma sustitucion suele aparecer varias veces en el mismo archivo.
+
+   Si queda algun marcador sin sustituir, el script falla con error de
+   sintaxis. Eso es deliberado: es preferible que falle ruidosamente a
+   que corra con un valor equivocado y haya que deshacerlo despues.
+
+4. Ejecutar los archivos EN ORDEN, en el SQL Editor de Neon:
+
+       01  ->  importar la capa desde QGIS  ->  02  ->  03  ->  04
+
+   El archivo 05 no se ejecuta de corrido: se abre y se copia la
+   consulta que haga falta en cada momento.
+
+
+POR QUE ESE ORDEN Y NO OTRO
+-----------------------------------------------------------------------
+Hay dos cosas que se crean DESPUES de cargar los datos, y es a
+proposito:
+
+  - La restriccion de validez geometrica (esta en el archivo 02).
+    Si existiera durante la carga, una sola geometria defectuosa
+    abortaria las miles de filas restantes.
+
+  - Los usuarios y el control de acceso (archivo 03).
+    Creados antes, la carga pelea contra ellos.
+
+Saltarse el orden no rompe nada de forma permanente, pero obliga a
+borrar y rehacer.
+
+
+QUE CAMBIA SEGUN EL CASO
+-----------------------------------------------------------------------
+
+  Paso                          Cambia?        Que se ajusta
+  ----------------------------  -------------  --------------------------
+  1. Crear la base en Neon      No             Nada
+  2. Crear la estructura        Si, mucho      Columnas, columna de
+                                               reparto, EPSG, geometria
+  3. Cargar la capa             Si             Formato, SRC, mapeo
+  4. Usuarios y acceso          Si             Uno por persona
+  5. Conectar QGIS              No             Solo los valores
+  6. Verificar el reparto       No             Nada
+  7. Panel de seguimiento       Solo nombres   Esquema, tabla, usuarios
+  8. Respaldos                  No             Nada
+
+Cada archivo SQL lleva, en los comentarios de cada bloque, una nota
+que dice si ese bloque cambia segun el caso y que hay que ajustar.
+
+
+LAS CUATRO REGLAS QUE NUNCA CAMBIAN
+-----------------------------------------------------------------------
+Valen para cualquier caso. Saltarse cualquiera produce fallas
+confusas mas adelante.
+
+1. LLAVE PRIMARIA ENTERA UNICA.
+   QGIS la necesita para editar una capa PostGIS de forma confiable.
+   Si la capa trae un identificador de texto, se conserva aparte.
+
+2. LA COLUMNA DE REPARTO VA NOT NULL Y CON CHECK.
+   Un nulo ahi deja un registro que nadie puede editar.
+
+3. LA GEOMETRIA SE DECLARA CON TIPO Y EPSG EXPLICITOS.
+   Es lo que evita que los calculos de area den numeros sin sentido.
+
+4. UN USUARIO POR PERSONA, NUNCA COMPARTIDO.
+   El campo editado_por guarda el usuario de la conexion. Si dos
+   personas entran con el mismo, se pierde toda la trazabilidad.
+
+
+DOS ADVERTENCIAS QUE AHORRAN TIEMPO
+-----------------------------------------------------------------------
+
+EL POOLER DE NEON.
+En la pantalla "Connect" de Neon hay un interruptor llamado
+"Connection pooling". Hay que APAGARLO antes de copiar la cadena de
+conexion. Esta pensado para aplicaciones web con cientos de
+conexiones simultaneas; con QGIS estorba, y pg_dump falla contra el.
+Al apagarlo, el host pierde el sufijo "-pooler". Ese es el correcto.
+
+PROBAR CON EL USUARIO CORRECTO.
+El rol propietario de la base (neondb_owner en Neon) ignora el control
+de acceso por diseno. Probar el sistema conectado como propietario no
+prueba nada: puede editar todo. La verificacion se hace
+obligatoriamente con los usuarios de edicion.
+
+
+RESPALDOS: LEER ESTO
+-----------------------------------------------------------------------
+En el plan gratuito de Neon la ventana de restauracion es de 6 HORAS
+como maximo, con tope de 1 GB de historial. Los planes pagos llegan a
+7 o 30 dias.
+
+Documentacion oficial:
+  https://neon.com/docs/introduction/restore-window
+
+Eso significa que si alguien detecta un problema al dia siguiente,
+Neon ya no puede devolver el estado anterior. El respaldo propio no es
+una recomendacion de buenas practicas: es el unico seguro real del
+trabajo.
+
+Al terminar cada jornada de edicion, una de estas dos:
+
+  CON PostgreSQL instalado:
+    pg_dump "postgresql://USUARIO:CLAVE@HOST/BASE?sslmode=require"
+      --schema=ESQUEMA --format=custom --file="respaldo_AAAAMMDD.dump"
+
+  SIN PostgreSQL instalado:
+    En QGIS, clic derecho en la capa -> Exportar -> Guardar objetos
+    como -> GeoPackage, con la fecha en el nombre del archivo.
+
+Conservar los ultimos diez.
+
+
+LIMITACION CONOCIDA DEL DISENO
+-----------------------------------------------------------------------
+El sistema registra LA ULTIMA edicion de cada registro, no el
+historial completo. Si alguien cambia un valor hoy y lo vuelve a
+cambiar manana, el primer cambio se pierde.
+
+Para la mayoria de los casos alcanza: responde quien, cuanto y cuando.
+
+Si el entregable exige historial completo (que valor tenia antes y
+cual tiene ahora, en cada cambio), hace falta una tabla de bitacora
+con su propio trigger. No viene en este paquete y se agrega sin tocar
+nada de lo existente.
+
+
+UN CASO QUE ESTE PAQUETE NO CUBRE
+-----------------------------------------------------------------------
+Si dos personas necesitan editar EL MISMO objeto -- no partes
+distintas de la capa, sino el mismo poligono -- este diseno no aplica.
+Ahi hace falta un sistema de versionado con resolucion de conflictos,
+que es otra herramienta y otro costo.
+
+El reparto por columna resuelve el caso de "nos dividimos el trabajo",
+que es el mas comun.
+
+=======================================================================

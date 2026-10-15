@@ -1,0 +1,59 @@
+# =====================================================================================
+#  Regeneración automática del tablero de avance
+# =====================================================================================
+#  Cada 30 minutos (y a mano desde la pestaña Actions), GitHub:
+#    1. consulta las vistas de la base con el rol de solo lectura,
+#    2. genera tablero/index.html,
+#    3. lo publica en GitHub Pages.
+#
+#  La credencial vive en Settings → Secrets → Actions → DATABASE_URL.
+#  Nunca aparece en el HTML publicado ni en los registros.
+#
+#  Requisito único: Settings → Pages → Source = "GitHub Actions".
+# =====================================================================================
+name: Tablero de avance
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"      # cada 30 minutos, UTC
+  workflow_dispatch:             # botón "Run workflow" para regenerar ya
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: tablero
+  cancel-in-progress: true
+
+jobs:
+  generar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install psycopg2-binary
+
+      - name: Generar HTML
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: python3 generar_tablero.py --salida public/index.html
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  publicar:
+    needs: generar
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

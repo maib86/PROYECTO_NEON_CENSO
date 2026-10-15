@@ -1,0 +1,132 @@
+# Registro de decisiones
+
+Formato: fecha · decisión · contexto · alternativas descartadas · consecuencias.
+Las entradas no se borran. Una decisión revertida se reemplaza con una entrada nueva.
+
+---
+
+## D-01 · 2026-10-08 · PostGIS gestionado en nube en lugar de PostgreSQL en estación institucional
+
+**Contexto.** Se necesitaba edición compartida entre dos personas desde sus casas, sin
+permisos de TI. Exponer un PostgreSQL de escritorio requiere abrir el puerto 5432 en el
+firewall institucional, IP fija y equipo encendido 24/7.
+
+**Alternativas descartadas.** PostgreSQL local expuesto (inviable sin TI; estación no es
+servidor). Túneles inversos (evasión del perímetro: no aceptable). GeoPackage en carpeta
+sincronizada (corrupción con edición concurrente). Mergin Maps (sin plan gratuito general).
+QGIS Cloud Free (excluye uso gubernamental). QFieldCloud Community (sin colaboración privada).
+
+**Consecuencias.** Solo tráfico saliente; cero instalaciones; datos del piloto deben ser
+públicos; respaldo propio obligatorio (ventana de restauración de 6 h).
+
+## D-02 · 2026-10-08 · Neon sobre Supabase
+
+**Contexto.** Ambos ofrecen PostGIS en plan gratuito.
+**Descartado.** Supabase pausa proyectos gratuitos tras 7 días sin actividad y requiere
+reactivación manual; conexión directa solo IPv6 en plan gratuito.
+**Consecuencias.** Neon suspende cómputo pero revive solo. Apagar *connection pooling* para
+QGIS y `pg_dump`.
+
+## D-03 · 2026-10-08 · Reparto del trabajo impuesto por Row Level Security
+
+**Contexto.** Dos personas con partes disjuntas. Un acuerdo verbal se rompe sin aviso.
+**Descartado.** Disciplina sin control; tablas separadas por persona (rompe la capa única).
+**Consecuencias.** Un rol por persona, nunca compartido. Políticas con USING y WITH CHECK.
+El propietario omite RLS: las pruebas se hacen con roles de edición.
+
+## D-04 · 2026-10-08 · Llave primaria entera IDENTITY; identificador de origen aparte
+
+**Contexto.** QGIS requiere llave entera única para editar PostGIS de forma confiable. El
+origen traía identificador de texto.
+**Consecuencias.** `id bigint IDENTITY`; `id_origen text`.
+
+## D-05 · 2026-10-08 · Carga por tabla de paso, no importación directa
+
+**Contexto.** La importación directa obliga a coincidencia exacta de nombres/tipos y no
+permite asignar el reparto ni reparar geometrías.
+**Consecuencias.** `carga_temporal` → `INSERT ... SELECT` con `ST_Multi(ST_MakeValid())` y
+expresión de reparto. Restricción de validez y roles se crean después de cargar.
+
+## D-06 · 2026-10-08 · Reparto por lote de UPM (A/B) en el piloto, no por provincia
+
+**Contexto.** El archivo de prueba es de un solo distrito; la capa definitiva de
+asentamientos se reparte por provincia. El mecanismo es el mismo; cambia la columna.
+**Consecuencias.** Lote A = UPM 001,002,003,006,010 (709); Lote B = resto (723).
+
+## D-07 · 2026-10-13 · Capa de visita como tabla de puntos separada
+
+**Contexto.** El formulario de campo vive en el centroide de la finca.
+**Descartado.** Agregar campos al polígono (riesgo de mover vértices desde el celular;
+peso excesivo en QField; impide revisitas).
+**Consecuencias.** `mgn.finca_visita` con FK a `deteccion_cambio`, hereda `lote` para RLS.
+`UNIQUE(finca_id)` en el piloto; se retira para revisitas.
+
+## D-08 · 2026-10-13 · `ST_PointOnSurface` en lugar de `ST_Centroid`
+
+**Contexto.** El centroide puede caer fuera en polígonos cóncavos o con islas.
+**Consecuencias.** Punto garantizado dentro. Verificado: 1.432/1.432 dentro de su polígono.
+
+## D-09 · 2026-10-13 · Tablero como HTML estático generado por un script, leído con rol de solo lectura
+
+**Contexto.** Un supervisor debe consultar el avance de noche desde el celular, sin
+equipos del equipo encendidos. El HTML no puede contener credenciales.
+**Descartado.** Página que consulta la base desde el navegador (expone credenciales).
+Metabase/Grafana para el piloto (requieren servidor; opción válida para producción).
+**Consecuencias.** Rol `tablero_lectura` con acceso solo a `v_tab_*`. Generador en Python.
+Regeneración en GitHub Actions cada 30 min con secreto cifrado; GitHub Pages público
+(aceptable solo con datos públicos). Producción: mismo script en cron institucional.
+
+## D-10 · 2026-10-13 · Identidad en campo por atributo (`@cloud_username`), RLS solo para escritorio
+
+**Contexto.** QFieldCloud en modo offline aplica deltas con una cuenta de servicio única;
+`current_user` no distingue censistas. Direct Data Access preservaría RLS pero exige señal.
+**Consecuencias.** Columna `encuestador` con valor por defecto `@cloud_username`. En campo,
+el reparto se garantiza por proyecto/filtro por equipo, no por muro de base de datos.
+Debe declararse así en los requerimientos para TI.
+
+## D-11 · 2026-10-13 · Claude Code como ejecutor; Claude web como arquitecto y guía de interfaz
+
+**Contexto.** El flujo por capturas de pantalla y copia manual de SQL funciona pero es
+lento y deja la trazabilidad en la conversación, no en archivos.
+**Consecuencias.** Todo lo ejecutable (SQL, Python, git, capturas, Actions) lo hace Claude
+Code en `C:\PROYECTO_NEON_CENSO` con cuatro agentes y bitácora por sesión. QGIS/QField los
+opera la persona con instrucciones exactas. Claude web conserva arquitectura, decisiones,
+documentos para TI y acompañamiento de interfaz. La fuente de verdad son los archivos del
+repositorio, no las conversaciones.
+
+## D-12 · 2026-10-15 · Cliente psql de PostgreSQL 18 en el PATH de usuario; Python con `py`
+
+**Contexto.** En la estación de trabajo, `psql` no respondía: no había ninguna entrada de
+PostgreSQL en el PATH. Existen dos clientes en disco: `C:\Program Files\PostgreSQL\18\bin`
+(18.6) y `C:\Program Files\QGIS 3.34.11\bin` (16.2). No hay instalación 17 (CLAUDE.md la
+citaba por error). `python` lo intercepta el alias de Microsoft Store; `py` (lanzador)
+resuelve a Python 3.13.5.
+**Decisión.** Agregar `C:\Program Files\PostgreSQL\18\bin` al final del PATH de usuario
+(sin permisos de administrador), con un comando idempotente que no duplica la entrada ni
+falla con PATH vacío. El cliente 18.6 se usa contra el servidor Neon 16/17; psql es
+compatible hacia atrás con servidores de versiones anteriores.
+**Descartado.** Invocar psql por ruta completa en cada comando (rutas con espacios, más
+propensas a error y no portables entre scripts, agentes y guía). psql de QGIS (cliente más
+antiguo, 16.2, y la ruta cambia con cada actualización de QGIS). Solo `~/.bashrc` (no
+alcanza a PowerShell ni queda documentado fuera del perfil personal).
+**Consecuencias.** El cambio surte efecto al reiniciar Claude Code y las terminales. No se
+desactiva el alias de la Store: todo comando Python del proyecto (scripts, pip, playwright,
+guía, workflow local) se escribe con `py`. En GitHub Actions y en producción el ejecutable
+sigue siendo `python`; la convención `py` aplica solo a esta estación Windows.
+
+## D-13 · 2026-10-15 · Servidor Neon es PostgreSQL 18.6; respaldo con pg_dump en lugar de rama; clave de rol por variable de psql
+
+**Contexto.** `SELECT version()` devolvió PostgreSQL 18.6, no 16/17 como asumía D-12. D-12
+no se edita; esta entrada corrige el dato. Sin MCP de Neon no se puede crear una rama desde
+Claude Code. El script `sql/06_centroides_visita.sql` traía la clave del rol de tablero como
+marcador dentro del archivo.
+**Decisión.** Cliente y servidor 18.6. Antes de cambios de esquema sin rama disponible:
+`pg_dump -Fc -n mgn` a `respaldos/` (ignorado por `*.dump`) y ejecución en una sola
+transacción (`-1 -v ON_ERROR_STOP=1`). Claves de roles nuevos por variable de psql
+(`:'var'`), nunca en el archivo. Pruebas de roles con su propia conexión, no con `SET ROLE`.
+**Descartado.** Rama de Neon creada a mano (posible; la persona puede elegirla en el
+futuro). `pg_dump --schema-only` (no permite restaurar datos). `SET ROLE` (en PG16+ el
+creador de un rol no puede asumirlo sin concesión explícita).
+**Consecuencias.** La clave puede quedar en registros del servidor si estos registran DDL, y
+en la lista de procesos local. Para producción, requerimiento TI: crear el rol sin clave y
+fijarla con `\password` (hash SCRAM calculado en el cliente).
