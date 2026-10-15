@@ -8,6 +8,7 @@ tablero/salida/
 public/
 *.dump
 *.backup
+*.bundle
 
 # Locales
 .claude/settings.local.json
