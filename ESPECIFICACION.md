@@ -43,6 +43,9 @@ Criterios de aceptación:
 - [x] GitHub Actions regenera y publica el tablero cada 30 minutos sin intervención.
       Evidencia: ejecuciones 38800395636 y 38800575730 en verde; cron `*/30` activo. URL:
       https://maib86.github.io/PROYECTO_NEON_CENSO/ (sesión 03).
+      Nota (sesión 06): tras la regeneración manual de las 16:46 del 15/10 no se registraba
+      ninguna ejecución por `schedule` (`docs/evidencia/s06/01_tablero_publicado.txt`). La
+      regeneración programada está configurada pero sin observar; causa sin diagnosticar.
 - [x] El HTML publicado no contiene credenciales (verificado por `revisor-auditoria`, sesión 03).
 
 Pendiente de la persona: campos temáticos del formulario de visita (cuestionario real).
@@ -90,7 +93,10 @@ Criterios de aceptación:
 
 Decisión abierta: QFieldCloud en nube (prueba 28 días) vs autoalojado desde el piloto.
 
-### Fase 4 — Requerimientos para TI — PENDIENTE
+### Fase 4 — Requerimientos para TI — EN CURSO: entregables v1 generados; revisión de la persona pendiente
+Entregables v1 (sesión 06): `docs/requerimientos_ti/REQUERIMIENTOS_TI.md` (versionado), con su
+banco de cifras `CIFRAS.csv` y `verificar_cifras.py`; PDF y presentación del 2026-10-19 en
+`docs/presentacion/` (fuera del repositorio, D-24). Pendiente: revisión de la persona.
 Documento en `docs/requerimientos_ti/` con: arquitectura, dimensionamiento para 90.000
 fincas / 700 personas, seguridad (TLS, roles, RLS, secretos, respaldos, MDM), costos
 comparados (nube vs autoalojado), y evidencia del piloto por cada punto.

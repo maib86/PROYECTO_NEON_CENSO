@@ -37,3 +37,5 @@ sim/salida/
 
 # Paquete para el celular (D-22): contiene pg_service.conf con la clave del rol. Nunca se sube.
 campo/paquete_movil/
+# Material interno de la presentación (D-24): muestra, logo, láminas y PDF. Nunca se sube.
+docs/presentacion/

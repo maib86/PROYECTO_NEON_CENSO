@@ -261,7 +261,7 @@ def render(datos, generado, alcance=ALCANCE[ESQUEMA_DEFECTO]):
         tiles_lote.append(f"""
         <div class="tile"><div class="k"><span class="lote" style="background:{LOTE_COLOR.get(l,'#2a78d6')}"></span>Lote {esc(l)}</div>
           <div class="v">{fmt_int(cerradas)}<small>de {fmt_int(f)} · {fmt_pct(100.0 * cerradas / f if f else 0.0)}</small></div>
-          <div class="k">{fmt_int(r['visitadas'])} visitadas · {fmt_int(int(r['no_localizadas'])+int(r['rechazos'])+int(r['revisitas']))} incidencias</div>
+          <div class="k">{fmt_int(r['visitadas'])} visitadas · {fmt_int(int(r['no_localizadas'])+int(r['rechazos'])+int(r['revisitas']))} incidencias ({fmt_int(r['revisitas'])} revisitas sin cerrar)</div>
         </div>""")
 
     # --- por persona
@@ -306,7 +306,7 @@ def render(datos, generado, alcance=ALCANCE[ESQUEMA_DEFECTO]):
 <main>
   <section class="card span2">
     <h2>Avance general</h2>
-    <div class="hero"><div class="big">{fmt_pct(pct)}</div><div class="ctx">{fmt_int(hechas)} de {fmt_int(total)} fincas con visita cerrada · {fmt_int(visitadas)} visitadas · {fmt_int(incid)} incidencias</div></div>
+    <div class="hero"><div class="big">{fmt_pct(pct)}</div><div class="ctx">{fmt_int(hechas)} de {fmt_int(total)} fincas con visita cerrada · {fmt_int(visitadas)} visitadas · {fmt_int(incid)} incidencias, de ellas {fmt_int(sum(int(r['revisitas']) for r in res))} revisitas sin cerrar</div></div>
     <div class="tiles">{''.join(tiles_lote)}</div>
   </section>
 

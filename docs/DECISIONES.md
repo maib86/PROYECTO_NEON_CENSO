@@ -313,3 +313,20 @@ cliente mal configurado vuelve a desplazar las horas sin aviso.
 (verificado: `America/Costa_Rica` con `edit_lote_a` por servicio). Las sesiones abiertas
 antes del cambio conservan la zona anterior hasta reconectar. `fecha_edicion` de las tres
 filas pasó a la hora de la corrección. Requerimiento TI 11.
+
+## D-24 · 2026-10-15 · Presentación, logo y muestra fuera del repositorio público; el documento para TI sí se versiona
+
+**Contexto.** La Fase 4 produce dos entregables: el documento de requerimientos para TI y una
+presentación para la Unidad de Cartografía y los encargados del censo. La presentación usa el
+logo institucional y copia el sistema visual de una presentación interna previa (la muestra),
+que no es material público. El repositorio es público (S03).
+**Decisión.** `docs/presentacion/` entra en `.gitignore` antes de crear cualquier archivo ahí:
+presentación, muestra (`referencia/`), logo (`activos/`), fuentes de la presentación, capturas
+de láminas y el PDF del documento quedan solo en la estación. Se versionan
+`docs/requerimientos_ti/REQUERIMIENTOS_TI.md`, `CIFRAS.csv`, `verificar_cifras.py` y
+`exportar_pdf.py`.
+**Descartado.** Versionar la presentación con el logo (material institucional en un
+repositorio público). Versionar la muestra (es de otro proyecto de la Unidad).
+**Consecuencias.** La presentación no se puede reconstruir desde el repositorio: depende de la
+muestra y del logo locales. Sus cifras sí son trazables: cada una tiene fila en `CIFRAS.csv`.
+El PDF se regenera con `py docs/requerimientos_ti/exportar_pdf.py`.

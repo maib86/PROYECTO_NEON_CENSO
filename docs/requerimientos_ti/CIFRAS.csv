@@ -1,0 +1,89 @@
+id,valor,unidad,descripcion,archivo_origen,linea_o_consulta,sesion
+C01,1.432,polígonos,Polígonos de detección de cambio del piloto (datos públicos),ESPECIFICACION.md,L16,00
+C02,20205,código,Distrito de los datos del piloto,ESPECIFICACION.md,L16,00
+C03,~90.000,fincas,Escala de producción de referencia,ESPECIFICACION.md,L16,00
+C04,~500,personas,Censistas previstos en producción,ESPECIFICACION.md,L17,00
+C05,~200,personas,Supervisores previstos en producción,ESPECIFICACION.md,L17,00
+C06,709,fincas,Fincas del lote A,docs/DECISIONES.md,L54,00
+C07,723,fincas,Fincas del lote B,docs/DECISIONES.md,L54,00
+C08,1.432/1.432,puntos,Puntos de visita dentro de su polígono (ST_PointOnSurface),docs/DECISIONES.md,L67,00
+C09,6 h,horas,Ventana de restauración de Neon en plan gratuito,docs/DECISIONES.md,L20,—
+C10,cada 30 min,frecuencia,Regeneración programada del tablero (configurada),docs/DECISIONES.md,L76,00
+C11,*/30 * * * *,cron,Expresión cron del workflow del tablero,.github/workflows/tablero.yml,L19,03
+C12,`UPDATE 1`,resultado,RLS: UPDATE de una fila del lote propio,docs/sesiones/2026-10-15_sesion-02.md,L55,02
+C13,`UPDATE 0`,resultado,RLS: UPDATE de una fila del lote ajeno,docs/sesiones/2026-10-15_sesion-02.md,L56,02
+C14,new row violates row-level security policy,resultado,RLS: INSERT con lote ajeno rechazado,docs/sesiones/2026-10-15_sesion-02.md,L57,02
+C15,permission denied for table finca_visita,resultado,"tablero_lectura no lee la tabla, solo las vistas v_tab_*",docs/sesiones/2026-10-15_sesion-02.md,L51,02
+C16,15 visitas con `edit_lote_a`,visitas,Visitas de prueba del lote A registradas desde QGIS por la persona,ESPECIFICACION.md,L39,02
+C17,20 visitas con `edit_lote_b`,visitas,Visitas de prueba del lote B simuladas por script,ESPECIFICACION.md,L40,02
+C18,13:02:30.279335,hora,Misma fecha_visita en las 15 visitas de A guardadas a la vez desde escritorio,docs/sesiones/2026-10-15_sesion-02.md,L195,02
+C19,edit_lote_a \| 15,filas,Auditoría: las 15 visitas de A con editado_por = edit_lote_a,docs/sesiones/2026-10-15_sesion-02.md,L195,02
+C20,38800395636,ejecución,Primera ejecución del workflow del tablero en verde,docs/sesiones/2026-10-15_sesion-03.md,L54,03
+C21,HTTP 200,resultado,URL pública del tablero responde,docs/sesiones/2026-10-15_sesion-03.md,L57,03
+C22,claves 0 \| host 0 \| endpoint 0,conteo,Escaneo estricto del historial de git contra los valores de .env,docs/sesiones/2026-10-15_sesion-03.md,L46,03
+C23,50.794,polígonos,UGM del SNIT usadas como proxy de escala,docs/requerimientos_ti/evidencia_escala.md,L17,04
+C24,56 %,porcentaje,Proporción del proxy respecto de 90.000,docs/requerimientos_ti/evidencia_escala.md,L17,04
+C25,"96,3 ms",ms,"Latencia de red de referencia, SELECT 1, p50",docs/requerimientos_ti/evidencia_escala.md,L16,04
+C26,901,conexiones,max_connections del servidor Neon (plan gratuito),docs/requerimientos_ti/evidencia_escala.md,L13,04
+C27,31.80 s,s,Carga de 50.794 polígonos con ogr2ogr a la tabla de paso,docs/requerimientos_ti/evidencia_escala.md,L34,04
+C28,"Time: 5688,683 ms",ms,INSERT ... SELECT con ST_MakeValid a sim.ugm,docs/requerimientos_ti/evidencia_escala.md,L38,04
+C29,poligonos 50794 \| puntos 50794 \| dentro 50794,conteo,Puntos de visita a escala dentro de su polígono,docs/requerimientos_ti/evidencia_escala.md,L57,04
+C30,192 MB,MB,"Tamaño total de sim.ugm (tabla, TOAST e índices)",docs/requerimientos_ti/evidencia_escala.md,L64,04
+C31,16 MB,MB,"Tamaño total de sim.finca_visita (cota superior, sin VACUUM)",docs/requerimientos_ti/evidencia_escala.md,L65,04
+C32,17 MB,MB,Base completa antes de la simulación,docs/requerimientos_ti/evidencia_escala.md,L32,04
+C33,225 MB,MB,Base completa después de la simulación,docs/requerimientos_ti/evidencia_escala.md,L68,04
+C34,340 MB,MB,"Polígonos extrapolados a 90.000 (estimación, no medición)",docs/requerimientos_ti/evidencia_escala.md,L76,04
+C35,28 MB,MB,"Puntos extrapolados a 90.000 (estimación, no medición)",docs/requerimientos_ti/evidencia_escala.md,L76,04
+C36,"0,5 GB",GB,"Límite de almacenamiento del plan gratuito, según el proveedor (no verificado)",docs/requerimientos_ti/evidencia_escala.md,L48,04
+C37,403 MB,MB,Pico de almacenamiento estimado por suma durante la carga (no medido),docs/requerimientos_ti/evidencia_escala.md,L47,04
+C38,23.122 ms,ms,Máximo de las vistas agregadas del tablero en el servidor,docs/requerimientos_ti/evidencia_escala.md,L89,04
+C39,144.985 ms,ms,"v_tab_puntos (50.794 filas), ejecución en servidor, todo pendiente",docs/requerimientos_ti/evidencia_escala.md,L92,04
+C40,"1504,458 ms",ms,v_tab_puntos medida en el cliente (servidor + red + recepción),docs/requerimientos_ti/evidencia_escala.md,L92,04
+C41,| 1 | 200 | 21.11 s | 9.5 | 97.3 ms | 136.4 ms | 257.1 ms | 0 |,fila,"Concurrencia, 1 conexión: UPDATE, pared, op/s, p50, p95, máx, errores",docs/requerimientos_ti/evidencia_escala.md,L108,04
+C42,| 10 | 2000 | 24.20 s | 82.6 | 101.2 ms | 180.0 ms | 412.1 ms | 0 |,fila,"Concurrencia, 10 conexiones",docs/requerimientos_ti/evidencia_escala.md,L109,04
+C43,| 25 | 5000 | 24.26 s | 206.1 | 104.1 ms | 179.3 ms | 493.2 ms | 0 |,fila,"Concurrencia, 25 conexiones",docs/requerimientos_ti/evidencia_escala.md,L110,04
+C44,"3,98 MiB",MiB,Peso del HTML del tablero con 50.794 marcadores,docs/requerimientos_ti/evidencia_escala.md,L180,04
+C45,51.349,nodos,Nodos DOM del tablero con 50.794 marcadores,docs/requerimientos_ti/evidencia_escala.md,L180,04
+C46,"4,7–4,8 s",s,Carga del tablero con CPU frenada 4x (aproximación a celular),docs/requerimientos_ti/evidencia_escala.md,L181,04
+C47,208.5 MiB,MiB,Paquete de campo con puntos y polígonos,docs/requerimientos_ti/evidencia_escala.md,L143,04
+C48,6.2 MiB,MiB,Paquete de campo solo con puntos,docs/requerimientos_ti/evidencia_escala.md,L144,04
+C49,unas 34 veces menos,razón,Reducción del paquete al llevar solo puntos,docs/requerimientos_ti/evidencia_escala.md,L208,04
+C50,46 filas,filas,Filas del gráfico por persona en la simulación (36 hilos de prueba),docs/requerimientos_ti/evidencia_escala.md,L191,04
+C51,"0,002 %",porcentaje,Cambio del área total al reproyectar 8908 a 5367,docs/requerimientos_ti/evidencia_escala.md,L43,04
+C52,7.200,UPDATE,Escrituras de la prueba de concurrencia (revertidas),docs/requerimientos_ti/evidencia_escala.md,L114,04
+C53,Resultado: 0 fallas,resultado,"Verificación del proyecto de campo (41 comprobaciones, sin credenciales)",docs/sesiones/2026-10-15_sesion-05.md,L53,05
+C54,1.5,m,precision_gnss_m registrada en las 3 primeras visitas de campo,docs/evidencia/s05/05_prueba_qfield_directa.txt,L13,05
+C55,no_pendientes_lote_a | editadas_por_edit_lote_a,encabezado,Consulta: no pendientes del lote A vs. editadas por edit_lote_a,docs/evidencia/s05/05_prueba_qfield_directa.txt,L23,05
+C56,18 |                       18,conteo,"Lote A tras la prueba de campo: 18 no pendientes, 18 editadas por edit_lote_a",docs/evidencia/s05/05_prueba_qfield_directa.txt,L25,05
+C57,06:00:13.645059,intervalo,Desfase de fecha_visita antes de D-23 (id 1396),docs/evidencia/s05/05_prueba_qfield_directa.txt,L39,05
+C58,GMT,zona,Zona de sesión por defecto antes de D-23,docs/sesiones/2026-10-15_sesion-05.md,L157,05
+C59,00:00:25.46969,intervalo,Visita 1394 tras D-23: guardado 25 s después de la visita,docs/evidencia/s05/07_visita_tras_d23.txt,L14,05
+C60,1.600000023841858,m,Precisión GNSS de la visita 1394 (float de 32 bits),docs/evidencia/s05/07_visita_tras_d23.txt,L14,05
+C61,38819392080,ejecución,Ejecución manual del tablero en S06,docs/evidencia/s06/01_tablero_publicado.txt,L7,06
+C62,generado 15/10/2026 16:46,hora,Hora de generación del tablero publicado verificado en S06,docs/evidencia/s06/01_tablero_publicado.txt,L17,06
+C63,"2,3 %",porcentaje,"Avance general publicado (estados terminales, D-15)",docs/evidencia/s06/01_tablero_publicado.txt,L25,06
+C64,33 de 1.432,fincas,Fincas con visita cerrada en el tablero publicado,docs/evidencia/s06/01_tablero_publicado.txt,L25,06
+C65,22 incidencias,fincas,Incidencias en el encabezado publicado (incluye revisitas sin cerrar),docs/evidencia/s06/01_tablero_publicado.txt,L25,06
+C66,18 de 709,fincas,Lote A con visita cerrada en el tablero publicado,docs/evidencia/s06/01_tablero_publicado.txt,L25,06
+C67,edit_lote_a: 19,visitas,Visitas registradas por edit_lote_a visibles en el tablero publicado,docs/evidencia/s06/01_tablero_publicado.txt,L25,06
+C68,(vacío: 0 ejecuciones por schedule),conteo,Ejecuciones del workflow por cron observadas al 15/10/2026 16:47,docs/evidencia/s06/01_tablero_publicado.txt,L13,06
+C69,grep -ci observaciones publicado.html,consulta,observaciones en el HTML publicado: 0 (línea siguiente),docs/evidencia/s06/01_tablero_publicado.txt,L18,06
+C70,"1396, 1405, 1398, 1406",finca_id,Las 4 visitas de campo en Últimos movimientos del publicado,docs/evidencia/s06/01_tablero_publicado.txt,L26,06
+C71,2026-10-15 16:29:35.795-06,hora,"Hora de visita de la finca 1396 (id 1394), desde QField tras D-23",docs/evidencia/s05/07_visita_tras_d23.txt,L14,05
+C72,2026-10-15 16:30:01.26469-06,hora,Hora de guardado de la finca 1396 (id 1394),docs/evidencia/s05/07_visita_tras_d23.txt,L14,05
+C73,2026-10-15 16:00:13.21-06,hora,Hora de visita corregida de la finca 1405 (id 1403),docs/evidencia/s05/06_zona_horaria.txt,L91,05
+C74,2026-10-15 16:01:08.24-06,hora,Hora de visita corregida de la finca 1398 (id 1396),docs/evidencia/s05/06_zona_horaria.txt,L90,05
+C75,2026-10-15 15:58:39.744-06,hora,Hora de visita corregida de la finca 1406 (id 1404),docs/evidencia/s05/06_zona_horaria.txt,L92,05
+C76,16:13:37.88395-06,hora,Hora de guardado de las 3 filas corregidas por sql/10 (D-23),docs/evidencia/s05/06_zona_horaria.txt,L91,05
+C77,neondb_owner,rol,creado_por de las filas de visita (carga inicial por el propietario),docs/evidencia/s05/05_prueba_qfield_directa.txt,L14,05
+C78,"10 visitada, 5 no_localizada",visitas,Desglose de las 15 visitas de A desde QGIS,docs/sesiones/2026-10-15_sesion-02.md,L250,02
+C79,puerto 5432,puerto,Puerto que habría que abrir para un PostgreSQL de escritorio,docs/DECISIONES.md,L11,—
+C80,1394,id,Visita repetida desde el celular tras D-23,ESPECIFICACION.md,L74,05
+C81,las 3 visitas,visitas,Primeras visitas desde el celular (más la 1394: 4 en total),ESPECIFICACION.md,L71,05
+C82,D-24,decisión,Última decisión registrada (D-01 a D-24),docs/DECISIONES.md,L317,06
+C83,41 comprobaciones,comprobaciones,Comprobaciones de verificar_proyecto_campo.py (0 fallas),docs/sesiones/2026-10-15_sesion-05.md,L53,05
+C84,cinco vistas,vistas,Vistas v_tab_* legibles por tablero_lectura,ESPECIFICACION.md,L37,02
+C85,lotes 1–7,lotes,Lotes del proxy (código de provincia) en la simulación,docs/requerimientos_ti/evidencia_escala.md,L42,04
+C86,PostGIS 3.6.4,versión,Versión de PostGIS del servidor Neon,docs/sesiones/2026-10-15_sesion-02.md,L19,02
+C87,pendiente \| neondb_owner \| 1432,filas,Estado y creado_por iniciales: las 1.432 filas creadas por el propietario,docs/sesiones/2026-10-15_sesion-02.md,L48,02
+C88,| 20 |,requerimiento,Último requerimiento numerado del documento para TI (20 en total),docs/requerimientos_ti/REQUERIMIENTOS_TI.md,L258,06

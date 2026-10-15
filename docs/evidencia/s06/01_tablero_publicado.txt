@@ -1,0 +1,29 @@
+## S06 paso 0 — tablero publicado (2026-10-15, hora de Costa Rica)
+$ gh run list --workflow tablero.yml --limit 3   (antes de disparar, 16:45; salida transcrita, no copiada)
+completed success Tablero de avance main workflow_dispatch 38800575730 31s 2026-10-15T20:16:18Z
+completed success Tablero de avance main workflow_dispatch 38800395636 32s 2026-10-15T20:14:59Z
+(ninguna ejecución posterior a las 16:30; se disparó a mano)
+$ gh workflow run tablero.yml
+https://github.com/maib86/PROYECTO_NEON_CENSO/actions/runs/38819392080
+$ gh run list --workflow tablero.yml --limit 3
+completed	success	Tablero de avance	Tablero de avance	main	workflow_dispatch	38819392080	28s	2026-10-15T22:46:42Z
+completed	success	Tablero de avance	Tablero de avance	main	workflow_dispatch	38800575730	31s	2026-10-15T20:16:18Z
+completed	success	Tablero de avance	Tablero de avance	main	workflow_dispatch	38800395636	32s	2026-10-15T20:14:59Z
+$ gh run list --workflow tablero.yml --event schedule --limit 3
+(vacío: 0 ejecuciones por schedule)
+$ curl -s -o publicado.html -w "%{http_code} %{size_download}" https://maib86.github.io/PROYECTO_NEON_CENSO/
+200 125996
+$ grep -o "generado[^<]*" publicado.html
+generado 15/10/2026 16:46 (hora de Costa Rica) · última visita registrada 15/10/2026 16:29
+$ grep -ci observaciones publicado.html
+0
+$ grep -ci "prueba qfield" publicado.html
+0
+$ grep -ciE "neon\.tech|npg_|postgresql://|sslmode|password" publicado.html
+0
+## Texto visible (encabezado y por persona), extraído del HTML publicado
+Avance general 2,3 % 33 de 1.432 fincas con visita cerrada · 17 visitadas · 22 incidencias Lote A 18 de 709 · 2,5 % 12 visitadas · 7 incidencias Lote B 15 de 723 · 2,1 % 5 visitadas · 15 incidencias Visitas por persona Lote A Lote B edit_lote_b edit_lote_b: 20 20 edit_lote_a edit_lote_a: 19 19 Visitas por día Lote A Lote B 7 13 
+## Últimos movimientos (primeras 4 filas: las 4 visitas de campo, finca_id 1396, 1405, 1398, 1406; ids 1394, 1403, 1396, 1404)
+Últimos movimientos Cuándo Persona Finca Estado 15/10/2026 16:30 edit_lote_a 1396 · LA Visitada 15/10/2026 16:13 edit_lote_a 1405 · LA Rechazo 15/10/2026 16:13 edit_lote_a 1398 · LA Revisita 15/10/2026 16:13 edit_lote_a 1406 · LA Visitada 15/10/2026 13:02 edit
+## Captura 1100 px del publicado: py tablero/capturar_tablero.py tablero/salida/publicado/index.html --anchos 1100
+errores JS: [] | dialogos: [] | marcadores 1432 | teselas 15/15 | scroll_horizontal False | desbordan [] -> 02_tablero_publicado_1100.png
