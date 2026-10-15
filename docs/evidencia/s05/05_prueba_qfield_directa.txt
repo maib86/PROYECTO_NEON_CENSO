@@ -1,0 +1,56 @@
+## Tres visitas desde QField, conexión directa (rol propietario)
+$ psql -X -w -v ON_ERROR_STOP=1 -f - <<'SQL'
+SET TIME ZONE 'America/Costa_Rica';
+SELECT id, finca_id, lote, estado_visita, editado_por, creado_por, fecha_visita, fecha_edicion, precision_gnss_m, encuestador, coalesce(encuestador,'(NULL)') = '' AS encuestador_vacio, observaciones IS NOT NULL AND observaciones <> '' AS hay_observaciones, length(observaciones) AS largo_obs, posicion_registro IS NOT NULL AS hay_posicion
+FROM mgn.finca_visita WHERE id IN (1404,1403,1396) ORDER BY id;
+SELECT count(*) AS filas, count(DISTINCT fecha_visita) AS fechas_distintas, max(fecha_visita)-min(fecha_visita) AS rango FROM mgn.finca_visita WHERE id IN (1404,1403,1396);
+SELECT count(*) FILTER (WHERE estado_visita<>'pendiente') AS no_pendientes_lote_a, count(*) FILTER (WHERE editado_por='edit_lote_a') AS editadas_por_edit_lote_a FROM mgn.finca_visita WHERE lote='A';
+SQL
+# rol: owner · rc=0 · tiempo de pared: 1.35 s
+SET
+  id  | finca_id | lote | estado_visita | editado_por |  creado_por  |        fecha_visita        |         fecha_edicion         | precision_gnss_m | encuestador | encuestador_vacio | hay_observaciones | largo_obs | hay_posicion 
+------+----------+------+---------------+-------------+--------------+----------------------------+-------------------------------+------------------+-------------+-------------------+-------------------+-----------+--------------
+ 1396 |     1398 | A    | revisita      | edit_lote_a | neondb_owner | 2026-10-15 10:01:08.24-06  | 2026-10-15 16:01:21.885059-06 |              1.5 |             | f                 | t                 |        15 | f
+ 1403 |     1405 | A    | rechazo       | edit_lote_a | neondb_owner | 2026-10-15 10:00:13.21-06  | 2026-10-15 16:00:25.995775-06 |              1.5 |             | f                 | t                 |        15 | f
+ 1404 |     1406 | A    | visitada      | edit_lote_a | neondb_owner | 2026-10-15 09:58:39.744-06 | 2026-10-15 15:59:22.198699-06 |              1.5 |             | f                 | t                 |        15 | f
+(3 rows)
+
+ filas | fechas_distintas |    rango     
+-------+------------------+--------------
+     3 |                3 | 00:02:28.496
+(1 row)
+
+ no_pendientes_lote_a | editadas_por_edit_lote_a 
+----------------------+--------------------------
+                   18 |                       18
+(1 row)
+
+## Desfase fecha_visita vs fecha_edicion y encuestador NULL
+$ psql -X -w -v ON_ERROR_STOP=1 -f - <<'SQL'
+SET TIME ZONE 'America/Costa_Rica';
+SELECT id, fecha_visita AT TIME ZONE 'UTC' AS fecha_visita_leida_en_utc, fecha_edicion, fecha_edicion - fecha_visita AS edicion_menos_visita, encuestador IS NULL AS encuestador_es_null, encuestador = '' AS encuestador_es_vacio
+FROM mgn.finca_visita WHERE id IN (1404,1403,1396) ORDER BY id;
+SHOW TIME ZONE;
+SQL
+# rol: owner · rc=0 · tiempo de pared: 0.96 s
+SET
+  id  | fecha_visita_leida_en_utc |         fecha_edicion         | edicion_menos_visita | encuestador_es_null | encuestador_es_vacio 
+------+---------------------------+-------------------------------+----------------------+---------------------+----------------------
+ 1396 | 2026-10-15 16:01:08.24    | 2026-10-15 16:01:21.885059-06 | 06:00:13.645059      | t                   | 
+ 1403 | 2026-10-15 16:00:13.21    | 2026-10-15 16:00:25.995775-06 | 06:00:12.785775      | t                   | 
+ 1404 | 2026-10-15 15:58:39.744   | 2026-10-15 15:59:22.198699-06 | 06:00:42.454699      | t                   | 
+(3 rows)
+
+      TimeZone      
+--------------------
+ America/Costa_Rica
+(1 row)
+
+$ py tablero/generar_tablero.py --salida tablero/salida/s05_verificacion.html  (rol tablero_lectura)
+rc=0
+Tablero escrito en tablero/salida/s05_verificacion.html (122 KB)
+HTML: 125969 bytes
+id 1396: observaciones en el HTML = 0 (largo 15)
+id 1403: observaciones en el HTML = 0 (largo 15)
+id 1404: observaciones en el HTML = 0 (largo 15)
+'observaciones' (nombre de campo) en el HTML = 0

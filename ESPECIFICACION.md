@@ -49,18 +49,42 @@ Pendiente de la persona: campos temáticos del formulario de visita (cuestionari
 Hasta entonces, solo campos estructurales: `estado_visita`, `encuestador`, `fecha_visita`,
 `observaciones`, precisión GNSS, posición de registro.
 
-### Fase 3 — Campo con QField — PENDIENTE
+### Fase 3 — Campo con QField — EN CURSO (dividida por D-22)
 **Objetivo:** dos personas editan puntos en QField; el tablero refleja ambas fuentes.
+
+Parte 1 (D-22): QField con conexión directa a Neon por `pg_service` en el dispositivo, sin
+QFieldCloud. Parte 2: QFieldCloud con PostGIS y edición offline, pendiente de la cuenta del
+INEC. Evidencia de la parte 1: `docs/evidencia/s05/05_prueba_qfield_directa.txt`, sesión 05.
 
 Criterios de aceptación:
 - [ ] Proyecto QGIS con `finca_visita` (editable) y `deteccion_cambio` (referencia) publicado
       en QFieldCloud en modo **offline editing**.
+  - [x] Proyecto construido por script (`campo/NEON_campo_lote_A.qgs`), con «offline editing»
+        en QFieldSync, y usado en el celular por conexión directa (parte 1).
+  - [ ] Publicado en QFieldCloud: pendiente de la cuenta del INEC (D-22).
 - [ ] Formulario con valores por defecto: `encuestador = @cloud_username`,
       `fecha_visita = now()`, `precision_gnss_m = @position_horizontal_accuracy`.
+  - [x] Configurado (D-19) y aplicado en el celular: `fecha_visita` distinta en cada una de
+        las 3 visitas; `precision_gnss_m` con valor (1.5).
+  - [ ] `fecha_visita` llega 6 h atrasada: la hora local del celular se guarda como UTC
+        (defecto abierto, sesión 05).
+  - [ ] `encuestador = @cloud_username`: NULL sin sesión de QFieldCloud (esperado); pendiente
+        de la cuenta del INEC (D-22).
 - [ ] Credenciales de base en QFieldCloud como secreto `pg_service`, no en el `.qgs`.
+  - [x] No están en el `.qgs` (solo `service='neon_lote_a'`; escaneo 0).
+  - [ ] Secreto `pg_service` en QFieldCloud: pendiente de la cuenta del INEC (D-22). En la
+        parte 1 la clave vive en el dispositivo (solo piloto; requerimiento TI 10).
 - [ ] Edición sin señal → sincronización → visible en tablero. Documentado el tiempo real
       entre sincronización y aparición.
+  - [x] Edición con señal desde el celular escrita en la base con el rol del lote:
+        `editado_por = edit_lote_a` en las 3 visitas (RLS aplicado en el dispositivo).
+  - [x] `observaciones` presentes en la tabla y ausentes del tablero generado con datos
+        actuales (0 coincidencias). Falta confirmar en el tablero publicado tras la próxima
+        regeneración.
+  - [ ] Edición sin señal y sincronización: pendiente de la cuenta del INEC (D-22).
 - [ ] Identidad de campo visible en `v_tab_encuestador` por atributo, no por `current_user`.
+  - [ ] Pendiente de la cuenta del INEC: sin QFieldCloud no hay `@cloud_username`. En la
+        parte 1 la identidad es el rol (`editado_por`), por equipo y no por persona.
 
 Decisión abierta: QFieldCloud en nube (prueba 28 días) vs autoalojado desde el piloto.
 
