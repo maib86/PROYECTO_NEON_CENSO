@@ -22,6 +22,7 @@
 
 import argparse
 import json
+import math
 import os
 import sys
 from datetime import datetime, timezone, timedelta
@@ -102,6 +103,11 @@ def fmt_int(n):
     return f"{int(n):,}".replace(",", ".")
 
 
+def fmt_pct(x):
+    """Porcentaje con coma decimal, coherente con el punto de miles de fmt_int."""
+    return f"{x:.1f}".replace(".", ",") + " %"
+
+
 def fecha_corta(iso):
     if not iso:
         return "—"
@@ -146,9 +152,12 @@ def barras_diarias(filas, ancho=560, alto=180):
     lotes = sorted({f["lote"] for f in filas})
     val = {(f["dia"], f["lote"]): float(f["visitas"]) for f in filas}
     maxv = max(val.values()) or 1
-    m_l, m_r, m_t, m_b = 36, 10, 10, 28
+    # Margen izquierdo según el largo del mayor valor del eje: a 400 px la letra del
+    # SVG se agranda (CSS) y un margen fijo cortaría números de 4 o más cifras.
+    m_l, m_r, m_t, m_b = max(36, 14 + 10 * len(fmt_int(maxv))), 10, 10, 28
     pw, ph = ancho - m_l - m_r, alto - m_t - m_b
     gw = pw / max(len(dias), 1)
+    paso = max(1, math.ceil(60 / gw))     # etiquetas de día separadas al menos 60 unidades
     bw = max(4, min(22, (gw - 8) / max(len(lotes), 1) - 2))
     out = [f'<svg class="chart" viewBox="0 0 {ancho} {alto}" role="img" aria-label="Visitas por día">']
     # líneas de rejilla (3)
@@ -166,7 +175,10 @@ def barras_diarias(filas, ancho=560, alto=180):
             y = m_t + ph - h
             out.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bw:.1f}" height="{h:.1f}" rx="3" '
                        f'fill="{LOTE_COLOR.get(l, "#2a78d6")}"><title>{esc(d)} · Lote {esc(l)}: {fmt_int(v)}</title></rect>')
-        etiqueta = str(d)[5:] if len(str(d)) >= 10 else str(d)
+        if i % paso:
+            continue
+        s = str(d)
+        etiqueta = f"{s[8:10]}/{s[5:7]}" if len(s) >= 10 else s      # DD/MM, como el resto
         out.append(f'<text x="{m_l + i*gw + gw/2:.1f}" y="{alto-8}" text-anchor="middle" class="tick">{esc(etiqueta)}</text>')
     out.append("</svg>")
     return "\n".join(out)
@@ -204,9 +216,10 @@ main{max-width:1100px;margin:0 auto;padding:8px 16px 40px;display:grid;gap:14px;
 .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--ink2);margin:6px 0 2px}
 .legend span{display:inline-flex;align-items:center;gap:6px}
 .chart{width:100%;height:auto;display:block}
-.chart .lbl{font-size:12px;fill:var(--ink2)}
-.chart .val{font-size:12px;fill:var(--ink);font-variant-numeric:tabular-nums}
-.chart .tick{font-size:11px;fill:var(--muted)}
+.chart .lbl{font-size:13px;fill:var(--ink2)}
+.chart .val{font-size:13px;fill:var(--ink);font-variant-numeric:tabular-nums}
+.chart .tick{font-size:13px;fill:var(--muted)}
+@media(max-width:520px){.chart .lbl,.chart .val{font-size:20px}.chart .tick{font-size:19px}}
 .chart .grid{stroke:var(--grid);stroke-width:1}
 .chart .axis{stroke:var(--axis);stroke-width:1}
 .chart rect:hover{opacity:.8}
@@ -215,7 +228,7 @@ table{width:100%;border-collapse:collapse;font-size:13px}
 th{text-align:left;color:var(--muted);font-weight:500;border-bottom:1px solid var(--grid);padding:6px 6px}
 td{padding:6px 6px;border-bottom:1px solid var(--grid);vertical-align:top}
 td.num{text-align:right;font-variant-numeric:tabular-nums}
-.pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:1px 8px;border-radius:999px;border:1px solid var(--ring)}
+.pill{white-space:nowrap;display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:1px 8px;border-radius:999px;border:1px solid var(--ring)}
 .pill i{width:8px;height:8px;border-radius:50%;display:inline-block}
 .vacio{color:var(--muted);font-size:13px;margin:0}
 footer{text-align:center;color:var(--muted);font-size:12px;padding:12px 16px 30px}
@@ -247,7 +260,7 @@ def render(datos, generado):
         cerradas = int(r["visitadas"]) + int(r["no_localizadas"]) + int(r["rechazos"])
         tiles_lote.append(f"""
         <div class="tile"><div class="k"><span class="lote" style="background:{LOTE_COLOR.get(l,'#2a78d6')}"></span>Lote {esc(l)}</div>
-          <div class="v">{fmt_int(cerradas)}<small>de {fmt_int(f)} · {(100.0 * cerradas / f if f else 0.0):.1f}%</small></div>
+          <div class="v">{fmt_int(cerradas)}<small>de {fmt_int(f)} · {fmt_pct(100.0 * cerradas / f if f else 0.0)}</small></div>
           <div class="k">{fmt_int(r['visitadas'])} visitadas · {fmt_int(int(r['no_localizadas'])+int(r['rechazos'])+int(r['revisitas']))} incidencias</div>
         </div>""")
 
@@ -268,7 +281,7 @@ def render(datos, generado):
 
     # --- movimientos
     filas_mov = "".join(
-        f"<tr><td>{esc(m['cuando'])}</td><td>{esc(m['persona'])}</td><td>{esc(m['finca_id'])} <span style='color:var(--muted)'>· L{esc(m['lote'])}</span></td>"
+        f"<tr><td>{esc(m['cuando'])}</td><td>{esc(m['persona'])}</td><td style='white-space:nowrap'>{esc(m['finca_id'])} <span style='color:var(--muted)'>· L{esc(m['lote'])}</span></td>"
         f"<td><span class='pill'><i style='background:{ESTADO_COLOR.get(m['estado_visita'],'#898781')}'></i>{esc(ESTADO_LABEL.get(m['estado_visita'], m['estado_visita']))}</span></td></tr>"
         for m in mov) or "<tr><td colspan=4 class='vacio'>Sin movimientos todavía.</td></tr>"
 
@@ -293,7 +306,7 @@ def render(datos, generado):
 <main>
   <section class="card span2">
     <h2>Avance general</h2>
-    <div class="hero"><div class="big">{pct:.1f}%</div><div class="ctx">{fmt_int(hechas)} de {fmt_int(total)} fincas con visita cerrada · {fmt_int(visitadas)} visitadas · {fmt_int(incid)} incidencias</div></div>
+    <div class="hero"><div class="big">{fmt_pct(pct)}</div><div class="ctx">{fmt_int(hechas)} de {fmt_int(total)} fincas con visita cerrada · {fmt_int(visitadas)} visitadas · {fmt_int(incid)} incidencias</div></div>
     <div class="tiles">{''.join(tiles_lote)}</div>
   </section>
 
