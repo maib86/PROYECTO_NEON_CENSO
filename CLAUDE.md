@@ -19,10 +19,12 @@ Idioma de trabajo: **español**. Voz institucional, neutra. Sin emojis en docume
 2. `docs/sesiones/` — la sesión más reciente dice exactamente dónde quedó todo.
 3. `docs/DECISIONES.md` — por qué las cosas son como son. No se revierte una decisión
    registrada sin registrar la nueva.
+4. `specs/` — el encargo vigente; si el prompt dice "ejecutá specs/X", ese archivo manda.
 
 ## Estructura
 
 ```
+specs/                    Encargos: specs/AAAA-MM-DD_SNN_nombre.md. Un spec = un encargo = un /clear.
 sql/                      Scripts SQL. Numerados en orden de ejecución.
   plantillas/             Versión parametrizada (<<<MARCADORES>>>) para replicar.
   ejemplos_.../           Scripts tal como se ejecutaron en el piloto. NO re-ejecutar.
@@ -36,6 +38,11 @@ datos_prueba/             GeoJSON de origen del piloto.
 ```
 
 ## Reglas que no se negocian
+
+**Automatización por defecto.** Se propone primero la vía más automatizable y reproducible.
+Un paso manual solo por: (a) solo lo puede hacer una persona; (b) decisión de diseño;
+(c) riesgo alto (borrar, cambiar políticas, rotar credenciales, publicar en público, gastar),
+con el comando exacto a la vista. Se dice cuál aplica.
 
 **Credenciales.** Viven solo en `.env` (ignorado por git). Nunca en código, en SQL, en
 documentos, en commits ni en la salida de un comando. Si un comando las imprimiría, no se

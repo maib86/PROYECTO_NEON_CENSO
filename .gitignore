@@ -18,3 +18,7 @@ Thumbs.db
 
 # Capas de trabajo locales (p. ej. datos_prueba/ugm/ugm.gpkg, capa UGM del SNIT, 206 MB)
 *.gpkg
+
+# Proyectos QGIS: contienen el host y QGIS puede guardar la clave en texto plano (D-17)
+*.qgz
+*.qgs
