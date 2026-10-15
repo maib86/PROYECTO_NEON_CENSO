@@ -10,6 +10,8 @@
 #    Con la base:        DATABASE_URL_TABLERO="postgresql://tablero_lectura:CLAVE@HOST/neondb?sslmode=require" \
 #                        py tablero/generar_tablero.py --salida tablero/salida/index.html
 #    Con datos de prueba: py tablero/generar_tablero.py --fixture tablero/fixture_demo.json --salida tablero/salida/demo.html
+#    Otro esquema:       ... --esquema sim --salida tablero/salida/sim.html   (por defecto mgn;
+#                        sim es la simulación a escala de S04, D-18, y no se publica)
 #
 #  Lee SOLO la variable DATABASE_URL_TABLERO (rol tablero_lectura), nunca DATABASE_URL
 #  (propietario). Si la conexión no es tablero_lectura, se detiene sin generar nada (D-14).
@@ -24,18 +26,16 @@ import argparse
 import json
 import math
 import os
+import re
 import sys
 from datetime import datetime, timezone, timedelta
 
 CR_TZ = timezone(timedelta(hours=-6))
 
-VISTAS = {
-    "resumen":     "SELECT * FROM mgn.v_tab_resumen",
-    "encuestador": "SELECT * FROM mgn.v_tab_encuestador",
-    "diario":      "SELECT * FROM mgn.v_tab_diario",
-    "puntos":      "SELECT * FROM mgn.v_tab_puntos",
-    "movimientos": "SELECT * FROM mgn.v_tab_movimientos",
-}
+VISTAS = ["resumen", "encuestador", "diario", "puntos", "movimientos"]
+ESQUEMA_DEFECTO = "mgn"
+# Texto del encabezado por esquema; uno no listado se rotula con su nombre.
+ALCANCE = {"mgn": "Distrito 20205", "sim": "Simulación a escala (esquema sim, UGM del SNIT)"}
 
 ESTADOS = [
     # clave, etiqueta, color (paleta de estado), símbolo
@@ -56,7 +56,7 @@ LOTE_COLOR = {"A": "#2a78d6", "B": "#eb6834"}   # categóricos 1 y 2, orden fijo
 #  Obtención de datos
 # -------------------------------------------------------------------------------------
 
-def leer_base(url):
+def leer_base(url, esquema=ESQUEMA_DEFECTO):
     import psycopg2
     import psycopg2.extras
     datos = {}
@@ -67,8 +67,8 @@ def leer_base(url):
             if usuario != ROL_TABLERO:
                 sys.exit(f"La conexión es '{usuario}', no '{ROL_TABLERO}'. "
                          "El tablero solo lee con el rol de solo lectura.")
-            for clave, sql in VISTAS.items():
-                cur.execute(sql)
+            for clave in VISTAS:
+                cur.execute(f"SELECT * FROM {esquema}.v_tab_{clave}")
                 filas = [dict(r) for r in cur.fetchall()]
                 for f in filas:
                     for k, v in f.items():
@@ -237,7 +237,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:12px 16px 30p
 """
 
 
-def render(datos, generado):
+def render(datos, generado, alcance=ALCANCE[ESQUEMA_DEFECTO]):
     res = datos.get("resumen", [])
     enc = datos.get("encuestador", [])
     dia = datos.get("diario", [])
@@ -301,7 +301,7 @@ def render(datos, generado):
 <body>
 <header>
   <h1>Avance del operativo de campo</h1>
-  <div class="sub">Distrito 20205 · generado {esc(generado)} (hora de Costa Rica) · última visita registrada {esc(fecha_corta(ult))}</div>
+  <div class="sub">{esc(alcance)} · generado {esc(generado)} (hora de Costa Rica) · última visita registrada {esc(fecha_corta(ult))}</div>
 </header>
 <main>
   <section class="card span2">
@@ -367,7 +367,11 @@ def main():
     ap.add_argument("--salida", default="tablero/index.html")
     ap.add_argument("--fixture", help="JSON con las cinco vistas, para probar sin base")
     ap.add_argument("--volcar", help="Guardar los datos leídos de la base en este JSON (para depurar)")
+    ap.add_argument("--esquema", default=ESQUEMA_DEFECTO,
+                    help="Esquema de las vistas v_tab_* (por defecto mgn)")
     a = ap.parse_args()
+    if not re.fullmatch(r"[a-z_][a-z0-9_]*", a.esquema):
+        sys.exit(f"Nombre de esquema no válido: {a.esquema!r}")
 
     if a.fixture:
         datos = leer_fixture(a.fixture)
@@ -375,13 +379,13 @@ def main():
         url = os.environ.get("DATABASE_URL_TABLERO")
         if not url:
             sys.exit("Falta DATABASE_URL_TABLERO (o usar --fixture).")
-        datos = leer_base(url)
+        datos = leer_base(url, a.esquema)
         if a.volcar:
             with open(a.volcar, "w", encoding="utf-8") as f:
                 json.dump(datos, f, ensure_ascii=False, indent=1, default=str)
 
     generado = datetime.now(CR_TZ).strftime("%d/%m/%Y %H:%M")
-    html = render(datos, generado)
+    html = render(datos, generado, ALCANCE.get(a.esquema, f"Esquema {a.esquema}"))
     os.makedirs(os.path.dirname(a.salida) or ".", exist_ok=True)
     with open(a.salida, "w", encoding="utf-8") as f:
         f.write(html)
