@@ -295,3 +295,21 @@ no se puede probar con la cuenta disponible.
 queda pendiente de la cuenta del INEC. El dispositivo guarda la clave de `edit_lote_a`: solo
 aceptable en el piloto. Requerimientos TI 9 (plan del INEC con PostGIS offline) y 10
 (credenciales en el dispositivo solo con MDM en producción).
+
+## D-23 · 2026-10-15 · Zona de sesión fijada en la base: `America/Costa_Rica`
+
+**Contexto.** En la prueba de la sesión 05 (D-22, parte 1), las tres visitas desde QField
+quedaron con `fecha_visita` 6 h atrasada. Causa: el formulario envía `now()` del dispositivo
+sin zona horaria y la sesión por defecto era UTC (`SHOW timezone` con una conexión nueva de
+`edit_lote_a`: `GMT`), así que la hora local de Costa Rica se guardó como UTC.
+**Decisión.** La base fija la zona de sesión:
+`ALTER DATABASE neondb SET timezone TO 'America/Costa_Rica'`. Las tres filas de prueba (1396,
+1403, 1404) se corrigen con `fecha_visita + 6 horas` (`sql/10`, ejecutado una vez con
+`edit_lote_a` para conservar `editado_por`).
+**Descartado.** Confiar la zona al cliente (`PGTZ`, `options` en `pg_service.conf` o
+expresión con zona en el formulario): depende de cada dispositivo y configuración, y un
+cliente mal configurado vuelve a desplazar las horas sin aviso.
+**Consecuencias.** Toda conexión nueva sin zona propia trabaja en `America/Costa_Rica`
+(verificado: `America/Costa_Rica` con `edit_lote_a` por servicio). Las sesiones abiertas
+antes del cambio conservan la zona anterior hasta reconectar. `fecha_edicion` de las tres
+filas pasó a la hora de la corrección. Requerimiento TI 11.

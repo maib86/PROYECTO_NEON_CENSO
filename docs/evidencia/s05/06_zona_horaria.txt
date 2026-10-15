@@ -1,0 +1,96 @@
+$ psql "service=neon_lote_a" -X -At -c "SHOW timezone"   (sin PGTZ, conexión nueva, ANTES)
+GMT
+## Antes: dueño de la base, ajustes por base/rol y función de auditoría
+$ psql -X -w -v ON_ERROR_STOP=1 -f - <<'SQL'
+SELECT datname, pg_get_userbyid(datdba) AS duenio FROM pg_database WHERE datname = current_database();
+SELECT coalesce(d.datname,'(todas)') AS base, coalesce(r.rolname,'(todos)') AS rol, s.setconfig FROM pg_db_role_setting s LEFT JOIN pg_database d ON d.oid = s.setdatabase LEFT JOIN pg_roles r ON r.oid = s.setrole;
+SELECT pg_get_functiondef('mgn.fn_sello_auditoria'::regproc);
+SQL
+# rol: owner · rc=0 · tiempo de pared: 1.00 s
+ datname |    duenio    
+---------+--------------
+ neondb  | neondb_owner
+(1 row)
+
+ base | rol | setconfig 
+------+-----+-----------
+(0 rows)
+
+                 pg_get_functiondef                  
+-----------------------------------------------------
+ CREATE OR REPLACE FUNCTION mgn.fn_sello_auditoria()+
+  RETURNS trigger                                   +
+  LANGUAGE plpgsql                                  +
+ AS $function$                                      +
+ BEGIN                                              +
+     IF TG_OP = 'INSERT' THEN                       +
+         NEW.creado_por     := current_user;        +
+         NEW.fecha_creacion := now();               +
+     ELSE                                           +
+         NEW.creado_por     := OLD.creado_por;      +
+         NEW.fecha_creacion := OLD.fecha_creacion;  +
+     END IF;                                        +
+                                                    +
+     NEW.editado_por   := current_user;             +
+     NEW.fecha_edicion := now();                    +
+                                                    +
+     RETURN NEW;                                    +
+ END;                                               +
+ $function$                                         +
+ 
+(1 row)
+
+## D-23: fijar la zona de sesión en la base
+$ psql -X -w -v ON_ERROR_STOP=1 -f - <<'SQL'
+ALTER DATABASE neondb SET timezone TO 'America/Costa_Rica';
+SELECT coalesce(d.datname,'(todas)') AS base, coalesce(r.rolname,'(todos)') AS rol, s.setconfig FROM pg_db_role_setting s LEFT JOIN pg_database d ON d.oid = s.setdatabase LEFT JOIN pg_roles r ON r.oid = s.setrole;
+SQL
+# rol: owner · rc=0 · tiempo de pared: 0.93 s
+ALTER DATABASE
+  base  |   rol   |           setconfig           
+--------+---------+-------------------------------
+ neondb | (todos) | {TimeZone=America/Costa_Rica}
+(1 row)
+
+
+$ psql "service=neon_lote_a" -X -At -c "SHOW timezone; SELECT current_user"   (sin PGTZ, conexión NUEVA, DESPUÉS)
+America/Costa_Rica
+edit_lote_a
+
+$ PGSERVICEFILE=campo/paquete_movil/pg_service.conf psql "service=neon_lote_a" -X -At -c "SHOW timezone"   (archivo del celular)
+America/Costa_Rica
+
+## Corrección de las 3 filas de prueba (rol edit_lote_a, conexión nueva por servicio)
+$ psql "service=neon_lote_a" -X -v ON_ERROR_STOP=1 -f sql/10_corregir_fecha_visita_prueba_qfield.sql
+BEGIN
+ momento |  id  | estado_visita |        fecha_visita        |         fecha_edicion         | editado_por | edicion_menos_visita 
+---------+------+---------------+----------------------------+-------------------------------+-------------+----------------------
+ ANTES   | 1396 | revisita      | 2026-10-15 10:01:08.24-06  | 2026-10-15 16:01:21.885059-06 | edit_lote_a | 06:00:13.645059
+ ANTES   | 1403 | rechazo       | 2026-10-15 10:00:13.21-06  | 2026-10-15 16:00:25.995775-06 | edit_lote_a | 06:00:12.785775
+ ANTES   | 1404 | visitada      | 2026-10-15 09:58:39.744-06 | 2026-10-15 15:59:22.198699-06 | edit_lote_a | 06:00:42.454699
+(3 filas)
+
+psql:sql/10_corregir_fecha_visita_prueba_qfield.sql:28: ERROR:  division by zero
+rc=3
+
+(primer intento abortado: la salvaguarda 1/0 dentro de CASE se evalúa al planificar; ROLLBACK implícito, filas sin cambio, comprobado arriba. Segundo intento con DO/GET DIAGNOSTICS)
+$ psql "service=neon_lote_a" -X -v ON_ERROR_STOP=1 -f sql/10_corregir_fecha_visita_prueba_qfield.sql
+BEGIN
+ momento |  id  | estado_visita |        fecha_visita        |         fecha_edicion         | editado_por | edicion_menos_visita 
+---------+------+---------------+----------------------------+-------------------------------+-------------+----------------------
+ ANTES   | 1396 | revisita      | 2026-10-15 10:01:08.24-06  | 2026-10-15 16:01:21.885059-06 | edit_lote_a | 06:00:13.645059
+ ANTES   | 1403 | rechazo       | 2026-10-15 10:00:13.21-06  | 2026-10-15 16:00:25.995775-06 | edit_lote_a | 06:00:12.785775
+ ANTES   | 1404 | visitada      | 2026-10-15 09:58:39.744-06 | 2026-10-15 15:59:22.198699-06 | edit_lote_a | 06:00:42.454699
+(3 filas)
+
+psql:sql/10_corregir_fecha_visita_prueba_qfield.sql:33: NOTICE:  filas corregidas: 3
+DO
+ momento |  id  | estado_visita |        fecha_visita        |        fecha_edicion         | editado_por 
+---------+------+---------------+----------------------------+------------------------------+-------------
+ DESPUÉS | 1396 | revisita      | 2026-10-15 16:01:08.24-06  | 2026-10-15 16:13:37.88395-06 | edit_lote_a
+ DESPUÉS | 1403 | rechazo       | 2026-10-15 16:00:13.21-06  | 2026-10-15 16:13:37.88395-06 | edit_lote_a
+ DESPUÉS | 1404 | visitada      | 2026-10-15 15:58:39.744-06 | 2026-10-15 16:13:37.88395-06 | edit_lote_a
+(3 filas)
+
+COMMIT
+rc=0

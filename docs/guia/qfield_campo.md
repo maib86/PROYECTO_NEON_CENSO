@@ -56,6 +56,10 @@ Salida: `campo/NEON_campo_lote_<<<LOTE>>>.qgs`. La verificación debe terminar e
 | `observaciones` | Texto multilínea |
 | `id`, `finca_id`, `lote`, `codigo_upm`, `creado_por`, `fecha_creacion`, `editado_por`, `fecha_edicion` | Solo lectura |
 
+Zona horaria (D-23): el formulario envía `now()` del dispositivo sin zona; la base tiene fijada
+la zona de sesión (`ALTER DATABASE neondb SET timezone TO 'America/Costa_Rica'`), de modo que
+esa hora se interpreta como hora de Costa Rica sin depender del cliente.
+
 Por qué «aplicar al actualizar»: las filas ya existen (un punto por finca, `sql/06`); en
 campo se actualizan y no se crean. Sin esa opción, ningún valor por defecto se evaluaría.
 `fecha_visita` conserva el valor existente: toma la hora del dispositivo solo la primera vez

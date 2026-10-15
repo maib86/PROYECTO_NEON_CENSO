@@ -66,8 +66,9 @@ Criterios de aceptación:
       `fecha_visita = now()`, `precision_gnss_m = @position_horizontal_accuracy`.
   - [x] Configurado (D-19) y aplicado en el celular: `fecha_visita` distinta en cada una de
         las 3 visitas; `precision_gnss_m` con valor (1.5).
-  - [ ] `fecha_visita` llega 6 h atrasada: la hora local del celular se guarda como UTC
-        (defecto abierto, sesión 05).
+  - [x] Desfase de 6 h en `fecha_visita` (hora local guardada como UTC) corregido con D-23:
+        zona de sesión fijada en la base; las 3 filas de prueba corregidas (`sql/10`).
+  - [ ] Repetir una visita desde el celular tras D-23 y comprobar la hora.
   - [ ] `encuestador = @cloud_username`: NULL sin sesión de QFieldCloud (esperado); pendiente
         de la cuenta del INEC (D-22).
 - [ ] Credenciales de base en QFieldCloud como secreto `pg_service`, no en el `.qgs`.
