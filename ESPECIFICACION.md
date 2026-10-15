@@ -36,6 +36,8 @@ Criterios de aceptación:
 - [x] RLS por lote funcionando también en la capa de puntos (probado con roles de edición).
 - [x] Rol `tablero_lectura` que solo ve las cinco vistas `v_tab_*`.
 - [ ] Visitas de prueba registradas desde QGIS por A y por B.
+      Parcial: B cumplido con evidencia **simulada por script** (`sql/08_visitas_prueba_lote_b.sql`,
+      20 visitas con `edit_lote_b`, sesión 02), no desde QGIS. A: pendiente, desde QGIS por la persona.
 - [ ] `generar_tablero.py` produce el HTML con datos reales; capturas a 1100 y 400 px sin defectos.
 - [ ] GitHub Actions regenera y publica el tablero cada 30 minutos sin intervención.
 - [ ] El HTML publicado no contiene credenciales (verificado por `revisor-auditoria`).
