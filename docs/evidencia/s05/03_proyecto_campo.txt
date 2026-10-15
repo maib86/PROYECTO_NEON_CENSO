@@ -1,0 +1,44 @@
+$ python-qgis-ltr.bat campo/verificar_proyecto_campo.py A
+[OK] escaneo «neon.tech» = 0 · 0
+[OK] escaneo «npg_» = 0 · 0
+[OK] escaneo «password» = 0 · 0
+[OK] escaneo «user=» = 0 · 0
+[OK] escaneo «host=» = 0 · 0
+[OK] escaneo «dbname=» = 0 · 0
+[OK] service='neon_lote_a' presente · 4 veces
+[OK] saveUser y saveUserFull vacíos
+[OK] proyecto se lee
+[OK] SRC del proyecto EPSG:5367 · EPSG:5367
+[OK] finca_visita (lote A) válida · 709 objetos
+[OK] finca_visita (lote A) filtro · "lote" = 'A'
+[OK] finca_visita (lote A) solo lectura = False
+[OK] finca_visita (lote A) SRC 5367
+[OK] finca_visita (lote A) QFieldSync cloud_action · offline
+[OK] deteccion_cambio (lote A, referencia) válida · 709 objetos
+[OK] deteccion_cambio (lote A, referencia) filtro · "lote" = 'A'
+[OK] deteccion_cambio (lote A, referencia) solo lectura = True
+[OK] deteccion_cambio (lote A, referencia) SRC 5367
+[OK] deteccion_cambio (lote A, referencia) QFieldSync cloud_action · offline
+[OK] estado_visita: lista de valores D-15 · ['pendiente', 'visitada', 'no_localizada', 'rechazo', 'revisita']
+[OK] observaciones multilínea
+[OK] id solo lectura
+[OK] finca_id solo lectura
+[OK] lote solo lectura
+[OK] codigo_upm solo lectura
+[OK] creado_por solo lectura
+[OK] fecha_creacion solo lectura
+[OK] editado_por solo lectura
+[OK] fecha_edicion solo lectura
+[OK] estado_visita editable
+[OK] observaciones editable
+[OK] fecha_visita editable
+[OK] por defecto encuestador · coalesce(@cloud_username, "encuestador") · aplicar al actualizar=True
+[OK] por defecto fecha_visita · if("fecha_visita" IS NULL AND "estado_visita" <> 'pendiente', now(), "fecha_visita") · aplicar al actualizar=True
+[OK] por defecto precision_gnss_m · coalesce(@position_horizontal_accuracy, "precision_gnss_m") · aplicar al actualizar=True
+[OK] pendiente sin fecha -> fecha vacía · NULL
+[OK] visitada sin fecha -> now() · 2026-10-15 15:16:02
+[OK] fecha previa -> se conserva · 2026-10-14 15:16:02
+[OK] encuestador = @cloud_username · 'prueba_campo'
+[OK] sin cambios pendientes en la capa
+Resultado: 0 fallas
+rc=0

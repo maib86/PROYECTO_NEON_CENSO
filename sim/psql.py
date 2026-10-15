@@ -2,8 +2,8 @@
 #  psql con credenciales tomadas de .env (sin exponerlas)
 # =====================================================================================
 #  USO
-#    py sim/psql.py [--rol owner|tablero] [--evidencia ARCHIVO.txt] [--titulo T] -c "SQL"
-#    py sim/psql.py [--rol owner|tablero] [--evidencia ARCHIVO.txt] -f script.sql
+#    py sim/psql.py [--rol owner|tablero|lote_a] [--evidencia ARCHIVO.txt] [--titulo T] -c "SQL"
+#    py sim/psql.py [--rol owner|tablero|lote_a] [--evidencia ARCHIVO.txt] -f script.sql
 #  Opciones de psql adicionales después de "--" (p. ej. -- -1 para una transacción).
 # =====================================================================================
 
@@ -15,7 +15,7 @@ from entorno import psql
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--rol", default="owner", choices=["owner", "tablero"])
+    ap.add_argument("--rol", default="owner", choices=["owner", "tablero", "lote_a"])
     ap.add_argument("--evidencia")
     ap.add_argument("--titulo")
     g = ap.add_mutually_exclusive_group(required=True)

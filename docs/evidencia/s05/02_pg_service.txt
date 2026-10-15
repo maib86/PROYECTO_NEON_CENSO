@@ -1,0 +1,12 @@
+$ py campo/escribir_pg_service.py
+Archivo: %APPDATA%\postgresql\.pg_service.conf
+Servicio escrito: neon_lote_a · claves: host, port, dbname, user, password, sslmode
+Otros servicios conservados: ninguno
+
+$ psql "service=neon_lote_a" -X -w -c "select current_user, inet_server_port(), current_setting('server_version')"
+ current_user | inet_server_port | current_setting 
+--------------+------------------+-----------------
+ edit_lote_a  |             5432 | 18.6 (653b019)
+(1 fila)
+
+Nota: el archivo está en %APPDATA%\postgresql\, fuera de C:\PROYECTO_NEON_CENSO (no puede entrar al repositorio).

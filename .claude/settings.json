@@ -7,7 +7,6 @@
       "Bash(git log *)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(git push *)",
       "Bash(py tablero/generar_tablero.py *)",
       "Bash(py tablero/capturar_tablero.py *)",
       "Bash(py sim/*)",
@@ -25,7 +24,8 @@
       "Bash(dir *)"
     ],
     "ask": [
-      "Bash(gh *)"
+      "Bash(gh *)",
+      "Bash(git push *)"
     ],
     "deny": [
       "Read(./.env)",

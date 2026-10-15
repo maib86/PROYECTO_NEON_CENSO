@@ -1,0 +1,96 @@
+## Huella de mgn.finca_visita antes
+$ psql -X -w -v ON_ERROR_STOP=1 -f - <<'SQL'
+SELECT count(*) AS total, count(*) FILTER (WHERE estado_visita<>'pendiente') AS no_pend, md5(string_agg(id||'|'||estado_visita||'|'||coalesce(fecha_visita::text,'')||'|'||editado_por||'|'||fecha_edicion::text, ',' ORDER BY id)) AS huella FROM mgn.finca_visita;
+SQL
+# rol: owner · rc=0 · tiempo de pared: 0.80 s
+ total | no_pend |              huella              
+-------+---------+----------------------------------
+  1432 |      35 | 4142666313b1f349edc4373965cbd50a
+(1 row)
+
+## Respaldo previo (D-13)
+$ pg_dump -Fc -n mgn -f respaldos/2026-10-15_mgn_antes_09.dump
+# rol: owner · rc=0 · tiempo de pared: 10.60 s
+
+## Aplicar sql/09 en una transacción
+$ psql -X -w -v ON_ERROR_STOP=1 -1 -f sql/09_fecha_visita_solo_si_nula.sql
+# rol: owner · rc=0 · tiempo de pared: 1.01 s
+CREATE FUNCTION
+COMMENT
+
+## Definición y comentario tras sql/09
+$ psql -X -w -v ON_ERROR_STOP=1 -f - <<'SQL'
+SELECT pg_get_functiondef('mgn.fn_fecha_visita_auto'::regproc); SELECT obj_description('mgn.fn_fecha_visita_auto'::regproc,'pg_proc');
+SQL
+# rol: owner · rc=0 · tiempo de pared: 0.86 s
+                                pg_get_functiondef                                 
+-----------------------------------------------------------------------------------
+ CREATE OR REPLACE FUNCTION mgn.fn_fecha_visita_auto()                            +
+  RETURNS trigger                                                                 +
+  LANGUAGE plpgsql                                                                +
+ AS $function$                                                                    +
+ BEGIN                                                                            +
+     -- Solo si llega NULL: nunca se sobrescribe una fecha enviada por el cliente.+
+     IF NEW.estado_visita <> 'pendiente' AND NEW.fecha_visita IS NULL THEN        +
+         NEW.fecha_visita := now();                                               +
+     END IF;                                                                      +
+     RETURN NEW;                                                                  +
+ END;                                                                             +
+ $function$                                                                       +
+ 
+(1 row)
+
+                                                                        obj_description                                                                         
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ D-16: asigna fecha_visita = now() solo si llega NULL y el estado no es pendiente. La fecha enviada por el cliente (QField: now() del dispositivo) se conserva.
+(1 row)
+
+## Verificación D-16 con edit_lote_a (ROLLBACK)
+$ psql -X -w -v ON_ERROR_STOP=1 -f sql/09_verificar_fecha_visita.sql
+# rol: lote_a · rc=0 · tiempo de pared: 1.56 s
+     rol     
+-------------
+ edit_lote_a
+(1 row)
+
+BEGIN
+SELECT 2
+ filas_de_prueba 
+-----------------
+               2
+(1 row)
+
+UPDATE 1
+UPDATE 1
+ caso | estado_visita | a_conserva_ayer | b_recibe_now | editado_por 
+------+---------------+-----------------+--------------+-------------
+    1 | visitada      | t               | f            | edit_lote_a
+    2 | visitada      | f               | t            | edit_lote_a
+(2 rows)
+
+ROLLBACK
+ lote_a_no_pendientes | lote_a_con_fecha | lote_a_total 
+----------------------+------------------+--------------
+                   15 |               15 |          709
+(1 row)
+
+## Huella de mgn.finca_visita después
+$ psql -X -w -v ON_ERROR_STOP=1 -f - <<'SQL'
+SELECT count(*) AS total, count(*) FILTER (WHERE estado_visita<>'pendiente') AS no_pend, md5(string_agg(id||'|'||estado_visita||'|'||coalesce(fecha_visita::text,'')||'|'||editado_por||'|'||fecha_edicion::text, ',' ORDER BY id)) AS huella FROM mgn.finca_visita;
+SQL
+# rol: owner · rc=0 · tiempo de pared: 0.76 s
+ total | no_pend |              huella              
+-------+---------+----------------------------------
+  1432 |      35 | 4142666313b1f349edc4373965cbd50a
+(1 row)
+
+## Huella de mgn.finca_visita al cierre (tras construir y verificar el proyecto)
+$ psql -X -w -v ON_ERROR_STOP=1 -f - <<'SQL'
+SELECT count(*) AS total, count(*) FILTER (WHERE estado_visita<>'pendiente') AS no_pend, md5(string_agg(id||'|'||estado_visita||'|'||coalesce(fecha_visita::text,'')||'|'||editado_por||'|'||fecha_edicion::text, ',' ORDER BY id)) AS huella FROM mgn.finca_visita;
+SQL
+# rol: owner · rc=0 · tiempo de pared: 0.75 s
+ total | no_pend |              huella              
+-------+---------+----------------------------------
+  1432 |      35 | 4142666313b1f349edc4373965cbd50a
+(1 row)
+

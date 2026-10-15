@@ -212,3 +212,54 @@ son extrapolaciones, no mediciones. Las UGM no son fincas: el proxy sirve para c
 tamaño, concurrencia y tablero, no para tiempos de visita ni cobertura (ver
 `docs/requerimientos_ti/evidencia_escala.md`). `sim` ocupa 208 MB de la base (225 MB en
 total) y se conserva hasta S06; su borrado se decide después de la presentación.
+
+## D-19 · 2026-10-15 · Un proyecto QFieldCloud por lote, con el rol de su lote en el secreto pg_service
+
+**Contexto.** D-10 supuso que en campo el RLS no protege, porque QFieldCloud aplica los
+cambios con una cuenta única. Hipótesis (sin verificar hasta la prueba de campo): QFieldCloud
+aplica los cambios con la conexión que define el proyecto; si esa conexión es un servicio
+libpq cuyo rol es el de edición del lote, el RLS sigue actuando sobre lo que se sincroniza.
+Se comprueba con `editado_por = edit_lote_a` tras la primera sincronización
+(`docs/guia/qfield_campo.md`, paso 6).
+**Decisión.** Un proyecto QFieldCloud por lote. Cada proyecto usa solo
+`service='neon_lote_<l>'` (sin host, usuario ni clave en el `.qgs`), y el servicio se carga en
+QFieldCloud como secreto `pg_service` con el rol de ese lote (`edit_lote_a`, `edit_lote_b`).
+El RLS protege por equipo también en campo. La identidad individual sigue llegando por
+atributo: `encuestador = @cloud_username` (D-10). En el piloto solo se prepara el lote A
+(`campo/NEON_campo_lote_A.qgs`); el lote B se documenta como réplica
+(`docs/guia/qfield_campo.md`).
+**Descartado.** Un solo proyecto con el rol propietario o con un rol común (el muro de la base
+desaparece en campo; queda solo el filtro del proyecto). Guardar host, usuario y clave en el
+proyecto (no se puede versionar en un repositorio público, D-17).
+**Consecuencias.** Mejora D-10, no la edita: el reparto en campo pasa a ser por equipo con muro
+de base; dentro de un equipo, la persona sigue siendo un atributo. `NEON_campo_lote_A.qgs`
+vuelve a entrar al repositorio (excepción `!campo/*.qgs`). `NEON.qgz` sigue fuera: esto
+reemplaza el punto de D-17 que preveía su regreso en S05; el proyecto versionado es el de
+campo, construido por script.
+Como las filas de `finca_visita` ya existen y en campo se actualizan, los valores por defecto
+del formulario llevan «aplicar al actualizar». `fecha_visita` se llena con `now()` del
+dispositivo solo si está vacía y el estado deja de ser `pendiente`: nunca se sobrescribe
+(D-16). `encuestador` y `precision_gnss_m` sí se sobrescriben en cada edición desde QField
+(solo conservan el valor si la variable viene vacía, como en QGIS escritorio): una revisita o
+una edición de otra persona deja el `encuestador` de la última edición con la fecha de la
+primera. Comportamiento conocido del piloto, pendiente de decisión de la persona.
+`deteccion_cambio` va como «offline editing» más capa de solo lectura: para una capa PostGIS
+no hay acción de copia de solo lectura, y «acceso directo» haría que el celular se conecte a
+la base. Que QField aplique «aplicar al actualizar» igual que PyQGIS se comprueba en campo. El archivo de servicio por usuario en Windows es
+`%APPDATA%\postgresql\.pg_service.conf` (con punto inicial; sin el punto, libpq no lo lee
+sin `PGSERVICEFILE`).
+
+## D-20 · 2026-10-15 · Corrección de la premisa de D-16: el trigger nunca sobrescribió `fecha_visita`
+
+**Contexto.** D-16 atribuyó las 15 visitas del lote A con la misma `fecha_visita` (sesión 02)
+a una sobrescritura incondicional del trigger, y descartó «mantenerla». En S05, antes de
+aplicar `sql/09`, la definición viva (`pg_get_functiondef`) y `sql/06` muestran que
+`mgn.fn_fecha_visita_auto` siempre asignó `now()` solo con `NEW.fecha_visita IS NULL` (y
+estado distinto de `pendiente`).
+**Corrección.** La causa real: QGIS escritorio envía `fecha_visita` NULL y `now()` es la hora
+de la transacción de guardado, la misma para todo lo guardado a la vez. La decisión de D-16
+(asignar solo si llega NULL) ya se cumplía. `sql/09` la reafirma de forma idempotente y la
+documenta con `COMMENT ON FUNCTION`; no cambia el comportamiento. La hora real de la visita
+la aporta el formulario de QField (D-19).
+**Consecuencias.** D-16 sigue vigente en su decisión; su contexto y su alternativa descartada
+quedan corregidos por esta entrada.

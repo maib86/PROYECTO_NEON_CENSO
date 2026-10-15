@@ -23,6 +23,14 @@ Thumbs.db
 # Proyectos QGIS: contienen el host y QGIS puede guardar la clave en texto plano (D-17)
 *.qgz
 *.qgs
+# Excepción (D-17, D-19): proyectos de campo con conexión solo por pg_service, sin host ni clave
+!campo/*.qgs
+# Subproductos que QGIS escribe junto al .qgs
+campo/*.qgs~
+campo/*_attachments.zip
+campo/*.qgd
+# Archivos de servicio libpq: contienen la clave (docs/guia/pg_service.md)
+*pg_service.conf
 
 # Salidas de la simulación S04 (paquetes, temporales)
 sim/salida/

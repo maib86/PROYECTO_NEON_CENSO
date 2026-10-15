@@ -1,0 +1,4 @@
+$ escaneo de 20 archivos (los 18 del diff contra HEAD más 2 subproductos de QGIS, luego ignorados: .qgs~ y _attachments.zip) contra los valores de .env
+claves 0 | host/endpoint 0
+historial (git log -p --all): claves 0 | host 0
+archivos: .claude/settings.json, .gitignore, campo/NEON_campo_lote_A.qgs, campo/NEON_campo_lote_A.qgs~, campo/NEON_campo_lote_A_attachments.zip, campo/construir_proyecto_campo.py, campo/escribir_pg_service.py, campo/verificar_proyecto_campo.py, docs/DECISIONES.md, docs/evidencia/s05/01_fecha_visita.txt, docs/evidencia/s05/02_pg_service.txt, docs/evidencia/s05/03_proyecto_campo.txt, docs/guia/pg_service.md, docs/guia/qfield_campo.md, docs/requerimientos_ti/insumos_piloto.md, sim/entorno.py, sim/psql.py, specs/2026-10-15_S05_qfield_preparacion.md, sql/09_fecha_visita_solo_si_nula.sql, sql/09_verificar_fecha_visita.sql

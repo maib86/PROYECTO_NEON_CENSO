@@ -7,7 +7,8 @@
 #  comandos ni en la salida. Toda salida pasa por `redactar`, que reemplaza clave,
 #  host y endpoint reales por marcadores (el nombre de rol no es secreto y se muestra).
 #
-#  Las evidencias literales se escriben en docs/evidencia/s04/ (ya redactadas).
+#  Las evidencias literales se escriben en docs/evidencia/s04/ (ya redactadas); otra
+#  carpeta con la variable EVIDENCIA_SESION (p. ej. s05).
 # =====================================================================================
 
 import os
@@ -18,13 +19,14 @@ from pathlib import Path
 from urllib.parse import urlparse, parse_qs, unquote
 
 RAIZ = Path(__file__).resolve().parent.parent
-EVIDENCIA = RAIZ / "docs" / "evidencia" / "s04"
+EVIDENCIA = RAIZ / "docs" / "evidencia" / os.environ.get("EVIDENCIA_SESION", "s04")
 SALIDA = RAIZ / "sim" / "salida"
 GDAL_BIN = Path(r"C:\Program Files\QGIS 3.34.11\bin")
 OGR2OGR = str(GDAL_BIN / "ogr2ogr.exe")
 OGRINFO = str(GDAL_BIN / "ogrinfo.exe")
 
-ROLES = {"owner": "DATABASE_URL", "tablero": "DATABASE_URL_TABLERO"}
+ROLES = {"owner": "DATABASE_URL", "tablero": "DATABASE_URL_TABLERO",
+         "lote_a": "DATABASE_URL_LOTE_A"}
 
 _secretos = []
 
