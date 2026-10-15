@@ -7,7 +7,16 @@
       "Bash(git log *)",
       "Bash(git add *)",
       "Bash(git commit *)",
+      "Bash(git push *)",
       "Bash(py tablero/generar_tablero.py *)",
+      "Bash(py tablero/capturar_tablero.py *)",
+      "Bash(py sim/*)",
+      "Bash(psql *)",
+      "Bash(pg_dump *)",
+      "Bash(ogrinfo *)",
+      "Bash(ogr2ogr *)",
+      "Bash(\"/c/Program Files/QGIS 3.34.11/bin/ogrinfo.exe\" *)",
+      "Bash(\"/c/Program Files/QGIS 3.34.11/bin/ogr2ogr.exe\" *)",
       "Bash(py tablero/construir_fixture_demo.py *)",
       "Bash(py -m pip *)",
       "Bash(py -m playwright *)",
@@ -16,8 +25,6 @@
       "Bash(dir *)"
     ],
     "ask": [
-      "Bash(psql *)",
-      "Bash(git push *)",
       "Bash(gh *)"
     ],
     "deny": [
