@@ -29,8 +29,15 @@ público, reescribir historial) mostrando el comando exacto.
 2. Si `py -m pip install git-filter-repo` funciona: `git filter-repo --path NEON.qgz
    --invert-paths` (riesgo alto: mostrar y esperar confirmación). Si no, no reescribir y
    anotar que el host figura en el historial, sin credenciales.
-3. Escaneo del historial completo, resultado literal = 0:
-   `git log -p --all | grep -ciE "npg_|password=|postgresql://[^ ]*:[^ ]*@"`.
+3. Escaneo estricto del historial completo contra los valores reales de `.env`, sin
+   imprimirlos: claves = 0, host = 0, identificador de endpoint (`ep-…`) = 0.
+   `git log -p --all > hist.txt` y luego, con `py -I`, leer `.env`, extraer de cada
+   `postgresql://usuario:CLAVE@HOST/...` la clave, el host y el endpoint, e imprimir solo
+   `hist.count(valor)` sumado por tipo. Resultado esperado: `0 | 0 | 0`.
+   (Corregido el 2026-10-15: el escaneo por patrón
+   `git log -p --all | grep -ciE "npg_|password=|postgresql://[^ ]*:[^ ]*@"` da falsos
+   positivos con los marcadores de la documentación —`CLAVE`, `<CLAVE>`, `CONTRASENA`— y no
+   sirve como criterio; se conserva solo como inspección auxiliar.)
 
 ## 3. Workflow
 `.github/workflows/tablero.yml`: usa `python` (no `py`); instala psycopg2-binary; secreto
@@ -64,7 +71,8 @@ ESPECIFICACION: criterios 6 y 7 [x], Fase 2 COMPLETADA con fecha. DECISIONES: D-
 Bitácora con URL pública y resultados literales. Commit y push. Resumen de 10 líneas.
 
 ## Criterios de aceptación
-- [ ] Historial sin credenciales (escaneo = 0); NEON.qgz fuera del repositorio.
+- [ ] Historial sin credenciales (escaneo estricto contra `.env`: claves 0, host 0,
+      endpoint 0); NEON.qgz fuera del repositorio.
 - [ ] Tablero en URL pública con datos de hoy, sin credenciales ni host.
 - [ ] Workflow en verde dos veces; cron activo.
 - [ ] Fase 2 COMPLETADA; D-16 y D-17; CLAUDE.md con specs/ y la regla de automatización.

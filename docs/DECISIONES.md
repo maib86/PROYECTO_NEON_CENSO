@@ -165,3 +165,30 @@ terminales (`visitada`, `no_localizada`, `rechazo`); `revisita` es incidencia, n
 inflaba el avance con fincas que hay que volver a visitar).
 **Consecuencias.** Al llegar el cuestionario real se revisan estados, fórmula y límite, con
 una entrada nueva que reemplace a esta.
+
+## D-16 · 2026-10-15 · `fecha_visita`: la fija el trigger solo si llega NULL
+
+**Contexto.** En la sesión 02, las 15 visitas del lote A guardadas por lote desde QGIS
+quedaron con la misma `fecha_visita`: `trg_fecha_visita_auto` usa `now()`, que es la hora de
+la transacción de guardado, no la de cada visita.
+**Decisión.** El trigger asigna `fecha_visita` solo cuando llega NULL. En QField la pone el
+formulario con `now()` del dispositivo (hora real de la visita). Desde QGIS escritorio queda la
+hora de guardado y así se declara. Se implementa en S05
+(`sql/09`); hoy solo se registra.
+**Descartado.** Mantener la sobrescritura incondicional por el trigger (pierde la hora real
+en campo con edición sin señal y sincronización posterior).
+**Consecuencias.** La hora de visita confiable es la de QField; la de escritorio es hora de guardado.
+
+## D-17 · 2026-10-15 · `NEON.qgz` fuera del repositorio hasta usar pg_service
+
+**Contexto.** El proyecto QGIS contiene el host de Neon y QGIS puede guardar la clave en
+texto plano dentro del `.qgz`. El repositorio pasa a ser público (GitHub Pages, S03).
+**Decisión.** `NEON.qgz` sale del índice y de todo el historial (`git filter-repo --path
+NEON.qgz --invert-paths --force`, confirmado por la persona); `*.qgz` y `*.qgs` en
+`.gitignore`. El archivo sigue solo en la máquina local. Vuelve al repositorio en S05, cuando
+la conexión use `pg_service` (sin host ni clave en el proyecto).
+**Descartado.** Versionarlo tal cual (expone el host en un repositorio público). Quitarlo
+solo del último commit (seguiría en el historial).
+**Consecuencias.** Los hashes de todos los commits anteriores cambiaron (respaldo previo en
+`respaldos/2026-10-15_repo_antes_filter_repo.bundle`, ignorado por git). Hasta S05, quien
+replique arma su proyecto QGIS con la guía.

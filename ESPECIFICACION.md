@@ -28,7 +28,7 @@ pueda evaluar y aprobar para un operativo nacional.
 - Trigger de auditoría; vistas de seguimiento; prueba cruzada validada por dos personas.
 - Guía de replicación y plantillas parametrizadas entregadas.
 
-### Fase 2 — Capa de visita y tablero HTML — EN CURSO
+### Fase 2 — Capa de visita y tablero HTML — COMPLETADA (2026-10-15)
 **Objetivo:** un supervisor consulta desde el celular, de noche, el avance del día.
 
 Criterios de aceptación:
@@ -40,8 +40,10 @@ Criterios de aceptación:
       (`sql/08_visitas_prueba_lote_b.sql`, 20 visitas con `edit_lote_b`), no desde QGIS. Sesión 02.
 - [x] `generar_tablero.py` produce el HTML con datos reales; capturas a 1100 y 400 px sin defectos.
       Evidencia: `docs/evidencia/2026-10-15_tablero_1100.png` y `_400.png` (sesión 02).
-- [ ] GitHub Actions regenera y publica el tablero cada 30 minutos sin intervención.
-- [ ] El HTML publicado no contiene credenciales (verificado por `revisor-auditoria`).
+- [x] GitHub Actions regenera y publica el tablero cada 30 minutos sin intervención.
+      Evidencia: ejecuciones 38800395636 y 38800575730 en verde; cron `*/30` activo. URL:
+      https://maib86.github.io/PROYECTO_NEON_CENSO/ (sesión 03).
+- [x] El HTML publicado no contiene credenciales (verificado por `revisor-auditoria`, sesión 03).
 
 Pendiente de la persona: campos temáticos del formulario de visita (cuestionario real).
 Hasta entonces, solo campos estructurales: `estado_visita`, `encuestador`, `fecha_visita`,
