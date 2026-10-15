@@ -1,0 +1,119 @@
+## Versión de GDAL
+$ "C:\Program Files\QGIS 3.34.11\bin\ogrinfo.exe" --version
+# rol: sin base · rc=0 · tiempo de pared: 0.05 s
+GDAL 3.9.2, released 2024/08/13
+
+## ogrinfo -so
+$ "C:\Program Files\QGIS 3.34.11\bin\ogrinfo.exe" -so -al -nomd C:\PROYECTO_NEON_CENSO\datos_prueba\ugm\ugm.gpkg
+# rol: sin base · rc=0 · tiempo de pared: 0.11 s
+INFO: Open of `C:\PROYECTO_NEON_CENSO\datos_prueba\ugm\ugm.gpkg'
+      using driver `GPKG' successful.
+
+Layer name: ugm
+Geometry: Multi Polygon
+Feature Count: 50794
+Extent: (156978.939999, 608896.730000) - (658879.562490, 1241118.071879)
+Layer SRS WKT:
+PROJCRS["CR-SIRGAS / CRTM05",
+    BASEGEOGCRS["CR-SIRGAS",
+        DATUM["CR-SIRGAS",
+            ELLIPSOID["GRS 1980",6378137,298.257222101,
+                LENGTHUNIT["metre",1]]],
+        PRIMEM["Greenwich",0,
+            ANGLEUNIT["degree",0.0174532925199433]],
+        ID["EPSG",8907]],
+    CONVERSION["unnamed",
+        METHOD["Transverse Mercator",
+            ID["EPSG",9807]],
+        PARAMETER["Latitude of natural origin",0,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8801]],
+        PARAMETER["Longitude of natural origin",-84,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8802]],
+        PARAMETER["Scale factor at natural origin",0.9999,
+            SCALEUNIT["unity",1],
+            ID["EPSG",8805]],
+        PARAMETER["False easting",500000,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8806]],
+        PARAMETER["False northing",0,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8807]]],
+    CS[Cartesian,2],
+        AXIS["easting",east,
+            ORDER[1],
+            LENGTHUNIT["metre",1]],
+        AXIS["northing",north,
+            ORDER[2],
+            LENGTHUNIT["metre",1]],
+    ID["EPSG",8908]]
+Data axis to CRS axis mapping: 1,2
+FID Column = fid
+Geometry Column = geom
+id: Real (0.0)
+id_mgn: Real (0.0)
+nomb_ugep: String (0.0)
+nomb_ugec: String (0.0)
+nomb_uged: String (0.0)
+cod_uged: String (0.0)
+area_m2: Real (0.0)
+fecha_act: String (0.0)
+
+## Perfil de la capa
+$ "C:\Program Files\QGIS 3.34.11\bin\ogrinfo.exe" -q C:\PROYECTO_NEON_CENSO\datos_prueba\ugm\ugm.gpkg -sql "SELECT count(*) n, count(DISTINCT id) id_distintos, count(DISTINCT id_mgn) id_mgn_distintos, count(DISTINCT cod_uged) distritos, count(DISTINCT nomb_ugec) cantones, count(DISTINCT nomb_ugep) provincias, sum(ST_IsValid(geom)=0) invalidas, sum(ST_NumGeometries(geom)>1) multipartes, min(fecha_act) fecha_min, max(fecha_act) fecha_max FROM ugm"
+# rol: sin base · rc=0 · tiempo de pared: 1.93 s
+
+Layer name: SELECT
+OGRFeature(SELECT):0
+  n (Integer) = 50794
+  id_distintos (Integer) = 50794
+  id_mgn_distintos (Integer) = 50794
+  distritos (Integer) = 492
+  cantones (Integer) = 84
+  provincias (Integer) = 7
+  invalidas (Integer) = 0
+  multipartes (Integer) = 1
+  fecha_min (String) = 1900-01-04Z
+  fecha_max (String) = 2025-12-30Z
+
+## Objetos por provincia (primer dígito de cod_uged)
+$ "C:\Program Files\QGIS 3.34.11\bin\ogrinfo.exe" -q C:\PROYECTO_NEON_CENSO\datos_prueba\ugm\ugm.gpkg -sql "SELECT substr(cod_uged,1,1) AS provincia, nomb_ugep, count(*) AS n FROM ugm GROUP BY provincia, nomb_ugep ORDER BY provincia"
+# rol: sin base · rc=0 · tiempo de pared: 0.40 s
+
+Layer name: SELECT
+OGRFeature(SELECT):0
+  provincia (String) = 1
+  nomb_ugep (String) = San José
+  n (Integer) = 14375
+
+OGRFeature(SELECT):1
+  provincia (String) = 2
+  nomb_ugep (String) = Alajuela
+  n (Integer) = 8911
+
+OGRFeature(SELECT):2
+  provincia (String) = 3
+  nomb_ugep (String) = Cartago
+  n (Integer) = 5353
+
+OGRFeature(SELECT):3
+  provincia (String) = 4
+  nomb_ugep (String) = Heredia
+  n (Integer) = 4285
+
+OGRFeature(SELECT):4
+  provincia (String) = 5
+  nomb_ugep (String) = Guanacaste
+  n (Integer) = 6542
+
+OGRFeature(SELECT):5
+  provincia (String) = 6
+  nomb_ugep (String) = Puntarenas
+  n (Integer) = 6838
+
+OGRFeature(SELECT):6
+  provincia (String) = 7
+  nomb_ugep (String) = Limón
+  n (Integer) = 4490
+

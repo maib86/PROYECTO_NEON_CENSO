@@ -192,3 +192,23 @@ solo del último commit (seguiría en el historial).
 **Consecuencias.** Los hashes de todos los commits anteriores cambiaron (respaldo previo en
 `respaldos/2026-10-15_repo_antes_filter_repo.bundle`, ignorado por git). Hasta S05, quien
 replique arma su proyecto QGIS con la guía.
+
+## D-18 · 2026-10-15 · Capa UGM del SNIT en el esquema `sim` como proxy de las fincas
+
+**Contexto.** El documento para TI necesita cifras de carga, tamaño, concurrencia, tablero
+y paquete de campo a la escala de producción (~90.000 fincas). El piloto solo tiene 1.432
+polígonos, y las fincas del censo no están disponibles.
+**Decisión.** Usar la capa pública UGM del SNIT (`datos_prueba/ugm/ugm.gpkg`, 50.794
+polígonos, EPSG:8908, reproyectada a 5367) como proxy, cargada con `ogr2ogr` en un esquema
+aparte, `sim` (`sim.ugm`, `sim.finca_visita`, `sim.v_tab_*`), con la misma estructura que
+`mgn`. La columna de reparto `lote` es el código de provincia (`'1'`…`'7'`). `sim` no tiene
+RLS ni roles de edición propios; `tablero_lectura` solo tiene `USAGE` sobre el esquema y
+`SELECT` sobre las vistas. Nada de `sim` se publica.
+**Descartado.** Generar polígonos sintéticos (no reflejan geometría real). Duplicar los
+1.432 polígonos de `mgn` (sin variedad geométrica, y repetidos). Cargar en `mgn`, que
+mezclaría la simulación con el piloto.
+**Consecuencias.** La capa tiene 50.794 objetos, el 56 % de 90.000: las cifras a 90.000
+son extrapolaciones, no mediciones. Las UGM no son fincas: el proxy sirve para carga,
+tamaño, concurrencia y tablero, no para tiempos de visita ni cobertura (ver
+`docs/requerimientos_ti/evidencia_escala.md`). `sim` ocupa 208 MB de la base (225 MB en
+total) y se conserva hasta S06; su borrado se decide después de la presentación.

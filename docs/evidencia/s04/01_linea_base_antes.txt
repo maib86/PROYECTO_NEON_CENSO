@@ -1,0 +1,49 @@
+## Línea base antes del encargo
+$ psql -X -w -v ON_ERROR_STOP=1 -f sim/sql_linea_base.sql
+# rol: owner · rc=0 · tiempo de pared: 1.66 s
+          hora_cr           
+----------------------------
+ 2026-10-15 14:39:52.245586
+(1 fila)
+
+ poligonos | puntos 
+-----------+--------
+      1432 |   1432
+(1 fila)
+
+ lote | estado_visita | count 
+------+---------------+-------
+ A    | no_localizada |     5
+ A    | pendiente     |   694
+ A    | visitada      |    10
+ B    | no_localizada |     5
+ B    | pendiente     |   703
+ B    | rechazo       |     5
+ B    | revisita      |     5
+ B    | visitada      |     5
+(8 filas)
+
+       huella_finca_visita        
+----------------------------------
+ a17c4a1b0adfbe75879f47e86b1628dc
+(1 fila)
+
+         huella_poligonos         
+----------------------------------
+ 9803cdc910fcfd9dfb7df1d995a3c248
+(1 fila)
+
+ base  | base_bytes 
+-------+------------
+ 17 MB |   17842176
+(1 fila)
+
+ esquema |  total  |  bytes  
+---------+---------+---------
+ mgn     | 1536 kB | 1572864
+(1 fila)
+
+ nspname 
+---------
+(0 filas)
+

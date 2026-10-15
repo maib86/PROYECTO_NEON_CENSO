@@ -1,0 +1,22 @@
+$ py tablero/generar_tablero.py --esquema sim --salida tablero/salida/sim.html
+# rc=0 · tiempo de pared: 3.21 s
+Tablero escrito en tablero/salida/sim.html (4075 KB)
+
+Peso de tablero/salida/sim.html: 4173444 bytes (3.98 MiB)
+
+$ py tablero/capturar_tablero.py tablero/salida/sim.html --dir tablero/salida/sim --anchos 400
+# rc=0 · tiempo de pared: 5.36 s
+400px -> tablero\salida\sim\captura_400.png | errores JS: [] | dialogos: [] | {'carga_ms': 1793, 'dcl_ms': 1695, 'letra_svg_min_px': 11.3, 'scroll_horizontal': False, 'desbordan': [], 'marcadores': 50794, 'teselas': 6, 'teselas_cargadas': 6, 'alto': 3908, 'nodos_dom': 51349, 'memoria_js_mb': 111, 'red_quieta_ms': 2318}
+
+$ py tablero/capturar_tablero.py tablero/salida/sim.html --dir tablero/salida/sim --anchos 400
+# rc=0 · tiempo de pared: 4.81 s
+400px -> tablero\salida\sim\captura_400.png | errores JS: [] | dialogos: [] | {'carga_ms': 1270, 'dcl_ms': 1262, 'letra_svg_min_px': 11.3, 'scroll_horizontal': False, 'desbordan': [], 'marcadores': 50794, 'teselas': 6, 'teselas_cargadas': 6, 'alto': 3908, 'nodos_dom': 51349, 'memoria_js_mb': 111, 'red_quieta_ms': 1798}
+
+$ py tablero/capturar_tablero.py tablero/salida/sim.html --dir tablero/salida/sim_cpu4 --anchos 400 --cpu-lento 4
+# rc=0 · tiempo de pared: 68.41 s
+400px -> tablero\salida\sim_cpu4\captura_400.png | errores JS: [] | dialogos: [] | {'carga_ms': 4684, 'dcl_ms': 4679, 'letra_svg_min_px': 11.3, 'scroll_horizontal': False, 'desbordan': [], 'marcadores': 50794, 'teselas': 6, 'teselas_cargadas': 6, 'alto': 3908, 'nodos_dom': 51349, 'memoria_js_mb': 87, 'red_quieta_ms': None, 'cpu_lento': 4.0}
+
+$ py tablero/capturar_tablero.py tablero/salida/sim.html --dir tablero/salida/sim_cpu4 --anchos 400 --cpu-lento 4
+# rc=0 · tiempo de pared: 68.65 s
+400px -> tablero\salida\sim_cpu4\captura_400.png | errores JS: [] | dialogos: [] | {'carga_ms': 4775, 'dcl_ms': 4771, 'letra_svg_min_px': 11.3, 'scroll_horizontal': False, 'desbordan': [], 'marcadores': 50794, 'teselas': 6, 'teselas_cargadas': 6, 'alto': 3908, 'nodos_dom': 51349, 'memoria_js_mb': 82, 'red_quieta_ms': None, 'cpu_lento': 4.0}
+

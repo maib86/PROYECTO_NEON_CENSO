@@ -1,0 +1,16 @@
+## Tamaños finales (6a)
+$ psql -X -w -v ON_ERROR_STOP=1 -f sim/sql_tamanos.sql
+# rol: owner · rc=0 · tiempo de pared: 0.87 s
+  base  | base_bytes 
+--------+------------
+ 225 MB |  236109824
+(1 row)
+
+ esquema |      tabla       | tabla_y_toast | indices | total  | total_bytes 
+---------+------------------+---------------+---------+--------+-------------
+ mgn     | deteccion_cambio | 728 kB        | 256 kB  | 984 kB |     1007616
+ mgn     | finca_visita     | 272 kB        | 280 kB  | 552 kB |      565248
+ sim     | finca_visita     | 8688 kB       | 7912 kB | 16 MB  |    16998400
+ sim     | ugm              | 188 MB        | 3864 kB | 192 MB |   200810496
+(4 rows)
+

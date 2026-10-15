@@ -1,0 +1,16 @@
+## Transformación del origen (projinfo)
+$ "C:\Program Files\QGIS 3.34.11\bin\projinfo.exe" -s EPSG:8908 -t EPSG:5367 --summary
+# rol: sin base · rc=0 · tiempo de pared: 0.07 s
+Candidate operations found: 1
+unknown id, Inverse of Costa Rica TM 2005 + Inverse of CR05 to CR-SIRGAS (1) + Costa Rica TM 2005, 0.5 m, Costa Rica - onshore and offshore.
+
+## Comprobación del freno de CPU (script de diagnóstico en el directorio temporal de la sesión, no versionado)
+# Abre tablero/salida/sim.html a 400 px, 4 veces (freno 1, 4, 1, 4); mide el evento load,
+# nodos del DOM, memoria JS y un bucle JS de 3e7 iteraciones. Salida literal:
+rate=1 load_wall=1268ms idle_wall=0ms nav(dcl,load)=[1224, 1256, 51349, 111] bucle_js=23ms
+rate=4 load_wall=4801ms idle_wall=0ms nav(dcl,load)=[4792, 4796, 51349, 87] bucle_js=95ms
+rate=1 load_wall=1299ms idle_wall=0ms nav(dcl,load)=[1195, 1295, 51349, 111] bucle_js=22ms
+rate=4 load_wall=4687ms idle_wall=0ms nav(dcl,load)=[4676, 4683, 51349, 111] bucle_js=91ms
+# (idle_wall=0: en esta corrida no se esperó networkidle.)
+# Corrida anterior, solo freno 1 antes de fallar por espera de networkidle (30 s) con freno 4:
+rate=1 load_wall=1525ms idle_wall=2063ms nav(dcl,load)=[1380, 1510] bucle_js=18ms

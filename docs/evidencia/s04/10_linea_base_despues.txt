@@ -1,0 +1,61 @@
+## Línea base después del encargo
+$ psql -X -w -v ON_ERROR_STOP=1 -f sim/sql_linea_base.sql
+# rol: owner · rc=0 · tiempo de pared: 1.53 s
+          hora_cr          
+---------------------------
+ 2026-10-15 14:54:00.85542
+(1 row)
+
+ poligonos | puntos 
+-----------+--------
+      1432 |   1432
+(1 row)
+
+ lote | estado_visita | count 
+------+---------------+-------
+ A    | no_localizada |     5
+ A    | pendiente     |   694
+ A    | visitada      |    10
+ B    | no_localizada |     5
+ B    | pendiente     |   703
+ B    | rechazo       |     5
+ B    | revisita      |     5
+ B    | visitada      |     5
+(8 rows)
+
+       huella_finca_visita        
+----------------------------------
+ a17c4a1b0adfbe75879f47e86b1628dc
+(1 row)
+
+         huella_poligonos         
+----------------------------------
+ 9803cdc910fcfd9dfb7df1d995a3c248
+(1 row)
+
+  base  | base_bytes 
+--------+------------
+ 225 MB |  236109824
+(1 row)
+
+ esquema |  total  |   bytes   
+---------+---------+-----------
+ mgn     | 1536 kB |   1572864
+ sim     | 208 MB  | 217808896
+(2 rows)
+
+ nspname 
+---------
+ sim
+(1 row)
+
+## sim.finca_visita tras revertir
+$ psql -X -w -v ON_ERROR_STOP=1 -f - <<'SQL'
+SELECT estado_visita, count(*) FROM sim.finca_visita GROUP BY 1;
+SQL
+# rol: owner · rc=0 · tiempo de pared: 0.80 s
+ estado_visita | count 
+---------------+-------
+ pendiente     | 50794
+(1 row)
+

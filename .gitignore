@@ -23,3 +23,6 @@ Thumbs.db
 # Proyectos QGIS: contienen el host y QGIS puede guardar la clave en texto plano (D-17)
 *.qgz
 *.qgs
+
+# Salidas de la simulación S04 (paquetes, temporales)
+sim/salida/

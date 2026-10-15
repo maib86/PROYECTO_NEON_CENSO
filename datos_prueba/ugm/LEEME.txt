@@ -1,0 +1,42 @@
+CAPA UGM (UNIDADES GEOESTADÍSTICAS MÍNIMAS) — PROXY DE FINCAS PARA LA SIMULACIÓN S04
+====================================================================================
+
+Archivo:        datos_prueba/ugm/ugm.gpkg (206.020.608 bytes; ignorado por git: *.gpkg)
+Fuente:         SNIT (capa UGM)
+URL de descarga: PENDIENTE: la indica la persona
+Inventario:     2026-10-15, con ogrinfo de GDAL 3.9.2 (QGIS 3.34.11).
+                Salida literal: docs/evidencia/s04/02_inventario_origen.txt
+Uso:            solo simulación a escala en el esquema sim (D-18). No es dato del censo.
+
+Capa(s):        1 capa, «ugm»
+Tipo:           MultiPolygon
+Objetos:        50.794 (id e id_mgn distintos: 50.794 cada uno)
+SRC:            CR-SIRGAS / CRTM05 (EPSG:8908). No es EPSG:5367 (CR05 / CRTM05).
+                Se reproyecta a 5367 en la carga; PROJ usa «Inverse of CR05 to
+                CR-SIRGAS (1)», precisión declarada 0,5 m (projinfo -s EPSG:8908 -t EPSG:5367).
+Extensión:      (156978.94, 608896.73) - (658879.56, 1241118.07)
+Columna FID:    fid · Columna de geometría: geom
+Geometrías inválidas (ST_IsValid): 0 · Con más de una parte: 1
+
+Campos:
+  id          Real     identificador (único)
+  id_mgn      Real     identificador del marco (único)
+  nomb_ugep   String   nombre de provincia (7)
+  nomb_ugec   String   nombre de cantón (84)
+  nomb_uged   String   nombre de distrito
+  cod_uged    String   código de distrito, 5 dígitos (492 distintos); el primero es la provincia
+  area_m2     Real     área en m²
+  fecha_act   String   fecha de actualización (de 1900-01-04Z a 2025-12-30Z)
+
+Objetos por provincia (primer dígito de cod_uged):
+  1 San José    14.375
+  2 Alajuela     8.911
+  3 Cartago      5.353
+  4 Heredia      4.285
+  5 Guanacaste   6.542
+  6 Puntarenas   6.838
+  7 Limón        4.490
+
+Nota: el operativo previsto tiene ~90.000 fincas; esta capa tiene 50.794 objetos (56 %).
+Las cifras de la simulación se reportan con 50.794 y, donde aplica, se indica la
+extrapolación lineal a 90.000 como estimación, no como medición.

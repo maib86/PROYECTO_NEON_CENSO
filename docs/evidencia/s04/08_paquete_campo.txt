@@ -1,0 +1,12 @@
+## sim.finca_visita + sim.ugm -> GeoPackage
+$ "C:\Program Files\QGIS 3.34.11\bin\ogr2ogr.exe" -f GPKG C:\PROYECTO_NEON_CENSO\sim\salida\paquete_campo_sim.gpkg PG: sim.finca_visita sim.ugm
+# rol: owner · rc=0 · tiempo de pared: 68.38 s
+
+## Solo sim.finca_visita -> GeoPackage
+$ "C:\Program Files\QGIS 3.34.11\bin\ogr2ogr.exe" -f GPKG C:\PROYECTO_NEON_CENSO\sim\salida\paquete_campo_sim_solo_puntos.gpkg PG: sim.finca_visita
+# rol: owner · rc=0 · tiempo de pared: 17.67 s
+
+## Pesos
+paquete_campo_sim.gpkg: 218615808 bytes (208.5 MiB)
+paquete_campo_sim_solo_puntos.gpkg: 6508544 bytes (6.2 MiB)
+

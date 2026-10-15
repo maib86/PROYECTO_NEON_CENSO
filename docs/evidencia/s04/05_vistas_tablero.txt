@@ -1,0 +1,293 @@
+## Creación de sim.v_tab_* y GRANT
+$ psql -X -w -v ON_ERROR_STOP=1 -1 -f sim/sql_vistas_tablero.sql
+# rol: owner · rc=0 · tiempo de pared: 1.65 s
+CREATE VIEW
+CREATE VIEW
+CREATE VIEW
+CREATE VIEW
+CREATE VIEW
+GRANT
+GRANT
+
+## tablero_lectura no lee la tabla (se espera permission denied)
+$ psql -X -w -v ON_ERROR_STOP=1 -f - <<'SQL'
+SELECT current_user; SELECT count(*) FROM sim.finca_visita;
+SQL
+# rol: tablero · rc=3 · tiempo de pared: 0.95 s
+  current_user   
+-----------------
+ tablero_lectura
+(1 row)
+
+psql:<stdin>:1: ERROR:  permission denied for table finca_visita
+
+## EXPLAIN (ANALYZE, BUFFERS) y tiempo de cliente, rol tablero_lectura
+$ psql -X -w -v ON_ERROR_STOP=1 --echo-queries -f sim/sql_medir_vistas.sql
+# rol: tablero · rc=0 · tiempo de pared: 3.79 s
+SELECT current_user;
+  current_user   
+-----------------
+ tablero_lectura
+(1 row)
+
+EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM sim.v_tab_resumen;
+                                                           QUERY PLAN                                                            
+---------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=3400.48..3400.50 rows=7 width=90) (actual time=21.527..21.528 rows=7.00 loops=1)
+   Sort Key: finca_visita.lote
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=927
+   ->  HashAggregate  (cost=3400.21..3400.38 rows=7 width=90) (actual time=21.500..21.504 rows=7.00 loops=1)
+         Group Key: finca_visita.lote
+         Batches: 1  Memory Usage: 32kB
+         Buffers: shared hit=924
+         ->  Seq Scan on finca_visita  (cost=0.00..1431.94 rows=50794 width=20) (actual time=0.008..5.001 rows=50794.00 loops=1)
+               Buffers: shared hit=924
+ Planning:
+   Buffers: shared hit=227
+ Planning Time: 0.599 ms
+ Execution Time: 21.650 ms
+(14 rows)
+
+EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM sim.v_tab_encuestador;
+                                                          QUERY PLAN                                                           
+-------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=1558.98..1558.99 rows=1 width=74) (actual time=3.979..3.980 rows=0.00 loops=1)
+   Sort Key: (count(*)) DESC
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=927
+   ->  GroupAggregate  (cost=1558.94..1558.97 rows=1 width=74) (actual time=3.966..3.966 rows=0.00 loops=1)
+         Group Key: (COALESCE(finca_visita.encuestador, finca_visita.editado_por)), finca_visita.lote
+         Buffers: shared hit=924
+         ->  Sort  (cost=1558.94..1558.94 rows=1 width=52) (actual time=3.964..3.964 rows=0.00 loops=1)
+               Sort Key: (COALESCE(finca_visita.encuestador, finca_visita.editado_por)), finca_visita.lote
+               Sort Method: quicksort  Memory: 25kB
+               Buffers: shared hit=924
+               ->  Seq Scan on finca_visita  (cost=0.00..1558.93 rows=1 width=52) (actual time=3.960..3.960 rows=0.00 loops=1)
+                     Filter: (estado_visita <> 'pendiente'::text)
+                     Rows Removed by Filter: 50794
+                     Buffers: shared hit=924
+ Planning:
+   Buffers: shared hit=46
+ Planning Time: 0.271 ms
+ Execution Time: 4.022 ms
+(19 rows)
+
+EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM sim.v_tab_diario;
+                                                       QUERY PLAN                                                       
+------------------------------------------------------------------------------------------------------------------------
+ GroupAggregate  (cost=1558.94..1558.97 rows=1 width=14) (actual time=3.338..3.338 rows=0.00 loops=1)
+   Group Key: (((finca_visita.fecha_visita AT TIME ZONE 'America/Costa_Rica'::text))::date), finca_visita.lote
+   Buffers: shared hit=927
+   ->  Sort  (cost=1558.94..1558.95 rows=1 width=6) (actual time=3.336..3.336 rows=0.00 loops=1)
+         Sort Key: (((finca_visita.fecha_visita AT TIME ZONE 'America/Costa_Rica'::text))::date), finca_visita.lote
+         Sort Method: quicksort  Memory: 25kB
+         Buffers: shared hit=927
+         ->  Seq Scan on finca_visita  (cost=0.00..1558.93 rows=1 width=6) (actual time=3.308..3.308 rows=0.00 loops=1)
+               Filter: ((fecha_visita IS NOT NULL) AND (estado_visita <> 'pendiente'::text))
+               Rows Removed by Filter: 50794
+               Buffers: shared hit=924
+ Planning:
+   Buffers: shared hit=35
+ Planning Time: 0.175 ms
+ Execution Time: 4.409 ms
+(15 rows)
+
+EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM sim.v_tab_puntos;
+                                                          QUERY PLAN                                                          
+------------------------------------------------------------------------------------------------------------------------------
+ Seq Scan on finca_visita v  (cost=0.00..1271916.86 rows=50794 width=113) (actual time=66.393..139.095 rows=50794.00 loops=1)
+   Buffers: shared hit=1324 read=16 dirtied=2
+ Planning:
+   Buffers: shared hit=56
+ Planning Time: 0.266 ms
+ Execution Time: 144.985 ms
+(6 rows)
+
+EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM sim.v_tab_movimientos;
+                                                           QUERY PLAN                                                            
+---------------------------------------------------------------------------------------------------------------------------------
+ Subquery Scan on v_tab_movimientos  (cost=1558.94..1558.96 rows=1 width=89) (actual time=4.020..4.021 rows=0.00 loops=1)
+   Buffers: shared hit=927
+   ->  Limit  (cost=1558.94..1558.95 rows=1 width=97) (actual time=4.019..4.020 rows=0.00 loops=1)
+         Buffers: shared hit=927
+         ->  Sort  (cost=1558.94..1558.95 rows=1 width=97) (actual time=4.018..4.019 rows=0.00 loops=1)
+               Sort Key: v.fecha_edicion DESC
+               Sort Method: quicksort  Memory: 25kB
+               Buffers: shared hit=927
+               ->  Seq Scan on finca_visita v  (cost=0.00..1558.93 rows=1 width=97) (actual time=4.006..4.007 rows=0.00 loops=1)
+                     Filter: (estado_visita <> 'pendiente'::text)
+                     Rows Removed by Filter: 50794
+                     Buffers: shared hit=924
+ Planning:
+   Buffers: shared hit=27
+ Planning Time: 0.179 ms
+ Execution Time: 4.056 ms
+(16 rows)
+
+Timing is on.
+SELECT * FROM sim.v_tab_resumen;
+Time: 118,712 ms
+SELECT * FROM sim.v_tab_encuestador;
+Time: 102,410 ms
+SELECT * FROM sim.v_tab_diario;
+Time: 101,873 ms
+SELECT * FROM sim.v_tab_puntos;
+Time: 1504,458 ms (00:01,504)
+SELECT * FROM sim.v_tab_movimientos;
+Time: 102,445 ms
+Timing is off.
+SELECT count(*) AS filas_puntos FROM sim.v_tab_puntos;
+ filas_puntos 
+--------------
+        50794
+(1 row)
+
+## EXPLAIN y tiempo de cliente con 7200 visitas de la prueba de concurrencia (antes de revertir)
+$ psql -X -w -v ON_ERROR_STOP=1 --echo-queries -f sim/sql_medir_vistas.sql
+# rol: tablero · rc=0 · tiempo de pared: 3.48 s
+SELECT current_user;
+  current_user   
+-----------------
+ tablero_lectura
+(1 row)
+
+EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM sim.v_tab_resumen;
+                                                           QUERY PLAN                                                            
+---------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=3577.13..3577.15 rows=7 width=90) (actual time=22.993..22.994 rows=7.00 loops=1)
+   Sort Key: finca_visita.lote
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=975
+   ->  HashAggregate  (cost=3576.86..3577.03 rows=7 width=90) (actual time=22.966..22.971 rows=7.00 loops=1)
+         Group Key: finca_visita.lote
+         Batches: 1  Memory Usage: 32kB
+         Buffers: shared hit=972
+         ->  Seq Scan on finca_visita  (cost=0.00..1506.33 rows=53433 width=20) (actual time=0.034..5.673 rows=50794.00 loops=1)
+               Buffers: shared hit=972
+ Planning:
+   Buffers: shared hit=227
+ Planning Time: 0.596 ms
+ Execution Time: 23.122 ms
+(14 rows)
+
+EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM sim.v_tab_encuestador;
+                                                            QUERY PLAN                                                            
+----------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=1639.97..1639.98 rows=1 width=74) (actual time=8.638..8.641 rows=46.00 loops=1)
+   Sort Key: (count(*)) DESC
+   Sort Method: quicksort  Memory: 28kB
+   Buffers: shared hit=975
+   ->  GroupAggregate  (cost=1639.92..1639.96 rows=1 width=74) (actual time=6.539..8.615 rows=46.00 loops=1)
+         Group Key: (COALESCE(finca_visita.encuestador, finca_visita.editado_por)), finca_visita.lote
+         Buffers: shared hit=972
+         ->  Sort  (cost=1639.92..1639.93 rows=1 width=52) (actual time=6.468..6.839 rows=7200.00 loops=1)
+               Sort Key: (COALESCE(finca_visita.encuestador, finca_visita.editado_por)), finca_visita.lote
+               Sort Method: quicksort  Memory: 539kB
+               Buffers: shared hit=972
+               ->  Seq Scan on finca_visita  (cost=0.00..1639.91 rows=1 width=52) (actual time=0.017..4.634 rows=7200.00 loops=1)
+                     Filter: (estado_visita <> 'pendiente'::text)
+                     Rows Removed by Filter: 43594
+                     Buffers: shared hit=972
+ Planning:
+   Buffers: shared hit=46
+ Planning Time: 0.248 ms
+ Execution Time: 8.747 ms
+(19 rows)
+
+EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM sim.v_tab_diario;
+                                                        QUERY PLAN                                                         
+---------------------------------------------------------------------------------------------------------------------------
+ GroupAggregate  (cost=1639.93..1639.96 rows=1 width=14) (actual time=9.929..9.934 rows=3.00 loops=1)
+   Group Key: (((finca_visita.fecha_visita AT TIME ZONE 'America/Costa_Rica'::text))::date), finca_visita.lote
+   Buffers: shared hit=975
+   ->  Sort  (cost=1639.93..1639.93 rows=1 width=6) (actual time=8.766..9.127 rows=7200.00 loops=1)
+         Sort Key: (((finca_visita.fecha_visita AT TIME ZONE 'America/Costa_Rica'::text))::date), finca_visita.lote
+         Sort Method: quicksort  Memory: 361kB
+         Buffers: shared hit=975
+         ->  Seq Scan on finca_visita  (cost=0.00..1639.92 rows=1 width=6) (actual time=0.760..7.725 rows=7200.00 loops=1)
+               Filter: ((fecha_visita IS NOT NULL) AND (estado_visita <> 'pendiente'::text))
+               Rows Removed by Filter: 43594
+               Buffers: shared hit=972
+ Planning:
+   Buffers: shared hit=35
+ Planning Time: 0.212 ms
+ Execution Time: 9.994 ms
+(15 rows)
+
+EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM sim.v_tab_puntos;
+                                                          QUERY PLAN                                                          
+------------------------------------------------------------------------------------------------------------------------------
+ Seq Scan on finca_visita v  (cost=0.00..1337999.24 rows=53433 width=113) (actual time=28.420..108.063 rows=50794.00 loops=1)
+   Buffers: shared hit=1379
+ Planning:
+   Buffers: shared hit=56
+ Planning Time: 0.213 ms
+ Execution Time: 114.144 ms
+(6 rows)
+
+EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM sim.v_tab_movimientos;
+                                                             QUERY PLAN                                                             
+------------------------------------------------------------------------------------------------------------------------------------
+ Subquery Scan on v_tab_movimientos  (cost=1639.93..1639.94 rows=1 width=89) (actual time=11.828..11.837 rows=25.00 loops=1)
+   Buffers: shared hit=975
+   ->  Limit  (cost=1639.93..1639.93 rows=1 width=97) (actual time=11.825..11.830 rows=25.00 loops=1)
+         Buffers: shared hit=975
+         ->  Sort  (cost=1639.93..1639.93 rows=1 width=97) (actual time=11.824..11.826 rows=25.00 loops=1)
+               Sort Key: v.fecha_edicion DESC
+               Sort Method: top-N heapsort  Memory: 31kB
+               Buffers: shared hit=975
+               ->  Seq Scan on finca_visita v  (cost=0.00..1639.92 rows=1 width=97) (actual time=0.023..9.977 rows=7200.00 loops=1)
+                     Filter: (estado_visita <> 'pendiente'::text)
+                     Rows Removed by Filter: 43594
+                     Buffers: shared hit=972
+ Planning:
+   Buffers: shared hit=27
+ Planning Time: 0.164 ms
+ Execution Time: 11.869 ms
+(16 rows)
+
+Timing is on.
+SELECT * FROM sim.v_tab_resumen;
+Time: 123,924 ms
+SELECT * FROM sim.v_tab_encuestador;
+Time: 106,740 ms
+SELECT * FROM sim.v_tab_diario;
+Time: 105,699 ms
+SELECT * FROM sim.v_tab_puntos;
+Time: 1231,009 ms (00:01,231)
+SELECT * FROM sim.v_tab_movimientos;
+Time: 114,667 ms
+Timing is off.
+SELECT count(*) AS filas_puntos FROM sim.v_tab_puntos;
+ filas_puntos 
+--------------
+        50794
+(1 row)
+
+## Contenido de las vistas con 7200 visitas
+$ psql -X -w -v ON_ERROR_STOP=1 -f - <<'SQL'
+SELECT * FROM sim.v_tab_resumen; SELECT count(*) FROM sim.v_tab_encuestador; SELECT count(*) FROM sim.v_tab_movimientos;
+SQL
+# rol: tablero · rc=0 · tiempo de pared: 1.13 s
+ lote | fincas | visitadas | no_localizadas | rechazos | revisitas | pendientes | avance_pct |         ultima_visita         
+------+--------+-----------+----------------+----------+-----------+------------+------------+-------------------------------
+ 1    |  14375 |      3626 |           1186 |     1186 |      1184 |       7193 |       41.7 | 2026-10-15 20:46:22.900753+00
+ 2    |   8911 |        10 |              2 |        1 |         4 |       8894 |        0.1 | 2026-10-15 20:46:21.99653+00
+ 3    |   5353 |         0 |              0 |        0 |         0 |       5353 |        0.0 | 
+ 4    |   4285 |         0 |              0 |        1 |         0 |       4284 |        0.0 | 2026-10-15 20:46:00.636472+00
+ 5    |   6542 |         0 |              0 |        0 |         0 |       6542 |        0.0 | 
+ 6    |   6838 |         0 |              0 |        0 |         0 |       6838 |        0.0 | 
+ 7    |   4490 |         0 |              0 |        0 |         0 |       4490 |        0.0 | 
+(7 rows)
+
+ count 
+-------
+    46
+(1 row)
+
+ count 
+-------
+    25
+(1 row)
+

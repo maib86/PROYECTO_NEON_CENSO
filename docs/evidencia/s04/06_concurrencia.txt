@@ -1,0 +1,13 @@
+=== Prueba de concurrencia · 2026-10-15 14:44:42 (hora local) ===
+$ py sim/prueba_concurrencia.py medir 1 10 25
+Filas disponibles: 50794 · max_connections del servidor: 901 · 200 UPDATE por conexión, autocommit, filas disjuntas
+SELECT 1 x 50 (1 conexión): p50 96.3 ms · p95 110.4 ms · máx 145.2 ms
+ 1 conexiones · 200 UPDATE · pared 21.11 s · 9.5 op/s · latencia p50 97.3 ms · p95 136.4 ms · máx 257.1 ms · media 105.5 ms · errores 0
+10 conexiones · 2000 UPDATE · pared 24.20 s · 82.6 op/s · latencia p50 101.2 ms · p95 180.0 ms · máx 412.1 ms · media 118.7 ms · errores 0
+25 conexiones · 5000 UPDATE · pared 24.26 s · 206.1 op/s · latencia p50 104.1 ms · p95 179.3 ms · máx 493.2 ms · media 118.6 ms · errores 0
+Filas tocadas en total: 7200
+
+$ py sim/prueba_concurrencia.py revertir
+UPDATE 7200
+Después: no pendientes 0 · con encuestador 0 · con fecha_visita 0 · total 50794
+
