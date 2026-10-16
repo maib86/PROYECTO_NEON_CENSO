@@ -1,0 +1,11 @@
+Tablero publicado tras el envío de 64a17a2 y la regeneración manual 38907129797 (workflow_dispatch, 16/10/2026 07:20 hora de Costa Rica) · S08
+$ gh run view 38907129797 --json event,conclusion
+{"conclusion":"success","event":"workflow_dispatch"}
+$ curl -s -o index.html -w "%{http_code}" https://maib86.github.io/PROYECTO_NEON_CENSO/
+200
+Encabezado:
+generado 16/10/2026 07:21
+Avance general y etiquetas:
+2,3 % 33 de 1.432 fincas con visita concluida · 17 visitadas · 22 incidencias, de ellas 6 revisitas pendientes
+Lote A 18 de 709 · 2,5 % 12 visitadas · 7 incidencias, de ellas 1 revisita pendiente Lote B 15 de 723 · 2,1 % 5 visitadas · 15 incidencias, de ellas 5 revisitas pendientes
+Conteos (grep -c): sin cerrar=0 · revisitas pendientes=3 · observaciones=0 · servidor=0

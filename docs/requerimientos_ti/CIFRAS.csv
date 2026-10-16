@@ -102,3 +102,7 @@ C100,Ejecuciones por horario: 4,ejecuciones,Ejecuciones por horario de la regene
 C101,"intervalos: 2 h 23 min, 5 h 16 min y 5 h 18 min",intervalo,Intervalos entre las ejecuciones por horario (configurada cada 30 min),docs/evidencia/s08/01_regeneracion_schedule.txt,L13,08,de 2 h 23 min a 5 h 18 min
 C102,≈ 714 MB,MB,"Pico de la carga llevado en proporción a 90.000 (403 × 90.000 / 50.794; estimado, sin medir)",docs/requerimientos_ti/evidencia_escala.md,L217,08,≈ 714 MB
 C103,"0,5 GB ≈ 512 MB",MB,"Límite del plan gratuito expresado en MB de 1.048.576 bytes (según el proveedor, sin verificar)",docs/requerimientos_ti/evidencia_escala.md,L217,08,≈ 512 MB
+C104,generado 16/10/2026 07:21,hora,"Generación del tablero publicado tras D-27 (regeneración manual 38907129797) y de la captura de L07 (S08)",docs/evidencia/s08/03_tablero_publicado.txt,L7,08,generado 16/10/2026 07:21
+C105,"22 incidencias, de ellas 6 revisitas pendientes",etiqueta,Encabezado del tablero publicado con la etiqueta de D-27,docs/evidencia/s08/03_tablero_publicado.txt,L9,08,"22 incidencias, de ellas 6 revisitas pendientes"
+C106,33 de 1.432 fincas con visita concluida,polígonos,Polígonos de prueba con visita concluida en la captura de L07 (07:21; el tablero los rotula fincas),docs/evidencia/s08/03_tablero_publicado.txt,L9,08,33 de 1.432
+C107,"2,3 %",porcentaje,Avance general en la captura de L07 (07:21),docs/evidencia/s08/03_tablero_publicado.txt,L9,08,"2,3 %"
