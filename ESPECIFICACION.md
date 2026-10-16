@@ -41,11 +41,18 @@ Criterios de aceptación:
 - [x] `generar_tablero.py` produce el HTML con datos reales; capturas a 1100 y 400 px sin defectos.
       Evidencia: `docs/evidencia/2026-10-15_tablero_1100.png` y `_400.png` (sesión 02).
 - [x] GitHub Actions regenera y publica el tablero cada 30 minutos sin intervención.
+      Alcance (sesión 07): probado que regenera y publica sin intervención; la frecuencia de
+      30 min no está demostrada (ver nota de la sesión 07).
       Evidencia: ejecuciones 38800395636 y 38800575730 en verde; cron `*/30` activo. URL:
       https://maib86.github.io/PROYECTO_NEON_CENSO/ (sesión 03).
       Nota (sesión 06): tras la regeneración manual de las 16:46 del 15/10 no se registraba
       ninguna ejecución por `schedule` (`docs/evidencia/s06/01_tablero_publicado.txt`). La
       regeneración programada está configurada pero sin observar; causa sin diagnosticar.
+      Nota (sesión 07): primera ejecución por horario, `38822130963`, el 15/10 a las 17:12,
+      casi 3 h después de crear el flujo; a las 17:58 seguía siendo la única
+      (`docs/evidencia/s07/01_regeneracion_y_tablero.txt`). Sin causa visible en el
+      repositorio; GitHub puede retrasar u omitir ejecuciones por horario. La frecuencia de
+      30 min no está demostrada (req. 14).
 - [x] El HTML publicado no contiene credenciales (verificado por `revisor-auditoria`, sesión 03).
 
 Pendiente de la persona: campos temáticos del formulario de visita (cuestionario real).
@@ -71,7 +78,7 @@ Criterios de aceptación:
         las 3 visitas; `precision_gnss_m` con valor (1.5).
   - [x] Desfase de 6 h en `fecha_visita` (hora local guardada como UTC) corregido con D-23:
         zona de sesión fijada en la base; las 3 filas de prueba corregidas (`sql/10`).
-  - [x] Visita repetida desde el celular tras D-23 (id 1394): `fecha_visita` 25 s antes de
+  - [x] Visita repetida desde el celular tras D-23 (polígono 1396, id de fila 1394): `fecha_visita` 25 s antes de
         `fecha_edicion`, sin desfase.
   - [ ] `encuestador = @cloud_username`: NULL sin sesión de QFieldCloud (esperado); pendiente
         de la cuenta del INEC (D-22).
@@ -82,7 +89,7 @@ Criterios de aceptación:
 - [ ] Edición sin señal → sincronización → visible en tablero. Documentado el tiempo real
       entre sincronización y aparición.
   - [x] Edición con señal desde el celular escrita en la base con el rol del lote:
-        `editado_por = edit_lote_a` en las 3 visitas (RLS aplicado en el dispositivo).
+        `editado_por = edit_lote_a` en las 3 visitas (la política la aplica la base de datos a la conexión).
   - [x] `observaciones` presentes en la tabla y ausentes del tablero generado con datos
         actuales (0 coincidencias). Falta confirmar en el tablero publicado tras la próxima
         regeneración.
@@ -93,7 +100,7 @@ Criterios de aceptación:
 
 Decisión abierta: QFieldCloud en nube (prueba 28 días) vs autoalojado desde el piloto.
 
-### Fase 4 — Requerimientos para TI — EN CURSO: entregables v1 generados; revisión de la persona pendiente
+### Fase 4 — Requerimientos para TI — EN CURSO: entregables v2 generados tras la auditoría de comunicación (S07); re-auditoría y revisión de la persona pendientes
 Entregables v1 (sesión 06): `docs/requerimientos_ti/REQUERIMIENTOS_TI.md` (versionado), con su
 banco de cifras `CIFRAS.csv` y `verificar_cifras.py`; PDF y presentación del 2026-10-19 en
 `docs/presentacion/` (fuera del repositorio, D-24). Pendiente: revisión de la persona.

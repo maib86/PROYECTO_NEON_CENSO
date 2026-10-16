@@ -120,6 +120,39 @@ SELECT id, estado_visita, encuestador, fecha_visita, precision_gnss_m, editado_p
 Esperado: `encuestador` = cuenta de QFieldCloud de la persona; `fecha_visita` = hora del
 celular (no la de la sincronización); `editado_por` = `edit_lote_<<<lote>>>` (rol del secreto).
 
+## Prueba negativa desde el celular (conexión directa, D-22 parte 1)
+
+Objetivo: comprobar que la base de datos rechaza, desde QField, el guardado de un punto del
+lote de trabajo B hecho con la cuenta del equipo A. En escritorio ya se probó (`UPDATE 0`,
+sesión 02); desde el celular solo se probó el caso positivo.
+
+1. Claude Code construye un proyecto igual al de campo pero **sin** el filtro de lote en
+   `finca_visita` (la capa de referencia conserva el suyo). Solo para esta prueba; queda en
+   `campo/paquete_movil/`, fuera del repositorio:
+
+```bash
+py campo/construir_prueba_negativa.py
+```
+
+2. Antes de la prueba, Claude Code (solo lectura) anota el estado del polígono del lote de
+   trabajo B que se va a tocar (`<<<FINCA_B>>>`, elegido con la persona) con la consulta del
+   paso 5 y lo guarda en la evidencia de la sesión.
+3. Persona: copiar `NEON_campo_prueba_negativa.qgs` a la misma carpeta del celular donde está
+   `NEON_campo_lote_A.qgs` (usa el mismo `pg_service.conf`, servicio `neon_lote_a`).
+4. Persona, en QField con internet: abrir el proyecto → tocar ese punto (`lote` = `B`) →
+   editar → cambiar `estado_visita` → guardar. Anotar lo que muestra QField (captura). No se
+   sabe de antemano si avisa: en escritorio, modificar una fila ajena da `UPDATE 0` sin error;
+   la prueba la decide la consulta, no el mensaje.
+5. Comprobación en la base de datos (Claude Code, solo lectura): la fila del lote B no cambió.
+
+```sql
+SELECT id, finca_id, lote, estado_visita, editado_por, fecha_edicion
+  FROM mgn.finca_visita WHERE finca_id = <<<FINCA_B>>>;
+```
+
+Esperado: `estado_visita`, `editado_por` y `fecha_edicion` iguales a los anotados en el paso 2 (no aparece
+`edit_lote_a`). Al terminar, borrar `NEON_campo_prueba_negativa.qgs` del celular.
+
 ## Réplica para el lote B
 
 Mismos pasos con `<<<LOTE>>>` = `B` y `<<<lote>>>` = `b`:

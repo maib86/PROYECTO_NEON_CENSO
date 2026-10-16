@@ -1,0 +1,63 @@
+## S07 paso 0 — regeneración automática y tablero publicado (2026-10-15, hora de Costa Rica)
+$ gh api repos/maib86/PROYECTO_NEON_CENSO/actions/workflows/tablero.yml --jq '{state,path,created_at,updated_at}'
+{"created_at":"2026-10-15T14:14:11.000-06:00","path":".github/workflows/tablero.yml","state":"active","updated_at":"2026-10-15T14:14:11.000-06:00"}
+$ gh run list --workflow tablero.yml --event schedule --limit 20 --json databaseId,createdAt,conclusion,headSha,event   (17:52)
+[{"conclusion":"success","createdAt":"2026-10-15T23:12:11Z","databaseId":38822130963,"event":"schedule","headSha":"7469b8c8216d0a6fbbb9a92ed6f2d9d69b89b353"}]
+primera ejecución por horario: 38822130963 · 2026-10-15T23:12:11Z = 15/10/2026 17:12 (hora de Costa Rica) · success
+(el flujo existe desde las 14:14; la primera ejecución por horario llegó casi 3 h después; a las 17:58 seguía siendo la única)
+$ gh workflow run tablero.yml   (17:54)
+https://github.com/maib86/PROYECTO_NEON_CENSO/actions/runs/38826372180
+$ gh run view 38826372180 --json conclusion,createdAt,headSha,event
+{"conclusion":"success","createdAt":"2026-10-15T23:54:34Z","event":"workflow_dispatch","headSha":"d47ee017b9bcc05c34074b23fa584a814e115d59"}
+$ gh run list --workflow tablero.yml --limit 6   (17:58)
+completed	success	Tablero de avance	Tablero de avance	main	workflow_dispatch	38826372180	29s	2026-10-15T23:54:34Z
+completed	success	Tablero de avance	Tablero de avance	main	schedule	38822130963	29s	2026-10-15T23:12:11Z
+completed	success	Tablero de avance	Tablero de avance	main	workflow_dispatch	38819392080	28s	2026-10-15T22:46:42Z
+completed	success	Tablero de avance	Tablero de avance	main	workflow_dispatch	38800575730	31s	2026-10-15T20:16:18Z
+completed	success	Tablero de avance	Tablero de avance	main	workflow_dispatch	38800395636	32s	2026-10-15T20:14:59Z
+Causa del retraso: sin causa visible en el repositorio (flujo "active", cron en main, sintaxis válida).
+La documentación de GitHub Actions (evento schedule) indica que las ejecuciones programadas pueden
+retrasarse en horas de carga alta y que algunas pueden descartarse:
+https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule
+
+## Tablero publicado tras la ejecución 38826372180 (código d47ee01)
+$ curl -s -o publicado.html -w "%{http_code} %{size_download}" https://maib86.github.io/PROYECTO_NEON_CENSO/
+200 126079
+$ grep -o 'generado [^<]*' publicado.html
+generado 15/10/2026 17:54 (hora de Costa Rica) · última visita registrada 15/10/2026 16:29
+$ grep -o '[0-9]* visitadas · [0-9]* incidencias[^<]*' publicado.html
+17 visitadas · 22 incidencias, de ellas 6 revisitas sin cerrar
+12 visitadas · 7 incidencias (1 revisitas sin cerrar)
+5 visitadas · 15 incidencias (5 revisitas sin cerrar)
+$ grep -ci observaciones publicado.html
+0
+$ grep -ciE "neon\.tech|npg_|postgresql://|sslmode|password" publicado.html
+0
+Encabezado corregido y visible. Las tarjetas por lote del publicado aún dicen «(1 revisitas sin cerrar)»:
+la corrección de singular y la redacción «de ellas» en las tarjetas (S07) se publican con el próximo envío
+al repositorio. Captura: 02_tablero_publicado_1754_1100.png.
+
+## Mismo tablero con el código de S07 (local, rol tablero_lectura, mismos datos)
+$ py tablero/generar_tablero.py --salida tablero/salida/s07/index.html
+Tablero escrito en tablero/salida/s07/index.html (123 KB)
+generado 15/10/2026 17:54 (hora de Costa Rica) · última visita registrada 15/10/2026 16:29
+con visita concluida · 17 visitadas · 22 incidencias, de ellas 6 revisitas sin cerrar
+12 visitadas · 7 incidencias, de ellas 1 revisita sin cerrar
+5 visitadas · 15 incidencias, de ellas 5 revisitas sin cerrar
+$ py tablero/capturar_tablero.py tablero/salida/s07/index.html --dir tablero/salida/s07 --anchos 1100
+errores JS: [] | dialogos: [] | desbordan [] | marcadores 1432 | teselas 15/15 | scroll_horizontal False
+-> 03_tablero_local_codigo_s07_1100.png (recorte 1100×1000 incrustado en L07)
+$ grep -o '[0-9,]* %\|[0-9]* de 1.432 fincas con visita concluida' tablero/salida/s07/index.html | head -3
+2,3 %
+33 de 1.432 fincas con visita concluida
+2,5 %
+
+## Prueba del singular con datos de prueba (fixture con 1 revisita en un lote y 1 visitada en otro)
+160 visitadas · 82 incidencias, de ellas 1 revisita sin cerrar
+1 visitada · 37 incidencias, de ellas 0 revisitas sin cerrar
+
+## Tras la revisión independiente: «de ella» con 1 incidencia y sin la segunda parte con 0 revisitas
+(fixture con 1 incidencia y 1 revisita en un lote, 0 y 0 en el otro)
+311 visitadas · 1 incidencia, de ella 1 revisita sin cerrar
+152 visitadas · 0 incidencias
+(fixture original) visita concluida · 311 visitadas · 118 incidencias, de ellas 37 revisitas sin cerrar

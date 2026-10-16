@@ -103,6 +103,19 @@ def fmt_int(n):
     return f"{int(n):,}".replace(",", ".")
 
 
+def fmt_n(n, singular, plural):
+    """Cantidad con el sustantivo en singular o plural: «1 revisita», «2 revisitas»."""
+    return f"{fmt_int(n)} {singular if int(n) == 1 else plural}"
+
+
+def fmt_incidencias(incid, revisitas):
+    """«N incidencias, de ellas M revisitas sin cerrar»; sin la segunda parte si M es 0."""
+    txt = fmt_n(incid, "incidencia", "incidencias")
+    if int(revisitas):
+        txt += f", {'de ella' if int(incid) == 1 else 'de ellas'} {fmt_n(revisitas, 'revisita sin cerrar', 'revisitas sin cerrar')}"
+    return txt
+
+
 def fmt_pct(x):
     """Porcentaje con coma decimal, coherente con el punto de miles de fmt_int."""
     return f"{x:.1f}".replace(".", ",") + " %"
@@ -261,7 +274,7 @@ def render(datos, generado, alcance=ALCANCE[ESQUEMA_DEFECTO]):
         tiles_lote.append(f"""
         <div class="tile"><div class="k"><span class="lote" style="background:{LOTE_COLOR.get(l,'#2a78d6')}"></span>Lote {esc(l)}</div>
           <div class="v">{fmt_int(cerradas)}<small>de {fmt_int(f)} · {fmt_pct(100.0 * cerradas / f if f else 0.0)}</small></div>
-          <div class="k">{fmt_int(r['visitadas'])} visitadas · {fmt_int(int(r['no_localizadas'])+int(r['rechazos'])+int(r['revisitas']))} incidencias ({fmt_int(r['revisitas'])} revisitas sin cerrar)</div>
+          <div class="k">{fmt_n(r['visitadas'], 'visitada', 'visitadas')} · {fmt_incidencias(int(r['no_localizadas'])+int(r['rechazos'])+int(r['revisitas']), r['revisitas'])}</div>
         </div>""")
 
     # --- por persona
@@ -306,7 +319,7 @@ def render(datos, generado, alcance=ALCANCE[ESQUEMA_DEFECTO]):
 <main>
   <section class="card span2">
     <h2>Avance general</h2>
-    <div class="hero"><div class="big">{fmt_pct(pct)}</div><div class="ctx">{fmt_int(hechas)} de {fmt_int(total)} fincas con visita cerrada · {fmt_int(visitadas)} visitadas · {fmt_int(incid)} incidencias, de ellas {fmt_int(sum(int(r['revisitas']) for r in res))} revisitas sin cerrar</div></div>
+    <div class="hero"><div class="big">{fmt_pct(pct)}</div><div class="ctx">{fmt_int(hechas)} de {fmt_int(total)} fincas con visita concluida · {fmt_n(visitadas, 'visitada', 'visitadas')} · {fmt_incidencias(incid, sum(int(r['revisitas']) for r in res))}</div></div>
     <div class="tiles">{''.join(tiles_lote)}</div>
   </section>
 

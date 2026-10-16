@@ -85,6 +85,11 @@ espera la confirmación o la captura. No simula que lo hizo.
 
 ## Convenciones técnicas (resumen; detalle en docs/guia)
 
+- Vocabulario único en láminas, notas, documento TI y PDF (D-25; tabla en el anexo E de
+  `docs/requerimientos_ti/REQUERIMIENTOS_TI.md`): «base de datos», «polígonos de prueba»,
+  «lote de trabajo A/B», «cuenta administradora», «cuenta del equipo A/B», «guardados»,
+  «regeneración automática». Se comprueba con `py docs/requerimientos_ti/verificar_vocabulario.py`.
+
 - Llave primaria entera `id` (IDENTITY). Identificador de origen en `id_origen`.
 - Columna de reparto `lote` (`A`/`B`), `NOT NULL` + `CHECK`. RLS: lectura total, escritura
   acotada por lote. El propietario omite RLS: **probar siempre con los roles de edición**.

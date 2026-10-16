@@ -330,3 +330,40 @@ repositorio público). Versionar la muestra (es de otro proyecto de la Unidad).
 **Consecuencias.** La presentación no se puede reconstruir desde el repositorio: depende de la
 muestra y del logo locales. Sus cifras sí son trazables: cada una tiene fila en `CIFRAS.csv`.
 El PDF se regenera con `py docs/requerimientos_ti/exportar_pdf.py`.
+
+## D-25 · 2026-10-15 · Vocabulario único en la presentación y el documento para TI
+
+**Contexto.** La auditoría de comunicación de la presentación (ronda 1, 51 hallazgos;
+`docs/presentacion/auditoria/informe_ronda1.md`, fuera del repositorio por D-24) encontró
+el mismo objeto con varios nombres («finca», «polígono», «objeto», «UGM»), términos con doble
+lectura para un censo de fincas («lote», «propietario», «escrituras») y «la base» leída como
+mapa base por la Unidad de Cartografía.
+**Decisión.** Un término por concepto en láminas, notas del orador, `REQUERIMIENTOS_TI.md` y su
+PDF: «base de datos» (nunca «la base» sola); «polígonos de prueba» (1.432, distrito 20205) para
+los objetos del piloto y «fincas» solo para producción; «polígonos UGM (proxy)»; «lote de
+trabajo A/B» en el piloto y «zona de equipo (por definir: provincia o UPM)» en producción;
+«cuenta administradora» (rol dueño); «cuenta del equipo A/B» (roles de edición; en tablas
+técnicas, el nombre del rol entre paréntesis); «guardados»; «control por fila (RLS)» en la
+primera aparición; «regeneración automática»; «computadora»; «equipo de campo»; «visita
+concluida»; fase «completada»; «solo se puede volver atrás 6 horas»; «revisión automática
+independiente (programa, sin acceso a la conversación)». Siglas expandidas en su primera
+aparición. Cifras en pantalla y en el PDF con coma decimal y punto de miles; una sola unidad,
+MB (los MB de `pg_size_pretty` y los MiB de los scripts son la misma unidad de 1.048.576
+bytes); el literal de consola queda solo en `CIFRAS.csv`. El tablero dice «visita concluida».
+Tabla completa: anexo E de `REQUERIMIENTOS_TI.md`.
+**Descartado.** Glosario aparte en una lámina (no corrige el uso inconsistente); conservar los
+literales de consola en pantalla con una nota (la nota de L10 no evitó la doble lectura).
+**Consecuencias.** `verificar_cifras.py` exige que cada cifra marcada en las láminas
+(`data-cifra` o `[Cnn]`) tenga fila en `CIFRAS.csv` y, si la fila trae `valor_pantalla`, que
+la pantalla diga eso; además falla ante un punto decimal en el texto visible.
+
+## D-26 · 2026-10-15 · Catálogo de cuatro estados y uso del color en la presentación
+
+**Contexto.** La ronda 1 contó doce etiquetas de estado para cuatro situaciones y el rojo con
+cinco significados (total, problema, estado, énfasis y una caja del diagrama).
+**Decisión.** Cuatro estados, definidos con leyenda en L04 y reutilizados sin variantes:
+PROBADO (verde) · MEDIDO (azul; «extrapolado» va en el texto, no en la píldora) · NO PROBADO
+(rojo) · PENDIENTE DE TI (ámbar). El rojo queda solo para «no probado / riesgo»; totales,
+remates, encabezados de lámina, la caja del tablero en L03 y la barra de avance pasan a azul.
+**Descartado.** Mantener «con señal», «hipótesis», «solo piloto», «en curso» como estados.
+**Consecuencias.** Lo que antes era una condición del estado se dice en el texto de la fila.

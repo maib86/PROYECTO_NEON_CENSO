@@ -61,7 +61,7 @@ def main() -> int:
         logo = '<img alt="INEC" src="data:image/png;base64,' + base64.b64encode(LOGO.read_bytes()).decode() + '">'
     html = f"""<!DOCTYPE html><html lang="es-CR"><head><meta charset="utf-8">
 <title>Requerimientos para producción · Piloto NEON-CENSO</title><style>{CSS}</style></head><body>
-<div class="head">{logo}<div class="who">INEC · Unidad de Cartografía<br>Piloto NEON-CENSO</div><div class="sp"></div><div class="mark">NEON-TI-01 · v1</div></div>
+<div class="head">{logo}<div class="who">INEC · Unidad de Cartografía<br>Piloto NEON-CENSO</div><div class="sp"></div><div class="mark">NEON-TI-01 · v2</div></div>
 {cuerpo}</body></html>"""
     SALIDA.mkdir(parents=True, exist_ok=True)
     ruta_html = SALIDA / "REQUERIMIENTOS_TI.html"
