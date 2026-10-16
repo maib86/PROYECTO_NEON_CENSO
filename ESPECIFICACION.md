@@ -93,6 +93,8 @@ Criterios de aceptación:
   - [x] `observaciones` presentes en la tabla y ausentes del tablero generado con datos
         actuales (0 coincidencias). Falta confirmar en el tablero publicado tras la próxima
         regeneración.
+  - [x] Prueba negativa desde el celular: edición del polígono 258 (lote B) con la cuenta del
+        equipo A, bloqueada por la base de datos (UPDATE 0, fila intacta). Evidencia s08b.
   - [ ] Edición sin señal y sincronización: pendiente de la cuenta del INEC (D-22).
 - [ ] Identidad de campo visible en `v_tab_encuestador` por atributo, no por `current_user`.
   - [ ] Pendiente de la cuenta del INEC: sin QFieldCloud no hay `@cloud_username`. En la

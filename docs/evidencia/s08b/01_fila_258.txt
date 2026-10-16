@@ -1,0 +1,18 @@
+# S08b paso 1 — fila del poligono 258 con la cuenta administradora
+# Hora de la consulta: ver hora_consulta_cr (now() en America/Costa_Rica, reloj del servidor)
+SET TIME ZONE 'America/Costa_Rica';
+SET
+SELECT to_char(now(), 'YYYY-MM-DD HH24:MI:SS TZH') AS hora_consulta_cr, current_user;
+    hora_consulta_cr     | current_user 
+-------------------------+--------------
+ 2026-10-16 07:47:56 -06 | neondb_owner
+(1 fila)
+
+SELECT id, finca_id, lote, estado_visita, encuestador, fecha_visita,
+       precision_gnss_m, editado_por, fecha_edicion, fecha_creacion
+FROM mgn.finca_visita WHERE finca_id = 258;
+ id  | finca_id | lote | estado_visita | encuestador | fecha_visita | precision_gnss_m | editado_por  |         fecha_edicion         |        fecha_creacion         
+-----+----------+------+---------------+-------------+--------------+------------------+--------------+-------------------------------+-------------------------------
+ 257 |      258 | B    | pendiente     |             |              |                  | neondb_owner | 2026-10-15 11:57:10.989819-06 | 2026-10-15 11:57:10.989819-06
+(1 fila)
+

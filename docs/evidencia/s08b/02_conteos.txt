@@ -1,0 +1,22 @@
+# S08b paso 3 — conteos globales con la cuenta administradora
+SET TIME ZONE 'America/Costa_Rica';
+SET
+SELECT to_char(now(), 'YYYY-MM-DD HH24:MI:SS TZH') AS hora_consulta_cr, current_user;
+    hora_consulta_cr     | current_user 
+-------------------------+--------------
+ 2026-10-16 07:48:07 -06 | neondb_owner
+(1 fila)
+
+SELECT count(*) FROM mgn.finca_visita
+WHERE lote = 'B' AND editado_por = 'edit_lote_a';
+ count 
+-------
+     0
+(1 fila)
+
+SELECT count(*) FROM mgn.finca_visita WHERE fecha_edicion::date = '2026-10-16';
+ count 
+-------
+     0
+(1 fila)
+

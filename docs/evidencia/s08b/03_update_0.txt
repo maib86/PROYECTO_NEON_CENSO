@@ -1,0 +1,54 @@
+# S08b paso 4 — reproduccion controlada con la cuenta del equipo A (service=neon_lote_a, conexion propia, sin SET ROLE)
+SET TIME ZONE 'America/Costa_Rica';
+SET
+SELECT to_char(now(), 'YYYY-MM-DD HH24:MI:SS TZH') AS hora_consulta_cr, current_user;
+    hora_consulta_cr     | current_user 
+-------------------------+--------------
+ 2026-10-16 07:48:16 -06 | edit_lote_a
+(1 fila)
+
+SELECT finca_id, lote FROM mgn.finca_visita WHERE finca_id IN (258, 1396) ORDER BY finca_id;
+ finca_id | lote 
+----------+------
+      258 | B
+     1396 | A
+(2 filas)
+
+BEGIN;
+BEGIN
+UPDATE mgn.finca_visita SET estado_visita = estado_visita
+WHERE finca_id = 258;
+UPDATE 0
+ROLLBACK;
+ROLLBACK
+BEGIN;
+BEGIN
+UPDATE mgn.finca_visita SET estado_visita = estado_visita
+WHERE finca_id = 1396;
+UPDATE 1
+ROLLBACK;
+ROLLBACK
+
+# Comprobacion posterior al ROLLBACK (cuenta administradora)
+SET TIME ZONE 'America/Costa_Rica';
+SET
+SELECT to_char(now(), 'YYYY-MM-DD HH24:MI:SS TZH') AS hora_consulta_cr, current_user;
+    hora_consulta_cr     | current_user 
+-------------------------+--------------
+ 2026-10-16 07:48:26 -06 | neondb_owner
+(1 fila)
+
+SELECT finca_id, lote, estado_visita, editado_por, fecha_edicion
+FROM mgn.finca_visita WHERE finca_id IN (258, 1396) ORDER BY finca_id;
+ finca_id | lote | estado_visita | editado_por  |         fecha_edicion         
+----------+------+---------------+--------------+-------------------------------
+      258 | B    | pendiente     | neondb_owner | 2026-10-15 11:57:10.989819-06
+     1396 | A    | visitada      | edit_lote_a  | 2026-10-15 16:30:01.26469-06
+(2 filas)
+
+SELECT count(*) FROM mgn.finca_visita WHERE fecha_edicion::date = '2026-10-16';
+ count 
+-------
+     0
+(1 fila)
+
