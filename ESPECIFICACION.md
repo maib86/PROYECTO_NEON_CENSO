@@ -54,12 +54,14 @@ Criterios de aceptación:
       repositorio; GitHub puede retrasar u omitir ejecuciones por horario. La frecuencia de
       30 min no está demostrada (req. 14).
 - [x] El HTML publicado no contiene credenciales (verificado por `revisor-auditoria`, sesión 03).
-- [ ] Tablero v2 (S08c, D-28): mapa satelital, contornos de UGM, filtros jerárquicos,
+- [x] Tablero v2 (S08c, D-28): mapa satelital, contornos de UGM, filtros jerárquicos,
       buscador e indicadores en el navegador.
       Avance (sesión 10): vistas `v_tab_geo_*` creadas y verificadas
       (`docs/evidencia/s08c/01_vistas.txt`); pruebas del paso 7 con 66 de 66 OK, desde el
       fixture y desde la base de datos (`docs/evidencia/s08c/02_pruebas.txt`).
-      Pendiente: publicación en Pages y verificación de la página publicada.
+      Publicado (sesión 10): commit `dee2876`, ejecución 38921918353, página generada el
+      16/10/2026 a las 09:11; respuesta 200, 1.186.359 bytes, 66 de 66 pruebas sobre la URL
+      pública (`docs/evidencia/s08c/03_publicado.txt`). La v1 se recupera con `git revert dee2876`.
       Nota: `tablero_lectura` ve ahora siete vistas `v_tab_*` (las cinco de la v1 y las dos
       geográficas).
 
