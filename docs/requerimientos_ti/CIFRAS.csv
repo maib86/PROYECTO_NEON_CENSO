@@ -80,13 +80,13 @@ C78,"10 visitada, 5 no_localizada",visitas,Desglose de las 15 visitas de A desde
 C79,puerto 5432,puerto,Puerto que habría que abrir para un PostgreSQL de escritorio,docs/DECISIONES.md,L11,—,
 C80,1394,id de fila,Id de fila de la cuarta visita desde el celular tras D-23 (polígono 1396),ESPECIFICACION.md,L81,05,
 C81,las 3 visitas,visitas,Primeras visitas desde el celular (más la del polígono 1396: 4 en total),ESPECIFICACION.md,L78,05,
-C82,D-26,decisión,Última decisión registrada (D-01 a D-26),docs/DECISIONES.md,L360,07,D-26
+C82,D-27,decisión,Última decisión registrada (D-01 a D-27),docs/DECISIONES.md,L371,08,D-27
 C83,41 comprobaciones,comprobaciones,Comprobaciones de verificar_proyecto_campo.py (0 fallas),docs/sesiones/2026-10-15_sesion-05.md,L53,05,
 C84,cinco vistas,vistas,Vistas v_tab_* legibles por tablero_lectura,ESPECIFICACION.md,L37,02,cinco
 C85,lotes 1–7,lotes,Lotes del proxy (código de provincia) en la simulación,docs/requerimientos_ti/evidencia_escala.md,L42,04,
 C86,PostGIS 3.6.4,versión,Versión de PostGIS del servidor Neon,docs/sesiones/2026-10-15_sesion-02.md,L19,02,
 C87,pendiente \| neondb_owner \| 1432,filas,Estado y creado_por iniciales: las 1.432 filas creadas por la cuenta administradora,docs/sesiones/2026-10-15_sesion-02.md,L48,02,
-C88,| 20 |,requerimiento,Último requerimiento numerado del documento para TI (20 en total),docs/requerimientos_ti/REQUERIMIENTOS_TI.md,L278,07,20
+C88,| 20 |,requerimiento,Último requerimiento numerado del documento para TI (20 en total),docs/requerimientos_ti/REQUERIMIENTOS_TI.md,L288,08,20
 C89,38822130963,ejecución,Primera ejecución de la regeneración automática por horario,docs/evidencia/s07/01_regeneracion_y_tablero.txt,L6,07,
 C90,15/10/2026 17:12 (hora de Costa Rica),hora,Hora de la primera ejecución por horario (38822130963),docs/evidencia/s07/01_regeneracion_y_tablero.txt,L6,07,17:12
 C91,generado 15/10/2026 17:54,hora,Generación del tablero publicado y de la captura de L07 (S07),docs/evidencia/s07/01_regeneracion_y_tablero.txt,L27,07,generado 15/10/2026 17:54
@@ -97,3 +97,8 @@ C95,| 11 |,requerimiento,Último requerimiento de insumos_piloto.md (1 a 11),doc
 C96,casi 3 h,horas,Retraso de la primera ejecución por horario respecto de la creación del flujo (14:14),docs/evidencia/s07/01_regeneracion_y_tablero.txt,L7,07,casi 3 h
 C97,33 de 1.432 fincas con visita concluida,polígonos,Polígonos de prueba con visita concluida en la captura de L07 (17:54; el tablero los rotula fincas),docs/evidencia/s07/01_regeneracion_y_tablero.txt,L52,07,33 de 1.432
 C98,"2,3 %",porcentaje,Avance general en la captura de L07 (17:54),docs/evidencia/s07/01_regeneracion_y_tablero.txt,L51,07,"2,3 %"
+C99,"Piedades Sur, cantón San Ramón, provincia Alajuela",lugar,"Nombre del distrito 20205 (confirmado por la persona responsable, sesión 08)",specs/2026-10-16_S08_ronda3_cierre.md,L13,08,"Piedades Sur, San Ramón, Alajuela"
+C100,Ejecuciones por horario: 4,ejecuciones,Ejecuciones por horario de la regeneración automática al 16/10/2026 07:19 (hora de Costa Rica),docs/evidencia/s08/01_regeneracion_schedule.txt,L13,08,4 veces
+C101,"intervalos: 2 h 23 min, 5 h 16 min y 5 h 18 min",intervalo,Intervalos entre las ejecuciones por horario (configurada cada 30 min),docs/evidencia/s08/01_regeneracion_schedule.txt,L13,08,de 2 h 23 min a 5 h 18 min
+C102,≈ 714 MB,MB,"Pico de la carga llevado en proporción a 90.000 (403 × 90.000 / 50.794; estimado, sin medir)",docs/requerimientos_ti/evidencia_escala.md,L217,08,≈ 714 MB
+C103,"0,5 GB ≈ 512 MB",MB,"Límite del plan gratuito expresado en MB de 1.048.576 bytes (según el proveedor, sin verificar)",docs/requerimientos_ti/evidencia_escala.md,L217,08,≈ 512 MB

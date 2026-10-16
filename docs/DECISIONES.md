@@ -367,3 +367,17 @@ PROBADO (verde) · MEDIDO (azul; «extrapolado» va en el texto, no en la píldo
 remates, encabezados de lámina, la caja del tablero en L03 y la barra de avance pasan a azul.
 **Descartado.** Mantener «con señal», «hipótesis», «solo piloto», «en curso» como estados.
 **Consecuencias.** Lo que antes era una condición del estado se dice en el texto de la fila.
+
+## D-27 · 2026-10-16 · Etiqueta del tablero: «N incidencias, de ellas M revisitas pendientes»
+
+**Contexto.** El spec S07 §0b pidió «revisitas sin cerrar» y D-25 prohíbe «cerrad-/cerrar»
+(estado terminal = «visita concluida»). La auditoría de comunicación ronda 2 (M-19) señaló que
+la captura de L07 decía «sin cerrar» y el texto de la lámina, «revisitas».
+**Decisión.** El encabezado del tablero y las tarjetas por lote de trabajo dicen
+«N incidencias, de ellas M revisitas pendientes» (singular: «1 revisita pendiente»; sin la
+segunda parte si M es 0). Confirmado por la persona (sesión web del 15/10, spec S08 §0).
+**Descartado.** «sin cerrar» (contradice D-25); «revisitas abiertas» (otro término nuevo).
+**Consecuencias.** `tablero/generar_tablero.py` (`fmt_incidencias`) cambia; el tablero
+publicado lo muestra tras el envío al repositorio y la regeneración siguiente.
+`verificar_vocabulario.py` prohíbe además «sin cerrar», «proxy» (se usa «sustituto») y
+«mosaicos» (se usa «teselas»), y el anexo E de `REQUERIMIENTOS_TI.md` los registra.

@@ -211,3 +211,8 @@ no medida).
 7. **El origen viene en CR-SIRGAS (EPSG:8908), no en CR05 (5367).** La reproyección usa una
    transformación con precisión declarada de 0,5 m. El área total cambió 0,002 %. En
    producción conviene definir el SRC oficial del marco de fincas antes de cargar.
+
+### Estimación por proporción del pico de carga (S08, auditoría N-03)
+
+Pico a 90.000 ≈ 403 MB × 90.000 / 50.794 ≈ 714 MB (estimado por proporción, sin medir). Límite del plan: 0,5 GB ≈ 512 MB.
+La cifra 403 no es proporcional del todo por construcción: incluye ≈ 17 MB de la base de datos previa (C32), que no crecen con la capa; escalando solo los ≈ 386 MB que crecen con la capa y sumando los 17 MB fijos, ≈ 701 MB. Si el proveedor usa 1.000 en vez de 1.024, el límite es ≈ 477 MB. En todos los casos el pico estimado supera el límite.

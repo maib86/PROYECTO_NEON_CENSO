@@ -100,7 +100,7 @@ Criterios de aceptación:
 
 Decisión abierta: QFieldCloud en nube (prueba 28 días) vs autoalojado desde el piloto.
 
-### Fase 4 — Requerimientos para TI — EN CURSO: entregables v2 generados tras la auditoría de comunicación (S07); re-auditoría y revisión de la persona pendientes
+### Fase 4 — Requerimientos para TI — EN CURSO: entregables v3 generados tras la auditoría de comunicación ronda 2 (S08, D-27); ronda 3 externa y revisión de la persona pendientes
 Entregables v1 (sesión 06): `docs/requerimientos_ti/REQUERIMIENTOS_TI.md` (versionado), con su
 banco de cifras `CIFRAS.csv` y `verificar_cifras.py`; PDF y presentación del 2026-10-19 en
 `docs/presentacion/` (fuera del repositorio, D-24). Pendiente: revisión de la persona.

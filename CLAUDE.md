@@ -16,7 +16,8 @@ Idioma de trabajo: **español**. Voz institucional, neutra. Sin emojis en docume
 ## Estado actual — leer SIEMPRE al iniciar
 
 1. `ESPECIFICACION.md` — alcance, fases y criterios de aceptación.
-2. `docs/sesiones/` — la sesión más reciente dice exactamente dónde quedó todo.
+2. `docs/sesiones/` — la última bitácora de cada tipo (Claude Code y Claude web) dice
+   exactamente dónde quedó todo.
 3. `docs/DECISIONES.md` — por qué las cosas son como son. No se revierte una decisión
    registrada sin registrar la nueva.
 4. `specs/` — el encargo vigente; si el prompt dice "ejecutá specs/X", ese archivo manda.
@@ -32,7 +33,8 @@ sql/                      Scripts SQL. Numerados en orden de ejecución.
 tablero/                  Generador del tablero HTML (Python) + fixture de prueba.
 .github/workflows/        Regeneración automática del tablero en GitHub Actions.
 docs/guia/                Guía de replicación (fuente de verdad del procedimiento).
-docs/sesiones/            Bitácora por sesión. Una por sesión de trabajo.
+docs/sesiones/            Bitácoras: de Claude Code (AAAA-MM-DD_sesion-NN.md) y de Claude web
+                          (AAAA-MM-DD_web.md). Al arrancar, leer la última de cada tipo.
 docs/requerimientos_ti/   Documento de requerimientos para producción (fase final).
 datos_prueba/             GeoJSON de origen del piloto.
 ```

@@ -2,9 +2,10 @@
 
 Piloto NEON-CENSO · Unidad de Cartografía · Instituto Nacional de Estadística y Censos (INEC)
 
-Versión 2 · 15 de octubre de 2026 · Estado: entregable v2, pendiente de revisión. La versión 2
-corrige la comunicación de la versión 1 (vocabulario único, D-25; identificadores; separadores)
-sin cambiar su contenido técnico.
+Versión 3 · 16 de octubre de 2026 · Estado: entregable v3, pendiente de revisión. La versión 2
+corrigió la comunicación de la versión 1 (vocabulario único, D-25; identificadores; separadores);
+la versión 3 atiende la auditoría de comunicación ronda 2 (D-27) y actualiza el dato de la
+regeneración automática. El contenido técnico no cambia.
 
 Cada cifra de este documento tiene una fila en `docs/requerimientos_ti/CIFRAS.csv` (columna
 `id`, citada aquí entre corchetes, por ejemplo [C23]) con el archivo y la línea de donde salió.
@@ -21,17 +22,18 @@ Los términos siguen el vocabulario del anexo E.
 **Qué se probó.** Una capa vectorial única en una base de datos PostgreSQL con PostGIS, en la
 nube y con datos públicos, editada a la vez por las cuentas de dos equipos de campo desde QGIS
 escritorio y desde QField en un celular, con el reparto del trabajo impuesto por la base de
-datos (control por fila (RLS, seguridad a nivel de fila)), auditoría automática de quién y
+datos: control por fila (RLS, seguridad a nivel de fila). Además, auditoría automática de quién y
 cuándo, y un tablero de avance HTML con regeneración automática. Se usaron 1.432 polígonos de
-prueba públicos del distrito 20205 [C01, C02], repartidos en dos lotes de trabajo de 709 y 723
-polígonos [C06, C07]. La escala se ensayó aparte con 50.794 polígonos UGM (proxy) del SNIT [C23].
+prueba públicos del distrito 20205, Piedades Sur, San Ramón, Alajuela [C01, C02, C99],
+repartidos en dos lotes de trabajo de 709 y 723 polígonos [C06, C07]. La escala se ensayó
+aparte con 50.794 polígonos UGM del SNIT, sustituto de las fincas para medir escala [C23].
 
 **Qué quedó demostrado.** (a) La base de datos impide guardar fuera del lote de trabajo propio:
 `UPDATE 1` en el lote de trabajo propio, `UPDATE 0` en el ajeno, `INSERT` ajeno rechazado
 [C12, C13, C14]. (b) Con conexión directa desde el celular, las visitas entraron con la cuenta
 del equipo A [C56]; la política la aplica la base de datos a la conexión. La prueba negativa
-desde el celular (intentar guardar un polígono del lote de trabajo B) está preparada y no se
-ha hecho. (c) El tablero lee solo vistas con una cuenta de solo lectura, no contiene
+desde el celular (intentar guardar un polígono del lote de trabajo B) está preparada y
+pendiente. (c) El tablero lee solo vistas con una cuenta de solo lectura, no contiene
 credenciales ni texto libre y se publicó con las visitas de campo [C15, C91, C69]. (d) Con
 50.794 polígonos, 25 conexiones simultáneas guardaron sin errores y la red, no la base de
 datos, fue el factor dominante [C25, C43].
@@ -40,8 +42,8 @@ datos, fue el factor dominante [C25, C43].
 QFieldCloud que admita PostGIS, D-22); la identidad individual de cada censista en campo
 (`@cloud_username`); el comportamiento con 90.000 fincas (lo que se dice es extrapolación
 [C24, C34]); el costo del control por fila a escala; tiempos desde la red institucional; la
-regularidad de la regeneración automática (una sola ejecución por horario observada, casi 3 h
-después de configurada [C89, C96]). El piloto corrió con dos personas y un celular.
+frecuencia de la regeneración automática: se ejecutó sola 4 veces, con intervalos de 2 h 23 min
+a 5 h 18 min; frecuencia no demostrada [C100, C101]. El piloto corrió con dos personas y un celular.
 
 **Qué se pide.** Las cinco decisiones de la sección 7 (modalidad de QFieldCloud, identidades de
 campo, historial de visitas, cuestionario real, dónde corre el tablero) y los recursos del
@@ -113,7 +115,7 @@ evidencia y en `CIFRAS.csv`; aquí se escribe con la convención del documento.
 | Control por fila, con las cuentas de los equipos A y B | prueba cruzada desde QGIS por dos personas: exitosa | `docs/sesiones/2026-10-13_sesion-00.md` |
 | Guía de replicación y plantillas | `docs/guia/Guia_replicacion_PostGIS.md`; `sql/plantillas/01`–`05` | repositorio |
 
-### Fase 2 — Capa de visita y tablero (completada el 15/10/2026; frecuencia de la regeneración automática sin demostrar)
+### Fase 2 — Capa de visita y tablero (completada el 15/10/2026; regeneración automática: frecuencia no demostrada)
 
 | Criterio | Resultado | Evidencia |
 |---|---|---|
@@ -122,7 +124,7 @@ evidencia y en `CIFRAS.csv`; aquí se escribe con la convención del documento.
 | Cuenta del tablero solo con vistas | `permission denied for table finca_visita` [C15] | sesión 02 |
 | Visitas de prueba A y B | A: 15 desde QGIS por la persona [C16]; B: 20 simuladas por script [C17] | `ESPECIFICACION.md`; sesión 02 |
 | Tablero con datos reales, 1.100 y 400 px | capturas sin defectos | `docs/evidencia/2026-10-15_tablero_1100.png`, `_400.png` |
-| Regeneración automática | configurada cada 30 min [C10]; ejecución manual en verde (`38800395636`) [C20]. Hasta las 16:47 no hubo ninguna por horario [C68]; la primera, `38822130963`, llegó el 15/10/2026 a las 17:12 [C89, C90], casi 3 h después de configurada [C96] | `docs/evidencia/s06/01_tablero_publicado.txt`; `docs/evidencia/s07/01_regeneracion_y_tablero.txt` |
+| Regeneración automática | configurada cada 30 min [C10]; ejecución manual en verde (`38800395636`) [C20]. Hasta las 16:47 no hubo ninguna por horario [C68]; la primera, `38822130963`, llegó el 15/10/2026 a las 17:12 [C89, C90], casi 3 h después de configurada [C96]. Al 16/10 a las 07:19, se ejecutó sola 4 veces, con intervalos de 2 h 23 min a 5 h 18 min; frecuencia no demostrada [C100, C101] | `docs/evidencia/s06/01_tablero_publicado.txt`; `docs/evidencia/s07/01_regeneracion_y_tablero.txt`; `docs/evidencia/s08/01_regeneracion_schedule.txt` |
 | HTML publicado sin credenciales | `HTTP 200` [C21]; cero apariciones de servidor y claves | sesión 03; `docs/evidencia/s07/01_regeneracion_y_tablero.txt` |
 
 ### Fase 3, parte 1 (D-22) — QField con conexión directa, sin QFieldCloud
@@ -131,8 +133,8 @@ evidencia y en `CIFRAS.csv`; aquí se escribe con la convención del documento.
 |---|---|---|
 | Proyecto de campo sin credenciales | `Resultado: 0 fallas` en 41 comprobaciones [C83]; solo `service='neon_lote_a'` [C53] | `docs/sesiones/2026-10-15_sesion-05.md` |
 | Guardado desde el celular con la cuenta del equipo A | tras las 3 primeras visitas de campo, lote de trabajo A: 18 polígonos visitados, los 18 guardados por la cuenta del equipo A (15 desde QGIS y 3 desde el celular) [C56]; con la cuarta (polígono 1396, id de fila 1394 [C80]), 19 en el tablero publicado [C67] | `docs/evidencia/s05/05_prueba_qfield_directa.txt` |
-| Prueba negativa desde el celular | **no hecha**: proyecto sin filtro de lote de trabajo preparado (`campo/construir_prueba_negativa.py`); la persona la ejecuta el 16/10 | `docs/guia/qfield_campo.md` |
-| Hora real de la visita desde el formulario | primero, desfase de 6 h [C57] (zona de sesión `GMT` [C58]); tras D-23, la cuarta visita se guardó 25 s después de hecha [C59] | `docs/evidencia/s05/05_…`, `06_…`, `07_visita_tras_d23.txt` |
+| Prueba negativa desde el celular | **pendiente**: proyecto sin filtro de lote de trabajo preparado (`campo/construir_prueba_negativa.py`) | `docs/guia/qfield_campo.md` |
+| Hora real de la visita desde el formulario | desfase de 6 h [C57] (zona de sesión `GMT` [C58]): corregido por D-23. Aparte, la cuarta visita se guardó 25 s después de hecha [C59]: tiempo normal entre visita y guardado, no un desfase | `docs/evidencia/s05/05_…`, `06_…`, `07_visita_tras_d23.txt` |
 | Precisión GNSS registrada | 1,5 m en las tres primeras [C54]; 1,6 m en la cuarta [C60] | `docs/evidencia/s05/05_…`, `07_…` |
 | Visitas de campo en el tablero publicado, sin `observaciones` | las 4 en «Últimos movimientos» (polígonos 1396, 1405, 1398, 1406) [C70]; `observaciones` 0 [C69]; generado el 15/10/2026 a las 17:54 [C91] | `docs/evidencia/s06/01_…`; `docs/evidencia/s07/01_…` |
 
@@ -151,8 +153,8 @@ evidencia y en `CIFRAS.csv`; aquí se escribe con la convención del documento.
 ## 4. Escala
 
 Fuente: `docs/requerimientos_ti/evidencia_escala.md` (S04, D-18) y sus salidas literales en
-`docs/evidencia/s04/`. Proxy: 50.794 polígonos UGM del SNIT, el 56 % del tamaño de producción
-[C23, C24]. Todas las mediciones desde una computadora del piloto, con 96,3 ms de ida y vuelta
+`docs/evidencia/s04/`. Sustituto de las fincas para medir escala: 50.794 polígonos UGM del SNIT,
+el 56 % del tamaño de producción [C23, C24]. Todas las mediciones desde una computadora del piloto, con 96,3 ms de ida y vuelta
 de red (mediana) [C25]. Las mediciones de guardado usaron la cuenta administradora.
 
 ### 4.1 Medido con 50.794
@@ -167,16 +169,18 @@ de red (mediana) [C25]. Las mediciones de guardado usaron la cuenta administrado
 | Base de datos completa antes / después | 17 MB / 225 MB | C32, C33 |
 | Vistas agregadas del tablero (servidor, máximo) | 23,1 ms | C38 |
 | `v_tab_puntos`, 50.794 filas (servidor / recibido en la computadora) | 145 ms / 1,5 s | C39, C40 |
-| Guardados simultáneos, 1 conexión | 200 guardados · 9,5 por segundo · p95 136,4 ms · 0 errores | C41 |
-| Guardados simultáneos, 10 conexiones | 2.000 guardados · 82,6 por segundo · p95 180,0 ms · 0 errores | C42 |
-| Guardados simultáneos, 25 conexiones | 5.000 guardados · 206,1 por segundo · p95 179,3 ms · 0 errores | C43 |
+| Guardados simultáneos, 1 conexión | 200 guardados · tiempo total 21,11 s · 9,5 por segundo · mediana 97,3 ms · p95 136,4 ms · 0 errores | C41 |
+| Guardados simultáneos, 10 conexiones | 2.000 guardados · tiempo total 24,20 s · 82,6 por segundo · mediana 101,2 ms · p95 180,0 ms · 0 errores | C42 |
+| Guardados simultáneos, 25 conexiones | 5.000 guardados · tiempo total 24,26 s · 206,1 por segundo · mediana 104,1 ms · p95 179,3 ms · 0 errores | C43 |
 | HTML del tablero con un marcador por punto | 3,98 MB · 51.349 elementos de la página | C44, C45 |
 | Carga del tablero con el procesador frenado 4 veces | 4,7–4,8 s | C46 |
 | Paquete de campo con polígonos / solo puntos | 208,5 MB / 6,2 MB (unas 34 veces menos) | C47–C49 |
 | Cambio de área al reproyectar EPSG:8908 → 5367 | 0,002 % | C51 |
 
 p95: el 95 % de los guardados tardó menos que ese valor. Los 7.200 guardados de prueba se
-deshicieron a propósito al terminar [C52].
+deshicieron a propósito al terminar [C52]; en la capa de simulación (esquema `sim`) queda solo
+su sello de auditoría. La mediana de 1 conexión (97,3 ms) es casi la ida y vuelta de red
+(96,3 ms) [C25, C41]: la red pesa más que la base de datos.
 
 ### 4.2 Extrapolado o estimado (no medido)
 
@@ -185,13 +189,19 @@ deshicieron a propósito al terminar [C52].
 | Polígonos con 90.000 fincas de complejidad similar | ≈ 340 MB | C34 |
 | Puntos con 90.000 fincas | ≈ 28 MB | C35 |
 | Pico de almacenamiento durante la carga con tabla de paso (50.794) | ≈ 403 MB, estimado por suma; pico **sin medir** | C37 |
-| Límite del plan gratuito | 0,5 GB según el proveedor; **sin verificar** | C36 |
+| Pico de la carga con 90.000 fincas | ≈ 714 MB = 403 × 90.000 / 50.794, **estimado por proporción, sin medir** | C102 |
+| Límite del plan gratuito | 0,5 GB ≈ 512 MB, según el proveedor; **sin verificar** | C36, C103 |
 
-Con 90.000 polígonos de complejidad similar y el pico de la carga, el plan gratuito no
-alcanza: producción necesita almacenamiento institucional dimensionado con la geometría real
-de las fincas (sin medir hasta tener la capa).
+El plan gratuito no alcanza porque el pico de la carga, llevado en proporción a 90.000
+(≈ 714 MB [C102]), supera el límite (0,5 GB ≈ 512 MB [C103]); la suma final de polígonos y
+puntos (≈ 340 + 28 MB) por sí sola quedaría por debajo, con poco margen. La cifra 403 no es
+proporcional del todo: incluye ≈ 17 MB de la base de datos previa [C32], que no crecen con la
+capa; escalando solo los ≈ 386 MB que crecen con la capa y sumando los 17 MB fijos, ≈ 701 MB. Si el proveedor usa 1.000 en vez de 1.024, el límite es ≈ 477 MB.
+En todos los casos el pico supera el límite (`evidencia_escala.md`, líneas 217 y 218).
+Producción necesita almacenamiento institucional dimensionado con la geometría real de las
+fincas (sin medir hasta tener la capa).
 
-### 4.3 Qué vale y qué no vale del proxy
+### 4.3 Qué vale y qué no vale del sustituto
 
 **Vale para:** volumen y complejidad geométrica de una capa nacional; orden de magnitud de
 almacenamiento y del paquete para trabajar sin señal; guardados cortos y simultáneos sobre
@@ -210,16 +220,16 @@ administradora, que no está sujeta a él); tiempos desde la red institucional o
 | Limitación | Por qué existió (qué no se tenía) | Qué hace falta para resolverla | Evidencia |
 |---|---|---|---|
 | Edición sin señal, sincronización e identidad `@cloud_username` no probadas | Cuenta QFieldCloud Community: no admite capas PostGIS | Cuenta o instancia QFieldCloud del INEC con PostGIS sin señal (decisión §7.1) y prueba D-22 parte 2 | D-22; `docs/evidencia/s05/05_…` (`encuestador` vacío) |
-| Prueba negativa desde el celular no hecha | Se probó primero el caso positivo; la negativa se preparó en S07 | Ejecutarla con `campo/construir_prueba_negativa.py` y la guía | `docs/guia/qfield_campo.md` |
+| Prueba negativa desde el celular pendiente | Se probó primero que las visitas entran; la prueba de bloqueo se preparó en S07 | Ejecutarla con `campo/construir_prueba_negativa.py` y la guía | `docs/guia/qfield_campo.md` |
 | Reparto en campo por proyecto y cuenta del equipo de campo, no por persona | QFieldCloud aplica cambios con la conexión del proyecto; no hay cuenta de base de datos por censista (supuesto D-19 sin verificar en QFieldCloud) | Verificar `editado_por` tras sincronizar; identidad individual por atributo restringido (req. 5, 15) | D-10, D-19 |
 | Hora de visita desde escritorio = hora de guardado | QGIS escritorio deja `fecha_visita` vacía; `now()` es la hora de la transacción: 15 visitas a las 13:02:30 [C18] | Registrar visitas solo desde el formulario de campo, que pone la hora del celular | D-16, D-20; sesión 02 |
-| Escala: 50.794 polígonos UGM (proxy), no 90.000 fincas | No existe aún la capa de fincas del censo | Capa real de fincas (o una muestra provincial) cargada en la infraestructura del INEC | D-18; `evidencia_escala.md` |
+| Escala: 50.794 polígonos UGM (sustituto), no 90.000 fincas | No existe aún la capa de fincas del censo | Capa real de fincas (o una muestra provincial) cargada en la infraestructura del INEC | D-18; `evidencia_escala.md` |
 | Datos y tablero públicos; en el plan gratuito solo se puede volver atrás 6 horas [C09] | Sin infraestructura institucional ni permisos de TI para el piloto | Servidor PostGIS institucional, web interna con autenticación, respaldo programado y restauración probada | D-01, D-09 |
 | Dos personas y un celular | Alcance del piloto | Prueba de campo con un equipo de campo real (sección 8c) | `ESPECIFICACION.md` §2 |
 | Clave de la base de datos en el celular | Conexión directa sin QFieldCloud (D-22, parte 1) | Clave en el servidor de QFieldCloud o gestión de dispositivos móviles (MDM) institucional (req. 10) | D-22 |
 | Una fila por polígono: la revisita reescribe persona y precisión, conserva la primera fecha | `UNIQUE(finca_id)` en el piloto | Una fila por visita, con coherencia lote de trabajo ↔ polígono (req. 2, 8) | D-07, D-21 |
-| Regeneración automática irregular | Servicio gratuito de GitHub sin horario garantizado: configurada a las 14:14, la primera ejecución por horario llegó a las 17:12 [C90, C96] | Regeneración automática institucional con monitoreo y alerta si no ocurre (req. 14) | `docs/evidencia/s07/01_regeneracion_y_tablero.txt` |
-| Encabezado del tablero: «22 incidencias» no distinguía las revisitas pendientes [C65] | La etiqueta sumaba revisitas a no localizadas y rechazos | Corregido en S06 y S07 (`tablero/generar_tablero.py`): «22 incidencias, de ellas 6 revisitas…», visible en el publicado de las 17:54 [C92]; el singular («1 revisita») y la misma redacción en las tarjetas de cada lote de trabajo se publican con el próximo envío al repositorio | sesiones 06 y 07 |
+| Regeneración automática: se ejecutó sola 4 veces, con intervalos de 2 h 23 min a 5 h 18 min; frecuencia no demostrada [C100, C101] | Causa no diagnosticada; la documentación de GitHub Actions indica que las ejecuciones por horario pueden retrasarse (evidencia s07/01, líneas 19 a 21). Configurada a las 14:14, la primera llegó a las 17:12 [C90, C96] | Regeneración automática institucional con monitoreo y alerta si no ocurre (req. 14) | `docs/evidencia/s07/01_regeneracion_y_tablero.txt`; `docs/evidencia/s08/01_regeneracion_schedule.txt` |
+| Encabezado del tablero: «22 incidencias» no distinguía las revisitas pendientes [C65] | La etiqueta sumaba revisitas a no localizadas y rechazos | Corregido en S06, S07 y S08 (`tablero/generar_tablero.py`, D-27): «22 incidencias, de ellas 6 revisitas pendientes» en el encabezado y la misma redacción, con singular, en las tarjetas de cada lote de trabajo [C92] | sesiones 06 a 08 |
 | Costo del control por fila a escala y tiempos desde la red institucional, sin medir | Pruebas de escala con la cuenta administradora, desde la computadora del piloto | Repetir la prueba de guardados simultáneos con las cuentas de los equipos de campo, desde la red y la nube de TI (req. 17) | `evidencia_escala.md` |
 | Estados de visita y fórmula de avance provisionales | Sin cuestionario real del censo | Cuestionario real (decisión §7.4) | D-15 |
 
@@ -241,7 +251,7 @@ el nombre técnico va entre paréntesis.
 | 8 | Cada visita es una fila, con su persona, fecha y precisión propias. | D-21; D-07 |
 | 11 | Zona horaria de sesión fijada en la base de datos (`ALTER DATABASE … SET timezone`), no confiada al cliente. | D-23 |
 | 12 | Almacenamiento dimensionado con la geometría real de las fincas, con margen para el pico de carga; carga sin tabla de paso duplicada o por partes. | S04, hallazgo 5; [C34, C37] |
-| 13 | Sistema de referencia oficial del marco de fincas definido antes de cargar (el proxy venía en EPSG:8908). | S04, hallazgo 7; [C51] |
+| 13 | Sistema de referencia oficial del marco de fincas definido antes de cargar (el sustituto venía en EPSG:8908). | S04, hallazgo 7; [C51] |
 | 16 | Columna de reparto por zona de equipo (por definir: provincia o UPM), `NOT NULL` + `CHECK` o FK a una tabla de zonas de equipo; una cuenta por equipo de campo. | D-03, D-06; S04, provincias 1–7 como valores [C85] |
 
 ### 6.2 Identidad y acceso
@@ -335,7 +345,7 @@ Resumen con el vocabulario del anexo E; el texto completo de cada decisión est�
 | D-15 | Estados de visita, fórmula de avance y movimientos (provisional). |
 | D-16 | `fecha_visita`: la fija la base de datos solo si queda vacía. |
 | D-17 | `NEON.qgz` fuera del repositorio hasta usar pg_service. |
-| D-18 | Capa de polígonos UGM del SNIT en el esquema `sim` como proxy de las fincas. |
+| D-18 | Capa de polígonos UGM del SNIT en el esquema `sim` como sustituto de las fincas. |
 | D-19 | Un proyecto QFieldCloud por lote de trabajo, con la cuenta de su equipo de campo en la clave del servidor. |
 | D-20 | Corrección de la premisa de D-16: la base de datos nunca sobrescribió `fecha_visita`. |
 | D-21 | Piloto: `encuestador` y precisión de la última edición; fecha de la primera visita. |
@@ -344,6 +354,7 @@ Resumen con el vocabulario del anexo E; el texto completo de cada decisión est�
 | D-24 | Presentación, logo y muestra fuera del repositorio público; el documento para TI sí se versiona. |
 | D-25 | Vocabulario único en la presentación y en este documento (anexo E). |
 | D-26 | Catálogo de cuatro estados y uso del color en la presentación. |
+| D-27 | Etiqueta del tablero: «N incidencias, de ellas M revisitas pendientes». |
 
 ### B. Glosario
 
@@ -360,7 +371,10 @@ Resumen con el vocabulario del anexo E; el texto completo de cada decisión est�
   regeneración automática del tablero con una clave cifrada.
 - **GitHub Pages:** alojamiento de páginas estáticas de GitHub; aquí publica el tablero.
 - **UGM, SNIT, UPM, MDM:** unidades geoestadísticas mínimas; Sistema Nacional de Información
-  Territorial; unidades primarias de muestreo; gestión de dispositivos móviles.
+  Territorial; unidades primarias de muestreo; gestión de dispositivos móviles (confirmado por
+  la persona responsable, sesión 08).
+- **Distrito 20205:** Piedades Sur, cantón San Ramón, provincia Alajuela (División Territorial
+  Administrativa; confirmado por la persona responsable, sesión 08) [C99].
 - **p95:** valor por debajo del cual quedó el 95 % de los tiempos medidos.
 
 ### C. Inventario del repositorio
@@ -385,15 +399,15 @@ Resumen con el vocabulario del anexo E; el texto completo de cada decisión est�
 | Cifra deseada | Situación |
 |---|---|
 | Tiempo entre sincronización de QFieldCloud y aparición en el tablero | Sin medir: requiere la parte 2 de D-22. |
-| Regularidad de la regeneración automática cada 30 min | Sin medir: una sola ejecución por horario observada, casi 3 h después de configurada [C89, C96]. |
+| Frecuencia de la regeneración automática cada 30 min | No demostrada: se ejecutó sola 4 veces, con intervalos de 2 h 23 min a 5 h 18 min [C100, C101]. |
 | Costo del control por fila con guardados simultáneos a escala | Sin medir: las pruebas usaron la cuenta administradora. |
 | Latencias desde la red institucional, la nube de TI o QField | Sin medir: todo desde la computadora del piloto. |
 | Comportamiento con 90.000 fincas (tamaño, vistas, tablero, paquete) | Sin medir: solo extrapolación desde 50.794 [C34, C35]. |
-| Pico de almacenamiento durante la carga | Sin medir: estimado por suma [C37]. |
+| Pico de almacenamiento durante la carga | Sin medir: estimado por suma con 50.794 [C37] y por proporción con 90.000 [C102]. |
 | Límite real de almacenamiento del plan gratuito | Sin verificar: 0,5 GB según el proveedor [C36]. |
 | Concurrencia por encima de 25 conexiones (operativo: ~700 personas) | Sin medir [C04, C05, C43]. |
 | Tiempo de restauración de un respaldo | Sin medir: no se probó restaurar. |
-| Tiempos de visita y rendimiento por censista | Sin medir: no hubo operativo real; el proxy no sirve para esto. |
+| Tiempos de visita y rendimiento por censista | Sin medir: no hubo operativo real; el sustituto no sirve para esto. |
 | Costos comparados (nube frente a servidores propios) | Sin medir: no hay cotizaciones en el repositorio. |
 
 ### E. Vocabulario
@@ -406,7 +420,7 @@ lista lo que no se usa para ese concepto.
 | La base PostgreSQL/PostGIS | «base de datos» (completo en títulos y en el cuerpo) | «la base» sola |
 | Objetos del piloto | «polígonos de prueba» (1.432, distrito 20205) | finca, objeto, UGM |
 | Objetos de producción | «fincas» | — |
-| Capa del proxy de escala | «polígonos UGM (proxy)» | fincas, objetos |
+| Capa sustituta para medir escala | «polígonos UGM (sustituto)»; en la primera aparición, «sustituto de las fincas para medir escala» | fincas, objetos, proxy |
 | Unidad de reparto del piloto | «lote de trabajo A/B» | lote, parte, zona, equipo |
 | Unidad de reparto en producción | «zona de equipo (por definir: provincia o UPM)» | zona a secas |
 | Cuenta dueña de la base de datos | «cuenta administradora» | propietario, rol, nombre técnico de la cuenta |
@@ -418,6 +432,9 @@ lista lo que no se usa para ese concepto.
 | Hardware | «computadora» | equipo |
 | Personas | «equipo de campo» | equipo a secas |
 | Estado terminal de visita | «visita concluida» | cerrada |
+| Revisita aún no resuelta (tablero, D-27) | «revisita pendiente» | sin cerrar, abierta |
+| Mapa dibujado por imágenes | «teselas» | mosaicos |
+| Siglas UGM, UPM, SNIT, MDM | expansión del anexo B en la primera aparición (confirmado por la persona responsable, sesión 08) | sigla sin expandir |
 | Fase terminada | «completada» | cerrada |
 | Ventana de Neon | «solo se puede volver atrás 6 horas» | restauración de 6 h |
 | Revisor | «revisión automática independiente (programa, sin acceso a la conversación)» | agente |

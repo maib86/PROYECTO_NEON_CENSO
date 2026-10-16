@@ -1,0 +1,14 @@
+Regeneración automática: ejecuciones por horario (S08, consultado 16/10/2026 07:19 hora de Costa Rica, UTC-6; 13:19 UTC)
+Comando: gh run list --workflow tablero.yml --event schedule --limit 50
+completed	success	Tablero de avance	Tablero de avance	main	schedule	38898646370	34s	2026-10-16T12:10:08Z
+completed	success	Tablero de avance	Tablero de avance	main	schedule	38863617011	29s	2026-10-16T06:51:41Z
+completed	success	Tablero de avance	Tablero de avance	main	schedule	38835925421	30s	2026-10-16T01:35:17Z
+completed	success	Tablero de avance	Tablero de avance	main	schedule	38822130963	29s	2026-10-15T23:12:11Z
+
+En hora de Costa Rica (UTC-6) e intervalos:
+1. 15/10/2026 17:12
+2. 15/10/2026 19:35 · intervalo 2:23:06
+3. 16/10/2026 00:51 · intervalo 5:16:24
+4. 16/10/2026 06:10 · intervalo 5:18:27
+Ejecuciones por horario: 4 · intervalos: 2 h 23 min, 5 h 16 min y 5 h 18 min · configurada cada 30 min
+Entre la última (06:10) y la consulta (07:19): ninguna.

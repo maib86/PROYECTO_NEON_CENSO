@@ -109,10 +109,10 @@ def fmt_n(n, singular, plural):
 
 
 def fmt_incidencias(incid, revisitas):
-    """«N incidencias, de ellas M revisitas sin cerrar»; sin la segunda parte si M es 0."""
+    """«N incidencias, de ellas M revisitas pendientes» (D-27); sin la segunda parte si M es 0."""
     txt = fmt_n(incid, "incidencia", "incidencias")
     if int(revisitas):
-        txt += f", {'de ella' if int(incid) == 1 else 'de ellas'} {fmt_n(revisitas, 'revisita sin cerrar', 'revisitas sin cerrar')}"
+        txt += f", {'de ella' if int(incid) == 1 else 'de ellas'} {fmt_n(revisitas, 'revisita pendiente', 'revisitas pendientes')}"
     return txt
 
 
