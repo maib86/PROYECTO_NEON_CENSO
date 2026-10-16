@@ -1,0 +1,59 @@
+## S08d paso 1 — ids para la demostracion (cuenta administradora, solo SELECT)
+$ psql -X -w -v ON_ERROR_STOP=1 -f - <<'SQL'
+SET TIME ZONE 'America/Costa_Rica';
+SELECT CASE WHEN v.precision_gnss_m IS NULL THEN 'QGIS' ELSE 'QField' END AS origen, v.finca_id, v.lote, v.codigo_upm AS upm, g.ugm, v.estado_visita, to_char(v.fecha_visita,'DD/MM/YYYY HH24:MI:SS') AS fecha_visita, round(v.precision_gnss_m::numeric,1) AS precision_gnss_m, v.editado_por, to_char(v.fecha_edicion,'DD/MM/YYYY HH24:MI:SS') AS fecha_edicion
+FROM mgn.finca_visita v LEFT JOIN mgn.v_tab_geo_poligonos g ON g.id = v.finca_id
+WHERE v.estado_visita <> 'pendiente' AND v.editado_por = 'edit_lote_a'
+ORDER BY origen, v.finca_id;
+SELECT v.finca_id, v.lote, v.codigo_upm AS upm, g.ugm, v.estado_visita, v.editado_por, to_char(v.fecha_edicion,'DD/MM/YYYY HH24:MI:SS') AS fecha_edicion FROM mgn.finca_visita v LEFT JOIN mgn.v_tab_geo_poligonos g ON g.id = v.finca_id WHERE v.finca_id = 258;
+SELECT editado_por, estado_visita, count(*) FROM mgn.finca_visita WHERE estado_visita <> 'pendiente' GROUP BY 1,2 ORDER BY 1,2;
+SELECT lote, count(*) FROM mgn.finca_visita GROUP BY 1 ORDER BY 1;
+SQL
+# rol: owner · rc=0 · tiempo de pared: 1.24 s
+SET
+ origen | finca_id | lote |   upm    |  ugm  | estado_visita |    fecha_visita     | precision_gnss_m | editado_por |    fecha_edicion    
+--------+----------+------+----------+-------+---------------+---------------------+------------------+-------------+---------------------
+ QField |     1396 | A    | 20205010 | 16716 | visitada      | 15/10/2026 16:29:35 |              1.6 | edit_lote_a | 15/10/2026 16:30:01
+ QField |     1398 | A    | 20205010 | 16716 | revisita      | 15/10/2026 16:01:08 |              1.5 | edit_lote_a | 15/10/2026 16:13:37
+ QField |     1405 | A    | 20205010 | 16716 | rechazo       | 15/10/2026 16:00:13 |              1.5 | edit_lote_a | 15/10/2026 16:13:37
+ QField |     1406 | A    | 20205010 | 16716 | visitada      | 15/10/2026 15:58:39 |              1.5 | edit_lote_a | 15/10/2026 16:13:37
+ QGIS   |       57 | A    | 20205003 | 16694 | visitada      | 15/10/2026 13:02:30 |                  | edit_lote_a | 15/10/2026 13:02:30
+ QGIS   |       58 | A    | 20205003 | 16691 | visitada      | 15/10/2026 13:02:30 |                  | edit_lote_a | 15/10/2026 13:02:30
+ QGIS   |       62 | A    | 20205003 | 16691 | visitada      | 15/10/2026 13:02:30 |                  | edit_lote_a | 15/10/2026 13:02:30
+ QGIS   |       63 | A    | 20205003 | 16691 | visitada      | 15/10/2026 13:02:30 |                  | edit_lote_a | 15/10/2026 13:02:30
+ QGIS   |       64 | A    | 20205003 | 16691 | visitada      | 15/10/2026 13:02:30 |                  | edit_lote_a | 15/10/2026 13:02:30
+ QGIS   |       65 | A    | 20205003 | 16691 | visitada      | 15/10/2026 13:02:30 |                  | edit_lote_a | 15/10/2026 13:02:30
+ QGIS   |       66 | A    | 20205003 | 16691 | visitada      | 15/10/2026 13:02:30 |                  | edit_lote_a | 15/10/2026 13:02:30
+ QGIS   |       67 | A    | 20205003 | 16691 | visitada      | 15/10/2026 13:02:30 |                  | edit_lote_a | 15/10/2026 13:02:30
+ QGIS   |       68 | A    | 20205003 | 16691 | visitada      | 15/10/2026 13:02:30 |                  | edit_lote_a | 15/10/2026 13:02:30
+ QGIS   |       70 | A    | 20205003 |       | visitada      | 15/10/2026 13:02:30 |                  | edit_lote_a | 15/10/2026 13:02:30
+ QGIS   |       71 | A    | 20205003 | 16691 | no_localizada | 15/10/2026 13:02:30 |                  | edit_lote_a | 15/10/2026 13:02:30
+ QGIS   |       72 | A    | 20205003 | 16691 | no_localizada | 15/10/2026 13:02:30 |                  | edit_lote_a | 15/10/2026 13:02:30
+ QGIS   |       73 | A    | 20205003 | 16694 | no_localizada | 15/10/2026 13:02:30 |                  | edit_lote_a | 15/10/2026 13:02:30
+ QGIS   |       74 | A    | 20205003 | 16691 | no_localizada | 15/10/2026 13:02:30 |                  | edit_lote_a | 15/10/2026 13:02:30
+ QGIS   |       75 | A    | 20205003 | 16694 | no_localizada | 15/10/2026 13:02:30 |                  | edit_lote_a | 15/10/2026 13:02:30
+(19 rows)
+
+ finca_id | lote |   upm    | ugm | estado_visita | editado_por  |    fecha_edicion    
+----------+------+----------+-----+---------------+--------------+---------------------
+      258 | B    | 20205009 |     | pendiente     | neondb_owner | 15/10/2026 11:57:10
+(1 row)
+
+ editado_por | estado_visita | count 
+-------------+---------------+-------
+ edit_lote_a | no_localizada |     5
+ edit_lote_a | rechazo       |     1
+ edit_lote_a | revisita      |     1
+ edit_lote_a | visitada      |    12
+ edit_lote_b | no_localizada |     5
+ edit_lote_b | rechazo       |     5
+ edit_lote_b | revisita      |     5
+ edit_lote_b | visitada      |     5
+(8 rows)
+
+ lote | count 
+------+-------
+ A    |   709
+ B    |   723
+(2 rows)
+

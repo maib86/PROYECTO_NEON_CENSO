@@ -61,7 +61,7 @@ def main() -> int:
         logo = '<img alt="INEC" src="data:image/png;base64,' + base64.b64encode(LOGO.read_bytes()).decode() + '">'
     html = f"""<!DOCTYPE html><html lang="es-CR"><head><meta charset="utf-8">
 <title>Requerimientos para producción · Piloto NEON-CENSO</title><style>{CSS}</style></head><body>
-<div class="head">{logo}<div class="who">INEC · Unidad de Cartografía<br>Piloto NEON-CENSO</div><div class="sp"></div><div class="mark">NEON-TI-01 · v2</div></div>
+<div class="head">{logo}<div class="who">INEC · Unidad de Cartografía<br>Piloto NEON-CENSO</div><div class="sp"></div><div class="mark">NEON-TI-01 · v4</div></div>
 {cuerpo}</body></html>"""
     SALIDA.mkdir(parents=True, exist_ok=True)
     ruta_html = SALIDA / "REQUERIMIENTOS_TI.html"
@@ -74,7 +74,7 @@ def main() -> int:
         pag.pdf(path=str(ruta_pdf), format="A4", print_background=True,
                 display_header_footer=True, header_template="<span></span>",
                 footer_template='<div style="font-size:7pt;font-family:Segoe UI,Arial;color:#6B7280;width:100%;text-align:center">'
-                                'Requerimientos para producción · Piloto NEON-CENSO · página <span class="pageNumber"></span> de <span class="totalPages"></span></div>',
+                                'NEON-TI-01 · v4 · Requerimientos para producción · Piloto NEON-CENSO · página <span class="pageNumber"></span> de <span class="totalPages"></span></div>',
                 margin={"top": "16mm", "bottom": "16mm", "left": "15mm", "right": "15mm"})
         nav.close()
     print(f"HTML: {ruta_html.relative_to(RAIZ)} ({ruta_html.stat().st_size} bytes)")

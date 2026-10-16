@@ -430,3 +430,26 @@ caben en un HTML estático.
 (`generar_tablero.py` sin `--v2`) y se recupera con `git revert` del commit de publicación.
 Para producción (~90.000 polígonos) el JSON embebido no escala: hace falta agregación del
 lado del servidor o teselas vectoriales (nota para requerimientos TI).
+
+## D-29 · 2026-10-16 · Presentación v4 en dos partes, construida desde un guion externo
+
+**Contexto.** La v3 (18 láminas, dos rondas de auditoría) explicaba qué se probó, pero no qué
+mecanismo actúa detrás de cada cosa que se ve. El 16/10 la sesión web encargó un guion a un
+revisor sin contexto previo del proyecto (`docs/presentacion/guion_v4.md`, fuera del
+repositorio, D-24). Ese mismo día, el encargado del censo dijo que QFieldCloud ya corre en
+servidores del INEC y que todos los operativos salen con QField.
+**Decisión.** Presentación v4 de 22 láminas en dos partes, «Qué está corriendo» (L01 a L12) y
+«Qué hace falta para el censo» (L13 a L22), abierta con el tablero en vivo
+(`guion_demostracion.md`, con los ids reales). Cada lámina lleva en notas del orador «Qué pasa
+detrás», «Frase de cierre» y «Pregunta probable». El dato de QFieldCloud del INEC se registra
+como dicho por el encargado del censo (16/10). Que esa instancia admita capas PostGIS es una
+inferencia: queda PENDIENTE DE TI. Entregable del documento: NEON-TI-01 v4, con una sección
+nueva, «Migración desde el piloto».
+**Descartado.** Rehacer el sistema visual: no había tiempo, y la v3 ya pasó dos rondas de
+auditoría. Se reutilizan su motor, sus estilos, los estados D-26, el vocabulario D-25/D-27 y
+las marcas `data-cifra`.
+**Consecuencias.** `docs/presentacion/fuente/construir_presentacion_v4.py` y
+`plantilla_v4.html` arman la v4. La v3 se conserva como
+`PRESENTACION_NEON_CENSO_2026-10-19_v3.html`. Las capturas de la persona no se editan: se
+recortan en memoria y las llamadas numeradas se superponen. Cifras nuevas C108 a C123 en
+`CIFRAS.csv`; el consumo de Neon (C115 a C117) es lectura de pantalla, no de script.
