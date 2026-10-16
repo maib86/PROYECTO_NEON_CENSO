@@ -1,0 +1,165 @@
+# S08c paso 7 — pruebas automáticas · 2026-10-16 09:08:47 -06:00 · tras la revisión independiente
+$ py tablero/generar_tablero.py --v2 --fixture --salida tablero/salida/v2/fixture.html
+Tablero v2 escrito en tablero/salida/v2/fixture.html (1158 KB)
+rc=0
+$ py tablero/generar_tablero.py --v2 --salida tablero/salida/v2/index.html   (DATABASE_URL_TABLERO de .env, sin mostrarla)
+Tablero v2 escrito en tablero/salida/v2/index.html (1158 KB)
+
+rc=0
+$ py tablero/generar_tablero.py --salida tablero/salida/v1_control.html   (la v1 sigue funcionando)
+Tablero escrito en tablero/salida/v1_control.html (123 KB)
+
+rc=0
+
+$ py tablero/probar_tablero_v2.py tablero/salida/v2/fixture.html --dir <scratchpad>/fixture
+[OK] Tamaño del HTML < 2,5 MB · 1186259 bytes (1.13 MB)
+[OK] grep -i observaciones = 0 · HTML completo 0 · fuera de la biblioteca embebida 0
+[OK] grep -i posicion_registro = 0 · HTML completo 0 · fuera de la biblioteca embebida 0
+[OK] grep -i sin cerrar = 0 · HTML completo 0 · fuera de la biblioteca embebida 0
+[OK] grep -i \bproxy\b: solo «leaflet-proxy» de la biblioteca · HTML completo 1 · fuera de la biblioteca embebida 0 · coincidencias: ['leaflet-proxy']
+[OK] grep -i mosaico = 0 · HTML completo 0 · fuera de la biblioteca embebida 0
+[OK] grep -i \bfincas?\b = 0 · HTML completo 0 · fuera de la biblioteca embebida 0
+[OK] grep -i neon\.tech = 0 · HTML completo 0 · fuera de la biblioteca embebida 0
+[OK] grep -i npg_ = 0 · HTML completo 0 · fuera de la biblioteca embebida 0
+[OK] grep -i postgres(ql)?:// = 0 · HTML completo 0 · fuera de la biblioteca embebida 0
+[OK] grep -i \bla base\b(?! de datos) = 0 · HTML completo 0 · fuera de la biblioteca embebida 0
+[OK] grep -i neondb_owner|edit_lote_[ab] = 0 · HTML completo 0 · fuera de la biblioteca embebida 0
+     resumen_bd: {'total': 1432, 'concluidas': 33, 'incidencias': 22, 'revisitas': 6} · generado_en: 2026-10-16T09:08:48-06:00
+[OK] 1100 px: Total = resumen_bd.total · 1432 vs 1432
+[OK] 1100 px: concluidas = resumen_bd · 33 vs 33
+[OK] 1100 px: incidencias = resumen_bd · 22 vs 22
+[OK] 1100 px: revisitas = resumen_bd · 6 vs 6
+[OK] 1100 px: etiqueta D-27 igual a fmt_incidencias · «22 incidencias, de ellas 6 revisitas pendientes»
+[OK] 1100 px: línea de ubicación exacta · «Alajuela › San Ramón › Piedades Sur (20205)»
+[OK] 1100 px: sin select de provincia, cantón ni distrito · selects: ['f-upm', 'f-ugm', 'f-lote', 'f-encv', 'f-est']
+[OK] 1100 px: selects UPM, UGM, lote de trabajo, encuestador y estado
+[OK] 1100 px: sin desplazamiento horizontal de la página
+[OK] 1100 px: lote de trabajo A → Total 709 · 709
+[OK] 1100 px: lote de trabajo B → Total 723 · 723
+[OK] 1100 px: UGM 16675 → Total = su conteo en los datos · 2 vs «UGM 16675 (2)» vs 2
+[OK] 1100 px: estado del filtro en el hash · #ugm=16675
+[OK] 1100 px: buscar 258 abre su ficha con lote de trabajo B · Polígono 258 | UPM	20205009 | UGM	sin UGM | Lote de trabajo	B | Estado	Pendiente | Encuestador	sin encuestador registrado | Fecha de visita	— | Precisión GNSS (
+[OK] 1100 px: ficha de un polígono visitado sin el término vedado · id 1
+[OK] 1100 px: vocabulario D-25 en página, fichas y tooltips = 0 prohibidos
+[OK] 1100 px: sin nombres técnicos de cuenta en el texto
+[OK] 1100 px: id inexistente → «sin resultados»
+[OK] 1100 px: cambio manual a «Mapa claro»
+     teselas cargadas tras el cambio: 20
+[OK] 1100 px: abrir con #lote=B → Total 723 y select en B · 723 · B
+[OK] 1100 px: Estado no se reinicia al cambiar lote de trabajo · 12 vs 12
+[OK] 1100 px: cambiar UPM reinicia lote de trabajo (nivel inferior) · lote=''
+[OK] 1100 px: movimientos del lote de trabajo B sin pendientes y no más de 25 · 20 filas
+[OK] 1100 px: encuestadores: suma de guardados = 39 · [20, 19]
+[OK] 1100 px: ningún guardado como «sin encuestador registrado» · ['encuestador_01', 'cuenta del equipo A']
+[OK] 1100 px: actividad diaria = 33 concluidas en 14 días · 33 visitas concluidas en los últimos 14 días (03/10/2026 a 16/10/2026).
+[OK] 1100 px: 0 errores de consola · []
+[OK] 400 px: Total = resumen_bd.total · 1432 vs 1432
+[OK] 400 px: concluidas = resumen_bd · 33 vs 33
+[OK] 400 px: incidencias = resumen_bd · 22 vs 22
+[OK] 400 px: revisitas = resumen_bd · 6 vs 6
+[OK] 400 px: etiqueta D-27 igual a fmt_incidencias · «22 incidencias, de ellas 6 revisitas pendientes»
+[OK] 400 px: línea de ubicación exacta · «Alajuela › San Ramón › Piedades Sur (20205)»
+[OK] 400 px: sin select de provincia, cantón ni distrito · selects: ['f-upm', 'f-ugm', 'f-lote', 'f-encv', 'f-est']
+[OK] 400 px: selects UPM, UGM, lote de trabajo, encuestador y estado
+[OK] 400 px: sin desplazamiento horizontal de la página
+[OK] 400 px: lote de trabajo A → Total 709 · 709
+[OK] 400 px: lote de trabajo B → Total 723 · 723
+[OK] 400 px: UGM 16675 → Total = su conteo en los datos · 2 vs «UGM 16675 (2)» vs 2
+[OK] 400 px: estado del filtro en el hash · #ugm=16675
+[OK] 400 px: buscar 258 abre su ficha con lote de trabajo B · Polígono 258 | UPM	20205009 | UGM	sin UGM | Lote de trabajo	B | Estado	Pendiente | Encuestador	sin encuestador registrado | Fecha de visita	— | Precisión GNSS (
+[OK] 400 px: ficha de un polígono visitado sin el término vedado · id 1
+[OK] 400 px: vocabulario D-25 en página, fichas y tooltips = 0 prohibidos
+[OK] 400 px: sin nombres técnicos de cuenta en el texto
+[OK] 400 px: id inexistente → «sin resultados»
+[OK] 400 px: cambio manual a «Mapa claro»
+     teselas cargadas tras el cambio: 6
+[OK] 400 px: abrir con #lote=B → Total 723 y select en B · 723 · B
+[OK] 400 px: Estado no se reinicia al cambiar lote de trabajo · 12 vs 12
+[OK] 400 px: cambiar UPM reinicia lote de trabajo (nivel inferior) · lote=''
+[OK] 400 px: movimientos del lote de trabajo B sin pendientes y no más de 25 · 20 filas
+[OK] 400 px: encuestadores: suma de guardados = 39 · [20, 19]
+[OK] 400 px: ningún guardado como «sin encuestador registrado» · ['encuestador_01', 'cuenta del equipo A']
+[OK] 400 px: actividad diaria = 33 concluidas en 14 días · 33 visitas concluidas en los últimos 14 días (03/10/2026 a 16/10/2026).
+[OK] 400 px: 0 errores de consola · []
+
+Resultado: 66 de 66 pruebas OK · 0 fallas
+rc=0
+
+$ py tablero/probar_tablero_v2.py tablero/salida/v2/index.html --dir docs/evidencia/s08c
+[OK] Tamaño del HTML < 2,5 MB · 1186359 bytes (1.13 MB)
+[OK] grep -i observaciones = 0 · HTML completo 0 · fuera de la biblioteca embebida 0
+[OK] grep -i posicion_registro = 0 · HTML completo 0 · fuera de la biblioteca embebida 0
+[OK] grep -i sin cerrar = 0 · HTML completo 0 · fuera de la biblioteca embebida 0
+[OK] grep -i \bproxy\b: solo «leaflet-proxy» de la biblioteca · HTML completo 1 · fuera de la biblioteca embebida 0 · coincidencias: ['leaflet-proxy']
+[OK] grep -i mosaico = 0 · HTML completo 0 · fuera de la biblioteca embebida 0
+[OK] grep -i \bfincas?\b = 0 · HTML completo 0 · fuera de la biblioteca embebida 0
+[OK] grep -i neon\.tech = 0 · HTML completo 0 · fuera de la biblioteca embebida 0
+[OK] grep -i npg_ = 0 · HTML completo 0 · fuera de la biblioteca embebida 0
+[OK] grep -i postgres(ql)?:// = 0 · HTML completo 0 · fuera de la biblioteca embebida 0
+[OK] grep -i \bla base\b(?! de datos) = 0 · HTML completo 0 · fuera de la biblioteca embebida 0
+[OK] grep -i neondb_owner|edit_lote_[ab] = 0 · HTML completo 0 · fuera de la biblioteca embebida 0
+     resumen_bd: {'total': 1432, 'concluidas': 33, 'incidencias': 22, 'revisitas': 6} · generado_en: 2026-10-16T09:08:51-06:00
+[OK] 1100 px: Total = resumen_bd.total · 1432 vs 1432
+[OK] 1100 px: concluidas = resumen_bd · 33 vs 33
+[OK] 1100 px: incidencias = resumen_bd · 22 vs 22
+[OK] 1100 px: revisitas = resumen_bd · 6 vs 6
+[OK] 1100 px: etiqueta D-27 igual a fmt_incidencias · «22 incidencias, de ellas 6 revisitas pendientes»
+[OK] 1100 px: línea de ubicación exacta · «Alajuela › San Ramón › Piedades Sur (20205)»
+[OK] 1100 px: sin select de provincia, cantón ni distrito · selects: ['f-upm', 'f-ugm', 'f-lote', 'f-encv', 'f-est']
+[OK] 1100 px: selects UPM, UGM, lote de trabajo, encuestador y estado
+[OK] 1100 px: sin desplazamiento horizontal de la página
+[OK] 1100 px: lote de trabajo A → Total 709 · 709
+[OK] 1100 px: lote de trabajo B → Total 723 · 723
+[OK] 1100 px: UGM 16675 → Total = su conteo en los datos · 2 vs «UGM 16675 (2)» vs 2
+[OK] 1100 px: estado del filtro en el hash · #ugm=16675
+[OK] 1100 px: buscar 258 abre su ficha con lote de trabajo B · Polígono 258 | UPM	20205009 | UGM	sin UGM | Lote de trabajo	B | Estado	Pendiente | Encuestador	sin encuestador registrado | Fecha de visita	— | Precisión GNSS (
+[OK] 1100 px: ficha de un polígono visitado sin el término vedado · id 1
+[OK] 1100 px: vocabulario D-25 en página, fichas y tooltips = 0 prohibidos
+[OK] 1100 px: sin nombres técnicos de cuenta en el texto
+[OK] 1100 px: id inexistente → «sin resultados»
+[OK] 1100 px: cambio manual a «Mapa claro»
+     teselas cargadas tras el cambio: 15
+[OK] 1100 px: abrir con #lote=B → Total 723 y select en B · 723 · B
+[OK] 1100 px: Estado no se reinicia al cambiar lote de trabajo · 12 vs 12
+[OK] 1100 px: cambiar UPM reinicia lote de trabajo (nivel inferior) · lote=''
+[OK] 1100 px: movimientos del lote de trabajo B sin pendientes y no más de 25 · 20 filas
+[OK] 1100 px: encuestadores: suma de guardados = 39 · [20, 19]
+[OK] 1100 px: ningún guardado como «sin encuestador registrado» · ['cuenta del equipo B', 'cuenta del equipo A']
+[OK] 1100 px: actividad diaria = 33 concluidas en 14 días · 33 visitas concluidas en los últimos 14 días (03/10/2026 a 16/10/2026).
+[OK] 1100 px: 0 errores de consola · []
+[OK] 400 px: Total = resumen_bd.total · 1432 vs 1432
+[OK] 400 px: concluidas = resumen_bd · 33 vs 33
+[OK] 400 px: incidencias = resumen_bd · 22 vs 22
+[OK] 400 px: revisitas = resumen_bd · 6 vs 6
+[OK] 400 px: etiqueta D-27 igual a fmt_incidencias · «22 incidencias, de ellas 6 revisitas pendientes»
+[OK] 400 px: línea de ubicación exacta · «Alajuela › San Ramón › Piedades Sur (20205)»
+[OK] 400 px: sin select de provincia, cantón ni distrito · selects: ['f-upm', 'f-ugm', 'f-lote', 'f-encv', 'f-est']
+[OK] 400 px: selects UPM, UGM, lote de trabajo, encuestador y estado
+[OK] 400 px: sin desplazamiento horizontal de la página
+[OK] 400 px: lote de trabajo A → Total 709 · 709
+[OK] 400 px: lote de trabajo B → Total 723 · 723
+[OK] 400 px: UGM 16675 → Total = su conteo en los datos · 2 vs «UGM 16675 (2)» vs 2
+[OK] 400 px: estado del filtro en el hash · #ugm=16675
+[OK] 400 px: buscar 258 abre su ficha con lote de trabajo B · Polígono 258 | UPM	20205009 | UGM	sin UGM | Lote de trabajo	B | Estado	Pendiente | Encuestador	sin encuestador registrado | Fecha de visita	— | Precisión GNSS (
+[OK] 400 px: ficha de un polígono visitado sin el término vedado · id 1
+[OK] 400 px: vocabulario D-25 en página, fichas y tooltips = 0 prohibidos
+[OK] 400 px: sin nombres técnicos de cuenta en el texto
+[OK] 400 px: id inexistente → «sin resultados»
+[OK] 400 px: cambio manual a «Mapa claro»
+     teselas cargadas tras el cambio: 6
+[OK] 400 px: abrir con #lote=B → Total 723 y select en B · 723 · B
+[OK] 400 px: Estado no se reinicia al cambiar lote de trabajo · 12 vs 12
+[OK] 400 px: cambiar UPM reinicia lote de trabajo (nivel inferior) · lote=''
+[OK] 400 px: movimientos del lote de trabajo B sin pendientes y no más de 25 · 20 filas
+[OK] 400 px: encuestadores: suma de guardados = 39 · [20, 19]
+[OK] 400 px: ningún guardado como «sin encuestador registrado» · ['cuenta del equipo B', 'cuenta del equipo A']
+[OK] 400 px: actividad diaria = 33 concluidas en 14 días · 33 visitas concluidas en los últimos 14 días (03/10/2026 a 16/10/2026).
+[OK] 400 px: 0 errores de consola · []
+
+Resultado: 66 de 66 pruebas OK · 0 fallas
+rc=0
+
+$ py docs/requerimientos_ti/verificar_vocabulario.py --html tablero/plantilla_v2.html --sin-revisar
+
+prohibidos: 0 · para revisar a mano: 60
+rc=0

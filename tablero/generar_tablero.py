@@ -377,12 +377,25 @@ def render(datos, generado, alcance=ALCANCE[ESQUEMA_DEFECTO]):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--salida", default="tablero/index.html")
-    ap.add_argument("--fixture", help="JSON con las cinco vistas, para probar sin base")
+    ap.add_argument("--salida", help="Por defecto tablero/index.html (v1) o tablero/salida/v2/index.html (v2)")
+    ap.add_argument("--fixture", nargs="?", const="",
+                    help="JSON con las vistas, para probar sin base (con --v2 puede ir sin ruta: "
+                         "tablero/fixtures/fixture_v2.json)")
     ap.add_argument("--volcar", help="Guardar los datos leídos de la base en este JSON (para depurar)")
     ap.add_argument("--esquema", default=ESQUEMA_DEFECTO,
                     help="Esquema de las vistas v_tab_* (por defecto mgn)")
+    ap.add_argument("--v2", action="store_true",
+                    help="Tablero v2: mapa, filtros jerárquicos e indicadores en el navegador (D-28)")
+    ap.add_argument("--volcar-fixture", help="Con --v2: escribir el fixture anonimizado desde la base")
     a = ap.parse_args()
+    if a.v2:
+        from generar_tablero_v2 import main_v2
+        return main_v2(a)
+    if a.volcar_fixture:
+        sys.exit("--volcar-fixture es de la versión 2 (usar con --v2).")
+    if a.fixture == "":
+        sys.exit("--fixture necesita la ruta del JSON en la versión 1.")
+    a.salida = a.salida or "tablero/index.html"
     if not re.fullmatch(r"[a-z_][a-z0-9_]*", a.esquema):
         sys.exit(f"Nombre de esquema no válido: {a.esquema!r}")
 

@@ -139,3 +139,23 @@ AJUSTES FRECUENTES
   Zona horaria            : las vistas ya convierten a America/Costa_Rica
 
 =======================================================================
+
+
+TABLERO V2 (D-28, spec S08c)
+-----------------------------------------------------------------------
+  generar_tablero.py --v2      Mapa con imagen satelital, contornos de
+                               UGM, filtros jerárquicos e indicadores
+                               que se recalculan en el navegador.
+                               Lee mgn.v_tab_geo_poligonos,
+                               mgn.v_tab_geo_ugm y mgn.v_tab_resumen
+                               (sql/11_vistas_geo_tablero.sql).
+  generar_tablero_v2.py        Módulo de la v2 (lo llama --v2).
+  plantilla_v2.html            Plantilla de la v2.
+  vendor/                      Leaflet 1.9.4 embebido (ORIGEN.md).
+  fixtures/fixture_v2.json     Vistas reales con encuestador seudonimizado.
+  probar_tablero_v2.py         Pruebas automáticas (texto y navegador).
+
+  Con la base:   py tablero/generar_tablero.py --v2 --salida tablero/salida/v2/index.html
+  Sin la base:   py tablero/generar_tablero.py --v2 --fixture
+  Fixture nuevo: py tablero/generar_tablero.py --v2 --volcar-fixture tablero/fixtures/fixture_v2.json
+  Pruebas:       py tablero/probar_tablero_v2.py tablero/salida/v2/index.html --dir docs/evidencia/s08c

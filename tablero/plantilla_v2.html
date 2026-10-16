@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Tablero de avance · Piloto PROYECTO_NEON_CENSO</title>
+<!-- Leaflet 1.9.4 embebido (tablero/vendor/ORIGEN.md). Inicio de biblioteca embebida. -->
+<style>{{LEAFLET_CSS}}</style>
+<!-- Fin de biblioteca embebida. -->
+<style>
+:root{--fondo:#0B1220;--sup:#121B30;--borde:#223049;--texto:#E6EAF2;--sec:#9AA6BF;--acento:#2F6FED;
+--barra:#1A2742;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fondo);color:var(--texto);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-variant-numeric:tabular-nums}
+a{color:#8DB0FF}
+.envoltura{max-width:1200px;margin:0 auto;padding:0 16px}
+header.cab{padding:18px 0 10px}
+.cab h1{font-size:21px;margin:0 0 6px;font-weight:650;letter-spacing:.01em}
+.cab .meta{color:var(--sec);font-size:14px;display:flex;flex-wrap:wrap;gap:4px 14px}
+.distintivo{display:inline-block;margin-top:10px;font-size:14px;padding:4px 10px;border-radius:999px;border:1px solid #6B5A1E;background:#2A2410;color:#F6D776}
+nav.anclas{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+nav.anclas a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border:1px solid var(--borde);border-radius:8px;background:var(--sup);color:var(--texto);text-decoration:none;font-size:14px}
+nav.anclas a:hover{border-color:var(--acento)}
+/* Barra de filtros fija */
+.barra{position:sticky;top:0;z-index:1100;background:rgba(11,18,32,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--borde);padding:8px 0}
+.ubic{font-size:14px;color:var(--sec);margin-bottom:6px}
+.ubic b{color:var(--texto);font-weight:600}
+.fila-filtros{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-end}
+.campo{display:flex;flex-direction:column;gap:2px;min-width:140px;flex:1 1 140px}
+.campo label{font-size:14px;color:var(--sec)}
+select,input[type=search],button{font:inherit;font-size:15px;min-height:40px;border-radius:8px;border:1px solid var(--borde);background:var(--sup);color:var(--texto);padding:0 10px}
+select:focus,input:focus,button:focus-visible{outline:2px solid var(--acento);outline-offset:1px}
+button{cursor:pointer}
+button.prim{background:var(--acento);border-color:var(--acento);color:#fff}
+.acciones{display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap}
+.contador{font-size:14px;color:var(--sec);margin-top:6px;display:flex;flex-wrap:wrap;gap:4px 14px}
+.contador b{color:var(--texto)}
+#niveles{font-size:14px;color:var(--sec)}
+#btn-filtros{display:none}
+.chips{display:none;flex-wrap:wrap;gap:6px}
+.chip{font-size:14px;padding:2px 10px;border-radius:999px;background:var(--barra);border:1px solid var(--borde)}
+#busqueda-msg{font-size:14px;color:#F6B26B;min-height:0}
+@media(max-width:700px){
+  #btn-filtros{display:inline-flex;align-items:center}
+  .chips{display:flex}
+  .barra:not(.abierta) .plegable{display:none}
+  .cab h1{font-size:19px}
+}
+main{padding:14px 0 30px;display:grid;gap:14px;grid-template-columns:minmax(0,1fr)}
+section.tarjeta{background:var(--sup);border:1px solid var(--borde);border-radius:12px;padding:14px 16px;scroll-margin-top:150px}
+section.tarjeta h2{font-size:15px;margin:0 0 10px;font-weight:650;color:var(--texto)}
+section.tarjeta h2 small{font-weight:400;color:var(--sec);font-size:14px;margin-left:6px}
+/* Indicadores */
+.indicadores{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(165px,1fr))}
+.ind{background:var(--sup);border:1px solid var(--borde);border-radius:12px;padding:12px 14px}
+.ind .k{font-size:14px;color:var(--sec)}
+.ind .v{font-size:26px;font-weight:700;line-height:1.2;margin-top:2px}
+.ind .d{font-size:14px;color:var(--sec);margin-top:2px}
+.ind.acento .v{color:#8DB0FF}
+/* Mapa */
+.mapa-caja{position:relative}
+#mapa{height:560px;border-radius:10px;border:1px solid var(--borde);background:#0B1220}
+@media(max-width:700px){#mapa{height:60vh}}
+.leaflet-container{background:#0B1220;font:inherit;font-size:14px}
+#aviso-mapa{display:none;position:absolute;left:10px;bottom:28px;z-index:900;font-size:14px;background:rgba(18,27,48,.92);border:1px solid var(--borde);color:var(--sec);padding:6px 10px;border-radius:8px;max-width:calc(100% - 20px)}
+.mapa-bajo{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:10px;align-items:flex-start;justify-content:space-between}
+.leyenda{display:flex;flex-wrap:wrap;gap:6px}
+.leyenda button{display:inline-flex;align-items:center;gap:8px;font-size:14px;padding:0 12px}
+.leyenda button.activo{border-color:var(--acento);background:#16264A}
+.leyenda i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.leaflet-control-layers-toggle{background-image:none!important;width:auto!important;height:40px!important;padding:0 12px;line-height:40px;color:#0B1220;font-weight:600;text-decoration:none!important}
+.leaflet-control-layers-toggle::before{content:"Capas"}
+.leaflet-control-layers{color:#0B1220}
+.leaflet-control-layers label{min-height:32px;display:flex;align-items:center}
+.leaflet-tooltip{font-size:14px}
+.leaflet-popup-content{font-size:14px;line-height:1.45;margin:12px 14px}
+.ficha table{border-collapse:collapse}
+.ficha td{padding:2px 8px 2px 0;border:0;vertical-align:top;white-space:normal}
+.ficha td:first-child{color:#475569}
+.ficha b{font-size:15px}
+/* Barras */
+.barras{display:grid;gap:8px}
+.barra-fila{display:grid;grid-template-columns:minmax(110px,180px) 1fr auto;gap:10px;align-items:center;font-size:14px}
+.pista{height:14px;background:#1A2742;border-radius:7px;overflow:hidden}
+.pista span{display:block;height:100%;background:var(--acento);border-radius:7px}
+.pct{color:var(--sec);white-space:nowrap}
+/* Tablas */
+.tabla-caja{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;color:var(--sec);font-weight:500;border-bottom:1px solid var(--borde);padding:8px 8px;vertical-align:bottom}
+td{padding:8px 8px;border-bottom:1px solid #1A2742;white-space:nowrap}
+td.num,th.num{text-align:right}
+td .mini{width:110px;display:inline-block;vertical-align:middle}
+.pildora{display:inline-flex;align-items:center;gap:6px}
+.pildora i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.vacio{color:var(--sec);font-size:14px;margin:0}
+.dos{display:grid;gap:14px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:900px){.dos{grid-template-columns:minmax(0,3fr) minmax(0,2fr)}}
+/* Actividad diaria */
+.dias{display:flex;align-items:flex-end;gap:4px;height:150px;padding-top:18px;border-bottom:1px solid var(--borde)}
+.dia{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;min-width:0}
+.dia .col{width:100%;max-width:34px;background:var(--acento);border-radius:4px 4px 0 0;min-height:0}
+.dia .n{font-size:14px;color:var(--texto);margin-bottom:2px}
+.ejes{display:flex;gap:4px}
+.ejes span{flex:1;text-align:center;font-size:14px;color:var(--sec);min-width:0;overflow:hidden}
+footer.pie{color:var(--sec);font-size:14px;padding:6px 0 40px;border-top:1px solid var(--borde)}
+footer.pie p{margin:8px 0}
+.oculto{display:none!important}
+</style></head>
+<body>
+<div class="envoltura">
+<header class="cab">
+  <h1>Tablero de avance · Piloto PROYECTO_NEON_CENSO</h1>
+  <div class="meta">
+    <span id="generado" data-iso="{{GENERADO_ISO}}">Generado {{GENERADO}}, hora de Costa Rica</span>
+    <span>Fuente: base de datos del piloto (Neon)</span>
+    <span>Regeneración automática</span>
+  </div>
+  <div class="distintivo">Datos de prueba · {{TOTAL}} polígonos de prueba · distrito {{DISTRITO}}</div>
+  <nav class="anclas" aria-label="Secciones">
+    <a href="#sec-mapa">Mapa</a><a href="#sec-equipos">Equipos de campo</a><a href="#sec-encuestadores">Encuestadores</a><a href="#sec-movimientos">Movimientos</a>
+  </nav>
+</header>
+</div>
+
+<div class="barra" id="barra">
+ <div class="envoltura">
+  <div class="ubic" id="ubicacion"></div>
+  <div class="fila-filtros">
+    <button type="button" id="btn-filtros" aria-expanded="false" aria-controls="filtros-campos">Filtros</button>
+    <div class="chips" id="chips"></div>
+  </div>
+  <div class="fila-filtros plegable" id="filtros-campos">
+    <span id="selects" class="fila-filtros" style="flex:1 1 auto"></span>
+    <div class="campo"><label for="f-est">Estado</label><select id="f-est"></select></div>
+    <div class="campo"><label for="buscar">Buscar polígono por id</label><input type="search" id="buscar" inputmode="numeric" placeholder="p. ej. 258" autocomplete="off"></div>
+    <div class="acciones"><button type="button" id="limpiar">Limpiar</button><button type="button" id="ver-todo" class="prim">Ver todo</button></div>
+  </div>
+  <div class="contador"><span id="contador"></span><span id="busqueda-msg" role="status"></span></div>
+  <div id="niveles" class="plegable"></div>
+ </div>
+</div>
+
+<div class="envoltura">
+<main>
+  <div class="indicadores" id="indicadores"></div>
+
+  <section class="tarjeta" id="sec-mapa">
+    <h2>Mapa de polígonos de prueba por estado</h2>
+    <div class="mapa-caja"><div id="mapa" role="region" aria-label="Mapa"></div>
+      <div id="aviso-mapa">Imagen satelital no disponible; se muestra mapa claro</div></div>
+    <div class="mapa-bajo">
+      <div><div class="ubic" style="margin-bottom:6px">Estado (clic para filtrar) · por debajo del zoom 15 cada polígono se muestra como punto</div><div class="leyenda" id="leyenda"></div></div>
+      <div style="flex:1 1 320px;max-width:520px"><div class="ubic" style="margin-bottom:6px">Avance por lote de trabajo</div><div class="barras" id="avance-lote"></div></div>
+    </div>
+  </section>
+
+  <section class="tarjeta" id="sec-equipos">
+    <h2>Equipos de campo <small>una fila por lote de trabajo</small></h2>
+    <div class="tabla-caja" id="tabla-equipos"></div>
+  </section>
+
+  <div class="dos">
+    <section class="tarjeta" id="sec-encuestadores">
+      <h2>Encuestadores <small>orden por guardados</small></h2>
+      <div class="tabla-caja" id="tabla-encuestadores"></div>
+    </section>
+    <section class="tarjeta" id="sec-actividad">
+      <h2>Actividad diaria <small>visitas concluidas por fecha de visita, últimos 14 días</small></h2>
+      <div id="actividad"></div>
+    </section>
+  </div>
+
+  <section class="tarjeta" id="sec-movimientos">
+    <h2>Últimos 25 movimientos <small>guardados con visita, por fecha del último guardado</small></h2>
+    <div class="tabla-caja" id="tabla-movimientos"></div>
+  </section>
+</main>
+
+<footer class="pie">
+  <p id="pie-ubicacion"></p>
+  <p>Coordenadas: EPSG 5367 (CRTM05) en la base de datos, transformadas a EPSG 4326 para el mapa. Contornos simplificados con tolerancia de 2 m.</p>
+  <p>Los puntos de visita son el punto interior del polígono, no la posición GNSS.</p>
+  <p>Contornos de UGM: capa pública del SNIT.</p>
+  <p>Imagen satelital: Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community. Mapa claro: © OpenStreetMap contributors. Mapa interactivo con Leaflet.</p>
+  <p>Página estática: no contiene credenciales ni consulta la base de datos al abrirse; los indicadores se recalculan en el navegador con el filtro activo.</p>
+</footer>
+</div>
+
+<script id="datos" type="application/json">{{DATOS}}</script>
+<!-- Inicio de biblioteca embebida. -->
+<script>{{LEAFLET_JS}}</script>
+<!-- Fin de biblioteca embebida. -->
+<script>
+(function () {
+'use strict';
+var MOSTRAR_PROYECCION = false;          // proyección de días restantes: calculada, oculta (D-28)
+var D = JSON.parse(document.getElementById('datos').textContent);
+var REG = D.registros, N = REG.length;
+REG.forEach(function (r) { r.encv = r.enc || (r.est !== 'pendiente' && r.ep ? r.ep : null); });
+var EST = {}; D.estados.forEach(function (e) { EST[e.clave] = e; });
+var NULO = '__nulo__';
+// Las cuentas llegan ya rotuladas por el generador (D-25): sin nombres técnicos en el HTML.
+
+// ---------- utilidades
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+function fmtInt(n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+function fmtDec(x, d) { var s = x.toFixed(d).split('.'); return fmtInt(+s[0]) + (s[1] ? ',' + s[1] : ''); }
+function fmtPct(x) { return fmtDec(x, 1) + ' %'; }
+function fmtN(n, sg, pl) { return fmtInt(n) + ' ' + (n === 1 ? sg : pl); }
+// Port de fmt_incidencias (generar_tablero.py, D-27): «N incidencias, de ellas M revisitas pendientes».
+function fmtIncidencias(inc, rev) {
+  var t = fmtN(inc, 'incidencia', 'incidencias');
+  if (rev) t += ', ' + (inc === 1 ? 'de ella' : 'de ellas') + ' ' + fmtN(rev, 'revisita pendiente', 'revisitas pendientes');
+  return t;
+}
+function fecha(iso, conHora) {
+  if (!iso) return '—';
+  var s = String(iso); // ISO con -06:00: los campos ya vienen en hora de Costa Rica
+  var t = s.slice(8, 10) + '/' + s.slice(5, 7) + '/' + s.slice(0, 4);
+  return conHora === false ? t : t + ' ' + s.slice(11, 16);
+}
+function cuenta(ep) { return ep || '—'; }
+// Encuestador visible: el campo encuestador; si falta y hubo guardado, la cuenta que guardó
+// (coalesce de la v1, sql/07); si no, «sin encuestador registrado». Nombres de cuenta, según D-25.
+function encuestador(c) { return c || 'sin encuestador registrado'; }
+function mediana(v) { if (!v.length) return null; v = v.slice().sort(function (a, b) { return a - b; }); var m = v.length >> 1; return v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2; }
+function terminal(r) { return EST[r.est] && EST[r.est].terminal; }
+function incidencia(r) { return EST[r.est] && EST[r.est].incidencia; }
+function guardado(r) { return r.est !== 'pendiente'; }
+
+// ---------- niveles jerárquicos
+var NIVELES = [
+  { k: 'cprov', et: 'Provincia', todos: 'Todas', nom: function (r) { return r.prov; }, plural: ['provincia', 'provincias'] },
+  { k: 'ccant', et: 'Cantón', todos: 'Todos', nom: function (r) { return r.cant; }, plural: ['cantón', 'cantones'] },
+  { k: 'cdist', et: 'Distrito', todos: 'Todos', nom: function (r) { return r.dist + ' (' + r.cdist + ')'; }, plural: ['distrito', 'distritos'] },
+  { k: 'upm', et: 'UPM', todos: 'Todas', nom: function (r) { return 'UPM ' + r.upm; }, plural: ['UPM', 'UPM'] },
+  { k: 'ugm', et: 'UGM', todos: 'Todas', nom: function (r) { return r.ugm ? 'UGM ' + r.ugm : 'sin UGM'; }, plural: ['UGM', 'UGM'] },
+  { k: 'lote', et: 'Lote de trabajo', todos: 'Todos', nom: function (r) { return 'Lote de trabajo ' + r.lote; }, plural: ['lote de trabajo', 'lotes de trabajo'] },
+  { k: 'encv', et: 'Encuestador', todos: 'Todos', nom: function (r) { return encuestador(r.encv); }, plural: ['encuestador', 'encuestadores'] }
+];
+function val(r, k) { var v = r[k]; return v == null || v === '' ? NULO : String(v); }
+NIVELES.forEach(function (n) {
+  var vs = {}; REG.forEach(function (r) { vs[val(r, n.k)] = 1; });
+  n.valores = Object.keys(vs);
+  n.select = n.valores.length > 1;          // un solo valor: va a la línea de ubicación
+  n.distintosNoNulos = n.valores.filter(function (v) { return v !== NULO; }).length;
+});
+var F = {}; NIVELES.forEach(function (n) { F[n.k] = ''; }); F.est = '';
+
+function cumpleHasta(r, i) {               // filtros de los niveles 0..i-1
+  for (var j = 0; j < i; j++) { var k = NIVELES[j].k; if (F[k] && val(r, k) !== F[k]) return false; }
+  return true;
+}
+function cumpleNiveles(r) { return cumpleHasta(r, NIVELES.length); }
+function cumple(r) { return cumpleNiveles(r) && (!F.est || r.est === F.est); }
+
+// Línea de ubicación: niveles de un solo valor
+(function () {
+  var r0 = REG[0] || {}, partes = [];
+  NIVELES.forEach(function (n) { if (!n.select && r0) partes.push(n.k === 'cdist' ? r0.dist + ' (' + r0.cdist + ')' : n.nom(r0)); });
+  var t = partes.join(' › ');
+  document.getElementById('ubicacion').innerHTML = '<b id="ubicacion-texto">' + esc(t) + '</b>';
+  document.getElementById('pie-ubicacion').textContent = 'Ubicación: ' + t + '.';
+  var nv = NIVELES.map(function (n) { var c = n.distintosNoNulos; return fmtInt(c) + ' ' + (c === 1 ? n.plural[0] : n.plural[1]); });
+  document.getElementById('niveles').textContent = 'Niveles construidos desde la base de datos: ' + nv.join(' · ');
+})();
+
+// Selects
+var selCaja = document.getElementById('selects'), SEL = {};
+NIVELES.forEach(function (n) {
+  if (!n.select) return;
+  var c = document.createElement('div'); c.className = 'campo';
+  c.innerHTML = '<label for="f-' + n.k + '">' + esc(n.et) + '</label><select id="f-' + n.k + '"></select>';
+  selCaja.appendChild(c);
+  SEL[n.k] = c.querySelector('select');
+  SEL[n.k].addEventListener('change', function () {
+    F[n.k] = this.value;
+    var i = NIVELES.indexOf(n);
+    for (var j = i + 1; j < NIVELES.length; j++) F[NIVELES[j].k] = '';   // reinicia los inferiores
+    aplicarFiltro(true);
+  });
+});
+var selEst = document.getElementById('f-est');
+selEst.addEventListener('change', function () { F.est = this.value; aplicarFiltro(true); });
+
+function opciones(sel, filas, todos, actual) {
+  sel.innerHTML = filas.map(function (o) { return '<option value="' + esc(o.v) + '"' + (o.v === actual ? ' selected' : '') + '>' + esc(o.t) + '</option>'; }).join('');
+}
+function reconstruirSelects() {
+  NIVELES.forEach(function (n, i) {
+    if (!n.select) return;
+    var base = REG.filter(function (r) { return cumpleHasta(r, i); });
+    var cnt = {}, nom = {};
+    base.forEach(function (r) { var v = val(r, n.k); cnt[v] = (cnt[v] || 0) + 1; nom[v] = n.nom(r); });
+    var ks = Object.keys(cnt).sort(function (a, b) { if (a === NULO) return 1; if (b === NULO) return -1; return a.localeCompare(b, 'es', { numeric: true }); });
+    if (F[n.k] && !cnt[F[n.k]]) F[n.k] = '';
+    opciones(SEL[n.k], [{ v: '', t: n.todos + ' (' + fmtInt(base.length) + ')' }].concat(ks.map(function (v) { return { v: v, t: nom[v] + ' (' + fmtInt(cnt[v]) + ')' }; })), null, F[n.k]);
+  });
+  var baseE = REG.filter(cumpleNiveles), ce = {};
+  baseE.forEach(function (r) { ce[r.est] = (ce[r.est] || 0) + 1; });
+  opciones(selEst, [{ v: '', t: 'Todos (' + fmtInt(baseE.length) + ')' }].concat(D.estados.map(function (e) { return { v: e.clave, t: e.etiqueta + ' (' + fmtInt(ce[e.clave] || 0) + ')' }; })), null, F.est);
+}
+
+// Hash de la URL
+function escribirHash() {
+  var p = [];
+  NIVELES.forEach(function (n) { if (F[n.k]) p.push(n.k + '=' + encodeURIComponent(F[n.k])); });
+  if (F.est) p.push('est=' + encodeURIComponent(F.est));
+  var h = p.length ? '#' + p.join('&') : '';
+  if (location.hash !== h) history.replaceState(null, '', h || location.pathname + location.search);
+}
+function leerHash() {
+  Object.keys(F).forEach(function (k) { F[k] = ''; });
+  location.hash.replace(/^#/, '').split('&').forEach(function (par) {
+    var kv = par.split('='); if (kv.length !== 2) return;
+    var k = decodeURIComponent(kv[0]), v = decodeURIComponent(kv[1]);
+    if (k in F && (k === 'est' || NIVELES.some(function (n) { return n.k === k && n.select; }))) F[k] = v;
+  });
+  if (F.est && !EST[F.est]) F.est = '';
+}
+
+// ---------- mapa
+var mapa = L.map('mapa', { preferCanvas: true, zoomControl: true, scrollWheelZoom: true });
+mapa.setView([10.1, -84.5], 12);   // vista inicial; aplicarFiltro ajusta al subconjunto
+var esri = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+  maxZoom: 19, attribution: 'Tiles &copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community' });
+var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' });
+var base = 'esri', cambioManual = false, cargadas = 0, errores = 0, avisado = false;
+esri.on('tileload', function () { cargadas++; });
+esri.on('tileerror', function () { errores++; if (errores >= 6) aMapaClaro(); });
+function aMapaClaro() {
+  if (avisado || cambioManual || !mapa.hasLayer(esri)) return;
+  avisado = true; mapa.removeLayer(esri); osm.addTo(mapa);
+  document.getElementById('aviso-mapa').style.display = 'block';
+}
+esri.addTo(mapa);
+setTimeout(function () { if (!cargadas) aMapaClaro(); }, 6000);
+
+var capaUGM = L.geoJSON(null, { style: { color: '#FFFFFF', opacity: .6, weight: 1, fill: false }, interactive: true });
+D.ugm.forEach(function (u) {
+  var f = { type: 'Feature', properties: { c: u.codigo }, geometry: u.g };
+  capaUGM.addData(f);
+});
+capaUGM.eachLayer(function (l) { l.bindTooltip('UGM ' + esc(l.feature.properties.c), { sticky: true }); });
+capaUGM.addTo(mapa);
+
+var capaPol = L.featureGroup().addTo(mapa);
+var capaPuntos = L.layerGroup();
+var porId = {};
+function estilo(r) {
+  var e = EST[r.est] || EST.pendiente;
+  if (r.est === 'pendiente') return { color: base === 'osm' ? '#475569' : e.color, weight: 1, fillColor: e.color, fillOpacity: .08, opacity: .9 };
+  return { color: e.color, weight: 1.5, fillColor: e.color, fillOpacity: .58, opacity: 1 };
+}
+function ficha(r) {
+  var e = EST[r.est] || { etiqueta: r.est };
+  var filas = [
+    ['UPM', r.upm], ['UGM', r.ugm || 'sin UGM'], ['Lote de trabajo', r.lote], ['Estado', e.etiqueta],
+    ['Encuestador', encuestador(r.encv)], ['Fecha de visita', fecha(r.fv)],
+    ['Precisión GNSS (m)', r.gnss == null ? '—' : fmtDec(r.gnss, 1)], ['Prioridad', r.prio || '—'],
+    ['Área (m²)', r.area == null ? '—' : fmtInt(r.area)], ['Último guardado', r.est === 'pendiente' ? '—' : fecha(r.fe) + ' · ' + cuenta(r.ep)]
+  ];
+  return '<div class="ficha"><b>Polígono ' + esc(r.id) + '</b><table>' + filas.map(function (f) { return '<tr><td>' + esc(f[0]) + '</td><td>' + esc(f[1]) + '</td></tr>'; }).join('') + '</table></div>';
+}
+var ZOOM_CONTORNO = 15;   // por debajo, cada polígono se dibuja como punto (mediana 196 m²: invisible a escala de distrito)
+function limites(r) { if (!r._b) r._b = L.geoJSON(r.g).getBounds(); return r._b; }
+function estiloPunto(r) {
+  var e = EST[r.est] || EST.pendiente;
+  if (r.est === 'pendiente') return { radius: 3, color: base === 'osm' ? '#475569' : e.color, weight: 1, opacity: .7, fillColor: e.color, fillOpacity: .25 };
+  return { radius: 5, color: '#0B1220', weight: 1, opacity: 1, fillColor: e.color, fillOpacity: .95 };
+}
+var modoContorno = null;
+function pintarMapa(R, ajustar) {
+  modoContorno = null;                         // fuerza el dibujo aunque el zoom no cruce el umbral
+  if (ajustar !== false) verTodo(R);           // primero la vista: decide punto o contorno
+  if (modoContorno === null) dibujarPoligonos(R);
+}
+function dibujarPoligonos(Rr) {
+  Rr = Rr || R;
+  capaPol.clearLayers(); porId = {};
+  modoContorno = mapa.getZoom() >= ZOOM_CONTORNO;
+  // pendientes primero: los estados con visita quedan encima
+  Rr.slice().sort(function (a, b) { return (a.est === 'pendiente' ? 0 : 1) - (b.est === 'pendiente' ? 0 : 1); }).forEach(function (r) {
+    var l;
+    if (modoContorno) {
+      l = L.geoJSON({ type: 'Feature', geometry: r.g, properties: {} }, { style: estilo(r) });
+      l.on('mouseover', function () { l.setStyle({ color: '#FFFFFF', weight: 3 }); });
+      l.on('mouseout', function () { l.setStyle(estilo(r)); });
+    } else {
+      l = L.circleMarker(r.p ? [r.p[1], r.p[0]] : limites(r).getCenter(), estiloPunto(r));
+      l.on('mouseover', function () { l.setStyle({ color: '#FFFFFF', weight: 3 }); });
+      l.on('mouseout', function () { l.setStyle(estiloPunto(r)); });
+    }
+    l.registro = r;
+    l.bindTooltip(esc(r.id + ' · UPM ' + r.upm + ' · ' + (r.ugm ? 'UGM ' + r.ugm : 'sin UGM') + ' · ' + (EST[r.est] ? EST[r.est].etiqueta : r.est)), { sticky: true });
+    l.bindPopup(ficha(r), { maxWidth: 320 });
+    l.addTo(capaPol); porId[r.id] = l;
+  });
+  pintarPuntos(Rr);
+}
+function reestilar() { capaPol.eachLayer(function (l) { l.setStyle(modoContorno ? estilo(l.registro) : estiloPunto(l.registro)); }); }
+var R = REG;
+function pintarPuntos(Rr) {
+  capaPuntos.clearLayers();
+  if (mapa.getZoom() < 15) return;
+  (Rr || R).forEach(function (r) {
+    if (r.est === 'pendiente' || !r.p) return;
+    L.circleMarker([r.p[1], r.p[0]], { radius: 4, color: '#FFFFFF', weight: 1.5, fillColor: (EST[r.est] || {}).color, fillOpacity: 1 })
+      .bindTooltip(esc('Punto de visita · ' + r.id)).addTo(capaPuntos);
+  });
+}
+mapa.on('zoomend', function () {
+  if (modoContorno === null || (mapa.getZoom() >= ZOOM_CONTORNO) !== modoContorno) dibujarPoligonos(); else pintarPuntos();
+});
+capaPuntos.addTo(mapa);
+function verTodo(Rr) {
+  Rr = Rr || R;
+  if (!Rr.length) return;
+  var b = L.latLngBounds([]);
+  Rr.forEach(function (r) { b.extend(limites(r)); });
+  if (b.isValid()) mapa.fitBounds(b.pad(0.04), { maxZoom: 17, animate: false });
+}
+L.control.layers({ 'Satelital': esri, 'Mapa claro': osm }, { 'Contornos de UGM': capaUGM, 'Puntos de visita (desde zoom 15)': capaPuntos }, { collapsed: true }).addTo(mapa);
+L.control.scale({ metric: true, imperial: false }).addTo(mapa);
+mapa.on('baselayerchange', function (ev) {
+  cambioManual = true;
+  base = ev.layer === osm ? 'osm' : 'esri';
+  if (base === 'esri') document.getElementById('aviso-mapa').style.display = 'none';
+  reestilar();
+});
+// El cambio automático también ajusta el borde de los pendientes
+osm.on('add', function () { base = 'osm'; reestilar(); });
+esri.on('add', function () { base = 'esri'; reestilar(); });
+
+// ---------- indicadores y secciones
+function calcular(Rr) {
+  var c = { total: Rr.length, concluidas: 0, pendientes: 0, incid: 0, revis: 0, guardados: 0 };
+  var diasC = {}, concFv = 0, gn = [];
+  Rr.forEach(function (r) {
+    if (terminal(r)) { c.concluidas++; if (r.fv) { concFv++; diasC[r.fv.slice(0, 10)] = 1; } }
+    if (r.est === 'pendiente') c.pendientes++;
+    if (incidencia(r)) c.incid++;
+    if (r.est === 'revisita') c.revis++;
+    if (guardado(r)) c.guardados++;
+    if (r.gnss != null) gn.push(r.gnss);
+  });
+  var nd = Object.keys(diasC).length;
+  c.ritmo = nd ? concFv / nd : null;
+  c.diasActivos = nd;
+  c.gnss = mediana(gn); c.gnssN = gn.length;
+  c.proyeccion = c.ritmo ? Math.ceil(c.pendientes / c.ritmo) : null;   // no se muestra (MOSTRAR_PROYECCION)
+  return c;
+}
+function ind(id, k, v, d, extra) {
+  return '<div class="ind' + (extra || '') + '" id="' + id + '"><div class="k">' + esc(k) + '</div><div class="v">' + esc(v) + '</div>' + (d ? '<div class="d">' + esc(d) + '</div>' : '') + '</div>';
+}
+function pintarIndicadores(c) {
+  var h = '';
+  h += ind('ind-total', 'Total', fmtInt(c.total), 'polígonos de prueba');
+  h += ind('ind-concluidas', 'Concluidas', fmtInt(c.concluidas), 'visitada, no localizada o rechazo');
+  h += ind('ind-avance', 'Avance', fmtPct(c.total ? 100 * c.concluidas / c.total : 0), 'concluidas sobre el total', ' acento');
+  h += ind('ind-pendientes', 'Pendientes', fmtInt(c.pendientes), 'sin visita registrada');
+  h += ind('ind-incidencias', 'Incidencias', fmtInt(c.incid), fmtIncidencias(c.incid, c.revis));
+  h += ind('ind-ritmo', 'Ritmo', c.ritmo == null ? '—' : fmtDec(c.ritmo, 1), 'concluidas por día activo · ' + fmtN(c.diasActivos, 'día', 'días'));
+  h += ind('ind-gnss', 'Precisión GNSS (mediana)', c.gnss == null ? '—' : fmtDec(c.gnss, 1) + ' m', 'n = ' + fmtInt(c.gnssN));
+  if (MOSTRAR_PROYECCION) h += ind('ind-proy', 'Proyección', c.proyeccion == null ? '—' : fmtInt(c.proyeccion) + ' días', 'al ritmo actual');
+  var el = document.getElementById('indicadores');
+  el.innerHTML = h;
+  el.dataset.total = c.total; el.dataset.concluidas = c.concluidas; el.dataset.incidencias = c.incid; el.dataset.revisitas = c.revis;
+  el.dataset.proyeccion = c.proyeccion == null ? '' : c.proyeccion;
+}
+function pintarLeyenda(Rr) {
+  var cnt = {}; Rr.forEach(function (r) { cnt[r.est] = (cnt[r.est] || 0) + 1; });
+  var el = document.getElementById('leyenda');
+  el.innerHTML = D.estados.map(function (e) {
+    return '<button type="button" data-est="' + esc(e.clave) + '" class="' + (F.est === e.clave ? 'activo' : '') + '" aria-pressed="' + (F.est === e.clave) + '"><i style="background:' + esc(e.color) + '"></i>' + esc(e.etiqueta) + ' · ' + fmtInt(cnt[e.clave] || 0) + '</button>';
+  }).join('');
+}
+document.getElementById('leyenda').addEventListener('click', function (ev) {
+  var b = ev.target.closest('button[data-est]'); if (!b) return;
+  F.est = F.est === b.dataset.est ? '' : b.dataset.est;
+  aplicarFiltro(true);
+});
+function porLote(Rr) {
+  var g = {};
+  Rr.forEach(function (r) { (g[r.lote] = g[r.lote] || []).push(r); });
+  return Object.keys(g).sort().map(function (l) { return { lote: l, filas: g[l], c: calcular(g[l]) }; });
+}
+function barra(p) { return '<div class="pista"><span style="width:' + Math.max(0, Math.min(100, p)).toFixed(2) + '%"></span></div>'; }
+function pintarAvanceLote(G) {
+  document.getElementById('avance-lote').innerHTML = G.length ? G.map(function (x) {
+    var p = x.c.total ? 100 * x.c.concluidas / x.c.total : 0;
+    return '<div class="barra-fila"><span>Lote de trabajo ' + esc(x.lote) + '</span>' + barra(p) + '<span class="pct">' + fmtInt(x.c.concluidas) + ' de ' + fmtInt(x.c.total) + ' · ' + fmtPct(p) + '</span></div>';
+  }).join('') : '<p class="vacio">Sin polígonos con el filtro activo.</p>';
+}
+function ultimo(filas) { var m = ''; filas.forEach(function (r) { if (guardado(r) && r.fe && r.fe > m) m = r.fe; }); return m; }
+function pintarEquipos(G) {
+  if (!G.length) { document.getElementById('tabla-equipos').innerHTML = '<p class="vacio">Sin polígonos con el filtro activo.</p>'; return; }
+  var h = '<table><thead><tr><th>Equipo de campo</th><th class="num">Total</th><th class="num">Concluidas</th><th class="num">Avance</th><th></th><th class="num">Incidencias</th><th class="num">Revisitas pendientes</th><th class="num">Encuestadores con guardados</th><th>Último guardado</th></tr></thead><tbody>';
+  G.forEach(function (x) {
+    var p = x.c.total ? 100 * x.c.concluidas / x.c.total : 0, e = {};
+    x.filas.forEach(function (r) { if (guardado(r) && r.encv) e[r.encv] = 1; });
+    h += '<tr><td>Equipo ' + esc(x.lote) + ' · lote de trabajo ' + esc(x.lote) + '</td><td class="num">' + fmtInt(x.c.total) + '</td><td class="num">' + fmtInt(x.c.concluidas) + '</td><td class="num">' + fmtPct(p) + '</td><td><span class="mini">' + barra(p) + '</span></td><td class="num">' + fmtInt(x.c.incid) + '</td><td class="num">' + fmtInt(x.c.revis) + '</td><td class="num">' + fmtInt(Object.keys(e).length) + '</td><td>' + esc(fecha(ultimo(x.filas))) + '</td></tr>';
+  });
+  document.getElementById('tabla-equipos').innerHTML = h + '</tbody></table>';
+}
+function pintarEncuestadores(Rr) {
+  var g = {};
+  Rr.forEach(function (r) {
+    if (!guardado(r)) return;
+    var k = r.encv || NULO, x = g[k] = g[k] || { enc: r.encv, lotes: {}, guard: 0, conc: 0, rev: 0, gn: [], ult: '' };
+    x.lotes[r.lote] = 1; x.guard++; if (terminal(r)) x.conc++; if (r.est === 'revisita') x.rev++;
+    if (r.gnss != null) x.gn.push(r.gnss); if (r.fe && r.fe > x.ult) x.ult = r.fe;
+  });
+  var filas = Object.keys(g).map(function (k) { return g[k]; }).sort(function (a, b) { return b.guard - a.guard || String(a.enc).localeCompare(String(b.enc)); });
+  if (!filas.length) { document.getElementById('tabla-encuestadores').innerHTML = '<p class="vacio">Sin guardados con el filtro activo.</p>'; return; }
+  var h = '<table><thead><tr><th>Encuestador</th><th>Lote de trabajo</th><th class="num">Guardados</th><th class="num">Concluidas</th><th class="num">Revisitas pendientes</th><th class="num">GNSS mediana (m)</th><th>Último guardado</th></tr></thead><tbody>';
+  filas.forEach(function (x) {
+    var m = mediana(x.gn);
+    h += '<tr><td>' + esc(encuestador(x.enc)) + '</td><td>' + esc(Object.keys(x.lotes).sort().join(', ')) + '</td><td class="num">' + fmtInt(x.guard) + '</td><td class="num">' + fmtInt(x.conc) + '</td><td class="num">' + fmtInt(x.rev) + '</td><td class="num">' + (m == null ? '—' : fmtDec(m, 1)) + '</td><td>' + esc(fecha(x.ult)) + '</td></tr>';
+  });
+  document.getElementById('tabla-encuestadores').innerHTML = h + '</tbody></table>';
+}
+function pintarActividad(Rr) {
+  var hoy = new Date(String(document.getElementById('generado').dataset.iso).slice(0, 10) + 'T12:00:00Z');
+  var dias = [];
+  for (var i = 13; i >= 0; i--) { var d = new Date(hoy.getTime() - i * 864e5); dias.push(d.toISOString().slice(0, 10)); }
+  var cnt = {}; Rr.forEach(function (r) { if (terminal(r) && r.fv) { var k = r.fv.slice(0, 10); cnt[k] = (cnt[k] || 0) + 1; } });
+  var max = Math.max.apply(null, dias.map(function (d) { return cnt[d] || 0; }).concat([1]));
+  var cols = dias.map(function (d) { var n = cnt[d] || 0; return '<div class="dia" title="' + esc(fecha(d + 'T00:00', false) + ': ' + n) + '"><span class="n">' + (n ? fmtInt(n) : '') + '</span><div class="col" style="height:' + (100 * n / max).toFixed(1) + '%"></div></div>'; }).join('');
+  var ejes = dias.map(function (d) { return '<span>' + d.slice(8, 10) + '</span>'; }).join('');
+  var tot = dias.reduce(function (s, d) { return s + (cnt[d] || 0); }, 0);
+  document.getElementById('actividad').innerHTML = '<div class="dias" role="img" aria-label="Concluidas por día">' + cols + '</div><div class="ejes">' + ejes + '</div><p class="vacio" style="margin-top:8px">' + fmtN(tot, 'visita concluida', 'visitas concluidas') + ' en los últimos 14 días (' + fecha(dias[0] + 'T00:00', false) + ' a ' + fecha(dias[13] + 'T00:00', false) + ').</p>';
+}
+function pintarMovimientos(Rr) {
+  var m = Rr.filter(function (r) { return guardado(r) && r.fe; }).sort(function (a, b) { return a.fe < b.fe ? 1 : a.fe > b.fe ? -1 : b.id - a.id; }).slice(0, 25);
+  if (!m.length) { document.getElementById('tabla-movimientos').innerHTML = '<p class="vacio">Sin movimientos con el filtro activo.</p>'; return; }
+  var h = '<table><thead><tr><th>Fecha y hora</th><th class="num">Id</th><th>UGM</th><th>Lote de trabajo</th><th>Estado</th><th>Encuestador</th><th>Cuenta que guardó</th></tr></thead><tbody>';
+  m.forEach(function (r) {
+    var e = EST[r.est] || { etiqueta: r.est, color: '#9AA6BF' };
+    h += '<tr><td>' + esc(fecha(r.fe)) + '</td><td class="num"><a href="#" data-id="' + esc(r.id) + '">' + esc(r.id) + '</a></td><td>' + esc(r.ugm || 'sin UGM') + '</td><td>' + esc(r.lote) + '</td><td><span class="pildora"><i style="background:' + esc(e.color) + '"></i>' + esc(e.etiqueta) + '</span></td><td>' + esc(encuestador(r.encv)) + '</td><td>' + esc(cuenta(r.ep)) + '</td></tr>';
+  });
+  document.getElementById('tabla-movimientos').innerHTML = h + '</tbody></table>';
+}
+document.getElementById('tabla-movimientos').addEventListener('click', function (ev) {
+  var a = ev.target.closest('a[data-id]'); if (!a) return; ev.preventDefault(); irA(+a.dataset.id);
+});
+function pintarChips() {
+  var ch = [];
+  NIVELES.forEach(function (n) { if (F[n.k]) { var r = REG.find(function (x) { return val(x, n.k) === F[n.k]; }); ch.push(r ? n.nom(r) : F[n.k]); } });
+  if (F.est) ch.push('Estado: ' + EST[F.est].etiqueta);
+  document.getElementById('chips').innerHTML = ch.length ? ch.map(function (t) { return '<span class="chip">' + esc(t) + '</span>'; }).join('') : '<span class="chip">Sin filtro</span>';
+}
+
+// ---------- aplicarFiltro: produce R y repinta en orden
+function aplicarFiltro(ajustar) {
+  reconstruirSelects();
+  R = REG.filter(cumple);
+  escribirHash();
+  document.getElementById('contador').innerHTML = 'Mostrando <b id="mostrando">' + fmtInt(R.length) + '</b> de ' + fmtInt(N);
+  var c = calcular(R);
+  pintarIndicadores(c);
+  pintarLeyenda(REG.filter(cumpleNiveles));
+  pintarMapa(R, ajustar);
+  var G = porLote(R);
+  pintarAvanceLote(G);
+  pintarEquipos(G);
+  pintarEncuestadores(R);
+  pintarActividad(R);
+  pintarMovimientos(R);
+  pintarChips();
+}
+
+// ---------- buscador
+var msg = document.getElementById('busqueda-msg');
+var barraEl = document.getElementById('barra'), btnF = document.getElementById('btn-filtros');
+function irA(id, plegar) {
+  var r = REG.find(function (x) { return x.id === id; });
+  if (!r) { msg.textContent = 'sin resultados'; return false; }
+  msg.textContent = '';
+  if (!cumple(r)) { Object.keys(F).forEach(function (k) { F[k] = ''; }); aplicarFiltro(false); msg.textContent = 'Se limpió el filtro para mostrar el polígono ' + id; }
+  mapa.fitBounds(limites(r).pad(0.6), { maxZoom: 18, animate: false });
+  var l = porId[id];
+  l.openPopup(limites(r).getCenter());
+  if (plegar !== false) { barraEl.classList.remove('abierta'); btnF.setAttribute('aria-expanded', false); btnF.textContent = 'Filtros'; }
+  document.getElementById('sec-mapa').scrollIntoView({ block: 'start' });
+  return true;
+}
+var tBus = null, inp = document.getElementById('buscar');
+function buscar(plegar) {
+  var v = inp.value.trim();
+  if (!v) { msg.textContent = ''; return; }
+  if (!/^\d+$/.test(v)) { msg.textContent = 'sin resultados'; return; }
+  irA(+v, plegar);
+}
+inp.addEventListener('input', function () { clearTimeout(tBus); tBus = setTimeout(function () { buscar(false); }, 1200); });
+inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') { clearTimeout(tBus); buscar(true); } });
+
+document.getElementById('limpiar').addEventListener('click', function () {
+  Object.keys(F).forEach(function (k) { F[k] = ''; }); inp.value = ''; msg.textContent = ''; aplicarFiltro(true);
+});
+document.getElementById('ver-todo').addEventListener('click', function () { verTodo(); });
+btnF.addEventListener('click', function () {
+  var ab = barraEl.classList.toggle('abierta'); btnF.setAttribute('aria-expanded', ab);
+  btnF.textContent = ab ? 'Ocultar filtros' : 'Filtros';
+});
+window.addEventListener('hashchange', function () { leerHash(); aplicarFiltro(true); });
+
+leerHash();
+aplicarFiltro(true);
+window.TABLERO = { datos: D, filtro: F, aplicarFiltro: aplicarFiltro, irA: irA, mapa: mapa, capas: { esri: esri, osm: osm } };
+})();
+</script>
+</body></html>

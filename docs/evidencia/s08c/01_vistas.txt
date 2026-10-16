@@ -1,0 +1,238 @@
+## Paso 1/1b: crear vistas (cuenta administradora, una transaccion)
+$ psql -X -w -v ON_ERROR_STOP=1 -1 -f sql/11_vistas_geo_tablero.sql
+# rol: owner · rc=0 · tiempo de pared: 1.51 s
+CREATE VIEW
+COMMENT
+CREATE VIEW
+COMMENT
+GRANT
+GRANT
+
+## Verificaciones (cuenta administradora)
+$ psql -X -w -v ON_ERROR_STOP=1 -f <scratchpad>/v1.sql
+# rol: owner · rc=0 · tiempo de pared: 71.07 s
+Pager usage is off.
+SET
+         hora_consulta         | current_user 
+-------------------------------+--------------
+ 2026-10-16 08:42:44.239801-06 | neondb_owner
+(1 row)
+
+ total | con_estado_no_pendiente | concluidas | revisitas | geom_nulas | sin_ugm | sin_punto 
+-------+-------------------------+------------+-----------+------------+---------+-----------
+  1432 |                      39 |         33 |         6 |          0 |      23 |         0
+(1 row)
+
+ n_ugm | min_pol | max_pol 
+-------+---------+---------
+    44 |       1 |     158
+(1 row)
+
+ geojson_poligonos | bytes  
+-------------------+--------
+ 299 kB            | 305968
+(1 row)
+
+ n_ugm_vista | geojson_ugm | bytes  
+-------------+-------------+--------
+          44 | 208 kB      | 213233
+(1 row)
+
+     table_name      |                                                                                                       columnas                                                                                                       
+---------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ v_tab_geo_poligonos | id, cod_provincia, provincia, cod_canton, canton, cod_distrito, distrito, upm, ugm, lote, prioridad, area_m2, estado_visita, encuestador, fecha_visita, precision_gnss_m, editado_por, fecha_edicion, lon, lat, geom
+ v_tab_geo_ugm       | ugm, geom
+(2 rows)
+
+ columnas_vedadas 
+------------------
+                0
+(1 row)
+
+     grantee     |     table_name      | privilege_type 
+-----------------+---------------------+----------------
+ tablero_lectura | v_tab_geo_poligonos | SELECT
+ tablero_lectura | v_tab_geo_ugm       | SELECT
+(2 rows)
+
+## Lectura con tablero_lectura (la ultima consulta debe dar permission denied)
+$ psql -X -w -v ON_ERROR_STOP=1 -f <scratchpad>/v2.sql
+# rol: tablero · rc=3 · tiempo de pared: 52.16 s
+Pager usage is off.
+  current_user   
+-----------------
+ tablero_lectura
+(1 row)
+
+ poligonos 
+-----------
+      1432
+(1 row)
+
+ ugm 
+-----
+  44
+(1 row)
+
+psql:<scratchpad>/v2.sql:5: ERROR:  permission denied for table finca_visita
+
+## tablero_lectura sin acceso directo a sim.ugm (debe dar permission denied)
+$ psql -X -w -v ON_ERROR_STOP=1 -f <scratchpad>/v3.sql
+# rol: tablero · rc=3 · tiempo de pared: 0.78 s
+Pager usage is off.
+psql:<scratchpad>/v3.sql:2: ERROR:  permission denied for table ugm
+
+## Paso 1b: v_tab_geo_ugm reescrita con IN (indice GiST); confirmado por la persona
+$ psql -X -w -v ON_ERROR_STOP=1 -1 -f sql/11_vistas_geo_tablero.sql
+# rol: owner · rc=0 · tiempo de pared: 1.47 s
+CREATE VIEW
+COMMENT
+CREATE VIEW
+COMMENT
+GRANT
+GRANT
+
+## Re-verificacion con tablero_lectura tras reescritura
+$ psql -X -w -v ON_ERROR_STOP=1 -f <scratchpad>/v4.sql
+# rol: tablero · rc=0 · tiempo de pared: 1.19 s
+Pager usage is off.
+Timing is on.
+  current_user   | n_ugm | bytes  
+-----------------+-------+--------
+ tablero_lectura |    44 | 213233
+(1 row)
+
+Time: 340,016 ms
+ poligonos | sin_ugm | n_ugm 
+-----------+---------+-------
+      1432 |      23 |    44
+(1 row)
+
+Time: 195,360 ms
+
+
+## Respaldo previo (D-13), 2026-10-16 08:41 -06, cuenta administradora
+$ pg_dump -Fc -n mgn -f respaldos/2026-10-16_mgn_antes_11.dump
+# rc=0 · tiempo de pared: 9.94 s · 403490 bytes (respaldos/ está fuera del repositorio)
+
+## Verificaciones con el SQL a la vista (sql/11_verificaciones_vistas_geo.sql, psql -a), incluido el diagnóstico de los 23 sin UGM
+$ psql -X -w -v ON_ERROR_STOP=1 -a -f sql/11_verificaciones_vistas_geo.sql
+# rol: owner · rc=0 · tiempo de pared: 3.05 s
+-- =====================================================================================
+--  Verificaciones de sql/11_vistas_geo_tablero.sql (spec S08c, pasos 1 y 1b). Solo lectura.
+--  Cuenta administradora:  py sim/psql.py -f sql/11_verificaciones_vistas_geo.sql -- -a
+-- =====================================================================================
+\pset pager off
+Pager usage is off.
+SET TIME ZONE 'America/Costa_Rica';
+SET
+SELECT now() AS hora_consulta, current_user;
+         hora_consulta         | current_user 
+-------------------------------+--------------
+ 2026-10-16 09:08:09.278654-06 | neondb_owner
+(1 row)
+
+-- Conteos (el spec esperaba 33 con estado distinto de pendiente: son 33 concluidas + 6 revisitas)
+SELECT count(*) AS total,
+       count(*) FILTER (WHERE estado_visita <> 'pendiente') AS con_estado_no_pendiente,
+       count(*) FILTER (WHERE estado_visita IN ('visitada','no_localizada','rechazo')) AS concluidas,
+       count(*) FILTER (WHERE estado_visita = 'revisita') AS revisitas,
+       count(*) FILTER (WHERE geom IS NULL) AS geom_nulas,
+       count(*) FILTER (WHERE ugm IS NULL) AS sin_ugm,
+       count(*) FILTER (WHERE lon IS NULL) AS sin_punto,
+       count(DISTINCT id) AS ids_distintos
+FROM mgn.v_tab_geo_poligonos;
+ total | con_estado_no_pendiente | concluidas | revisitas | geom_nulas | sin_ugm | sin_punto | ids_distintos 
+-------+-------------------------+------------+-----------+------------+---------+-----------+---------------
+  1432 |                      39 |         33 |         6 |          0 |      23 |         0 |          1432
+(1 row)
+
+-- Polígonos por UGM
+SELECT count(*) AS n_ugm, min(n) AS min_pol, max(n) AS max_pol
+FROM (SELECT ugm, count(*) n FROM mgn.v_tab_geo_poligonos WHERE ugm IS NOT NULL GROUP BY ugm) x;
+ n_ugm | min_pol | max_pol 
+-------+---------+---------
+    44 |       1 |     158
+(1 row)
+
+-- Tamaño del GeoJSON (umbral del spec: 1,5 MB)
+SELECT sum(length(geom::text)) AS bytes_poligonos FROM mgn.v_tab_geo_poligonos;
+ bytes_poligonos 
+-----------------
+          305968
+(1 row)
+
+SELECT count(*) AS n_ugm_vista, sum(length(geom::text)) AS bytes_ugm FROM mgn.v_tab_geo_ugm;
+ n_ugm_vista | bytes_ugm 
+-------------+-----------
+          44 |    213233
+(1 row)
+
+-- Columnas: sin observaciones ni posicion_registro
+SELECT count(*) AS columnas_vedadas FROM information_schema.columns
+WHERE table_schema = 'mgn' AND table_name IN ('v_tab_geo_poligonos','v_tab_geo_ugm')
+  AND column_name IN ('observaciones','posicion_registro');
+ columnas_vedadas 
+------------------
+                0
+(1 row)
+
+-- Permisos de tablero_lectura sobre las vistas nuevas y sobre sim.ugm (debe faltar)
+SELECT grantee, table_schema, table_name, privilege_type FROM information_schema.role_table_grants
+WHERE grantee = 'tablero_lectura' AND table_name IN ('v_tab_geo_poligonos','v_tab_geo_ugm','ugm')
+ORDER BY 2, 3;
+     grantee     | table_schema |     table_name      | privilege_type 
+-----------------+--------------+---------------------+----------------
+ tablero_lectura | mgn          | v_tab_geo_poligonos | SELECT
+ tablero_lectura | mgn          | v_tab_geo_ugm       | SELECT
+(2 rows)
+
+-- Diagnóstico de los polígonos sin UGM: ¿tocan alguna UGM (borde) o caen en un hueco?
+WITH sin AS (SELECT d.id, d.codigo_upm, d.geom FROM mgn.deteccion_cambio d
+             JOIN mgn.v_tab_geo_poligonos v ON v.id = d.id WHERE v.ugm IS NULL)
+SELECT count(*) AS sin_ugm,
+       count(*) FILTER (WHERE EXISTS (SELECT 1 FROM sim.ugm u WHERE ST_Intersects(u.geom, s.geom))) AS intersecan_alguna_ugm,
+       count(*) FILTER (WHERE EXISTS (SELECT 1 FROM sim.ugm u WHERE ST_Covers(u.geom, ST_PointOnSurface(s.geom)))) AS punto_cubierto_en_borde,
+       count(DISTINCT codigo_upm) AS upm
+FROM sin s;
+ sin_ugm | intersecan_alguna_ugm | punto_cubierto_en_borde | upm 
+---------+-----------------------+-------------------------+-----
+      23 |                    22 |                       0 |   9
+(1 row)
+
+WITH sin AS (SELECT d.id, d.geom FROM mgn.deteccion_cambio d
+             JOIN mgn.v_tab_geo_poligonos v ON v.id = d.id WHERE v.ugm IS NULL)
+SELECT s.id,
+       round(ST_Area(s.geom)) AS area_m2,
+       (SELECT round(ST_Distance(u.geom, ST_PointOnSurface(s.geom))::numeric, 1)
+          FROM sim.ugm u ORDER BY u.geom <-> ST_PointOnSurface(s.geom) LIMIT 1) AS dist_ugm_mas_cercana_m,
+       (SELECT u.cod_distrito FROM sim.ugm u ORDER BY u.geom <-> ST_PointOnSurface(s.geom) LIMIT 1) AS distrito_ugm_cercana
+FROM sin s ORDER BY s.id;
+  id  | area_m2 | dist_ugm_mas_cercana_m | distrito_ugm_cercana 
+------+---------+------------------------+----------------------
+    1 |      98 |                    1.3 | 20205
+   37 |     587 |                    0.5 | 20205
+   50 |     196 |                    1.6 | 20205
+   52 |      98 |                    0.6 | 20205
+   53 |      98 |                    1.8 | 20205
+   54 |     196 |                    1.8 | 20205
+   70 |      98 |                    3.0 | 20205
+   81 |      98 |                    2.3 | 20205
+  128 |     196 |                    0.8 | 20205
+  173 |      98 |                    2.0 | 20205
+  258 |      98 |                    2.6 | 20205
+  274 |      98 |                    1.1 | 20205
+  288 |     196 |                    1.6 | 20205
+  361 |      98 |                    3.1 | 20205
+  364 |      98 |                    0.5 | 20205
+  366 |     196 |                    0.9 | 20205
+  421 |     196 |                    1.2 | 20205
+  599 |      98 |                    3.6 | 20205
+  636 |      98 |                    1.5 | 20205
+  647 |      98 |                    2.0 | 20205
+  715 |      98 |                    1.7 | 20205
+ 1343 |      98 |                    0.5 | 20205
+ 1426 |      98 |                    8.9 | 20205
+(23 rows)
+
+

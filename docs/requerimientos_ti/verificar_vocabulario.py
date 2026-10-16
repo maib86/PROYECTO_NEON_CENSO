@@ -3,7 +3,7 @@ vocabulario único (D-25) prohíbe, y lista para revisión a mano los que solo s
 ciertos sentidos.
 
 Uso (desde la raíz del repositorio):
-    py docs/requerimientos_ti/verificar_vocabulario.py [--laminas RUTA.html]
+    py docs/requerimientos_ti/verificar_vocabulario.py [--laminas RUTA.html] [--html PAGINA.html]
 
 FALLA: término prohibido (debe ser 0). REVISAR: término permitido solo en un sentido
 («fincas» para producción, «programa» para la revisión automática, «parte», «UGM»); se
@@ -99,6 +99,8 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--laminas", type=Path, default=LAMINAS)
     ap.add_argument("--sin-revisar", action="store_true", help="no imprimir la lista REVISAR")
+    ap.add_argument("--html", type=Path, action="append", default=[],
+                    help="otra página HTML (p. ej. tablero/plantilla_v2.html): todo su texto visible")
     args = ap.parse_args()
     fallas, dudas = [], []
 
@@ -121,6 +123,13 @@ def main() -> int:
             dudas += d
     else:
         print(f"presentación no encontrada ({args.laminas}): se omite (D-24)")
+
+    for ruta in args.html:
+        p = Texto()
+        p.feed(ruta.read_text(encoding="utf-8"))
+        f, d = revisar(ruta.name, " ".join(p.texto.values()))
+        fallas += f
+        dudas += d
 
     for linea in fallas:
         print(linea)

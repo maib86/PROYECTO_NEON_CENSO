@@ -381,3 +381,52 @@ segunda parte si M es 0). Confirmado por la persona (sesión web del 15/10, spec
 publicado lo muestra tras el envío al repositorio y la regeneración siguiente.
 `verificar_vocabulario.py` prohíbe además «sin cerrar», «proxy» (se usa «sustituto») y
 «mosaicos» (se usa «teselas»), y el anexo E de `REQUERIMIENTOS_TI.md` los registra.
+
+## D-28 · 2026-10-16 · Tablero v2: mapa satelital, contornos de UGM, filtros jerárquicos e indicadores en el navegador
+
+**Contexto.** Para la demostración del 19/10 se necesita un tablero que se pueda recorrer en
+vivo, en el celular y de noche, filtrando por UPM, UGM, lote de trabajo y encuestador (spec S08c).
+**Decisión.** Una sola página con secciones y barra de filtros fija, en modo oscuro fijo. Los
+indicadores, tablas y barras se calculan en el navegador sobre el subconjunto filtrado, a
+partir de un JSON embebido (`<script type="application/json">` con `<` escapado). Hay dos
+vistas nuevas, `mgn.v_tab_geo_poligonos` y `mgn.v_tab_geo_ugm`, con geometrías simplificadas
+(`ST_SimplifyPreserveTopology` 2 m en 5367, luego 4326 con 6 decimales); el script es
+`sql/11_vistas_geo_tablero.sql`. La UGM es un nivel de filtro y un contorno, obtenida por
+cruce espacial con la capa SNIT en `sim.ugm`; código = `id_mgn`, confirmado por la persona.
+Es una excepción explícita y acotada a «nada de sim se publica» (D-18): solo se publican
+los contornos y códigos de las 44 UGM del distrito 20205 que contienen polígonos de prueba,
+y ninguna visita ni cifra de `sim`. `tablero_lectura` recibe SELECT sobre las dos vistas,
+no sobre `sim.ugm`. Un nivel jerárquico se muestra como select solo si tiene más de un
+valor en los datos; si no, va como texto en la línea de ubicación. Leaflet 1.9.4 va
+embebido (`tablero/vendor/`, sin CDN). La base por defecto es la imagen satelital Esri
+World Imagery, con cambio automático a OSM si no cargan teselas. La proyección de días
+restantes se calcula pero no se muestra.
+Amplía D-09 (sigue siendo HTML estático sin credenciales, leído con `tablero_lectura`) y
+respeta D-14, D-25 y D-27.
+Decisiones de ejecución (sesión 10):
+- Por debajo del zoom 15 cada polígono se dibuja como punto: la mediana es de 196 m² y a
+  escala de distrito no se ve.
+- `v_tab_geo_ugm` filtra con `IN` en lugar de `EXISTS`: 0,3 s frente a unos 50 s, con el
+  mismo resultado.
+- Encuestador visible: el campo `encuestador`; si está vacío y hubo guardado, la cuenta que
+  guardó (como el `coalesce` de la v1); si no, «sin encuestador registrado» (el spec decía
+  «sin usuario registrado»; D-25 prohíbe «usuario»). El generador convierte los nombres de
+  cuenta en rótulos D-25 («cuenta administradora», «cuenta del equipo A/B») antes de
+  embeberlos: el HTML no lleva nombres de cuenta de la base de datos. Sección «Equipos de
+  campo».
+- «Últimos 25 movimientos» y «Último guardado» solo cuentan polígonos con estado distinto de
+  pendiente, como la v1; la carga inicial no es un movimiento.
+- 39 polígonos tienen estado distinto de pendiente: 33 concluidas y 6 revisitas. El spec
+  esperaba 33, que son las concluidas.
+- 23 polígonos quedan «sin UGM». Su punto interior cae en huecos de la capa del SNIT, a
+  entre 0,5 y 8,9 m de la UGM más cercana (todas del 20205); 22 tocan parcialmente una UGM
+  y ninguno queda sobre el borde exacto. Se muestran como «sin UGM», como prevé el spec;
+  no se asignan por cercanía.
+**Descartado.** Pestañas, porque esconden contenido en el celular. CDN, porque la red de la
+sala puede bloquearlo. Consultas desde el navegador (D-09). Selección múltiple, por tiempo.
+Publicar las UGM con visitas simuladas: sería progreso inventado, y 50.794 polígonos no
+caben en un HTML estático.
+**Consecuencias.** El workflow genera con `--v2`. La v1 sigue disponible
+(`generar_tablero.py` sin `--v2`) y se recupera con `git revert` del commit de publicación.
+Para producción (~90.000 polígonos) el JSON embebido no escala: hace falta agregación del
+lado del servidor o teselas vectoriales (nota para requerimientos TI).
