@@ -2,12 +2,15 @@
 
 Piloto NEON-CENSO · Unidad de Cartografía · Instituto Nacional de Estadística y Censos (INEC)
 
-NEON-TI-01 · v4 · 16 de octubre de 2026 · Estado: entregable v4, pendiente de revisión. La
+NEON-TI-01 · v4.1 · 16 de octubre de 2026 · Estado: entregable v4.1, pendiente de revisión. La
 versión 2 corrigió la comunicación de la versión 1 (vocabulario único, D-25; identificadores;
 separadores); la versión 3 atendió la auditoría de comunicación ronda 2 (D-27). La versión 4
-(D-29) registra la prueba negativa desde el celular (hecha, sesión 09), el tablero v2 (D-28) y
-el dato del 16/10 sobre QFieldCloud en servidores del INEC, y agrega la sección 9, «Migración
-desde el piloto».
+(D-29) registró la prueba de bloqueo desde el celular (hecha, sesión 09), el tablero v2 (D-28) y
+el dato del 16/10 sobre QFieldCloud en servidores del INEC, y agregó la sección 9, «Migración
+desde el piloto». La v4.1 (D-30) atiende la auditoría de comunicación ronda 3: distingue
+la cuenta de base de datos (por equipo de campo) de la identidad de campo (por persona), propone
+PostgreSQL 15 como versión mínima, corrige la cita del punto 4 de la sección 9 y amplía el
+anexo E.
 
 Cada cifra de este documento tiene una fila en `docs/requerimientos_ti/CIFRAS.csv` (columna
 `id`, citada aquí entre corchetes, por ejemplo [C23]) con el archivo y la línea de donde salió.
@@ -33,10 +36,11 @@ aparte con 50.794 polígonos UGM del SNIT, sustituto de las fincas para medir es
 **Qué quedó demostrado.** (a) La base de datos impide guardar fuera del lote de trabajo propio:
 `UPDATE 1` en el lote de trabajo propio, `UPDATE 0` en el ajeno, `INSERT` ajeno rechazado
 [C12, C13, C14]. (b) Con conexión directa desde el celular, las visitas entraron con la cuenta
-del equipo A [C56]; la política la aplica la base de datos a la conexión. La prueba negativa
+del equipo A [C56]; la política la aplica la base de datos a la conexión. La prueba de bloqueo
 desde el celular está hecha: con la cuenta del equipo A se editó y guardó en QField el polígono
 258, del lote de trabajo B; la fila quedó intacta y la reproducción desde consola dio
-`UPDATE 0` sobre el 258 y `UPDATE 1` sobre el 1396, del lote de trabajo A [C118, C119, C120].
+`UPDATE 0` sobre el 258 y `UPDATE 1` sobre el 1396, del lote de trabajo A [C119, C120].
+Resultado: bloqueado, como se esperaba.
 Límite: la base de datos no registra el intento. (c) El tablero lee solo vistas con una cuenta de solo lectura, no contiene
 credenciales ni texto libre y se publicó con las visitas de campo [C15, C91, C69]; desde el
 16/10 es el tablero v2 (D-28), con mapa satelital, 44 contornos de UGM y filtros que recalculan
@@ -45,7 +49,7 @@ los indicadores en el navegador, en un HTML de 1,13 MB [C110, C111, C121]. (d) C
 datos, fue el factor dominante [C25, C43].
 
 **Qué no quedó demostrado.** La edición sin señal y su sincronización (requiere un plan de
-QFieldCloud que admita PostGIS, D-22); la identidad individual de cada censista en campo
+QFieldCloud que admita PostGIS, D-22); la identidad de campo por persona de cada censista
 (`@cloud_username`); el comportamiento con 90.000 fincas (lo que se dice es extrapolación
 [C24, C34]); el costo del control por fila a escala; tiempos desde la red institucional; la
 frecuencia de la regeneración automática: se ejecutó sola 4 veces, con intervalos de 2 h 23 min
@@ -85,7 +89,7 @@ Los 20 requerimientos técnicos que se proponen para producción están en la se
 | Elemento | Decisión que lo sostiene |
 |---|---|
 | Base de datos gestionada en la nube, solo tráfico saliente, sin instalaciones | D-01, D-02 |
-| Reparto impuesto por el control por fila, con una cuenta por lote de trabajo; pruebas con las cuentas de los equipos A y B | D-03, D-06 |
+| Reparto impuesto por el control por fila, con una cuenta de base de datos por lote de trabajo; pruebas con las cuentas de los equipos A y B | D-03, D-06 |
 | Llave entera `id` IDENTITY; identificador de origen aparte; carga por tabla de paso | D-04, D-05 |
 | Capa de visita de puntos separada; punto garantizado dentro (`ST_PointOnSurface`) | D-07, D-08 |
 | Tablero estático, cuenta de solo lectura, sin texto libre ni posición GNSS | D-09, D-14 |
@@ -142,7 +146,7 @@ evidencia y en `CIFRAS.csv`; aquí se escribe con la convención del documento.
 |---|---|---|
 | Proyecto de campo sin credenciales | `Resultado: 0 fallas` en 41 comprobaciones [C83]; solo `service='neon_lote_a'` [C53] | `docs/sesiones/2026-10-15_sesion-05.md` |
 | Guardado desde el celular con la cuenta del equipo A | tras las 3 primeras visitas de campo, lote de trabajo A: 18 polígonos visitados, los 18 guardados por la cuenta del equipo A (15 desde QGIS y 3 desde el celular) [C56]; con la cuarta (polígono 1396, id de fila 1394 [C80]), 19 en el tablero publicado [C67] | `docs/evidencia/s05/05_prueba_qfield_directa.txt` |
-| Prueba negativa desde el celular | **hecha** (sesión 09, 16/10/2026): con la cuenta del equipo A se editó y guardó en QField el polígono 258 (lote de trabajo B); QField no mostró error y la fila quedó intacta. Veredicto: SUPERADA [C118]. Reproducción desde consola con la cuenta del equipo A: `UPDATE 0` sobre el 258 y `UPDATE 1` sobre el 1396 [C119, C120]. Límite: la base de datos no registra el intento | `docs/sesiones/2026-10-16_sesion-09.md`; `docs/evidencia/s08b/` |
+| Prueba de bloqueo desde el celular | **hecha** (sesión 09, 16/10/2026): con la cuenta del equipo A se editó y guardó en QField el polígono 258 (lote de trabajo B); QField no mostró error y la fila quedó intacta. Resultado: bloqueado, como se esperaba. Reproducción desde consola con la cuenta del equipo A: `UPDATE 0` sobre el 258 y `UPDATE 1` sobre el 1396 [C119, C120]. Límite: la base de datos no registra el intento | `docs/sesiones/2026-10-16_sesion-09.md`; `docs/evidencia/s08b/` |
 | Hora real de la visita desde el formulario | desfase de 6 h [C57] (zona de sesión `GMT` [C58]): corregido por D-23. Aparte, la cuarta visita se guardó 25 s después de hecha [C59]: tiempo normal entre visita y guardado, no un desfase | `docs/evidencia/s05/05_…`, `06_…`, `07_visita_tras_d23.txt` |
 | Precisión GNSS registrada | 1,5 m en las tres primeras [C54]; 1,6 m en la cuarta [C60] | `docs/evidencia/s05/05_…`, `07_…` |
 | Visitas de campo en el tablero publicado, sin `observaciones` | las 4 en «Últimos movimientos» (polígonos 1396, 1405, 1398, 1406) [C70]; `observaciones` 0 [C69]; generado el 15/10/2026 a las 17:54 [C91] | `docs/evidencia/s06/01_…`; `docs/evidencia/s07/01_…` |
@@ -155,7 +159,7 @@ evidencia y en `CIFRAS.csv`; aquí se escribe con la convención del documento.
 | `encuestador = @cloud_username` | pendiente: queda vacío sin sesión de QFieldCloud | ídem |
 | Clave en el servidor de QFieldCloud (no en el celular) | pendiente | ídem; hoy la clave está en el celular |
 | Edición sin señal → sincronización → tablero; tiempo hasta aparecer | pendiente; tiempo **sin medir** | ídem |
-| Identidad individual en `v_tab_encuestador` | pendiente: hoy la identidad es la cuenta del equipo de campo | ídem |
+| Identidad de campo por persona en `v_tab_encuestador` | pendiente: hoy solo queda la cuenta de base de datos del equipo de campo | ídem |
 
 ---
 
@@ -229,8 +233,8 @@ administradora, que no está sujeta a él); tiempos desde la red institucional o
 | Limitación | Por qué existió (qué no se tenía) | Qué hace falta para resolverla | Evidencia |
 |---|---|---|---|
 | Edición sin señal, sincronización e identidad `@cloud_username` no probadas | Cuenta QFieldCloud Community: no admite capas PostGIS | Cuenta o instancia QFieldCloud del INEC con PostGIS sin señal (decisión §7.1) y prueba D-22 parte 2 | D-22; `docs/evidencia/s05/05_…` (`encuestador` vacío) |
-| Un intento de guardar en el lote de trabajo ajeno no deja rastro (la prueba negativa desde el celular está hecha, sesión 09) | El control por fila responde «0 filas» sin error; QField no avisa y la base de datos no registra el intento | Valorar con TI una regla que registre los intentos o la revisión de registros del servidor; en producción, proyecto de campo filtrado por zona de equipo (req. 7). Es una observación, no un requerimiento aprobado | `docs/evidencia/s08b/03_update_0.txt` |
-| Reparto en campo por proyecto y cuenta del equipo de campo, no por persona | QFieldCloud aplica cambios con la conexión del proyecto; no hay cuenta de base de datos por censista (supuesto D-19 sin verificar en QFieldCloud) | Verificar `editado_por` tras sincronizar; identidad individual por atributo restringido (req. 5, 15) | D-10, D-19 |
+| Un intento de guardar en el lote de trabajo ajeno no deja rastro (la prueba de bloqueo desde el celular está hecha, sesión 09) | El control por fila responde «0 filas» sin error; QField no avisa y la base de datos no registra el intento | Valorar con TI una regla que registre los intentos o la revisión de registros del servidor; en producción, proyecto de campo filtrado por zona de equipo (req. 7). Es una observación, no un requerimiento aprobado | `docs/evidencia/s08b/03_update_0.txt` |
+| Reparto en campo por proyecto y cuenta de base de datos del equipo de campo; sin identidad de campo por persona | QFieldCloud aplica cambios con la conexión del proyecto; la cuenta de base de datos es una por equipo de campo, no por censista (supuesto D-19 sin verificar en QFieldCloud) | Mantener la cuenta de base de datos por equipo de campo (req. 16) y añadir la identidad de campo por persona, por atributo restringido (req. 5, 15); verificar `editado_por` tras sincronizar | D-10, D-19 |
 | Hora de visita desde escritorio = hora de guardado | QGIS escritorio deja `fecha_visita` vacía; `now()` es la hora de la transacción: 15 visitas a las 13:02:30 [C18] | Registrar visitas solo desde el formulario de campo, que pone la hora del celular | D-16, D-20; sesión 02 |
 | Escala: 50.794 polígonos UGM (sustituto), no 90.000 fincas | No existe aún la capa de fincas del censo | Capa real de fincas (o una muestra provincial) cargada en la infraestructura del INEC | D-18; `evidencia_escala.md` |
 | Datos y tablero públicos; en el plan gratuito solo se puede volver atrás 6 horas [C09] | Sin infraestructura institucional ni permisos de TI para el piloto | Servidor PostGIS institucional, web interna con autenticación, respaldo programado y restauración probada | D-01, D-09 |
@@ -259,9 +263,9 @@ el nombre técnico va entre paréntesis.
 | 2 | Coherencia lote de trabajo ↔ polígono en la capa de visita (FK compuesta o función que copie el valor) antes de retirar `UNIQUE(finca_id)`. | Sesión 02; D-07, D-14 |
 | 8 | Cada visita es una fila, con su persona, fecha y precisión propias. | D-21; D-07 |
 | 11 | Zona horaria de sesión fijada en la base de datos (`ALTER DATABASE … SET timezone`), no confiada al cliente. | D-23 |
-| 12 | Almacenamiento dimensionado con la geometría real de las fincas, con margen para el pico de carga; carga sin tabla de paso duplicada o por partes. | S04, hallazgo 5; [C34, C37] |
+| 12 | PostgreSQL 15 o superior con PostGIS (el req. 1 exige `security_invoker` en las vistas, disponible desde la versión 15); versión por confirmar con TI. Almacenamiento dimensionado con la geometría real de las fincas, con margen para el pico de carga; carga sin tabla de paso duplicada o por partes. | S04, hallazgo 5; [C34, C37]; D-30 |
 | 13 | Sistema de referencia oficial del marco de fincas definido antes de cargar (el sustituto venía en EPSG:8908). | S04, hallazgo 7; [C51] |
-| 16 | Columna de reparto por zona de equipo (por definir: provincia o UPM), `NOT NULL` + `CHECK` o FK a una tabla de zonas de equipo; una cuenta por equipo de campo. | D-03, D-06; S04, provincias 1–7 como valores [C85] |
+| 16 | Columna de reparto por zona de equipo (por definir: provincia, UPM, UGM o región), `NOT NULL` + `CHECK` o FK a una tabla de zonas de equipo; una cuenta de base de datos por equipo de campo, que se mantiene en producción (la identidad de campo por persona es el req. 15). | D-03, D-06; S04, provincias 1–7 como valores [C85] |
 
 ### 6.2 Identidad y acceso
 
@@ -269,7 +273,7 @@ el nombre técnico va entre paréntesis.
 |---|---|---|
 | 3 | Claves de las cuentas de la base de datos fijadas con `\password` (cifrado SCRAM calculado en el cliente), no escritas en sentencias SQL que pueden quedar en registros. | D-13 |
 | 5 | `encuestador` restringido a nombres de cuenta válidos (CHECK, dominio o FK a la lista de cuentas de campo). | Sesión 02; D-14 |
-| 15 | Una cuenta por persona en campo (QFieldCloud o el sistema de identidades del INEC), nunca compartida; la identidad individual llega por atributo y se valida contra el req. 5. | D-10, D-19; `ESPECIFICACION.md` §4, restricción 4 |
+| 15 | Identidad de campo por persona (cuenta de QFieldCloud o del sistema de identidades del INEC), nunca compartida; llega por atributo y se valida contra el req. 5. No reemplaza la cuenta de base de datos por equipo de campo (req. 16). | D-10, D-19; `ESPECIFICACION.md` §4, restricción 4 |
 
 ### 6.3 Campo
 
@@ -307,16 +311,19 @@ Son cinco. El piloto no las puede tomar; de ellas dependen los requerimientos ci
    (encargado del censo): QFieldCloud ya corre en servidores del INEC y todos los operativos
    salen con QField. Falta confirmar que esa instancia tenga PostGIS y admita la edición sin
    señal sobre capas PostGIS: **PENDIENTE DE TI**.
-2. **Gestión de identidades de campo:** de dónde salen las cuentas de los censistas y
-   supervisores, cómo se dan de alta y de baja, y con qué se valida `encuestador`.
-   Requerimientos 5, 15.
+2. **Gestión de identidades de campo:** de dónde sale la identidad de campo por persona de
+   censistas y supervisores, cómo se da de alta y de baja, y con qué se valida `encuestador`.
+   La cuenta de base de datos sigue siendo una por equipo de campo (req. 16); dentro de una
+   zona de equipo, el reparto entre censistas depende de esta identidad, no del control por
+   fila. Requerimientos 5, 15, 16.
 3. **Historial completo de visitas:** una fila por visita (recomendado por D-21) o solo el
    último estado. Requerimientos 2, 8.
 4. **Cuestionario real:** campos temáticos del formulario, estados de visita y fórmula de
    avance. Reemplaza la decisión provisional D-15. Hoy el formulario solo tiene estado, hora,
    persona, precisión GNSS y observaciones.
 5. **Dónde corre la regeneración automática del tablero y dónde se publica:** servidores
-   institucionales, web interna y control de acceso. Requerimientos 14, 19.
+   institucionales, web interna y control de acceso, y cómo accede un supervisor desde el
+   celular (VPN institucional o portal con inicio de sesión). Requerimientos 14, 19.
 
 ---
 
@@ -328,7 +335,7 @@ En orden de dependencia: (c) necesita (a) y (b).
 |---|---|---|
 | (a) Cuenta QFieldCloud de prueba del INEC → prueba sin señal (D-22, parte 2) | Edición sin señal, sincronización, `@cloud_username`, clave en el servidor, cuenta del equipo de campo tras sincronizar (D-19) y tiempo hasta el tablero | Cuenta o instancia con PostGIS (decisión §7.1); un celular; el proyecto `campo/NEON_campo_lote_A.qgs` y la guía `docs/guia/qfield_campo.md` |
 | (b) Réplica de la estructura en servidores del INEC | Que el procedimiento funciona fuera de Neon y con la red institucional; repetir las mediciones de S04 con las cuentas de los equipos de campo | Servidor PostgreSQL/PostGIS institucional, cuenta administradora para la carga, acceso de red desde QGIS; `docs/guia/Guia_replicacion_PostGIS.md` y `sql/plantillas/` |
-| (c) Prueba de campo con un equipo de campo real | Reparto por zona de equipo, carga de trabajo real, usabilidad del formulario, precisión GNSS en condiciones de campo | Cuestionario real (§7.4), criterio de reparto (provincia o UPM), un equipo de campo de prueba con sus celulares, y los pasos (a) y (b) |
+| (c) Prueba de campo con un equipo de campo real | Reparto por zona de equipo, carga de trabajo real, usabilidad del formulario, precisión GNSS en condiciones de campo | Cuestionario real (§7.4), criterio de reparto (provincia, UPM, UGM o región), un equipo de campo de prueba con sus celulares, y los pasos (a) y (b) |
 
 ---
 
@@ -342,11 +349,15 @@ accesible por internet con cifrado (TLS), en plan gratuito. Aporta comodidades d
 apaga el cómputo cuando nadie lo usa, ofrece un pooler de conexiones y permite volver atrás
 solo 6 horas [C09]. Consumo leído en la consola el 16/10 (lectura de pantalla, no de script):
 1,63 CU-h de cómputo, 0,26 GB de almacenamiento (incluye el esquema `sim` de la simulación de
-escala) y 0,43 GB de transferencia [C115, C116, C117].
+escala: el esquema `sim` ocupa 208 MB [C126]; la base de datos completa tras la simulación,
+225 MB [C33]) y 0,43 GB de transferencia [C115, C116, C117].
+
+**De quién son hoy las cuentas.** Hoy: cuentas personales de Neon y GitHub, solo con datos
+públicos; en producción, cuentas institucionales administradas por TI (paso b).
 
 **Qué es propio y estándar.** El esquema `mgn`: dos tablas (polígonos de prueba y puntos de
-visita), la cuenta administradora y tres cuentas (equipo A, equipo B y tablero), las políticas
-de control por fila, el trigger de auditoría y 7 vistas [C113]. Es SQL estándar, sin funciones
+visita), la cuenta administradora y tres cuentas de base de datos (equipo A, equipo B y
+tablero), las políticas de control por fila, el trigger de auditoría y 7 vistas [C113]. Es SQL estándar, sin funciones
 exclusivas de Neon; el último respaldo ocupa 403.490 bytes [C114]. Se recrea con `pg_restore` o
 con las plantillas parametrizadas `sql/plantillas/01`–`05`.
 
@@ -354,10 +365,10 @@ con las plantillas parametrizadas `sql/plantillas/01`–`05`.
 
 | # | Hoy (Neon) | Producción (INEC) | Requerimiento que lo cubre |
 |---|---|---|---|
-| 1 | PostgreSQL `18.6` + PostGIS en Neon | PostgreSQL con PostGIS en servidor del INEC; versión mínima por confirmar con TI contra las plantillas (**PENDIENTE DE TI**) | 12 (dimensionamiento), 13 (sistema de referencia) |
+| 1 | PostgreSQL `18.6` + PostGIS en Neon | PostgreSQL 15 o superior con PostGIS en servidor del INEC (el req. 1 exige `security_invoker` en las vistas, disponible desde la versión 15); versión por confirmar con TI (**PENDIENTE DE TI**) | 12 (versión y dimensionamiento), 13 (sistema de referencia) |
 | 2 | Esquema `mgn` (respaldo de 403.490 bytes) | `pg_restore` del respaldo, o recrear con `sql/plantillas/01`–`05` | 16 (columna de reparto por zona de equipo) |
-| 3 | Cuentas con clave en variable de entorno | Cuentas creadas sin clave; cada responsable la fija desde su cliente con `\password` | 3, 15 |
-| 4 | QGIS y celulares por internet, con TLS y conexión directa | QGIS por red interna o VPN con TLS; celulares solo hablan con QFieldCloud, con la cuenta del equipo de campo como secreto en el servidor | 9, 10, 17 |
+| 3 | Cuentas de base de datos (una por equipo de campo, más la administradora y la del tablero) con clave en variable de entorno | Las mismas cuentas de base de datos, una por equipo de campo, creadas sin clave; cada responsable la fija desde su cliente con `\password`. Se añade la identidad de campo por persona, que no reemplaza la cuenta de base de datos por equipo de campo | 3, 16 (cuenta de base de datos por equipo de campo), 15 (identidad de campo por persona) |
+| 4 | QGIS y celulares por internet, con TLS y conexión directa | QGIS por red interna o VPN con TLS: propuesta de esta sección de migración, sin requerimiento propio en la sección 6. Celulares solo hablan con QFieldCloud, con la cuenta de base de datos del equipo de campo como secreto en el servidor | 9, 10 (celulares); 17 cubre la prueba de carga desde la red institucional |
 | 5 | Regeneración automática en GitHub Actions; tablero en GitHub Pages | Regeneración automática institucional con alerta; tablero en web interna con autenticación | 14, 19 |
 | 6 | Solo se puede volver atrás 6 horas; `pg_dump` antes de cada cambio de esquema, restauración nunca probada | Respaldo diario programado y restauración probada en un entorno aparte | 20 |
 
@@ -404,6 +415,7 @@ Resumen con el vocabulario del anexo E; el texto completo de cada decisión est�
 | D-27 | Etiqueta del tablero: «N incidencias, de ellas M revisitas pendientes». |
 | D-28 | Tablero v2: mapa satelital, contornos de UGM, filtros jerárquicos e indicadores en el navegador. |
 | D-29 | Presentación v4 en dos partes, desde un guion externo; dato de QFieldCloud del INEC (16/10) con PostGIS pendiente de TI; documento NEON-TI-01 v4. |
+| D-30 | Correcciones de la ronda 3 de auditoría de comunicación: cuenta de base de datos (por equipo de campo) e identidad de campo (por persona) distinguidas, «prueba de bloqueo», PostgreSQL 15 como versión mínima propuesta, anexo E ampliado; documento NEON-TI-01 v4.1. |
 
 ### B. Glosario
 
@@ -435,9 +447,9 @@ Resumen con el vocabulario del anexo E; el texto completo de cada decisión est�
 | `sql/ejemplos_implementacion_real/` | Scripts de la Fase 1 tal como se ejecutaron. No se re-ejecutan. |
 | `tablero/` | Generador del tablero, script de capturas, datos de prueba. |
 | `.github/workflows/` | Regeneración automática y publicación del tablero. |
-| `campo/` | Proyecto QGIS de campo del lote de trabajo A, construido y verificado por script, sin credenciales; script de la prueba negativa. |
+| `campo/` | Proyecto QGIS de campo del lote de trabajo A, construido y verificado por script, sin credenciales; script de la prueba de bloqueo. |
 | `sim/` | Scripts de la simulación a escala (S04). |
-| `docs/guia/` | Guía de replicación, `pg_service` y QField en campo (con la prueba negativa). |
+| `docs/guia/` | Guía de replicación, `pg_service` y QField en campo (con la prueba de bloqueo). |
 | `docs/evidencia/` | Salidas literales y capturas por sesión (S04 a S07). |
 | `docs/sesiones/` | Bitácora de cada sesión de trabajo. |
 | `docs/requerimientos_ti/` | Este documento, insumos, evidencia de escala, banco de cifras y sus verificadores (cifras y vocabulario). |
@@ -471,7 +483,7 @@ lista lo que no se usa para ese concepto.
 | Objetos de producción | «fincas» | — |
 | Capa sustituta para medir escala | «polígonos UGM (sustituto)»; en la primera aparición, «sustituto de las fincas para medir escala» | fincas, objetos, proxy |
 | Unidad de reparto del piloto | «lote de trabajo A/B» | lote, parte, zona, equipo |
-| Unidad de reparto en producción | «zona de equipo (por definir: provincia o UPM)» | zona a secas |
+| Unidad de reparto en producción | «zona de equipo (por definir: provincia, UPM, UGM o región)»; definición más abajo | zona a secas |
 | Cuenta dueña de la base de datos | «cuenta administradora» | propietario, rol, nombre técnico de la cuenta |
 | Cuentas `edit_lote_a` / `edit_lote_b` | «cuenta del equipo A/B» (en tablas técnicas, el nombre entre paréntesis) | rol, usuario |
 | Cuenta `tablero_lectura` | «cuenta del tablero» | rol |
@@ -489,3 +501,9 @@ lista lo que no se usa para ese concepto.
 | Revisor | «revisión automática independiente (programa, sin acceso a la conversación)» | agente |
 | Identificador de visita | número de polígono (`finca_id`); el `id` de la fila se rotula «id de fila» | id sin rótulo |
 | Unidades | coma decimal, punto de miles, MB de 1.048.576 bytes | punto decimal, MiB |
+| Cuenta con la que QGIS o el celular se conectan a la base de datos | «cuenta de base de datos (por equipo)»: una por equipo de campo; el control por fila actúa sobre ella; se mantiene en producción (req. 16) | cuenta a secas cuando pueda confundirse con la identidad de campo |
+| Persona que registra la visita | «identidad de campo (por persona)»: identidad individual del censista o supervisor, que llega por atributo (`encuestador`); se añade en producción y no reemplaza la cuenta de base de datos (req. 15) | cuenta, usuario |
+| Archivo `pg_service` | «archivo de conexión (pg_service)»: guarda los datos de conexión fuera del proyecto QGIS | servicio a secas |
+| Unidad de reparto en producción (definición) | «zona de equipo»: parte de la capa asignada a un equipo de campo; su criterio (provincia, UPM, UGM o región) está por definir (req. 16) | zona a secas, tramo |
+| Identificador visible del polígono de prueba | «número de polígono» (columna `finca_id`) | id sin rótulo |
+| Prueba de que la base de datos impide guardar fuera del lote de trabajo propio | «prueba de bloqueo»; su resultado se escribe «Resultado: bloqueado, como se esperaba» | prueba negativa, SUPERADA |

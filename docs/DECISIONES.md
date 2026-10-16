@@ -453,3 +453,39 @@ las marcas `data-cifra`.
 `PRESENTACION_NEON_CENSO_2026-10-19_v3.html`. Las capturas de la persona no se editan: se
 recortan en memoria y las llamadas numeradas se superponen. Cifras nuevas C108 a C123 en
 `CIFRAS.csv`; el consumo de Neon (C115 a C117) es lectura de pantalla, no de script.
+
+## D-30 · 2026-10-16 · Correcciones de la ronda 3 de auditoría de comunicación
+
+**Contexto.** La auditoría de comunicación ronda 3 de la presentación v4
+(`docs/presentacion/auditoria/informe_ronda3.md`, fuera del repositorio, D-24) sostuvo 10
+hallazgos altos y 31 medios. Ninguno señala una cifra inventada: señalan palabras con dos o tres
+significados («cuenta», «servicio», «encuestador»), el rojo y el verde usados para
+permitido/bloqueado, un número de requerimiento mal citado (M-23), una versión de PostgreSQL
+que contradice el req. 1 (A-10) y preguntas institucionales sin respuesta (A-06 a A-08). Las
+verificaciones previas están en `docs/evidencia/s08e/01_verificaciones.txt` (spec S08e).
+**Decisión.**
+- Las 20 visitas del lote de trabajo B cargadas por script [C17] se declaran en pantalla (L02)
+  y en la demostración.
+- «Prueba negativa» pasa a «prueba de bloqueo» en láminas, guion de demostración y documento (el guion v4 de origen, `guion_v4.md`, no se edita: es insumo); en pantalla, el
+  veredicto se escribe «Resultado: bloqueado, como se esperaba» (en las bitácoras no se cambia).
+- Las flechas y los resultados permitido/bloqueado se dibujan en color neutro con la palabra
+  «permitido» o «bloqueado», no en verde/rojo (D-26).
+- Versión mínima de PostgreSQL propuesta: 15, porque el req. 1 exige `security_invoker` en las
+  vistas, disponible desde esa versión; por confirmar con TI.
+- Se agregan al anexo E de `REQUERIMIENTOS_TI.md`: «cuenta de base de datos (por equipo)»,
+  «identidad de campo (por persona)», «archivo de conexión (pg_service)», «zona de equipo»
+  (con definición), «número de polígono» y «prueba de bloqueo».
+- Leyenda de L04 ampliada: «D-xx = decisión registrada del piloto; req. N = requerimiento
+  propuesto en NEON-TI-01; PENDIENTE DE TI = espera un recurso o una revisión de TI;
+  PENDIENTE DEL INEC = decisión de la Unidad o del censo, no de TI; nada está aprobado».
+- Lámina de respaldo L23 «Preguntas frecuentes»: deck v4.1 de 23 láminas.
+- Documento NEON-TI-01 v4.1.
+**Descartado.** Renombrar los estados o cambiar el catálogo D-26: el hallazgo A-11 se rebajó a
+medio y M-18 se resuelve con la leyenda, sin renombrar.
+**Consecuencias.** El documento distingue en todas sus secciones la cuenta de base de datos (por
+equipo, req. 16) de la identidad de campo (por persona, req. 15). La sección 9 declara que hoy
+Neon y GitHub son cuentas personales con datos públicos y que red interna o VPN es propuesta de
+la migración, sin requerimiento propio. Cifras nuevas C126 (esquema `sim`, 208 MB) y C127 (1.393
+pendientes, contados con la cuenta del tablero) en `CIFRAS.csv`; C88 actualiza su línea (L301).
+`verificar_cifras.py` deja de leer como decimal un rótulo de versión («v4.1»), igual que ya
+exceptuaba los números de sección («§7.1»).

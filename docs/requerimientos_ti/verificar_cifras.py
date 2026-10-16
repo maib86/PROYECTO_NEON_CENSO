@@ -14,7 +14,7 @@ Citas:
     tiene fila; si la fila trae valor_pantalla y el elemento cita una sola cifra, el texto en
     pantalla es exactamente valor_pantalla;
   - en el texto visible de las láminas y en las notas (fuera de código, <span class="sig">, y
-    sin contar números de sección como «§7.1»)
+    sin contar números de sección como «§7.1» ni rótulos de versión como «v4.1»)
     no hay punto decimal («31.80 s»), cifras de 5 o más dígitos sin punto de miles («50794»)
     ni la unidad MiB (una sola unidad: MB).
 La presentación está fuera del repositorio (D-24): si no existe, esa parte se omite y se dice.
@@ -94,7 +94,7 @@ class Laminas(HTMLParser):
 def revisar_separadores(lamina: str, texto: str, origen: str) -> list:
     fallas = []
     texto = re.sub(r"\s+", " ", texto)
-    for m in re.finditer(r"(?<![\d.,§])\d+\.\d{1,2}(?![\d.])", texto):
+    for m in re.finditer(r"(?<![\d.,§])(?<!\bv)\d+\.\d{1,2}(?![\d.])", texto):
         fallas.append(f"FALLA {lamina} ({origen}): punto decimal «{m.group(0)}» (coma decimal en pantalla, D-25)")
     for m in re.finditer(r"(?<![\d.,])\d{5,}(?![\d.,])", texto):
         if m.group(0) not in SIN_MILES:

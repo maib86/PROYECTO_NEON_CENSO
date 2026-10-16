@@ -1,0 +1,63 @@
+## S08e paso 1a: guardados desde QGIS (sin precision GNSS) por UGM, lote A, UPM 20205003 (cuenta del tablero, solo SELECT sobre v_tab_geo_poligonos)
+$ psql -X -w -v ON_ERROR_STOP=1 -f - <<'SQL'
+SET TIME ZONE 'America/Costa_Rica';
+SELECT coalesce(ugm,'(sin UGM)') AS ugm, count(*) AS n, string_agg(id::text, ', ' ORDER BY id) AS ids
+FROM mgn.v_tab_geo_poligonos
+WHERE lote='A' AND upm='20205003' AND estado_visita <> 'pendiente' AND precision_gnss_m IS NULL
+GROUP BY 1 ORDER BY 1;
+SELECT editado_por, count(*) FROM mgn.v_tab_geo_poligonos WHERE lote='A' AND upm='20205003' AND estado_visita <> 'pendiente' GROUP BY 1;
+SQL
+# rol: tablero · rc=0 · tiempo de pared: 1.07 s
+SET
+    ugm    | n  |                    ids                     
+-----------+----+--------------------------------------------
+ (sin UGM) |  1 | 70
+ 16691     | 11 | 58, 62, 63, 64, 65, 66, 67, 68, 71, 72, 74
+ 16694     |  3 | 57, 73, 75
+(3 rows)
+
+ editado_por | count 
+-------------+-------
+ edit_lote_a |    15
+(1 row)
+
+
+## S08e paso 1a: conclusion
+Lote A, UPM 20205003: 15 guardados desde QGIS (cuenta del equipo A, sin precision GNSS).
+UGM 16691: 11 (58, 62, 63, 64, 65, 66, 67, 68, 71, 72, 74). UGM 16694: 3 (57, 73, 75). Sin UGM: 1 (70).
+El guion decia «12 de los 15»: eran 11 (A-04).
+
+## S08e paso 1b: requerimiento sobre red interna / VPN / TLS (M-23)
+$ grep -n "security_invoker\|VPN\|red interna\|TLS" docs/requerimientos_ti/REQUERIMIENTOS_TI.md
+66:  conexión TLS (sslmode=require), sin pooling
+258:| 1 | Vistas del tablero con `security_invoker = true` ... | Sesión 02; D-14 |
+341: accesible por internet con cifrado (TLS), en plan gratuito. ...
+360:| 4 | QGIS y celulares por internet, con TLS y conexión directa | QGIS por red interna o VPN con TLS; ... | 9, 10, 17 |
+Ningun requerimiento de §6 pide red interna, VPN ni TLS. El req. 17 es la prueba de carga desde la
+red institucional. Conclusion: L17 cita «propuesta de migración» (seccion 9, punto 4) sin numero de req.
+
+## S08e paso 1c: sesion de la prueba cruzada UPDATE 1 / UPDATE 0 (B-10)
+- docs/sesiones/2026-10-15_sesion-02.md L55-L56: UPDATE 1 lote propio / UPDATE 0 lote ajeno, ambos roles
+  (psql), capa de puntos [C12, C13].
+- docs/sesiones/2026-10-13_sesion-00.md L21: «Prueba cruzada de RLS entre dos personas desde QGIS: exitosa».
+- REQUERIMIENTOS_TI.md L123 (Fase 1) cita la sesion 00 para la prueba cruzada; L131, la sesion 02 para UPDATE 1/0.
+Conclusion: L06 dice «UPDATE 1 / UPDATE 0: sesion 02; prueba cruzada desde QGIS entre dos personas: sesion 00».
+
+## S08e paso 1d: req. 1 y security_invoker (A-10)
+REQUERIMIENTOS_TI.md L258: req. 1 = «Vistas del tablero con `security_invoker = true` ...».
+La opcion security_invoker de las vistas existe desde PostgreSQL 15 (conocimiento general de PostgreSQL;
+no hay fila en el repositorio). Conclusion: version minima propuesta 15, «por confirmar con TI» (D-30).
+## S08e A-01: conteo por estado (cuenta del tablero, solo SELECT sobre v_tab_geo_poligonos)
+$ psql -X -w -v ON_ERROR_STOP=1 -f - <<'SQL'
+SELECT estado_visita, count(*) FROM mgn.v_tab_geo_poligonos GROUP BY 1 ORDER BY 1;
+SQL
+# rol: tablero · rc=0 · tiempo de pared: 1.07 s
+ estado_visita | count 
+---------------+-------
+ no_localizada |    10
+ pendiente     |  1393
+ rechazo       |     6
+ revisita      |     6
+ visitada      |    17
+(5 rows)
+

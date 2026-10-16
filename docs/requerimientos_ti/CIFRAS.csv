@@ -86,7 +86,7 @@ C84,cinco vistas,vistas,Vistas v_tab_* legibles por tablero_lectura,ESPECIFICACI
 C85,lotes 1–7,lotes,Lotes del proxy (código de provincia) en la simulación,docs/requerimientos_ti/evidencia_escala.md,L42,04,
 C86,PostGIS 3.6.4,versión,Versión de PostGIS del servidor Neon,docs/sesiones/2026-10-15_sesion-02.md,L19,02,
 C87,pendiente \| neondb_owner \| 1432,filas,Estado y creado_por iniciales: las 1.432 filas creadas por la cuenta administradora,docs/sesiones/2026-10-15_sesion-02.md,L48,02,
-C88,| 20 |,requerimiento,Último requerimiento numerado del documento para TI (20 en total),docs/requerimientos_ti/REQUERIMIENTOS_TI.md,L297,08,20
+C88,| 20 |,requerimiento,Último requerimiento numerado del documento para TI (20 en total),docs/requerimientos_ti/REQUERIMIENTOS_TI.md,L301,08,20
 C89,38822130963,ejecución,Primera ejecución de la regeneración automática por horario,docs/evidencia/s07/01_regeneracion_y_tablero.txt,L6,07,
 C90,15/10/2026 17:12 (hora de Costa Rica),hora,Hora de la primera ejecución por horario (38822130963),docs/evidencia/s07/01_regeneracion_y_tablero.txt,L6,07,17:12
 C91,generado 15/10/2026 17:54,hora,Generación del tablero publicado y de la captura de L07 (S07),docs/evidencia/s07/01_regeneracion_y_tablero.txt,L27,07,generado 15/10/2026 17:54
@@ -121,6 +121,8 @@ C119,UPDATE 0,resultado,"Reproducción desde consola con la cuenta del equipo A 
 C120,UPDATE 1,resultado,"Reproducción desde consola con la cuenta del equipo A sobre el polígono 1396 (lote de trabajo A), S08b",docs/evidencia/s08b/03_update_0.txt,L28,09,UPDATE 1
 C121,"Generado 16/10/2026 09:11, hora de Costa Rica",hora,"Generación del tablero v2 publicado (regeneración manual 38921918353)",docs/evidencia/s08c/03_publicado.txt,L6,10,16/10/2026 09:11
 C122,servidor Neon 18.6,versión,Versión de PostgreSQL del servidor Neon (cliente y servidor 18.6),CLAUDE.md,L79,—,18.6
-C123,D-29,decisión,Última decisión registrada (D-01 a D-29),docs/DECISIONES.md,L434,11,D-29
+C123,D-30,decisión,Última decisión registrada (D-01 a D-30),docs/DECISIONES.md,L457,12,D-30
 C124,2026-10-15 11:57:10,hora,Último cambio de la fila 258 (carga inicial con la cuenta administradora) tras la prueba negativa,docs/evidencia/s08b/01_fila_258.txt,L16,09,15/10 11:57:10
 C125,2026-10-16 07:48:16,hora,Hora de la reproducción desde consola con la cuenta del equipo A (UPDATE 0 / UPDATE 1),docs/evidencia/s08b/03_update_0.txt,L7,09,16/10/2026 07:48
+C126,208 MB,MB,Tamaño del esquema sim (simulación de escala),docs/requerimientos_ti/evidencia_escala.md,L69,04,208 MB
+C127,1393,polígonos,"Polígonos de prueba pendientes (tarjeta «Pendientes» del tablero v2), contados el 16/10 con la cuenta del tablero",docs/evidencia/s08e/01_verificaciones.txt,L58,12,1.393
