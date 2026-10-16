@@ -44,7 +44,7 @@ jobs:
       - name: Generar HTML
         env:
           DATABASE_URL_TABLERO: ${{ secrets.DATABASE_URL_TABLERO }}
-        run: python tablero/generar_tablero.py --salida public/index.html
+        run: python tablero/generar_tablero.py --v2 --salida public/index.html
 
       - uses: actions/upload-pages-artifact@v3
         with:
